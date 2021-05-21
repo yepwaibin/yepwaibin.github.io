@@ -270,6 +270,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/21/vector/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/io.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SKY's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/05/21/vector/" itemprop="url">vector</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-21T19:42:26+08:00">
+                2021-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1.构造函数"></a>1.构造函数</h3><ul>
+<li><code>vector()</code>:创建一个空vector</li>
+<li><code>vector(int nSize)</code>:创建一个vector,元素个数为nSize</li>
+<li><code>vector(int nSize,const t&amp; t)</code>:创建一个vector，元素个数为nSize,且值均为t</li>
+<li><code>vector(const vector&amp;)</code>:复制构造函数</li>
+<li><code>vector(begin,end)</code>:复制[begin,end)区间内另一个数组的元素到vector中</li>
+</ul>
+<h3 id="2-增加函数"><a href="#2-增加函数" class="headerlink" title="2.增加函数"></a>2.增加函数</h3><ul>
+<li><code>void push_back(const T&amp; x)</code>:向量尾部增加一个元素X</li>
+<li><code>iterator insert(iterator it,const T&amp; x)</code>:向量中迭代器指向元素前增加一个元素x</li>
+<li><code>iterator insert(iterator it,int n,const T&amp; x)</code>:向量中迭代器指向元素前增加n个相同的元素x</li>
+<li><code>iterator insert(iterator it,const_iterator first,const_iterator last)</code>:向量中迭代器指向元素前插入另一个相同类型向量的[first,last)间的数据</li>
+</ul>
+<h3 id="3-删除函数"><a href="#3-删除函数" class="headerlink" title="3.删除函数"></a>3.删除函数</h3><ul>
+<li><code>iterator erase(iterator it)</code>:删除向量中迭代器指向元素</li>
+<li><code>iterator erase(iterator first,iterator last)</code>:删除向量中[first,last)中元素</li>
+<li><code>void pop_back()</code>:删除向量中最后一个元素</li>
+<li><code>void clear()</code>:清空向量中所有元素</li>
+</ul>
+<h3 id="4-遍历函数"><a href="#4-遍历函数" class="headerlink" title="4.遍历函数"></a>4.遍历函数</h3><ul>
+<li><code>reference at(int pos)</code>:返回pos位置元素的引用</li>
+<li><code>reference front()</code>:返回首元素的引用</li>
+<li><code>reference back()</code>:返回尾元素的引用</li>
+<li><code>iterator begin()</code>:返回向量头指针，指向第一个元素</li>
+<li><code>iterator end()</code>:返回向量尾指针，指向向量最后一个元素的下一个位置</li>
+<li><code>reverse_iterator rbegin()</code>:反向迭代器，指向最后一个元素</li>
+<li><code>reverse_iterator rend()</code>:反向迭代器，指向第一个元素之前的位置</li>
+</ul>
+<h3 id="5-判断函数"><a href="#5-判断函数" class="headerlink" title="5.判断函数"></a>5.判断函数</h3><ul>
+<li><code>bool empty() const</code>:判断向量是否为空，若为空，则向量中无元素</li>
+</ul>
+<h3 id="6-大小函数"><a href="#6-大小函数" class="headerlink" title="6.大小函数"></a>6.大小函数</h3><ul>
+<li><code>int size() const</code>:返回向量中元素的个数</li>
+<li><code>int capacity() const</code>:返回当前向量所能容纳的最大元素值</li>
+<li><code>int max_size() const</code>:返回最大可允许的 vector 元素数量值</li>
+</ul>
+<h3 id="7-其他函数"><a href="#7-其他函数" class="headerlink" title="7.其他函数"></a>7.其他函数</h3><ul>
+<li><code>void swap(vector&amp;)</code>:交换两个同类型向量的数据</li>
+<li><code>void assign(int n,const T&amp; x)</code>:设置向量中前n个元素的值为x</li>
+<li><code>void assign(const_iterator first,const_iterator last)</code>:向量中[first,last)中元素设置成当前向量元素</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/21/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -439,7 +599,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,6 +607,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
