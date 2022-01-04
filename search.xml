@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>搭建一个自己的博客</title>
+    <url>/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="Hexo-快速搭建"><a href="#Hexo-快速搭建" class="headerlink" title="Hexo 快速搭建"></a>Hexo 快速搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li>git</li>
+<li>node</li>
+<li>npm</li>
+</ul>
+<span id="more"></span>
+
+<p>命令行里验证有无安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.24.0.windows.1</span><br><span class="line"></span><br><span class="line">$ node --version</span><br><span class="line">v14.17.5</span><br><span class="line"></span><br><span class="line">$ npm --version</span><br><span class="line">6.14.14</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置SSH-Key"><a href="#配置SSH-Key" class="headerlink" title="配置SSH Key"></a>配置SSH Key</h4><p>如果第一次用git工具，记得配置一下SSH key，为部署本地博客到 Github 做准备。</p>
+<p>如果之前没有创建，则执行以下命令全局配置一下本地账户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>生成密钥SSK key</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;上面的邮箱&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>回车回车回车，即可生成ssh key。<code>.ssh</code>目录下有两个文件，<code>id_rsa</code>和<code>id_rsa.pub</code>，这两个就是ssh key的密钥对，前一个是私钥，后一个是公钥</p>
+<p>cat获取你的ssh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>复制输出内容</p>
+<p>登录github，settings -&gt; SSH and GPG keys -&gt; New SSH key</p>
+<p>Title随便写</p>
+<p>Key把刚才复制的内容copy到这，就确认完成了。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli	<span class="comment"># -g 代表着全局安装</span></span><br></pre></td></tr></table></figure>
+
+<p>完成后建立自己的个人博客</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blogName</span><br><span class="line">$ <span class="built_in">cd</span> blogName</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建你的第一篇博文"><a href="#创建你的第一篇博文" class="headerlink" title="创建你的第一篇博文"></a>创建你的第一篇博文</h3><p>新建一篇博文：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="string">&#x27;新年快乐&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>/source/_posts</code>文件夹下找到你的博文，使用typora（推荐）打开并编辑。</p>
+<p>保存后运行：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate <span class="comment"># 生成静态文件，可简写为 hexo g</span></span><br><span class="line"><span class="variable">$ </span>hexo server <span class="comment"># 启动服务器。默认情况下，访问网址为：`http://localhost:4000/`。可以简写为 hexo s</span></span><br></pre></td></tr></table></figure>
+
+<p>此时已经可以在<code>public</code>文件夹下看到完整的静态文件。<br>在浏览器中输入<code>http://localhost:4000/</code>就可以看到预览效果了。</p>
+<p>以上是本地部署，下面讲博客部署到Github page上</p>
+<h2 id="部署到Github-page"><a href="#部署到Github-page" class="headerlink" title="部署到Github page"></a>部署到Github page</h2><p>登录github，新建仓库，仓库名为<code>username.github.io</code>，<strong>注意：<code>username</code>应该是你github的用户名</strong></p>
+<p>本地和github都完成之后，现在需要把这两者连接在一起</p>
+<ol>
+<li><p>修改被指</p>
+<p>在项目根目录下的<code>_config.yml</code>修改配置参数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    github: https://github.com/你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>安装部署插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li><p>启动执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p> 用浏览器输入，https://你的用户名.github.io，就可以看到你的博客了。</p>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>个人用的是<a href="https://theme-next.js.org/">NexT主题</a></p>
+<p>进入项目根目录，下载NexT主题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+
+<p>修改<strong>项目根目录</strong>下的<code>_config.yml</code>的配置</p>
+<p>注意：<code>_config.yml</code>配置文件有两个，一个在项目根目录，一个在<code>/themes/next</code>中，大部分配置在主题里面改。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h2 id="NexT配置"><a href="#NexT配置" class="headerlink" title="NexT配置"></a>NexT配置</h2><p>以下均在<code>_config.yml</code>文件中修改</p>
+<h3 id="修改NexT风格"><a href="#修改NexT风格" class="headerlink" title="修改NexT风格"></a>修改NexT风格</h3><p>NexT主题有四个风格，想要的取消注释</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line">scheme: Mist</span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="暗黑模式"><a href="#暗黑模式" class="headerlink" title="暗黑模式"></a>暗黑模式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Dark Mode</span></span><br><span class="line">darkmode: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改变网页标签icon"><a href="#改变网页标签icon" class="headerlink" title="改变网页标签icon"></a>改变网页标签icon</h3><p>把你想要用的图片放在<code>/themes/next/source/images</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.ico</span><br><span class="line">  medium: /images/favicon-32x32-next.ico</span><br></pre></td></tr></table></figure>
+
+<p>插一个提示，可以在<a href="https://www.bitbug.net/">比特虫</a>在线制作icon</p>
+<h3 id="增加或删除博客页面功能"><a href="#增加或删除博客页面功能" class="headerlink" title="增加或删除博客页面功能"></a>增加或删除博客页面功能</h3><p>想用的取消注释，</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="添加标签页面"><a href="#添加标签页面" class="headerlink" title="添加标签页面"></a>添加标签页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/tags</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">date: 2022-01-04 13:29:07</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加分类页面"><a href="#添加分类页面" class="headerlink" title="添加分类页面"></a>添加分类页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/categories</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">date: 2022-01-04 13:55:58</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加about页面"><a href="#添加about页面" class="headerlink" title="添加about页面"></a>添加about页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/about</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，里面直接写你的个人介绍。</p>
+<h3 id="调整侧边栏位置"><a href="#调整侧边栏位置" class="headerlink" title="调整侧边栏位置"></a>调整侧边栏位置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  <span class="comment"># Sidebar Position.</span></span><br><span class="line">  <span class="comment">#position: left</span></span><br><span class="line">  position: right</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加侧边栏头像图片"><a href="#添加侧边栏头像图片" class="headerlink" title="添加侧边栏头像图片"></a>添加侧边栏头像图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># 把要展示的图片放在images中</span></span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  rounded: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="启用不蒜子统计"><a href="#启用不蒜子统计" class="headerlink" title="启用不蒜子统计"></a>启用不蒜子统计</h3><p>不蒜子是用于统计文章添加阅读次数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  total_visitors: <span class="literal">true</span></span><br><span class="line">  total_visitors_icon: fa fa-user</span><br><span class="line">  total_views: <span class="literal">true</span></span><br><span class="line">  total_views_icon: fa fa-eye</span><br><span class="line">  post_views: <span class="literal">true</span></span><br><span class="line">  post_views_icon: fa fa-eye</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加加载进度条"><a href="#添加加载进度条" class="headerlink" title="添加加载进度条"></a>添加加载进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-pace source/lib/pace</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加页面顶部阅读进度条"><a href="#添加页面顶部阅读进度条" class="headerlink" title="添加页面顶部阅读进度条"></a>添加页面顶部阅读进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-reading-progress source/lib/reading_progress</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reading_progress:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  position: top               <span class="comment"># 进度条的位置：top | bottom</span></span><br><span class="line">  color: <span class="string">&quot;#37c6c0&quot;</span>            <span class="comment"># 进度条的颜色</span></span><br><span class="line">  height: 3px                 <span class="comment"># 进度条的大小</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="显示侧栏阅读进度百分比"><a href="#显示侧栏阅读进度百分比" class="headerlink" title="显示侧栏阅读进度百分比"></a>显示侧栏阅读进度百分比</h3><p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  sidebar: <span class="literal">false</span></span><br><span class="line">  scrollpercent: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
+<li><code>hexo init [folder]</code> <ul>
+<li>Hexo 默认在目前的文件夹建立网站。</li>
+<li>Git clone <a href="https://github.com/hexojs/hexo-starter">hexo-starter</a> 和 <a href="https://github.com/hexojs/hexo-theme-landscape">hexo-theme-landscape</a> 主题到当前目录或指定目录。</li>
+<li>使用 <a href="https://classic.yarnpkg.com/lang/en/">Yarn 1</a>、<a href="https://pnpm.js.org/">pnpm</a> 或 <a href="https://docs.npmjs.com/cli/install">npm</a> 包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm 默认随 <a href="https://hexo.io/docs/#Install-Node-js">Node.js</a> 安装。</li>
+</ul>
+</li>
+<li><code>hexo new &#39;文章标题&#39;</code><ul>
+<li>新建文件，写的时候自己用typora打开写</li>
+</ul>
+</li>
+<li><code>hexo clean</code><ul>
+<li>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</li>
+<li>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</li>
+</ul>
+</li>
+<li><code>hexo generate</code><ul>
+<li>生成静态文件，可简写为<code>hexo g</code></li>
+</ul>
+</li>
+<li><code>hexo server</code><ul>
+<li>启动服务器。默认情况下，访问网址为：<code>http://localhost:4000/</code>。可以简写为 hexo s</li>
+</ul>
+</li>
+<li><code>hexo deploy</code><ul>
+<li>部署网站，可简写为<code>hexo d</code></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新年快乐</title>
+    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
+    <content><![CDATA[<p>2022年希望有更好的明天</p>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+</search>
