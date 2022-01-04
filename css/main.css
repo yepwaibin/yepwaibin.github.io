@@ -1057,6 +1057,11 @@ pre code {
 .post-body .note.danger h6 {
   color: #d9534f;
 }
+.pdfobject-container iframe,
+.pdfobject-container embed {
+  height: 500px;
+  width: 100%;
+}
 .post-body .tabs {
   margin-bottom: 20px;
 }
@@ -1645,7 +1650,6 @@ pre code {
   line-height: 1.8;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .post-toc .nav .nav-child {
   display: none;
@@ -1745,6 +1749,12 @@ pre code {
   display: inline-block;
   margin: 0 5px;
 }
+.busuanzi-count #busuanzi_container_site_uv {
+  display: none;
+}
+.busuanzi-count #busuanzi_container_site_pv {
+  display: none;
+}
 @-moz-keyframes icon-animate {
   0%, 100% {
     transform: scale(1);
@@ -1827,10 +1837,6 @@ pre code {
   position: fixed;
   z-index: 30;
   right: 30px;
-  width: 24px;
-}
-.back-to-top span {
-  display: none;
 }
 @media (max-width: 991px) {
   .back-to-top {
@@ -1850,6 +1856,16 @@ pre code {
 }
 .back-to-top.back-to-top-on {
   bottom: 19px;
+}
+.reading-progress-bar {
+  --progress: 0;
+  background: #37c6c0;
+  height: 3px;
+  position: fixed;
+  z-index: 50;
+  width: var(--progress);
+  left: 0;
+  top: 0;
 }
 .rtl.post-body p,
 .rtl.post-body a,
@@ -2207,6 +2223,9 @@ pre code {
 .post-meta-break {
   flex-basis: 100%;
   height: 0;
+}
+#busuanzi_container_page_pv {
+  display: none;
 }
 .post-nav {
   border-top: 1px solid #eee;
@@ -2872,7 +2891,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #df144e;
+  background: #812457;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
