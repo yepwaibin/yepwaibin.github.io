@@ -23,28 +23,28 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="2022年希望有更好的明天">
+<meta name="description" content="Javascript历史回顾  最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证  最早有两个版本的Javascript  网景的Javascript 微软IE的JScript  由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了ECMA-262，也就是ECMAScript这个脚本语法标准">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新年快乐">
-<meta property="og:url" content="http://example.com/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/index.html">
+<meta property="og:title" content="什么是Javascript">
+<meta property="og:url" content="http://example.com/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="2022年希望有更好的明天">
+<meta property="og:description" content="Javascript历史回顾  最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证  最早有两个版本的Javascript  网景的Javascript 微软IE的JScript  由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了ECMA-262，也就是ECMAScript这个脚本语法标准">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-03T16:20:14.000Z">
-<meta property="article:modified_time" content="2022-01-04T06:04:18.937Z">
+<meta property="article:published_time" content="2022-01-05T14:49:10.000Z">
+<meta property="article:modified_time" content="2022-01-06T15:00:57.979Z">
 <meta property="article:author" content="Sky">
-<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/">
+<link rel="canonical" href="http://example.com/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/","path":"2022/01/04/新年快乐/","title":"新年快乐"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/","path":"2022/01/05/什么是Javascript/","title":"什么是Javascript"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>新年快乐 | Sky's Blog</title>
+<title>什么是Javascript | Sky's Blog</title>
   
 
 
@@ -137,7 +137,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -150,6 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript%E5%8E%86%E5%8F%B2%E5%9B%9E%E9%A1%BE"><span class="nav-text">Javascript历史回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">Javascript是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECMAScript"><span class="nav-text">ECMAScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ECMAScript%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="nav-text">ECMAScript的主要版本更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM"><span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM"><span class="nav-text">BOM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript%E4%B8%8EECMASCript%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">Javascript与ECMASCript的关系</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,7 +216,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -228,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          新年快乐
+          什么是Javascript
         </h1>
 
         <div class="post-meta-container">
@@ -238,9 +239,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-01-04 00:20:14 / Modified: 14:04:18" itemprop="dateCreated datePublished" datetime="2022-01-04T00:20:14+08:00">2022-01-04</time>
+      <time title="Created: 2022-01-05 22:49:10" itemprop="dateCreated datePublished" datetime="2022-01-05T22:49:10+08:00">2022-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-06 23:00:57" itemprop="dateModified" datetime="2022-01-06T23:00:57+08:00">2022-01-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,7 +255,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9A%8F%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">随记</span></a>
+          <a href="/categories/Javascript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">Javascript高级程序设计</span></a>
         </span>
     </span>
 
@@ -265,7 +272,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>13</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -283,7 +290,67 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>2022年希望有更好的明天</p>
+        <h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
+<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
+</blockquote>
+<p>最早有两个版本的Javascript</p>
+<ol>
+<li>网景的Javascript</li>
+<li>微软IE的JScript</li>
+</ol>
+<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
+<span id="more"></span>
+
+<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
+<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
+<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
+</blockquote>
+<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
+<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
+<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
+<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
+<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
+<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
+<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
+<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promise finally()</code>，模板字面量修订</li>
+<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在 HTML 中使 用扩展的 XML</p>
+</blockquote>
+<p>DOM通过创建表示文档的树，通过DOM API进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM三个Level</p>
+<ol>
+<li>Level1目标是映射文档结构</li>
+<li>Level2新增模块<ul>
+<li>DOM视图</li>
+<li>DOM事件</li>
+<li>DOM样式</li>
+<li>DOM遍历和范围</li>
+</ul>
+</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫 DOMLoad and Save 的新模块中），还有验证文档的方法（DOM Validation）。</li>
+</ol>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
+<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
+</blockquote>
+<ul>
+<li>弹出新浏览器窗口的能力</li>
+<li>移动、缩放和关闭浏览器窗口的能力</li>
+<li>navigator 对象，提供关于浏览器的详尽信息</li>
+<li>location 对象，提供浏览器加载页面的详尽信息</li>
+<li>screen 对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance 对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对 cookie 的支持</li>
+<li>其他自定义对象，如 XMLHttpRequest 和 IE 的 ActiveXObject</li>
+</ul>
+<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
+<p>原则上 <code>JavaScript</code> 与 <code>ECMAScript</code> 指的是同一个东西，但有时也会加以区分</p>
+<ul>
+<li><code>JavaScript</code>：指语言及其实现</li>
+<li><code>ECMAScript</code>：指语言标准及语言版本</li>
+</ul>
 
     </div>
 
@@ -293,17 +360,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag"># 杂记</a>
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="prev" title="搭建一个自己的博客">
+                  <i class="fa fa-chevron-left"></i> 搭建一个自己的博客
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" rel="next" title="搭建一个自己的博客">
-                  搭建一个自己的博客 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/" rel="next" title="HTML中的Javascript">
+                  HTML中的Javascript <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

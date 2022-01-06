@@ -1,6 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HTML中的Javascript</title>
+    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
+    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
+<li><p>async</p>
+</li>
+<li><p>crossorigin</p>
+<blockquote>
+<p>配置相关CORS设置</p>
+</blockquote>
+<ul>
+<li>anonymous</li>
+<li>use-credentials</li>
+</ul>
+</li>
+<li><p>defer</p>
+</li>
+<li><p>intergrity</p>
+<blockquote>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错， 脚本不会执行，用于确保内容分发网络（CDN，Content Delivery Network）不会提 供恶意内容</p>
+</blockquote>
+</li>
+<li><p>src</p>
+<ul>
+<li>会忽略行内脚本</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的 JavaScript 则受限制</li>
+</ul>
+</li>
+<li><p>type</p>
+<ul>
+<li><code>text/javascript</code></li>
+<li><code>module</code><ul>
+<li>会被当成ES6模块</li>
+<li>脚本加载解析过程与defer相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
+<li><p>行内脚本</p>
+<p>下载和执行会阻塞<code>HTML</code>的解析</p>
+</li>
+<li><p>外部脚本</p>
+<ul>
+<li>不加<code>async</code>和<code>defer</code><ul>
+<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
+</ul>
+</li>
+<li><code>defer</code><ul>
+<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+</ul>
+</li>
+<li><code>async</code><ul>
+<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
+<li>异步脚本保证会在页面的 <code>load </code>事件前执行，但可能会在 <code>DOMContentLoaded</code>之前或之后</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态加载脚本</p>
+<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
+</li>
+</ol>
+<p>建议都使用外部脚本，原因：</p>
+<ul>
+<li>可维护性</li>
+<li>缓存<ul>
+<li>浏览器会根据特定的设置缓存所有外部链接的 JavaScript 文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code> doctype</code> 切换文档模式，共有三中文档模块</p>
+<ol>
+<li>混杂模式</li>
+<li>标准模式</li>
+<li>准标准模式</li>
+</ol>
+<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的 HTML 元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是Javascript</title>
+    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
+    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
+<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
+</blockquote>
+<p>最早有两个版本的Javascript</p>
+<ol>
+<li>网景的Javascript</li>
+<li>微软IE的JScript</li>
+</ol>
+<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
+<span id="more"></span>
+
+<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
+<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
+<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
+</blockquote>
+<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
+<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
+<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
+<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
+<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
+<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
+<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
+<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promise finally()</code>，模板字面量修订</li>
+<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在 HTML 中使 用扩展的 XML</p>
+</blockquote>
+<p>DOM通过创建表示文档的树，通过DOM API进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM三个Level</p>
+<ol>
+<li>Level1目标是映射文档结构</li>
+<li>Level2新增模块<ul>
+<li>DOM视图</li>
+<li>DOM事件</li>
+<li>DOM样式</li>
+<li>DOM遍历和范围</li>
+</ul>
+</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫 DOMLoad and Save 的新模块中），还有验证文档的方法（DOM Validation）。</li>
+</ol>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
+<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
+</blockquote>
+<ul>
+<li>弹出新浏览器窗口的能力</li>
+<li>移动、缩放和关闭浏览器窗口的能力</li>
+<li>navigator 对象，提供关于浏览器的详尽信息</li>
+<li>location 对象，提供浏览器加载页面的详尽信息</li>
+<li>screen 对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance 对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对 cookie 的支持</li>
+<li>其他自定义对象，如 XMLHttpRequest 和 IE 的 ActiveXObject</li>
+</ul>
+<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
+<p>原则上 <code>JavaScript</code> 与 <code>ECMAScript</code> 指的是同一个东西，但有时也会加以区分</p>
+<ul>
+<li><code>JavaScript</code>：指语言及其实现</li>
+<li><code>ECMAScript</code>：指语言标准及语言版本</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>变量、作用域与内存</title>
+    <url>/2022/01/06/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98/</url>
+    <content><![CDATA[<h2 id="通过变量使用原始值与引用值"><a href="#通过变量使用原始值与引用值" class="headerlink" title="通过变量使用原始值与引用值"></a>通过变量使用原始值与引用值</h2><ol>
+<li>原始值<ul>
+<li>最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问</li>
+<li>不能有属性，但尝试添加属性不报错</li>
+<li>使用new关键字，Javascript会创建一个Object 类型的实例，但其行为类似原始值</li>
+<li>赋值到另一个变量时，是新增一个新的原始值</li>
+</ul>
+</li>
+<li>引用值<ul>
+<li>由多个值构成的对象，存储在堆内存中，保存引用值的变量按引用访问</li>
+<li>可以随时增删改其属性和方法</li>
+<li>赋值到另一个变量时，只是复制了指针地址，没有新增一个对象</li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>相同点：</p>
+<ul>
+<li>传递参数都是<strong>按值传递</strong><ul>
+<li>原始值，传原始值</li>
+<li>引用值，传指针地址</li>
+</ul>
+</li>
+</ul>
+<p>确认类型</p>
+<ul>
+<li>typeof适合用来判断一个变量是否为原始类型（字符串、数值、布尔值或 undefined）</li>
+<li>instanceof来判断它是什么类型对象<ul>
+<li>用 instanceof 检测原始值，则始终会返回 false</li>
+</ul>
+</li>
+</ul>
+<p>在把一个值赋给变量时，JavaScript 引擎必须确定这个值是原始值还是引用值。</p>
+<h2 id="理解执行上下文"><a href="#理解执行上下文" class="headerlink" title="理解执行上下文"></a>理解执行上下文</h2><blockquote>
+<p>执行上下文就是当前代码的执行环境，包括全局执行上下文（就是最外层的上下文），函数执行上下文</p>
+</blockquote>
+<ul>
+<li>全局执行上下文：创建一个全局的 window 对象（浏览器的情况下），并且设置 <code>this</code> 的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+</ul>
+<p>js引擎内部有一个执行上下文栈，它是用于执行代码的调用栈，最底部是全局执行上下文栈，当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文。</p>
+<h3 id="三个重要属性"><a href="#三个重要属性" class="headerlink" title="三个重要属性"></a>三个重要属性</h3><ol>
+<li><p>变量对象</p>
+<p>每个上下文都有一个关联的变量对象， 而这个上下文中定义的所有变量和函数都存在于这个对象上。我们编写的代码无法访问变量对象</p>
+<p><strong>活动对象</strong></p>
+<blockquote>
+<p>在函数上下文中，我们用活动对象来表示变量对象，活动对象和变量对象其实是一个东西，只有当进入一个执行环境时，这个执行上下文的变量对象才会被激活，此时称为活动对象（AO），只有活动对象上的各种属性才能被访问。</p>
+<p>活动对象是在进入函数上下文时刻被创建的，最初只有一个定义变量：arguments （全局上下文中没有这个变量），它通过函数的 arguments 属性初始化。arguments 属性值是 Arguments 对象（调用函数时，会为其创建一个Arguments对象，并自动初始化局部变量arguments，指代该Arguments对象。所有作为参数传入的值都会成为Arguments对象的数组元素。）</p>
+</blockquote>
+<p>变量对象和活动对象的关系：</p>
+<p>未进入执行阶段之前，变量对象(VO)中的属性都不能访问，但是进入执行阶段之后，变量对象(VO)转变为了活动对象(AO)，里面的属性都能被访问了，然后开始进行执行阶段的操作。</p>
+<p><strong>它们其实都是同一个对象，只是处于执行上下文的不同生命周期</strong></p>
+</li>
+<li><p>作用域链</p>
+<p>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定 了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</p>
+</li>
+<li><p>this</p>
+</li>
+</ol>
+<ul>
+<li>当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文，ECMAScript程序的执行流就是通过这个上下文栈进行控制的。</li>
+</ul>
+<h3 id="执行上下文的生命周期"><a href="#执行上下文的生命周期" class="headerlink" title="执行上下文的生命周期"></a>执行上下文的生命周期</h3><p>可以分为三个阶段</p>
+<ol>
+<li><p>创建阶段</p>
+<blockquote>
+<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
+</blockquote>
+<ul>
+<li>初始化函数的所有形参<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为 undefined</li>
+</ul>
+</li>
+<li>初始化函数声明<ul>
+<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li>初始变量声明<ul>
+<li>由名称和对应值（undefined）组成一个变量对象的属性被创建；</li>
+<li>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>代码执行阶段</p>
+<blockquote>
+<p>创建完成之后，就会开始执行代码，这个时候，会完成变量赋值，函数引用，以及执行其他代码。</p>
+</blockquote>
+<p>顺序执行代码，根据代码，修改活动对象的值</p>
+</li>
+<li><p>销毁阶段</p>
+<p>上下文在其所有代码都执行完毕后会被销毁，包括定义在它上面的所有变量和函数，全局上下文在应用程序退出前才会被销毁。</p>
+</li>
+</ol>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><ul>
+<li>var声明，变量会被自动添加到最接近的上下文。在函数中，最接近的上下文就是函数的局部上下文，如果变量未经声明就被初始化了，那么它就会自动被添加到全局上下文</li>
+</ul>
+<h3 id="标识符查找"><a href="#标识符查找" class="headerlink" title="标识符查找"></a>标识符查找</h3><p>搜索开始于作用域链前端，以给定的名称搜索对应的标识符。如果在局部上下文中找到该标识符，则搜索停止，变量确定；如果没有找到变量名，则继续沿作用域链搜索。这个过程一直持续到搜索至全局上下文的变量对象。如果仍然没有找到标识符，则说明其未声明。</p>
+<h2 id="理解垃圾回收"><a href="#理解垃圾回收" class="headerlink" title="理解垃圾回收"></a>理解垃圾回收</h2><p>Javascript通过自动内存管理实现内存分配和闲置资源回收。思路：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间（或者说在代码执行过程中某个预定的收集时间）就会自动运行</p>
+<p>两种策略</p>
+<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记；当变量离开上下文时， 也会被加上离开上下文的标记。</p>
+<p>给变量加标记得两种实现思路</p>
+<ul>
+<li>当变量进入上下文时，反转某一位</li>
+<li>维护“在上下文中”和“不在上下文中”两个变量列表，可以把变量从一个列表转移到另一个列表</li>
+</ul>
+<p>标记过程的实现并不重要，关键是策略</p>
+<p>垃圾回收运行过程</p>
+<ul>
+<li>会标记内存中存储的所有变量</li>
+<li>将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉</li>
+<li>在此之后再被加上标记 的变量就是待删除的了吗，因为任何在上下文中的变量都访问不到它们了</li>
+<li>垃圾回收程序做一次内 存清理，销毁带标记的所有值并收回它们的内存</li>
+</ul>
+<h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>思路</p>
+<ul>
+<li>对每个值都记录它被引用的次数</li>
+<li>声明变量并给它赋一个引用值时，这个值的引用数为 1</li>
+<li>如果同一个值又被赋给另一个变 量，那么引用数加 1</li>
+<li>如果保存对该值引用的变量被其他值给覆盖了，那么引用数减 1</li>
+<li>当一 个值的引用数为 0 时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了</li>
+<li>释放引用数为 0 的值的内存</li>
+</ul>
+<p>缺陷</p>
+<p>会有可能出现循环引用，如：对象 A 有一个指针指向对象 B，而对象 B 也引用了对象 A</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>垃圾回收程序会周期性运行，如果内存中分配了很多变量，则可能造成性能损失，因此垃圾回收的时间调度很重要。</p>
+<p>现代垃圾回收程序会基于对 JavaScript 运行时环境的探测来决定何时运行。探测机制因引擎而异， 但基本上都是根据已分配对象的大小和数量来判断的。V8 的堆增长策略会根据<strong>活跃对象的数量外加一些余量</strong>来确定何时再次垃圾回收。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>分配给浏览器得内存通常很小，因为要出于安全考虑，为的是避免运行大量 JavaScript 的网页耗尽系统内存而导致操作系统崩溃。内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。</p>
+<p>优化内存方法</p>
+<blockquote>
+<p>优化内存占用的最佳手段就是保证在执行 代码时只保存必要的数据。如果数据不再必要，那么把它设置为 null，从而释放其引用。这也可以叫 作解除引用。这个建议最适合全局变量和全局对象的属性</p>
+</blockquote>
+<ol>
+<li><p>使用const和let声明</p>
+<p>块级作用域能更早地让垃圾回收程序介入，今早回收应该回收地内存</p>
+</li>
+<li><p>隐藏类和删除操作</p>
+<ul>
+<li>V8 会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。如果这实例共享同一个构造函数和原型，V8 会在后台配置，共享相同的隐藏类<ul>
+<li>后面如果某个实例新增新的属性，他们不会共享相同隐藏类，所以要避免 JavaScript 的“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性</li>
+</ul>
+</li>
+<li>动态删除属性与动态添加属性导致的后果一样。最佳实践是把不想要的属性设置为 null。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果</li>
+</ul>
+</li>
+<li><p>静态分配（这个方法，大多数情况下，这都属于过早优化）</p>
+<p>关键点：减少浏览器执行垃圾回收的次数。理论上，如果能够合理使用分配的内存，同时避免多余的垃圾回收，那就可以保住因释放内存而损失的性能</p>
+<p>浏览器决定何时运行垃圾回收程序的一个标准就是对象更替的速度。</p>
+<p>思路：</p>
+<ol>
+<li><p>使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。 </p>
+</li>
+<li><p>应用程序可以向这个对象池请求一个对象、设置其属性、使用它，然后在操作完成后再把它还给对象池。</p>
+</li>
+<li><p>由于没发生对象初始化，垃圾回收探测就不会发现有对象更替，因此垃圾回收程序就不会那么频繁地运行。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>JavaScript 中的内存泄漏大部分是由不合理的引用导致的</p>
+<p>可能出现的场景</p>
+<ol>
+<li><p>定时器导致</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line"> <span class="built_in">console</span>.log(name); </span><br><span class="line">&#125;, <span class="number">100</span>); </span><br></pre></td></tr></table></figure>
+
+<p>只要定时器一直运行，回调函数中引用的 name 就会一直占用内存。因而垃圾回收程序就不会清理外部变量。</p>
+</li>
+<li><p>闭包</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> <span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"> <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> 	<span class="keyword">return</span> name; </span><br><span class="line"> &#125;; </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<p>闭包一直引用这外部函数的变量，垃圾回收程序无法去清理</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建一个自己的博客</title>
     <url>/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="Hexo-快速搭建"><a href="#Hexo-快速搭建" class="headerlink" title="Hexo 快速搭建"></a>Hexo 快速搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
@@ -39,18 +388,20 @@
 
 <p>在 <code>/source/_posts</code>文件夹下找到你的博文，使用typora（推荐）打开并编辑。</p>
 <p>保存后运行：</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate <span class="comment"># 生成静态文件，可简写为 hexo g</span></span><br><span class="line"><span class="variable">$ </span>hexo server <span class="comment"># 启动服务器。默认情况下，访问网址为：`http://localhost:4000/`。可以简写为 hexo s</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate <span class="comment"># 生成静态文件，可简写为 hexo g</span></span><br><span class="line"><span class="variable">$ </span>hexo server <span class="comment"># 启动服务器。默认情况下，访问网址为：http://localhost:4000/。可以简写为 hexo s</span></span><br></pre></td></tr></table></figure>
 
 <p>此时已经可以在<code>public</code>文件夹下看到完整的静态文件。<br>在浏览器中输入<code>http://localhost:4000/</code>就可以看到预览效果了。</p>
 <p>以上是本地部署，下面讲博客部署到Github page上</p>
 <h2 id="部署到Github-page"><a href="#部署到Github-page" class="headerlink" title="部署到Github page"></a>部署到Github page</h2><p>登录github，新建仓库，仓库名为<code>username.github.io</code>，<strong>注意：<code>username</code>应该是你github的用户名</strong></p>
 <p>本地和github都完成之后，现在需要把这两者连接在一起</p>
 <ol>
-<li><p>修改被指</p>
+<li><p>修改配置</p>
 <p>在项目根目录下的<code>_config.yml</code>修改配置参数</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    github: https://github.com/你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
 <li><p>安装部署插件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p><code>hexo-deploy-git </code>插件是通过拷贝 <code>public</code> 文件夹内容到<code>.deploy_git</code>文件夹下，然后提交推送到远程分支上实现了网站文件的部署。</p>
+</li>
 <li><p>启动执行</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
 </ol>
@@ -83,7 +434,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">date: 2022-01-04 13:29:07</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <h4 id="添加分类页面"><a href="#添加分类页面" class="headerlink" title="添加分类页面"></a>添加分类页面</h4><p>在项目根目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/categories</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/categories</span><br></pre></td></tr></table></figure>
 
 <p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">date: 2022-01-04 13:55:58</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
@@ -117,8 +468,13 @@
 <p>修改配置文件 <code>themes/next/_config.yml</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  time: <span class="literal">true</span>                   <span class="comment"># 文章阅读时长</span></span><br><span class="line">  symbols: <span class="literal">true</span>                <span class="comment"># 文章字数统计</span></span><br><span class="line">  total_time: <span class="literal">true</span>             <span class="comment"># 站点总阅读时长</span></span><br><span class="line">  total_symbols: <span class="literal">true</span>          <span class="comment"># 站点总字数统计</span></span><br><span class="line">  exclude_codeblock: <span class="literal">true</span>      <span class="comment"># 排除代码字数统计</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h3><p>进入项目根目录，下载插件<code>hexo-generator-searchdb</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install  hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 
+<p>修改主题配置文件，添加<code>search</code>，并修改<code>local_search</code>中的<code>enable</code>，改为<code>true</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Local search</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="首页博文只展示部分文字"><a href="#首页博文只展示部分文字" class="headerlink" title="首页博文只展示部分文字"></a>首页博文只展示部分文字</h3><p>在文章想要分割的位置中添加一行<code>&lt;!--more--&gt;</code></p>
 <h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
 <li><code>hexo init [folder]</code> <ul>
 <li>Hexo 默认在目前的文件夹建立网站。</li>
@@ -163,6 +519,379 @@
       </categories>
       <tags>
         <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>语言基础</title>
+    <url>/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li><p>区分大小写</p>
+</li>
+<li><p>标识符</p>
+<ul>
+<li>首字符为字母、下划线、美元符号</li>
+<li>建议使用驼峰大小写</li>
+<li>关键字、保留字、true、false、null不能为标识符</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li>单行注释<code>//</code></li>
+<li>块注释<code>/* */</code></li>
+</ul>
+</li>
+<li><p>严格模式</p>
+<ul>
+<li>加一行<code>&quot;use strict&quot;</code></li>
+<li>是一个预处理指令</li>
+</ul>
+</li>
+<li><p>语句</p>
+<ul>
+<li><p>可以不分号结束，由解析器决定结尾，但建议都手动自己加分号</p>
+</li>
+<li><p>大括号里是代码块</p>
+<span id="more"></span></li>
+</ul>
+</li>
+<li><p>变量</p>
+<ul>
+<li><p><code>var</code></p>
+<ul>
+<li>函数级作用域</li>
+<li>作用域提升</li>
+<li>重复声明不报错</li>
+<li>全局声明的变量成为window对象属性</li>
+</ul>
+</li>
+<li><p><code>let</code></p>
+<ul>
+<li><p>块级作用域</p>
+</li>
+<li><p>没有提升，有暂时死区TDZ</p>
+<ul>
+<li><p>当程序流程进入新的作用域（module、function、block）进行实例化时，在此作用域中，用let、const声明的变量会先在作用域中被创建，但此时还未进行词法绑定，所以还不能被访问，此时访问会抛出错误。在这运行流程一进入作用域创建变量，到变量开始可被访问之间的一段时间，就称之为TDZ(暂时死区)。</p>
+</li>
+<li><pre><code class="javascript">let x = &#39;outer value&#39;
+
+function func () &#123;
+  // 这里会产生 TDZ for x
+  console.log(x) // TDZ期间访问，产生ReferenceError错误
+  let x = &#39;inner value&#39; // 对x的声明语句，这里结束 TDZ for x
+&#125;
+
+func()
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>不能重复声明</p>
+</li>
+<li><p>混用<code>var</code>和<code>let</code>，重复声明会报错</p>
+</li>
+<li><p>全局声明不是window对象的属性</p>
+</li>
+</ul>
+</li>
+<li><p><code>const</code></p>
+<ul>
+<li>声明同时必须初始化</li>
+<li>初始化后不能修改</li>
+<li>不能修改仅限于常量的引用<ul>
+<li>想让整个对象都不能修改，可以使用 <code>Object.freeze()</code></li>
+</ul>
+</li>
+<li>不能用于声明会自增的迭代变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>六种简单数据类型、一种复杂数据类型（Object）。可以使用<code>typeof</code>来确定任意变量的数据类型，它返回一个字符串</p>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用 <code>var</code> 或<code> let</code> 声明了变量但没有初始化时，就相当于给变量赋予了<code> undefined</code> 值。在对<strong>未初始化</strong>的变量调用<code> typeof</code> 时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时， 返回的结果还是<code>&quot;undefined&quot;</code></p>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null </code>值表示一个空对象指针，这也是给<code>typeof </code>传一个 <code>null</code> 会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用 <code>null </code>来填充该变量</p>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a><code>Boolean</code>类型</h3><p>两个字面量true、false</p>
+<p>要将一个其他类型的值转换为布尔值，可以调用特定的<code>Boolean()</code>转型函数，<code>Boolean()</code>转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。</p>
+<p><code>NaN</code>返回<code>false</code></p>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a><code>Number</code>类型</h3><ul>
+<li>Number 类型使用 IEEE 754 格式表示整数和浮点值。</li>
+<li>整数也可以用八进制或十六进制字面量表示。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数</li>
+<li>正零和 负零在所有情况下都被认为是等同的</li>
+</ul>
+<ol>
+<li><p>浮点数</p>
+<ul>
+<li>数值中必须包含小数点，而且小数点后面必须至少有一个数字，没有数字或只有0，则会变成整数</li>
+<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母 e，再加上一个要乘的 10 的多少次幂</li>
+<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2 == 0.3 </code>是false</li>
+</ul>
+</li>
+<li><p>值的范围</p>
+<ul>
+<li>最小值<ul>
+<li><code>Number.MIN_VALUE</code></li>
+<li><code>-Infinity</code></li>
+<li><code>Number.POSITIVE_INFINITY</code></li>
+</ul>
+</li>
+<li>最大值<ul>
+<li><code>Number.MAX_VALUE</code></li>
+<li><code>Infinity</code></li>
+<li><code>Number.NEGATIVE_INFINITY</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>NaN</code></p>
+<blockquote>
+<p>不是数值</p>
+</blockquote>
+<ul>
+<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN </code>不等于包括 <code>NaN </code>在内的任何值</li>
+<li><code>isNaN()</code>函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。<ol>
+<li>首先会调用对象的<code>valueOf()</code>方法，然后再确定返回的值是否可以转换为数值</li>
+<li>如果不能，再调用 <code>toString()</code>方法， 并测试其返回值</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>数值转换</p>
+<ol>
+<li><code>Number()</code><ul>
+<li>布尔：0、1</li>
+<li>数值：返回</li>
+<li><code>null</code>：0</li>
+<li><code>undefiner</code>：<code>NaN</code></li>
+<li>字符串<ul>
+<li>正负号+数字字符，转换回十进制数值</li>
+<li>字符串前含有十六进制格式（<code>0xf</code>），返回这个十六进制对应的十进制</li>
+<li>空字符串：0</li>
+<li>其他字符情况：<code>NaN</code></li>
+</ul>
+</li>
+<li>对象<ul>
+<li>调用<code>valueOf()</code>方法，再按上述规则转换，如果转换为<code>NaN</code>，则调用<code>toString()</code>方法，再按字符串规则转换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>parseInt()</code><ul>
+<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回 NaN</li>
+<li>如果是，则继续依次检测每个字符，直到字符串末尾，或碰到非数值字符</li>
+<li>字符串以”0x”开头，就会被解释为十六进制整数</li>
+<li>以”0” 开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
+<li>parseInt()也接收第二个参数，用于指定底数（进制数）。</li>
+</ul>
+</li>
+<li><code>parseFloat()</code><ul>
+<li>与<code>parseInt()</code>函数相似，从位置 0 开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
+<li>始终忽略字符串开头的零</li>
+<li>十六进制数值始终会返回 0。因为 parseFloat()只解析十进制值，因此不能指定底数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a><code>String</code>类型</h3><p>双引号、单引号、反引号</p>
+<ul>
+<li>以某种引号作为字符串开头，必须仍然以该种引号作为字符串结尾。</li>
+<li>字符串的长度可以通过其<code>length</code>属性获取</li>
+<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改 某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
+<li>字符串值也有<code> toString()</code>方法， 该方法只是简单地返回自身的一个副本，<code>null </code>和<code> undefined</code> 值没有<code> toString()</code>方法</li>
+<li>模板字面量保留反引号内部的空格，可以跨行定义字符串</li>
+</ul>
+<p>字符串插值</p>
+<ul>
+<li>模板字面量不是字符串，而是一种特殊的 JavaScript 句法表达式，只不过求值后得到的是字符串</li>
+<li>所有插入的值都会使用<code> toString()</code>强制转型为字符串，而且任何 JavaScript 表达式都可以用于插值。嵌套的模板字符串无须转义</li>
+</ul>
+<p>标签函数</p>
+<ul>
+<li>会接收被插值记号分隔后的模板和对每个表达式求值的结果。</li>
+<li>接收到的参数依次是原始字符串数组和对每个表达式求值的结果。</li>
+</ul>
+<p>原始字符串</p>
+<ul>
+<li>可以直接获取原始的模板字面量内容（如换行符或 Unicode 字符），而不是被转换后的字符表示</li>
+<li>默认的<code>String.raw</code>标签函数</li>
+</ul>
+<h3 id="Symbol类型"><a href="#Symbol类型" class="headerlink" title="Symbol类型"></a><code>Symbol</code>类型</h3><blockquote>
+<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非 字符串形式的对象属性。</p>
+</blockquote>
+<ul>
+<li><p>使用<code> Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
+</li>
+<li><p><code>Symbol()</code>函数不能与 new 关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
+<ul>
+<li>确实想使用符号包装对象，可以借用 Object()函数</li>
+</ul>
+</li>
+<li><p>全局符号注册表</p>
+<ul>
+<li><blockquote>
+<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册 表中创建并重用符号。</p>
+</blockquote>
+</li>
+<li><p>方法：<code>Symbol.for()</code></p>
+<ul>
+<li>都执行幂等操作</li>
+<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同 字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
+</ul>
+</li>
+<li><p>全局注册表中的符号必须使用字符串键来创建，所以参数都会转换成字符串</p>
+</li>
+<li><p><code>Symbol.keyFor()</code>来查询全局注册表</p>
+<ul>
+<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回 <code>undefined</code>。</li>
+<li>如果传给<code> Symbol.keyFor()</code>的不是符号，则该方法抛出 <code>TypeError</code></li>
+</ul>
+</li>
+<li><p>凡是可以使用字符串或数值作为属性的地方，都可以使用符号</p>
+</li>
+<li><p><code>Object.getOwnPropertyNames()</code>返回对象实例的常规属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertySymbols()</code>返回对象实例的符号属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertyDescriptors()</code>会返回同时包含常规和符号属性描述符的对象</p>
+</li>
+<li><p><code>Reflect.ownKeys()</code>会返回两种类型 的键</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用内置符号"><a href="#常用内置符号" class="headerlink" title="常用内置符号"></a>常用内置符号</h4><ol>
+<li><code>Symbol.asyncIterator</code><ul>
+<li>返回对象默认的<code> AsyncIterator</code>。 由<code>for-await-of</code>语句使用</li>
+<li>循环时，它们会调用以 <code>Symbol.asyncIterator </code>为键的函数，并期望这个函数会返回一个实现迭代器 API 的对象</li>
+</ul>
+</li>
+<li><code>Symbol.hasInstance</code><ul>
+<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由 <code>instanceof </code>操作符使用</li>
+<li>instanceof 操作符可以用来确定一个对象实例的原型链上是否有原型</li>
+<li>这个属性定义在 Function 的原型上</li>
+</ul>
+</li>
+<li><code>Symbol.isConcatSpreadable</code><ol>
+<li>数组对象<ul>
+<li>默认：打平到已有数组</li>
+<li>true：打平到已有数组</li>
+<li>false：将整个数组对象追加到数组末尾</li>
+</ul>
+</li>
+<li>类数组对象<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：打平到已有数组</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+<li>不是数组，也不是类数组<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：忽略</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><code>Symbol.iterator</code><ul>
+<li>该方法返回对象默认的迭代器。 由 <code>for-of </code>语句使用</li>
+</ul>
+</li>
+<li><code>Symbol.match</code><ul>
+<li>用正则表达式去匹配字符串。由<code> String.prototype.match()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.replace</code><ul>
+<li>替换一个字符串中匹配的子串。由<code>String.prototype.replace()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.search</code><ul>
+<li>返回字符串中匹配正则表达式的索引。由 <code>String.prototype.search()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.species</code><ul>
+<li>作为创建派生对象的构造函数</li>
+<li>用 Symbol.species 定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
+</ul>
+</li>
+<li><code>Symbol.split</code><ul>
+<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code> String.prototype.split()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.toPrimitive</code><ul>
+<li>该方法将对象转换为相应的原始 值。由<code> ToPrimitive</code> 抽象操作使用</li>
+</ul>
+</li>
+<li><code>Symbol.toStringTag</code><ul>
+<li>该字符串用于创建对象的默认字符串描述。由内置方法<code> Object.prototype.toString()</code>使用</li>
+<li>通过<code> toString()</code>方法获取对象标识时，会检索由 <code>Symbol.toStringTag </code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
+</ul>
+</li>
+</ol>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a><code>Object</code>类型</h3><blockquote>
+<p>就是一组数据和功能的集合，通过 new 操作符后跟对象类型的名称来创建</p>
+</blockquote>
+<ul>
+<li><code>constructor</code><ul>
+<li>创建当前对象的函数</li>
+</ul>
+</li>
+<li><code>hasOwnProperty(propertyName)</code><ul>
+<li>用于判断当前对象实例上是否存在给定的属性</li>
+</ul>
+</li>
+<li><code>isPrototypeOf(Object)</code><ul>
+<li>判断当前对象是否为另一个对象的原型</li>
+</ul>
+</li>
+<li><code>propertyIsEnumerable(propertyName)</code><ul>
+<li>判断给定的属性是否可以使用<code>for-in </code>语句枚举</li>
+</ul>
+</li>
+<li><code>toLocaleString()</code><ul>
+<li>返回对象的字符串表示，该字符串反映对象所在的本地化执行环境</li>
+</ul>
+</li>
+<li><code>toString()</code><ul>
+<li>返回对象的字符串表示</li>
+</ul>
+</li>
+<li><code>valueOf()</code><ul>
+<li>返回对象对应的字符串、数值或布尔值表示。通常与<code> toString()</code>的返回值相同。</li>
+</ul>
+</li>
+</ul>
+<h2 id="流控制语句"><a href="#流控制语句" class="headerlink" title="流控制语句"></a>流控制语句</h2><ul>
+<li><code>if</code></li>
+<li><code>do-while</code></li>
+<li><code>while</code></li>
+<li><code>for</code></li>
+<li><code>for-in</code><ul>
+<li>用于美剧对象中的非符号键属性</li>
+</ul>
+</li>
+<li><code>for-of</code><ul>
+<li>用于遍历可迭代对象的元素</li>
+</ul>
+</li>
+<li>标签语句<ul>
+<li>主要用于嵌套循环</li>
+<li>和c++的goto差不多</li>
+</ul>
+</li>
+<li><code>break、continue</code></li>
+<li><code>switch</code></li>
+</ul>
+<h2 id="理解函数"><a href="#理解函数" class="headerlink" title="理解函数"></a>理解函数</h2><ul>
+<li>function 关键字声明，后跟一组参数，然后是函数体</li>
+<li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
+<li>不需要指定是否返回值。任何函数在任何时间都可以使用 return 语句来返 回函数的值，用法是后跟要返回的值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
       </tags>
   </entry>
 </search>

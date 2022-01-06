@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="语法 区分大小写  标识符  首字符为字母、下划线、美元符号 建议使用驼峰大小写 关键字、保留字、true、false、null不能为标识符   注释  单行注释&#x2F;&#x2F; 块注释&#x2F;* *&#x2F;   严格模式  加一行&quot;use strict&quot; 是一个预处理指令   语句  可以不分号结束，由解析器决定结尾，但建议都手动自己加分号  大括号里是代码块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="语言基础">
+<meta property="og:url" content="http://example.com/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Sky&#39;s Blog">
+<meta property="og:description" content="语法 区分大小写  标识符  首字符为字母、下划线、美元符号 建议使用驼峰大小写 关键字、保留字、true、false、null不能为标识符   注释  单行注释&#x2F;&#x2F; 块注释&#x2F;* *&#x2F;   严格模式  加一行&quot;use strict&quot; 是一个预处理指令   语句  可以不分号结束，由解析器决定结尾，但建议都手动自己加分号  大括号里是代码块">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-06T15:03:35.000Z">
+<meta property="article:modified_time" content="2022-01-06T15:06:03.530Z">
+<meta property="article:author" content="Sky">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/","path":"2022/01/06/语言基础/","title":"语言基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>语言基础 | Sky's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sky's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Undefined%E7%B1%BB%E5%9E%8B"><span class="nav-text">Undefined类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null%E7%B1%BB%E5%9E%8B"><span class="nav-text">Null类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean%E7%B1%BB%E5%9E%8B"><span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number%E7%B1%BB%E5%9E%8B"><span class="nav-text">Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E7%B1%BB%E5%9E%8B"><span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol%E7%B1%BB%E5%9E%8B"><span class="nav-text">Symbol类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E7%AC%A6%E5%8F%B7"><span class="nav-text">常用内置符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object%E7%B1%BB%E5%9E%8B"><span class="nav-text">Object类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-text">流控制语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%87%BD%E6%95%B0"><span class="nav-text">理解函数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sky</p>
+  <div class="site-description" itemprop="description">World is powered by solitude</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sky">
+      <meta itemprop="description" content="World is powered by solitude">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sky's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          语言基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-01-06 23:03:35 / Modified: 23:06:03" itemprop="dateCreated datePublished" datetime="2022-01-06T23:03:35+08:00">2022-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">Javascript高级程序设计</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li><p>区分大小写</p>
+</li>
+<li><p>标识符</p>
+<ul>
+<li>首字符为字母、下划线、美元符号</li>
+<li>建议使用驼峰大小写</li>
+<li>关键字、保留字、true、false、null不能为标识符</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li>单行注释<code>//</code></li>
+<li>块注释<code>/* */</code></li>
+</ul>
+</li>
+<li><p>严格模式</p>
+<ul>
+<li>加一行<code>&quot;use strict&quot;</code></li>
+<li>是一个预处理指令</li>
+</ul>
+</li>
+<li><p>语句</p>
+<ul>
+<li><p>可以不分号结束，由解析器决定结尾，但建议都手动自己加分号</p>
+</li>
+<li><p>大括号里是代码块</p>
+<span id="more"></span></li>
+</ul>
+</li>
+<li><p>变量</p>
+<ul>
+<li><p><code>var</code></p>
+<ul>
+<li>函数级作用域</li>
+<li>作用域提升</li>
+<li>重复声明不报错</li>
+<li>全局声明的变量成为window对象属性</li>
+</ul>
+</li>
+<li><p><code>let</code></p>
+<ul>
+<li><p>块级作用域</p>
+</li>
+<li><p>没有提升，有暂时死区TDZ</p>
+<ul>
+<li><p>当程序流程进入新的作用域（module、function、block）进行实例化时，在此作用域中，用let、const声明的变量会先在作用域中被创建，但此时还未进行词法绑定，所以还不能被访问，此时访问会抛出错误。在这运行流程一进入作用域创建变量，到变量开始可被访问之间的一段时间，就称之为TDZ(暂时死区)。</p>
+</li>
+<li><pre><code class="javascript">let x = &#39;outer value&#39;
+
+function func () &#123;
+  // 这里会产生 TDZ for x
+  console.log(x) // TDZ期间访问，产生ReferenceError错误
+  let x = &#39;inner value&#39; // 对x的声明语句，这里结束 TDZ for x
+&#125;
+
+func()
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>不能重复声明</p>
+</li>
+<li><p>混用<code>var</code>和<code>let</code>，重复声明会报错</p>
+</li>
+<li><p>全局声明不是window对象的属性</p>
+</li>
+</ul>
+</li>
+<li><p><code>const</code></p>
+<ul>
+<li>声明同时必须初始化</li>
+<li>初始化后不能修改</li>
+<li>不能修改仅限于常量的引用<ul>
+<li>想让整个对象都不能修改，可以使用 <code>Object.freeze()</code></li>
+</ul>
+</li>
+<li>不能用于声明会自增的迭代变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>六种简单数据类型、一种复杂数据类型（Object）。可以使用<code>typeof</code>来确定任意变量的数据类型，它返回一个字符串</p>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用 <code>var</code> 或<code> let</code> 声明了变量但没有初始化时，就相当于给变量赋予了<code> undefined</code> 值。在对<strong>未初始化</strong>的变量调用<code> typeof</code> 时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时， 返回的结果还是<code>&quot;undefined&quot;</code></p>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null </code>值表示一个空对象指针，这也是给<code>typeof </code>传一个 <code>null</code> 会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用 <code>null </code>来填充该变量</p>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a><code>Boolean</code>类型</h3><p>两个字面量true、false</p>
+<p>要将一个其他类型的值转换为布尔值，可以调用特定的<code>Boolean()</code>转型函数，<code>Boolean()</code>转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。</p>
+<p><code>NaN</code>返回<code>false</code></p>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a><code>Number</code>类型</h3><ul>
+<li>Number 类型使用 IEEE 754 格式表示整数和浮点值。</li>
+<li>整数也可以用八进制或十六进制字面量表示。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数</li>
+<li>正零和 负零在所有情况下都被认为是等同的</li>
+</ul>
+<ol>
+<li><p>浮点数</p>
+<ul>
+<li>数值中必须包含小数点，而且小数点后面必须至少有一个数字，没有数字或只有0，则会变成整数</li>
+<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母 e，再加上一个要乘的 10 的多少次幂</li>
+<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2 == 0.3 </code>是false</li>
+</ul>
+</li>
+<li><p>值的范围</p>
+<ul>
+<li>最小值<ul>
+<li><code>Number.MIN_VALUE</code></li>
+<li><code>-Infinity</code></li>
+<li><code>Number.POSITIVE_INFINITY</code></li>
+</ul>
+</li>
+<li>最大值<ul>
+<li><code>Number.MAX_VALUE</code></li>
+<li><code>Infinity</code></li>
+<li><code>Number.NEGATIVE_INFINITY</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>NaN</code></p>
+<blockquote>
+<p>不是数值</p>
+</blockquote>
+<ul>
+<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN </code>不等于包括 <code>NaN </code>在内的任何值</li>
+<li><code>isNaN()</code>函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。<ol>
+<li>首先会调用对象的<code>valueOf()</code>方法，然后再确定返回的值是否可以转换为数值</li>
+<li>如果不能，再调用 <code>toString()</code>方法， 并测试其返回值</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>数值转换</p>
+<ol>
+<li><code>Number()</code><ul>
+<li>布尔：0、1</li>
+<li>数值：返回</li>
+<li><code>null</code>：0</li>
+<li><code>undefiner</code>：<code>NaN</code></li>
+<li>字符串<ul>
+<li>正负号+数字字符，转换回十进制数值</li>
+<li>字符串前含有十六进制格式（<code>0xf</code>），返回这个十六进制对应的十进制</li>
+<li>空字符串：0</li>
+<li>其他字符情况：<code>NaN</code></li>
+</ul>
+</li>
+<li>对象<ul>
+<li>调用<code>valueOf()</code>方法，再按上述规则转换，如果转换为<code>NaN</code>，则调用<code>toString()</code>方法，再按字符串规则转换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>parseInt()</code><ul>
+<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回 NaN</li>
+<li>如果是，则继续依次检测每个字符，直到字符串末尾，或碰到非数值字符</li>
+<li>字符串以”0x”开头，就会被解释为十六进制整数</li>
+<li>以”0” 开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
+<li>parseInt()也接收第二个参数，用于指定底数（进制数）。</li>
+</ul>
+</li>
+<li><code>parseFloat()</code><ul>
+<li>与<code>parseInt()</code>函数相似，从位置 0 开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
+<li>始终忽略字符串开头的零</li>
+<li>十六进制数值始终会返回 0。因为 parseFloat()只解析十进制值，因此不能指定底数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a><code>String</code>类型</h3><p>双引号、单引号、反引号</p>
+<ul>
+<li>以某种引号作为字符串开头，必须仍然以该种引号作为字符串结尾。</li>
+<li>字符串的长度可以通过其<code>length</code>属性获取</li>
+<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改 某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
+<li>字符串值也有<code> toString()</code>方法， 该方法只是简单地返回自身的一个副本，<code>null </code>和<code> undefined</code> 值没有<code> toString()</code>方法</li>
+<li>模板字面量保留反引号内部的空格，可以跨行定义字符串</li>
+</ul>
+<p>字符串插值</p>
+<ul>
+<li>模板字面量不是字符串，而是一种特殊的 JavaScript 句法表达式，只不过求值后得到的是字符串</li>
+<li>所有插入的值都会使用<code> toString()</code>强制转型为字符串，而且任何 JavaScript 表达式都可以用于插值。嵌套的模板字符串无须转义</li>
+</ul>
+<p>标签函数</p>
+<ul>
+<li>会接收被插值记号分隔后的模板和对每个表达式求值的结果。</li>
+<li>接收到的参数依次是原始字符串数组和对每个表达式求值的结果。</li>
+</ul>
+<p>原始字符串</p>
+<ul>
+<li>可以直接获取原始的模板字面量内容（如换行符或 Unicode 字符），而不是被转换后的字符表示</li>
+<li>默认的<code>String.raw</code>标签函数</li>
+</ul>
+<h3 id="Symbol类型"><a href="#Symbol类型" class="headerlink" title="Symbol类型"></a><code>Symbol</code>类型</h3><blockquote>
+<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非 字符串形式的对象属性。</p>
+</blockquote>
+<ul>
+<li><p>使用<code> Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
+</li>
+<li><p><code>Symbol()</code>函数不能与 new 关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
+<ul>
+<li>确实想使用符号包装对象，可以借用 Object()函数</li>
+</ul>
+</li>
+<li><p>全局符号注册表</p>
+<ul>
+<li><blockquote>
+<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册 表中创建并重用符号。</p>
+</blockquote>
+</li>
+<li><p>方法：<code>Symbol.for()</code></p>
+<ul>
+<li>都执行幂等操作</li>
+<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同 字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
+</ul>
+</li>
+<li><p>全局注册表中的符号必须使用字符串键来创建，所以参数都会转换成字符串</p>
+</li>
+<li><p><code>Symbol.keyFor()</code>来查询全局注册表</p>
+<ul>
+<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回 <code>undefined</code>。</li>
+<li>如果传给<code> Symbol.keyFor()</code>的不是符号，则该方法抛出 <code>TypeError</code></li>
+</ul>
+</li>
+<li><p>凡是可以使用字符串或数值作为属性的地方，都可以使用符号</p>
+</li>
+<li><p><code>Object.getOwnPropertyNames()</code>返回对象实例的常规属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertySymbols()</code>返回对象实例的符号属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertyDescriptors()</code>会返回同时包含常规和符号属性描述符的对象</p>
+</li>
+<li><p><code>Reflect.ownKeys()</code>会返回两种类型 的键</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用内置符号"><a href="#常用内置符号" class="headerlink" title="常用内置符号"></a>常用内置符号</h4><ol>
+<li><code>Symbol.asyncIterator</code><ul>
+<li>返回对象默认的<code> AsyncIterator</code>。 由<code>for-await-of</code>语句使用</li>
+<li>循环时，它们会调用以 <code>Symbol.asyncIterator </code>为键的函数，并期望这个函数会返回一个实现迭代器 API 的对象</li>
+</ul>
+</li>
+<li><code>Symbol.hasInstance</code><ul>
+<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由 <code>instanceof </code>操作符使用</li>
+<li>instanceof 操作符可以用来确定一个对象实例的原型链上是否有原型</li>
+<li>这个属性定义在 Function 的原型上</li>
+</ul>
+</li>
+<li><code>Symbol.isConcatSpreadable</code><ol>
+<li>数组对象<ul>
+<li>默认：打平到已有数组</li>
+<li>true：打平到已有数组</li>
+<li>false：将整个数组对象追加到数组末尾</li>
+</ul>
+</li>
+<li>类数组对象<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：打平到已有数组</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+<li>不是数组，也不是类数组<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：忽略</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><code>Symbol.iterator</code><ul>
+<li>该方法返回对象默认的迭代器。 由 <code>for-of </code>语句使用</li>
+</ul>
+</li>
+<li><code>Symbol.match</code><ul>
+<li>用正则表达式去匹配字符串。由<code> String.prototype.match()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.replace</code><ul>
+<li>替换一个字符串中匹配的子串。由<code>String.prototype.replace()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.search</code><ul>
+<li>返回字符串中匹配正则表达式的索引。由 <code>String.prototype.search()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.species</code><ul>
+<li>作为创建派生对象的构造函数</li>
+<li>用 Symbol.species 定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
+</ul>
+</li>
+<li><code>Symbol.split</code><ul>
+<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code> String.prototype.split()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.toPrimitive</code><ul>
+<li>该方法将对象转换为相应的原始 值。由<code> ToPrimitive</code> 抽象操作使用</li>
+</ul>
+</li>
+<li><code>Symbol.toStringTag</code><ul>
+<li>该字符串用于创建对象的默认字符串描述。由内置方法<code> Object.prototype.toString()</code>使用</li>
+<li>通过<code> toString()</code>方法获取对象标识时，会检索由 <code>Symbol.toStringTag </code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
+</ul>
+</li>
+</ol>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a><code>Object</code>类型</h3><blockquote>
+<p>就是一组数据和功能的集合，通过 new 操作符后跟对象类型的名称来创建</p>
+</blockquote>
+<ul>
+<li><code>constructor</code><ul>
+<li>创建当前对象的函数</li>
+</ul>
+</li>
+<li><code>hasOwnProperty(propertyName)</code><ul>
+<li>用于判断当前对象实例上是否存在给定的属性</li>
+</ul>
+</li>
+<li><code>isPrototypeOf(Object)</code><ul>
+<li>判断当前对象是否为另一个对象的原型</li>
+</ul>
+</li>
+<li><code>propertyIsEnumerable(propertyName)</code><ul>
+<li>判断给定的属性是否可以使用<code>for-in </code>语句枚举</li>
+</ul>
+</li>
+<li><code>toLocaleString()</code><ul>
+<li>返回对象的字符串表示，该字符串反映对象所在的本地化执行环境</li>
+</ul>
+</li>
+<li><code>toString()</code><ul>
+<li>返回对象的字符串表示</li>
+</ul>
+</li>
+<li><code>valueOf()</code><ul>
+<li>返回对象对应的字符串、数值或布尔值表示。通常与<code> toString()</code>的返回值相同。</li>
+</ul>
+</li>
+</ul>
+<h2 id="流控制语句"><a href="#流控制语句" class="headerlink" title="流控制语句"></a>流控制语句</h2><ul>
+<li><code>if</code></li>
+<li><code>do-while</code></li>
+<li><code>while</code></li>
+<li><code>for</code></li>
+<li><code>for-in</code><ul>
+<li>用于美剧对象中的非符号键属性</li>
+</ul>
+</li>
+<li><code>for-of</code><ul>
+<li>用于遍历可迭代对象的元素</li>
+</ul>
+</li>
+<li>标签语句<ul>
+<li>主要用于嵌套循环</li>
+<li>和c++的goto差不多</li>
+</ul>
+</li>
+<li><code>break、continue</code></li>
+<li><code>switch</code></li>
+</ul>
+<h2 id="理解函数"><a href="#理解函数" class="headerlink" title="理解函数"></a>理解函数</h2><ul>
+<li>function 关键字声明，后跟一组参数，然后是函数体</li>
+<li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
+<li>不需要指定是否返回值。任何函数在任何时间都可以使用 return 语句来返 回函数的值，用法是后跟要返回的值</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/" rel="prev" title="HTML中的Javascript">
+                  <i class="fa fa-chevron-left"></i> HTML中的Javascript
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/06/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98/" rel="next" title="变量、作用域与内存">
+                  变量、作用域与内存 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sky</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">15k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">14 mins.</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
