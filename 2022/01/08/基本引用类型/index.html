@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="理解对象引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念 对象被认为是某个特定引用类型的实例。新对象通过使用 new 操作符后跟一个构造函数来创建。构造函数就是用来创建新对象的函数 JavaScript 中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本引用类型">
+<meta property="og:url" content="http://example.com/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Sky&#39;s Blog">
+<meta property="og:description" content="理解对象引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念 对象被认为是某个特定引用类型的实例。新对象通过使用 new 操作符后跟一个构造函数来创建。构造函数就是用来创建新对象的函数 JavaScript 中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-07T16:11:45.000Z">
+<meta property="article:modified_time" content="2022-01-07T16:13:57.181Z">
+<meta property="article:author" content="Sky">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/","path":"2022/01/08/基本引用类型/","title":"基本引用类型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基本引用类型 | Sky's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sky's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1"><span class="nav-text">理解对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%ACJavascript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本Javascript数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date%E7%B1%BB%E5%9E%8B"><span class="nav-text">Date类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RegExp"><span class="nav-text">RegExp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%9B%E5%BB%BA"><span class="nav-text">正则表达式创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RegExp%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-text">RegExp实例方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E5%80%BC%E4%B8%8E%E5%8E%9F%E5%A7%8B%E5%80%BC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-text">原始值与原始值包装类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean"><span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number"><span class="nav-text">Number</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%86%99%E4%BA%86-valueOf-%E3%80%81toLocaleString-%E5%92%8C-toString-%E6%96%B9%E6%B3%95"><span class="nav-text">重写了 valueOf()、toLocaleString()和 toString()方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E6%95%B0%E5%80%BC%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="nav-text">将数值格式化为字符串方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-text">String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-text">单例内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Global"><span class="nav-text">Global</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Math"><span class="nav-text">Math</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sky</p>
+  <div class="site-description" itemprop="description">World is powered by solitude</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sky">
+      <meta itemprop="description" content="World is powered by solitude">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sky's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基本引用类型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-01-08 00:11:45 / Modified: 00:13:57" itemprop="dateCreated datePublished" datetime="2022-01-08T00:11:45+08:00">2022-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Javascript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">Javascript高级程序设计</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><p>引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念</p>
+<p>对象被认为是某个特定引用类型的实例。新对象通过使用 new 操作符后跟一个构造函数来创建。构造函数就是用来创建新对象的函数</p>
+<p>JavaScript 中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象</p>
+<span id="more"></span>
+
+<ul>
+<li>Object类型<ul>
+<li>一个基础类型</li>
+</ul>
+</li>
+<li>Array类型</li>
+<li>Date类型</li>
+<li>RegExp类型</li>
+</ul>
+<p>函数其实是 Function 类型的实例，这意味着函数也是对象。由于函数是对象，因此也就具有能够增强自身行为的方法</p>
+<p>当代码开始执行时，全局上下文中会存在两个内置对象：<code>Global </code>和 <code>Math</code>。其中，<code>Global </code>对象在 大多数 ECMAScript 实现中无法直接访问。不过，浏览器将其实现为 window 对象。所有全局变量和函 数都是 <code>Global </code>对象的属性。<code>Math </code>对象包含辅助完成复杂计算的属性和方法</p>
+<h2 id="基本Javascript数据类型"><a href="#基本Javascript数据类型" class="headerlink" title="基本Javascript数据类型"></a>基本Javascript数据类型</h2><h3 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h3><blockquote>
+<p>Date 类型将日期保存为自协调世界时（UTC，Universal Time Coordinated）时间 1970 年 1 月 1 日午夜（零时）至今所经过的毫秒数</p>
+</blockquote>
+<p>创建日期对象</p>
+<ul>
+<li><code>new Date()</code><ul>
+<li>构造函数</li>
+</ul>
+</li>
+<li>辅助方法：<ul>
+<li><code>Date.parse()</code><ul>
+<li>“月/日/年”</li>
+<li>“月名 日, 年”</li>
+<li>“周几 月名 日 年 时:分:秒 时区”，</li>
+<li><code>“YYYY-MM-DDTHH:mm:ss.sssZ”</code></li>
+<li><code>Date.parse()</code>会被Date构造函数隐式调用</li>
+</ul>
+</li>
+<li><code>Date.UTC()</code><ul>
+<li><code>Date.UTC()</code>方法也返回日期的毫秒表示</li>
+<li>参数是年、零起点月数（1 月是 0，2 月是 1，以此类推）、日（1<del>31）、时（0</del>23）、 分、秒和毫秒</li>
+<li><code>Date.UTC()</code>也会被 Date 构造函数隐式调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Date.now()</code><ul>
+<li>返回表示方法执行时日期和时间的毫秒数</li>
+<li>方便用于代码分析，计算运行时长</li>
+</ul>
+</li>
+<li><code>toLocaleString()</code><ul>
+<li>返回与浏览器运行的本地环境一致的日期和时间</li>
+</ul>
+</li>
+<li><code>toString()</code><ul>
+<li>返回带时区信息的日期和时间，而时间也是以 24 小时制（0~23）表示的</li>
+</ul>
+</li>
+<li><code>valueOf()</code><ul>
+<li>返回的是日期的毫秒表示</li>
+</ul>
+</li>
+</ul>
+<p>日期格式化方法</p>
+<h3 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h3><p><code>RegExp </code>类型支持正则表达式</p>
+<ul>
+<li><code>g</code><ul>
+<li>全局模式</li>
+</ul>
+</li>
+<li><code>i</code><ul>
+<li>不区分大小写</li>
+</ul>
+</li>
+</ul>
+<p>所有元字符在模式中也必须转义</p>
+<ul>
+<li><code>( [ &#123; \ ^ $ | ) ] &#125; ? * + . </code></li>
+<li>使用反斜杠来转义</li>
+</ul>
+<h4 id="正则表达式创建"><a href="#正则表达式创建" class="headerlink" title="正则表达式创建"></a>正则表达式创建</h4><ul>
+<li>字面量定义</li>
+<li><code>RegExp</code>构造函数创建<ul>
+<li>两个参数<ul>
+<li>模式字符串<ul>
+<li>因为是字符串，所以所有元字符都必须二次转义，<strong>包括转义字符序列</strong></li>
+</ul>
+</li>
+<li>（可选）标记字符串</li>
+</ul>
+</li>
+<li>可以基于已有的正则表达式实例，并可选择性地修改它们的标记</li>
+</ul>
+</li>
+</ul>
+<h4 id="RegExp实例方法"><a href="#RegExp实例方法" class="headerlink" title="RegExp实例方法"></a>RegExp实例方法</h4><ol>
+<li><p><code>exec()</code></p>
+<p>主要用于配合捕获组使用。这个方法只接收一个参数，即要应用模式的字符串。如果找到了匹配项，则<strong>返回包含第一个匹配信息的数组</strong>；如果没找到匹配项，则返回 null。</p>
+<p>这个数组的第一个元素是匹配整个模式的字符串， 其他元素是与表达式中的捕获组匹配的字符串</p>
+<p>两个额外属性</p>
+<ul>
+<li><code>index</code><ul>
+<li>字符串中匹配模式的起始位置</li>
+</ul>
+</li>
+<li><code>input</code><ul>
+<li>是要查找的字符串</li>
+</ul>
+</li>
+</ul>
+<p>如果模式设置了全局标记，则每次调用 <code>exec()</code>方法会返回一个匹配的信息；如果没有设置全局标记，则无论对同一个字符串调用多少次 exec()，也只会返回第一个匹配的信息</p>
+</li>
+<li><p><code>test()</code></p>
+<p>接收一个字符串参数。如果输入的文本与模式匹配，则参数 返回 <code>true</code>，否则返回 <code>false</code>。主要用于测试模式是否匹配。</p>
+<p><code>toLocaleString()</code>和<code> toString()</code>都返回正则表达式的字面量表示，<code>valueOf()</code>方法返回正则表达式本身</p>
+</li>
+</ol>
+<h2 id="原始值与原始值包装类型"><a href="#原始值与原始值包装类型" class="headerlink" title="原始值与原始值包装类型"></a>原始值与原始值包装类型</h2><blockquote>
+<p>每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。</p>
+</blockquote>
+<ul>
+<li>每种包装类型都映射到同名的原始类型</li>
+<li>在以读模式访问原始值时，后台会实例化一个原始值包装对象，通过这个对象可以操作数据</li>
+<li>涉及原始值的语句只要一执行完毕，包装对象就会立即销毁</li>
+</ul>
+<p>当原始值调用对象方法或属性时，发生三个事情</p>
+<ul>
+<li>创建原始值包装类型</li>
+<li>调用实例上特定的方法</li>
+<li>销毁实例</li>
+</ul>
+<p>引用类型与原始值包装类型的<strong>主要区别在于对象的生命周期</strong>。在通过 new 实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则<strong>只存在于访问它的那行代码执行期间</strong>。</p>
+<p>三个原始值包装类型</p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><blockquote>
+<p><code>Boolean</code> 是对应布尔值的引用类型。要创建一个 <code>Boolean</code> 对象，就使用 <code>Boolean</code> 构造函数并传入<code>true</code>或 <code>false</code></p>
+</blockquote>
+<ul>
+<li>重写<code> valueOf()</code>方法，返回一个原始值 true 或 false</li>
+<li><code>toString()</code>方法被调用时也会被覆盖，返回字符串”true”或”false”</li>
+</ul>
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><h4 id="重写了-valueOf-、toLocaleString-和-toString-方法"><a href="#重写了-valueOf-、toLocaleString-和-toString-方法" class="headerlink" title="重写了 valueOf()、toLocaleString()和 toString()方法"></a>重写了 <code>valueOf()</code>、<code>toLocaleString()</code>和<code> toString()</code>方法</h4><ul>
+<li><code>valueOf()</code>方法返回<code>Number</code>对象表示的原始数值</li>
+<li>另外两个方法返回数值字符串</li>
+<li><code>toString() </code>方法可选地接收一个表示基数的参数，并返回相应基数形式的数值字符串</li>
+</ul>
+<h4 id="将数值格式化为字符串方法"><a href="#将数值格式化为字符串方法" class="headerlink" title="将数值格式化为字符串方法"></a>将数值格式化为字符串方法</h4><ul>
+<li><code>toFixed()</code><ul>
+<li>返回包含指定小数点位数的数值字符串</li>
+</ul>
+</li>
+<li><code>toExponential()</code><ul>
+<li>返回以科学记数法（也称为指数记数法）表 示的数值字符串</li>
+<li>接收一个参数，表示结果中小数的位数</li>
+</ul>
+</li>
+<li><code>toPrecision()</code><ul>
+<li>接收一个参数，表示结果中数字的总位数</li>
+</ul>
+</li>
+</ul>
+<p><code>Number.isInteger()</code>方法，用于辨别一个数值是否保存为整数</p>
+<p>为了鉴别整数是否在合理数字范围内，可以使用 <code>Number.isSafeInteger()</code>方法</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><blockquote>
+<p>String 是对应字符串的引用类型。要创建一个 String 对象，使用 String 构造函数并传入一个数值</p>
+</blockquote>
+<p><code>valueOf()</code>、<code>toLocaleString() </code>和 <code>toString()</code>都返回对象的原始字符串值，有一个<code>length</code>属性，表示字符串中字符的数量。</p>
+<p>JavaScript 字符串由 16 位码元（code unit）组成，在 Unicode 中称为基本多语言平面（BMP）</p>
+<ul>
+<li><code>charAt()</code>方法<ul>
+<li>返回给定索引位置的字符，由传给方法的整数参数指定</li>
+</ul>
+</li>
+<li><code>charCodeAt()</code><ul>
+<li>可以查看指定码元的字符编码</li>
+<li>返回指定索引位置的码元值</li>
+</ul>
+</li>
+<li><code>fromCharCode()</code><ul>
+<li>用于根据给定的 UTF-16 码元创建字符串中的字符</li>
+<li>可以接受任意多个数值，并返回将所有数值对应的字符拼接起来的字符串</li>
+</ul>
+</li>
+</ul>
+<p>对于扩展到Unicode 增补字符平面时，Unicode 采用了一个策略，即每个字符使用另外 16 位去选择一个增补平面。这种每个字符使用两个 16 位码元的策略称为<strong>代理对</strong></p>
+<ul>
+<li><code>codePointAt()</code><ul>
+<li>接收 16 位码元的索引并返回该索引位置上的码点(能识别完整的码点（16位或32位）)<ul>
+<li>码点是 Unicode 中一个字符的完整标识</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>fromCodePoint()</code><ul>
+<li>接收任意数量的码点，返回对应字符拼接起来的字符串</li>
+</ul>
+</li>
+<li><code>normalize()</code><ul>
+<li>规范化字符串</li>
+</ul>
+</li>
+</ul>
+<p>字符串操作方法</p>
+<ul>
+<li><code>concat()</code><ul>
+<li>将一个或多个字符串拼接成一个新字符串</li>
+<li><code>concat()</code>方法可以接收任意多个参数，因此可以一次性拼接多个字符串</li>
+<li>更常用的时<code>+</code>运算符</li>
+</ul>
+</li>
+<li>提取子字符串<ul>
+<li><code>slice()</code><ul>
+<li>第一个参数表示开始，第二个表示结束</li>
+<li>将所有负值参数都当成字 符串长度加上负参数值</li>
+</ul>
+</li>
+<li><code>substr()</code><ul>
+<li>第一个参数表示开始，第二个表示返回子字符串数量</li>
+<li>将第一个负参数值当成字符串长度加上该值，将第二个负参数值转换为 0</li>
+</ul>
+</li>
+<li><code>substring()</code><ul>
+<li>第一个参数表示开始，第二个表示结束</li>
+<li>将所有负参数值都转换为 0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定位子字符串<ul>
+<li><code>indexOf()</code><ul>
+<li>从开头开始查找子字符串</li>
+</ul>
+</li>
+<li><code>lastIndexOf()</code><ul>
+<li>从末尾开始查找子字符串</li>
+</ul>
+</li>
+<li>都可以接收可选的第二个参数，表示开始搜索的位置</li>
+</ul>
+</li>
+<li>判断字符串是否包含另一个字符串<ul>
+<li><code>startswith</code><ul>
+<li>检查开始于索引 0 的匹配项</li>
+<li>可选第二参数，表示开始搜索位置</li>
+</ul>
+</li>
+<li><code>endsWith</code><ul>
+<li>检查开始于索引(<code>string.length - substring.length</code>)的匹配项</li>
+<li>可选第二参数，表示当作字符串末尾位置</li>
+</ul>
+</li>
+<li><code>includes</code><ul>
+<li>检查整个字符串</li>
+<li>可选第二参数，表示开始搜索位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>trim()</code><ul>
+<li>创建字符串副本，删除前后所有空格符</li>
+<li><code>trimLeft()</code></li>
+<li><code>trimRight()</code></li>
+</ul>
+</li>
+<li><code>repeat</code><ul>
+<li>接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果。</li>
+</ul>
+</li>
+<li>填充字符<ul>
+<li><code>padStart()</code></li>
+<li><code>padEnd()</code></li>
+<li>第一个参数是长度，第二个参数是可选的填充字符串</li>
+<li>如果长度小于或等于字符串长度，则会返回原始字符串</li>
+</ul>
+</li>
+<li>字符串迭代于结构<ul>
+<li>原型上暴露了一个@@iterator 方法，表示可以迭代字符串的每个字符，在 for-of 循环中可以通过这个迭代器按序访问每个字符，有了这个迭代器之后，字符串就可以通过解构操作符来解构了</li>
+</ul>
+</li>
+<li>字符串大小写转换<ul>
+<li><code>toLowerCase()</code></li>
+<li><code>toUpperCase()</code></li>
+<li><code>toLocaleLowerCase()</code><ul>
+<li>基于特定地区实现</li>
+</ul>
+</li>
+<li><code>toLocaleUpperCase()</code><ul>
+<li>基于特定地区实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字符串模式匹配<ul>
+<li><code>match()</code></li>
+<li><code>search()</code></li>
+<li><code>replace()</code><ul>
+<li>第二个参数可以是函数</li>
+</ul>
+</li>
+<li><code>split()</code><ul>
+<li>可传第二参数，确保返回数组大小不超过第二参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>localeCompare()<ul>
+<li>比较两个字符串，排前头返回负值，排后头返回正值，相等返回0</li>
+</ul>
+</li>
+</ul>
+<h3 id="单例内置对象"><a href="#单例内置对象" class="headerlink" title="单例内置对象"></a>单例内置对象</h3><blockquote>
+<p>任何由 ECMAScript 实现提供、与宿主环境无关，并在 ECMAScript 程序开始执行时就存在的对象</p>
+</blockquote>
+<h4 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h4><blockquote>
+<p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法</p>
+</blockquote>
+<p>方法</p>
+<ul>
+<li>URI编码方法<ul>
+<li><code>encodeURI()</code><ul>
+<li>不会编码属于 URL 组件的特殊字符，比如冒号、斜杠、问号、 井号</li>
+</ul>
+</li>
+<li><code>encodeURIComponent()</code><ul>
+<li>会编码它发现的所有非标准字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>URI解码方式<ul>
+<li><code>decodeURI()</code></li>
+<li><code>decodeURIComponent()</code></li>
+</ul>
+</li>
+</ul>
+<p><code>window</code>对象</p>
+<blockquote>
+<p>浏览器将 window 对象实现为 Global 对象的代理</p>
+</blockquote>
+<p>当一个函数在没有明确指定 this 值的情况下执行时，this 值等于Global 对象</p>
+<h4 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h4><blockquote>
+<p>保存数学公式、信息和计算的地方</p>
+</blockquote>
+<ul>
+<li><code>min()</code>与<code>max()</code></li>
+<li>舍入方法<ul>
+<li><code>ceil()</code><ul>
+<li>向上取整</li>
+</ul>
+</li>
+<li><code>floor()</code><ul>
+<li>向下取整</li>
+</ul>
+</li>
+<li><code>round()</code><ul>
+<li>四舍五入</li>
+</ul>
+</li>
+<li><code>fround()</code><ul>
+<li>返回数值最接近的单精度（32 位）浮点值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>random()<ul>
+<li>返回0-1范围内的随机数，包含0，不包含1</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/07/%E8%AE%B0%E5%BD%95/" rel="prev" title="记录">
+                  <i class="fa fa-chevron-left"></i> 记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/08/%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/" rel="next" title="集合引用类型">
+                  集合引用类型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sky</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">24k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">22 mins.</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
