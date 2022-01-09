@@ -937,6 +937,10 @@
     <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2><h3 id="2022-01-07"><a href="#2022-01-07" class="headerlink" title="2022-01-07"></a>2022-01-07</h3><p>以为新买的手表坏了，显示2021，拿起来才发现原来是20:21，本想顺手拍个照记录一下时间，按下快门，照片里却变成了20:22。<code>1:17</code></p>
 <h3 id="2022-01-08"><a href="#2022-01-08" class="headerlink" title="2022-01-08"></a>2022-01-08</h3><p>走在街上谈论到某些事情时候，突然想到王小波在书引用到弗洛伊德的一些话，当人处于一个痛苦的环境下，并且无法改变这种痛苦，那么人就会把这种痛苦看作一种是快乐，去享受着。没去确认语句的具体细节，但大概是这个意思。<code>00:48</code></p>
+<span id="more"></span>
+
+<h3 id="2022-01-09"><a href="#2022-01-09" class="headerlink" title="2022-01-09"></a>2022-01-09</h3><p>放纵了一天，明天好好干<code>00:38</code></p>
+<h3 id="2022-01-10"><a href="#2022-01-10" class="headerlink" title="2022-01-10"></a>2022-01-10</h3><p>八合里吃牛，燥热。还有50天？猛干<code>2:18</code></p>
 ]]></content>
       <categories>
         <category>日常</category>
@@ -1319,6 +1323,127 @@ func()
       </tags>
   </entry>
   <entry>
+    <title>迭代器与生成器</title>
+    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
+<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
+<p>在无迭代器时，迭代有两个缺点</p>
+<ul>
+<li>迭代之前需要事先知道如何使用数据结构</li>
+<li>遍历顺序并不是数据结构固有的</li>
+</ul>
+<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
+<span id="more"></span>
+
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
+<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的 <code>Iterable</code> 接口，而且可以通过迭代器<code>Iterator</code>消费</p>
+</blockquote>
+<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code> Iterable</code>接口的对象都有一个 <code>Symbol.iterator </code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
+<p> 可迭代对象</p>
+<ul>
+<li>包含元素有限</li>
+<li>具有无歧义的遍历顺序</li>
+</ul>
+<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有 <code>iterator </code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
+<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的 API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
+<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
+<ul>
+<li>支持迭代的自我识别能力</li>
+<li>创建实现<code>Iterator</code>接口的对象的能力</li>
+</ul>
+<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code> Symbol.iterator</code> 作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">    <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">    value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">    next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了 Iterable 接口，那这个对象也就实现了这个接口。</p>
+<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器 API 使用 next()方法在可迭代对象中遍历数据</p>
+<ul>
+<li>成功调用<code> next()</code>，都会返回一个<code> IteratorResult</code>对象<ul>
+<li><code>IteratorResult </code>对象包含两个对象：done和value<ul>
+<li><code>done </code>是一个布尔值，表示是否还可以再次调用<code> next()</code>取得下一个值</li>
+<li><code>value</code> 包含可迭代对象的下一个值（<code>done</code> 为<code> false</code>），或者<code> undefined</code>（<code>done</code> 为<code> true</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>若不调用 <code>next()</code>，则无法知道迭代器的当前位置</li>
+</ul>
+<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code> done: true</code> 状态，后续调用 <code>next()</code>就一直返回同样的值了</p>
+<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
+<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
+<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与 Iterable 接口类似，任何实现 Iterator 接口的对象都可以作为迭代器使用。</p>
+<p><code>Symbol.iterator </code>属性引用的工厂函数 会返回相同的迭代器</p>
+<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的 <code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
+<p>可能情形：</p>
+<ol>
+<li><code>for-of </code>循环通过<code> break</code>、<code>continue</code>、<code>return </code>或 <code>throw </code>提前退出</li>
+<li>解构操作并未消费所有值</li>
+</ol>
+<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
+<p>因为<code> return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭， 可以测试这个迭代器实例的 <code>return </code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这 个方法并不能让它变成可关闭的。这是因为调用 <code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code> return()</code>方法还是会被调用</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
+<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
+</blockquote>
+<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
+<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了 <code>Iterator </code>接口，因此具有<code> next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
+<p>next()方法的返回值类似于迭代器，有一个 <code>done</code> 属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次 next()就会让生成器到达 <code>done: true </code>状态</p>
+<p>value 属性是生成器函数的返回值，默认值为<code> undefined</code>，可以通过生成器函数的返回值指定</p>
+<p>生成器函数</p>
+<ul>
+<li>只会在初次调用<code> next()</code>方法后开始执行<ul>
+<li>初次调用生成器函数并不会打印日志</li>
+</ul>
+</li>
+<li>实现了<code> Iterable</code> 接口，它们默认的迭代器是自引用的<ul>
+<li><code>g === g[Symbol.iterator]()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
+<p>yield 关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到 yield 关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用 next()方法来恢复执行。</p>
+</blockquote>
+<p>yield 关键字</p>
+<ul>
+<li>有点像函数的中间返回语句<ul>
+<li>通过<code>yield</code>关键字退出的生成器函数会处在 <code>done: false</code> 状态</li>
+<li>通过<code>return </code>关键字退出的生成器函 数会处于<code> done: true</code>状态</li>
+</ul>
+</li>
+<li>只能在生成器函数内部使用</li>
+<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
+<li>可以作为函数的中间参数使用<ul>
+<li>上一次让生成器函数暂停的 yield 关键字会接收到传给 next()方法的第一个值</li>
+<li>第一次调用 <code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
+</ul>
+</li>
+<li><code>yield</code>关键字可以同时用于输入和输出</li>
+<li>使用星号增强 yield 的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
+<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
+</ul>
+</li>
+</ul>
+<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用 next() 不会影响其他生成器</p>
+<p>生成器对象作为可迭代对象</p>
+<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和 <code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
+<ol>
+<li>所有生成器对象都有<code> return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用 <code>next()</code>会显示 <code>done: true </code>状态，而提供的任何返回值都不会被存储或传播</li>
+<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器 就会关闭<ul>
+<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
+<li>错误处理会跳过对应的<code> yield</code></li>
+<li>如果生成器对象还没有开始执行，那么调用 <code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>集合引用类型</title>
     <url>/2022/01/08/%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><blockquote>
@@ -1687,6 +1812,302 @@ func()
 </li>
 <li>对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对象、类与面向对象编程</title>
+    <url>/2022/01/09/%E5%AF%B9%E8%B1%A1%E3%80%81%E7%B1%BB%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><blockquote>
+<p>一组属性的无序集合，每个属性或方法都由一个名称来标识，这个名称映射到一个值</p>
+<p>可以想象成一张散列表，其中的内容就是一组名/值对，值可以是数据或者函数</p>
+</blockquote>
+<p>创建方法</p>
+<ol>
+<li><code>new Object()</code>然后再给它添加属性和方法</li>
+<li><code>&#123;&#125;</code>对象字面量</li>
+</ol>
+<span id="more"></span>
+
+<p>内部属性，（不能在js直接访问）</p>
+<ol>
+<li>数据属性<ul>
+<li>[[Configurable]]<ul>
+<li>是否可以通过delete删除并重新定义</li>
+<li>是否可以修改它的特性</li>
+<li>是否可以改为访问器属性</li>
+<li>默认为true</li>
+</ul>
+</li>
+<li>[[Enumerable]]<ul>
+<li>是否可以通过 for-in 循环返回</li>
+<li>默认为true</li>
+</ul>
+</li>
+<li>[[Writable]]<ul>
+<li>是否可以被修改</li>
+<li>默认为true</li>
+</ul>
+</li>
+<li>[[Value]]<ul>
+<li>包含属性实际的值</li>
+<li>默认undefined</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>访问器属性<ul>
+<li>[[Configurable]]<ul>
+<li>是否可以通过delete删除并重新定义</li>
+<li>是否可以修改它的特性</li>
+<li>是否可以改为数据属性</li>
+<li>默认为true</li>
+</ul>
+</li>
+<li>[[Enumerable]]<ul>
+<li>是否可以通过 for-in 循环返回</li>
+<li>默认为true</li>
+</ul>
+</li>
+<li>[[Get]]<ul>
+<li>获取函数，在读取属性时调用。默认值为 undefined。</li>
+</ul>
+</li>
+<li>[[Set]]<ul>
+<li>设置函数，在写入属性时调用。默认值为 undefined</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ol>
+<li><code>Object.defineProperty()</code><ul>
+<li>接收 3 个参数：要给其添加属性的对象、属性的名称和一个描述符对象</li>
+<li>configurable、enumerable 和 writable 的值如果不指定，则都默认为 false</li>
+</ul>
+</li>
+<li>Object.defineProperties()<ul>
+<li>这个方法可以通过多个描述符一次性定义多个属性</li>
+<li>接收两个参数：要为之添加或修改属性的对象和另一个描述符对象</li>
+</ul>
+</li>
+<li>Object.getOwnPropertyDescriptor()<ul>
+<li>取得指定属性的属性描述符</li>
+<li>接收两个参数：属性所在的对象和要取得其描述符的属性名。返回值是一个对象</li>
+</ul>
+</li>
+<li>Object.getOwnPropertyDescriptors()<ul>
+<li>实际上会在每个自有属性上调用 Object.getOwnPropertyDescriptor()并在一个新对象中返回它们</li>
+<li>接受一个参数，参数为对象</li>
+</ul>
+</li>
+<li>Object.assign()<ul>
+<li>用于合并对象，是<strong>浅复制</strong>，接收一个目标对象和一个或多个源对象作为参数</li>
+<li>可枚举和自有属性才复制到目标对象</li>
+<li>这个方法会使用源对象上的[[Get]]取得属性的值，然后使用目标对象上的[[Set]]设置属性的值</li>
+</ul>
+</li>
+<li>Object.is()<ul>
+<li>与===很像，接受两个参数</li>
+</ul>
+</li>
+</ol>
+<p>增强的对象语法</p>
+<ol>
+<li>属性简写<ul>
+<li>只要使用变量名（不用再写冒号）就会自动被解释为同名的属性键</li>
+<li>如果没有找到同名变量，则会抛出 ReferenceError</li>
+</ul>
+</li>
+<li>可计算属性<ul>
+<li>可以在对象字面量中完成动态属性赋值。中括号内被当作 JavaScript 表达式求值</li>
+<li>抛出任何错误都会中断对象创建</li>
+</ul>
+</li>
+<li>简写方法名</li>
+</ol>
+<p>对象解构</p>
+<ul>
+<li>就是使用与对象匹配的结构来实现对象属性赋值</li>
+<li>解构在内部使用函数 ToObject()（不能在运行时环境中直接访问）把源数据结构转换为对象</li>
+<li>null 和 undefined 不能被解构，否则会抛出错误</li>
+<li>解构并不要求变量必须在解构表达式中声明。不过，如果是给事先声明的变量赋值，则赋值表达式必须包含在一对括号中</li>
+<li>解构赋值可以使用嵌套结构，以匹配嵌套的属性</li>
+<li>一个解构表达式涉及多个赋值，开始的赋值成功而后面的赋值出错，则整个解构赋值只会完成一部分</li>
+</ul>
+<h2 id="理解对象创建过程"><a href="#理解对象创建过程" class="headerlink" title="理解对象创建过程"></a>理解对象创建过程</h2><p>缺陷：虽然使用 Object 构造函数或对象字面量可以方便地创建对象，但这些方式也有明显不足：创建具有同样接口的多个对象需要重复编写很多代码</p>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><blockquote>
+<p>用于抽象创建特定对象的过程</p>
+<p>工厂模式虽然可以解决创建多个类似对象的问题，但没有解决对象标识问题</p>
+</blockquote>
+<p>有一个函数，传入参数给它，它在里面<strong>新建对象</strong>。并用参数完成赋值，再把对象返回出去。这个函数就叫做工厂函数。</p>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>有一个函数，传入参数给它，属性和方法直接赋值给了 this。</p>
+<p>与工厂函数区别</p>
+<ul>
+<li>没有显式地创建对象</li>
+<li>属性和方法直接赋值给了 this</li>
+<li>没有 return</li>
+</ul>
+<p>用new 操作符创建实例，会发生以下事情</p>
+<ul>
+<li>在内存中创建一个新对象</li>
+<li>这个新对象内部的<code>[[Prototype]]</code>特性被赋值为构造函数的 <code>prototype</code> 属性</li>
+<li>构造函数内部的 this 被赋值为这个新对象（即 this 指向新对象）</li>
+<li>执行构造函数内部的代码（给新对象添加属性）。</li>
+<li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象。</li>
+</ul>
+<p>实例有constructor属性，<strong>指向构造函数</strong></p>
+<ul>
+<li>constructor 本来是用于标识对象类型的</li>
+<li>定义自定义构造函数可以确保实例被标识为特定类型</li>
+</ul>
+<p>在调用一个函数而没有明确设置 this 值的情况下（即没有作为对象的方法调用，或 者没有使用 call()/apply()调用），this 始终指向 Global 对象。</p>
+<p>构造函数问题：其定义的方法会在每个实例上都创建一遍，自定义类型引用的代码不能很好地聚集一起。</p>
+<p>此问题可以通过原型模式解决。</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>每个函数都会创建一个 prototype 属性，这个属性是一个对象，包含应该由特定引用类型的实例 共享的属性和方法。这个对象就是通过调用构造函数创建的对象的原型。使用原型对象的好处是，在它上面定义的属性和方法可以被对象实例共享。</p>
+<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p>无论何时，只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属性（指向 原型对象）</p>
+<h2 id="理解继承"><a href="#理解继承" class="headerlink" title="理解继承"></a>理解继承</h2><h2 id="理解类"><a href="#理解类" class="headerlink" title="理解类"></a>理解类</h2><h2 id="8-2-创建对象"><a href="#8-2-创建对象" class="headerlink" title="8.2 创建对象"></a>8.2 创建对象</h2><p>原型模式</p>
+<ul>
+<li>每个函数都会创建一个prototype 属性（指向原型对象），默认情况下，所有原型对象自动获得一个名为 constructor 的属性，指回与之关联的构造函数</li>
+<li>prototype 属性是一个对象，包含应该由特定引用类型的实例共享的属性和方法。这个对象就是通过调用<strong>构造函数创建的对象</strong>（就是实例）的原型</li>
+<li>使用原型对象的好处是，在它上面定义的<strong>属性和方法可以被对象实例共享</strong>。原来在构造函数中直接赋给对象实例的值，可以直接赋值给它们的原型</li>
+<li>实例的内部<code>[[Prototype]]</code>指针就会被赋值为构造函数的原型对象</li>
+</ul>
+<p>可以使用<code> isPrototypeOf()</code>方法确定两个对象之间的这种关系。本质上，<code>isPrototypeOf()</code>会在传入参数的<code>[[Prototype]]</code>指向调用它的对象时返回 true</p>
+<p>原型层级</p>
+<p>搜索开始于对象实例本身。如果在这个实例上发现了给定的名称，则返回该名称对应的值。如果没有找到这个属性，则搜索会沿着指针进入原 型对象，然后在原型对象上找到属性后，再返回对应的值。</p>
+<p>通过调用 hasOwnProperty()能够清楚地看到访问的是实例属性还是原型属性</p>
+<p>原型与in操作符</p>
+<p>只要通过对象可以访问，in 操作符就返回 true，而 hasOwnProperty()只有属性存在于实例上时才返回 true</p>
+<p>属性枚举顺序</p>
+<h3 id="对象迭代"><a href="#对象迭代" class="headerlink" title="对象迭代"></a>对象迭代</h3><p>Object.values()和 Object.entries()接收一个对象，返回它们内容的数组。Object.values() 返回对象值的数组，Object.entries()返回键/值对的数组。</p>
+<ol>
+<li>其他原型语法<br>Person.prototype 通过对象字面量创建新对象，这样重写之后，Person.prototype 的 constructor 属性就不指向Person 了。</li>
+<li>原型的动态性<br>先创建实例，而后对原型添加新的方法，旧的实例也会动态能使用到新的方法</li>
+<li>原生对象原型<br>通过原生对象的原型可以取得所有默认方法的引用，也可以给原生类型的实例定义新的方法。可以 像修改自定义对象原型一样修改原生对象原型，因此随时可以添加方法。</li>
+<li>原型问题<br>原型上的所有属性是在实例间共享的，这对函数来说比较合适，但对属性来说不合适，例如引用值被共享，一个实例修改了，另一个实例也会被修改。</li>
+</ol>
+<h2 id="8-3继承"><a href="#8-3继承" class="headerlink" title="8.3继承"></a>8.3继承</h2><h3 id="8-1原型链"><a href="#8-1原型链" class="headerlink" title="8.1原型链"></a>8.1原型链</h3><blockquote>
+<p>基本思想就是通过原型继承多个引用类型的属性和方法</p>
+</blockquote>
+<p>如果原型是另一个类型的实例呢，则这个原型本身有一个内部指针指向另一个原型，相应地另一个原型也有一个指针指向另一个构造函数。这样就在实例和原型之间构造了一条原型链。</p>
+<ol>
+<li><p>默认原型：所有类型都继承Object</p>
+</li>
+<li><p>原型与继承的关系</p>
+</li>
+</ol>
+<ul>
+<li>使用 instanceof 操作符，如果一个实例的原型链中出现过相应的构造函数，则 instanceof 返回 true。</li>
+<li>使用 isPrototypeOf()方法。原型链中的每个原型都可以调用这个方法，只要原型链中包含这个原型，这个方法就返回 true</li>
+</ul>
+<ol start="3">
+<li>关于方法</li>
+</ol>
+<ul>
+<li>新方法覆盖就方法</li>
+<li>以对象字面量方式创建原型方法会破坏之前的原型链，因为这相当于重写了原型链。</li>
+</ul>
+<ol start="4">
+<li>原型链问题<ul>
+<li>原型中包含的引用值会在所有实例间共享，这也是为什么属性通常会在构造函数中定义而不会定义在原型上的原因</li>
+<li>子类型在实例化时不能给父类型的构造函数传参</li>
+</ul>
+</li>
+</ol>
+<h3 id="8-2盗用构造函数"><a href="#8-2盗用构造函数" class="headerlink" title="8.2盗用构造函数"></a>8.2盗用构造函数</h3><blockquote>
+<p>在子类构造函数中调用父类构造函数</p>
+</blockquote>
+<p>因为毕竟函数就是在特定上下文中执行代码的简单对象，所以可以使用 <code>apply()</code>和<code> call()</code>方法以新创建的对象为上下文执行构造函数。</p>
+<p>优点：可以在子类构造函数中向父类构造函数传参</p>
+<p>缺点：必须在构造函数中定义方法，因此函数不能重用。此外，子类也不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式</p>
+<h3 id="8-3组合继承"><a href="#8-3组合继承" class="headerlink" title="8.3组合继承"></a>8.3组合继承</h3><blockquote>
+<p>综合了原型链和盗用构造函数，使用原型链继承原型上的属性和方法，而通过盗用构造函数继承实例属性。</p>
+</blockquote>
+<p>属性放在构造函数，方法放在原型链中</p>
+<h3 id="8-4原型式继承"><a href="#8-4原型式继承" class="headerlink" title="8.4原型式继承"></a>8.4原型式继承</h3><blockquote>
+<p>可以无须明确定义构造函数而实现继承，本质上是对给定对象执行浅复制。这种操作的结果之后还可以再进一步增强</p>
+</blockquote>
+<p>原型式继承非常适合<strong>不需要单独创建构造函数</strong>，但仍然需要在对象间共享信息的场合。但要记住，属性中包含的<strong>引用值始终会在相关对象间共享</strong>，跟使用原型模式是一样的</p>
+<p><code>Object.create()</code>方法将原型式继承的概念规范化，接收两个参数</p>
+<h3 id="8-5寄生式继承"><a href="#8-5寄生式继承" class="headerlink" title="8.5寄生式继承"></a>8.5寄生式继承</h3><blockquote>
+<p>即先基于一个对象创建一个新对象，然后再增强这个新对象，最后返回新对象。这个模式也被用在组合继承中，用于避免重复调用父类构造函数导致的浪费。</p>
+</blockquote>
+<h3 id="8-6寄生式组合继承"><a href="#8-6寄生式组合继承" class="headerlink" title="8.6寄生式组合继承"></a>8.6寄生式组合继承</h3><blockquote>
+<p>寄生组合继承被认为是实现基于类型继承的最有效方式</p>
+</blockquote>
+<blockquote>
+<p>我了解的 js 中实现继承的几种方式有：</p>
+<p>（1）第一种是以原型链的方式来实现继承，但是这种实现方式存在的缺点是，在包含有引用类型的数据时，会被所有的实例对象所共享，容易造成修改的混乱。还有就是在创建子类型的时候不能向超类型传递参数。</p>
+<p>（2）第二种方式是使用借用构造函数的方式，这种方式是通过在子类型的函数中调用超类型的构造函数来实现的，这一种方法解决了不能向超类型传递参数的缺点，但是它存在的一个问题就是无法实现函数方法的复用，并且超类型原型定义的方法子类型也没有办法访问到。</p>
+<p>（3）第三种方式是组合继承，组合继承是将原型链和借用构造函数组合起来使用的一种方式。通过借用构造函数的方式来实现类型的属性的继承，通过将子类型的原型设置为超类型的实例来实现方法的继承。这种方式解决了上面的两种模式单独使用时的问题，但是由于我们是以超类型的实例来作为子类型的原型，所以调用了两次超类的构造函数，造成了子类型的原型中多了很多不必要的属性。</p>
+<p>（4）第四种方式是原型式继承，原型式继承的主要思路就是基于已有的对象来创建新的对象，实现的原理是，向函数中传入一个对象，然后返回一个以这个对象为原型的对象。这种继承的思路主要不是为了实现创造一种新的类型，只是对某个对象实现一种简单继承，ES5 中定义的 Object.create() 方法就是原型式继承的实现。缺点与原型链方式相同。</p>
+<p>（5）第五种方式是寄生式继承，寄生式继承的思路是创建一个用于封装继承过程的函数，通过传入一个对象，然后复制一个对象的副本，然后对象进行扩展，最后返回这个对象。这个扩展的过程就可以理解是一种继承。这种继承的优点就是对一个简单对象实现继承，如果这个对象不是我们的自定义类型时。缺点是没有办法实现函数的复用。</p>
+<p>（6）第六种方式是寄生式组合继承，组合继承的缺点就是使用超类型的实例做为子类型的原型，导致添加了不必要的原型属性。寄生式组合继承的方式是使用超类型的原型的副本来作为子类型的原型，这样就避免了创建不必要的属性。</p>
+</blockquote>
+<h2 id="8-4-类"><a href="#8-4-类" class="headerlink" title="8.4 类"></a>8.4 类</h2><h3 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h3><ol>
+<li>类声明<br><code>class Person &#123;&#125;</code></li>
+<li>类表达式<br><code>const Animal = class &#123;&#125;</code></li>
+</ol>
+<p>类定义声明不能提升</p>
+<h3 id="类构造函数"><a href="#类构造函数" class="headerlink" title="类构造函数"></a>类构造函数</h3><p>把类表达式赋值给变量后，可以通过 name 属性取得类表达式的名称</p>
+<p>使用 new 调用类的构造函数会执行如下操作：</p>
+<ul>
+<li>在内存中创建一个新对象。 </li>
+<li>这个新对象内部的[[Prototype]]指针被赋值为构造函数的 prototype 属性。 </li>
+<li>构造函数内部的 this 被赋值为这个新对象（即 this 指向新对象）。 </li>
+<li>执行构造函数内部的代码（给新对象添加属性）。 </li>
+<li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象</li>
+</ul>
+<p>默认情况下，类构造函数会在执行之后<strong>返回 this 对象</strong>。构造函数返回的对象会被用作实例化的对象，如果没有什么引用新创建的 this 对象，那么这个对象会被销毁。不过，如果返回的不是 this 对象，而是其他对象，那么这个对象不会通过 instanceof 操作符检测出跟类有关联，因为这个对象的原型指针并没有被修改。</p>
+<p>类构造函数与构造函数的主要区别：</p>
+<p>调用类构造函数必须使用 new 操作符。而普通构造函数如果 不使用 new 调用，那么就会以全局的 this（通常是 window）作为内部对象。调用类构造函数时如果 忘了使用 new 则会抛出错误</p>
+<p>类中定义的 constructor 方法不会被当成构造函数，在对它使用 instanceof 操作符时会返回 false。但是，如果在创建实例时直接将类构造函数当成普通构造函数来 使用，那么 instanceof 操作符的返回值会反转</p>
+<p>类可以作为参数传递</p>
+<p>类可以立即实例化</p>
+<h3 id="实例、原型和类成员"><a href="#实例、原型和类成员" class="headerlink" title="实例、原型和类成员"></a>实例、原型和类成员</h3><p>每次通过new调用类标识符时，都会执行类构造函数</p>
+<p>放在<strong>构造函数</strong>的方法是各自独立的，放在<strong>构造函数外类块中</strong>的方法（即为原型方法）可以共享。</p>
+<p>构造函数外类块中的方法都会定义在类的原型上</p>
+<p>每个实例都对应一个唯一的成员对象，这意味着所有成员都不会在原型上共享：</p>
+<ol start="3">
+<li><p>静态类方法</p>
+<p>使用 static 关键字作为前缀，在静态成员中，<strong>this 引用类自身</strong>。</p>
+<p>适合作为实例工厂</p>
+</li>
+<li><p>非函数原型和类成员</p>
+<p>类定义并不显式支持在原型或类上添加成员数据，但在类定义外部，可以手动添加</p>
+</li>
+<li><p>迭代器与生成器方法</p>
+<p>类定义语法支持在原型和类本身上定义生成器方法</p>
+<p>因为支持生成器方法，所以可以通过添加一个默认的迭代器，把类实例变成可迭代对象</p>
+</li>
+</ol>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ol>
+<li><p>继承基础</p>
+<p>支持<strong>单继承</strong>，使用<code>extends</code>关键字，可以继承任何拥有<code>[[Construct]]</code>和原型的对象</p>
+<p>派生类都会通过原型链访问到类和原型上定义的方法。this 的值会反映调用相应方法的实例或者类</p>
+</li>
+<li><p>构造函数、<code>HomeObject </code>和 <code>super()</code></p>
+<p>派生类的方法可以通过 super 关键字引用它们的原型。这个关键字只能在派生类中使用，而且仅限于类构造函数、实例方法和静态方法内部。在类构造函数中使用 super 可以调用父类构造函数。</p>
+<p>使用<code>super()</code>几个关键点：</p>
+<ul>
+<li>super 只能在派生类构造函数和静态方法中使用</li>
+<li>不能单独引用 super 关键字，要么用它调用构造函数，要么用它引用静态方法</li>
+<li>调用 super()会调用父类构造函数，并将返回的实例赋值给 this</li>
+<li>super()的行为如同调用构造函数，如果需要给父类构造函数传参，则需要手动传入</li>
+<li>如果没有定义类构造函数，在实例化派生类时会调用 super()，而且会传入所有传给派生类的参数。</li>
+<li>在类构造函数中，不能在调用 super()之前引用 this</li>
+<li>如果在派生类中显式定义了构造函数，则要么必须在其中调用 super()，要么必须在其中返回一个对象</li>
+</ul>
+</li>
+<li><p>抽象基类</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
