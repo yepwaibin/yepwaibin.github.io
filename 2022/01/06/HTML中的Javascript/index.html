@@ -23,15 +23,15 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="&lt;script&gt;元素 async  crossorigin  配置相关CORS设置   anonymous use-credentials   defer  intergrity  允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错， 脚本不会执行，用于确保内容分发网络（CDN，Content Delivery Net">
+<meta name="description" content="&lt;script&gt;元素 async  crossorigin  配置相关CORS设置   anonymous use-credentials   defer  intergrity  允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML中的Javascript">
 <meta property="og:url" content="http://example.com/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="&lt;script&gt;元素 async  crossorigin  配置相关CORS设置   anonymous use-credentials   defer  intergrity  允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错， 脚本不会执行，用于确保内容分发网络（CDN，Content Delivery Net">
+<meta property="og:description" content="&lt;script&gt;元素 async  crossorigin  配置相关CORS设置   anonymous use-credentials   defer  intergrity  允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwor">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-06T14:59:57.000Z">
-<meta property="article:modified_time" content="2022-01-06T15:22:56.622Z">
+<meta property="article:modified_time" content="2022-01-10T08:19:27.039Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
@@ -239,9 +239,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-01-06 22:59:57 / Modified: 23:22:56" itemprop="dateCreated datePublished" datetime="2022-01-06T22:59:57+08:00">2022-01-06</time>
+      <time title="Created: 2022-01-06 22:59:57" itemprop="dateCreated datePublished" datetime="2022-01-06T22:59:57+08:00">2022-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-10 16:19:27" itemprop="dateModified" datetime="2022-01-10T16:19:27+08:00">2022-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,13 +306,13 @@
 </li>
 <li><p>intergrity</p>
 <blockquote>
-<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错， 脚本不会执行，用于确保内容分发网络（CDN，Content Delivery Network）不会提 供恶意内容</p>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
 </blockquote>
 </li>
 <li><p>src</p>
 <ul>
 <li>会忽略行内脚本</li>
-<li>不会受浏览器的同源策略限制，但返回并被执行的 JavaScript 则受限制</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
 </ul>
 </li>
 <li><p>type</p>
@@ -338,7 +344,7 @@
 </li>
 <li><code>async</code><ul>
 <li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
-<li>异步脚本保证会在页面的 <code>load </code>事件前执行，但可能会在 <code>DOMContentLoaded</code>之前或之后</li>
+<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
 </ul>
 </li>
 </ul>
@@ -351,18 +357,18 @@
 <ul>
 <li>可维护性</li>
 <li>缓存<ul>
-<li>浏览器会根据特定的设置缓存所有外部链接的 JavaScript 文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
 </ul>
 </li>
 </ul>
-<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code> doctype</code> 切换文档模式，共有三中文档模块</p>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三中文档模块</p>
 <ol>
 <li>混杂模式</li>
 <li>标准模式</li>
 <li>准标准模式</li>
 </ol>
 <p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
-<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的 HTML 元素。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
 
     </div>
 
@@ -418,13 +424,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">34k</span>
+    <span title="Symbols count total">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31 mins.</span>
+    <span title="Reading time total">33 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">

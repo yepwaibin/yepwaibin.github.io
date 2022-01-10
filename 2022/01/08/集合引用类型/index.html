@@ -23,15 +23,15 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="对象 适合存储和应用程序间交换数据  创建Object实例方法  使用new操作符new Object 对象字面量&amp;#123;&amp;#125; 属性名可以是字符串或数值，数值属性会自动转换为字符串 属性名也可以是包含非字母数字字符，但要用中括号去存取    属性一般通过点语法获取，也能通过中括号，中括号内使用属性名的字符串形式">
+<meta name="description" content="对象 适合存储和应用程序间交换数据  创建Object实例方法  使用new操作符newObject 对象字面量&amp;#123;&amp;#125; 属性名可以是字符串或数值，数值属性会自动转换为字符串 属性名也可以是包含非字母数字字符，但要用中括号去存取    属性一般通过点语法获取，也能通过中括号，中括号内使用属性名的字符串形式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集合引用类型">
 <meta property="og:url" content="http://example.com/2022/01/08/%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="对象 适合存储和应用程序间交换数据  创建Object实例方法  使用new操作符new Object 对象字面量&amp;#123;&amp;#125; 属性名可以是字符串或数值，数值属性会自动转换为字符串 属性名也可以是包含非字母数字字符，但要用中括号去存取    属性一般通过点语法获取，也能通过中括号，中括号内使用属性名的字符串形式">
+<meta property="og:description" content="对象 适合存储和应用程序间交换数据  创建Object实例方法  使用new操作符newObject 对象字面量&amp;#123;&amp;#125; 属性名可以是字符串或数值，数值属性会自动转换为字符串 属性名也可以是包含非字母数字字符，但要用中括号去存取    属性一般通过点语法获取，也能通过中括号，中括号内使用属性名的字符串形式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-07T16:16:46.000Z">
-<meta property="article:modified_time" content="2022-01-07T16:29:23.040Z">
+<meta property="article:modified_time" content="2022-01-10T08:10:50.959Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
@@ -239,9 +239,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-01-08 00:16:46 / Modified: 00:29:23" itemprop="dateCreated datePublished" datetime="2022-01-08T00:16:46+08:00">2022-01-08</time>
+      <time title="Created: 2022-01-08 00:16:46" itemprop="dateCreated datePublished" datetime="2022-01-08T00:16:46+08:00">2022-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-01-10 16:10:50" itemprop="dateModified" datetime="2022-01-10T16:10:50+08:00">2022-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +272,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>4.7k</span>
+      <span>4.8k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -289,7 +295,7 @@
 </blockquote>
 <p>创建<code>Object</code>实例方法</p>
 <ol>
-<li>使用<code>new</code>操作符<code>new Object</code></li>
+<li>使用<code>new</code>操作符<code>newObject</code></li>
 <li>对象字面量<code>&#123;&#125;</code><ol>
 <li>属性名可以是字符串或数值，数值属性会自动转换为字符串</li>
 <li>属性名也可以是包含非字母数字字符，但要用中括号去存取</li>
@@ -301,9 +307,9 @@
 
 <h2 id="数组与定型数组"><a href="#数组与定型数组" class="headerlink" title="数组与定型数组"></a>数组与定型数组</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h4><ol>
 <li>使用<code>Array</code>构造函数<ul>
-<li><code>new Array()</code>或<code>Array()</code></li>
-<li>可以传入一个数值，然后 length 属性就会被自动创建并设置为这个值</li>
-<li>也可以给 Array 构造函数传入要保存的元素</li>
+<li><code>newArray()</code>或<code>Array()</code></li>
+<li>可以传入一个数值，然后length属性就会被自动创建并设置为这个值</li>
+<li>也可以给Array构造函数传入要保存的元素</li>
 </ul>
 </li>
 <li>数组字面量<ul>
@@ -312,9 +318,9 @@
 </li>
 <li><code>from()</code><ul>
 <li>将<strong>类数组结构</strong>转换为数组实例</li>
-<li>第一个参数是类数组对象，即任何可迭代的结构，或者有一个<code> length</code> 属性和可索引元素的结构</li>
+<li>第一个参数是类数组对象，即任何可迭代的结构，或者有一个<code>length</code>属性和可索引元素的结构</li>
 <li>可选第二个参数，映射函数参数。这个函数可以直接增强新数组的值</li>
-<li>可选第三个参数，用于指定映射函数中 this 的值，但这个重写的 this 值在箭头函数中不适用</li>
+<li>可选第三个参数，用于指定映射函数中this的值，但这个重写的this值在箭头函数中不适用</li>
 </ul>
 </li>
 <li><code>of()</code><ul>
@@ -322,13 +328,13 @@
 </ul>
 </li>
 </ol>
-<p>ECMAScript 会将逗号之间相应索引位置的值当成空位</p>
+<p>ECMAScript会将逗号之间相应索引位置的值当成空位</p>
 <p>数组索引：在中括号中提供的索引表示要访问的值</p>
 <ul>
 <li>如果索引小于数组包含的元素数，则返回存储在相应位置的元素</li>
-<li>如果把一个值设置给超过数组最大索引的索引，则数组长度会自动扩展到该索引值加 1</li>
+<li>如果把一个值设置给超过数组最大索引的索引，则数组长度会自动扩展到该索引值加1</li>
 </ul>
-<p>通过修改<code> length</code> 属性，可以从数组末尾删除或添加元素。</p>
+<p>通过修改<code>length</code>属性，可以从数组末尾删除或添加元素。</p>
 <h4 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h4><ul>
 <li>通过<code>instanceof</code>操作符<ul>
 <li>缺陷：如果网页里有多个框架，则可能涉及两个不同的全局执行上下文，如果要把数组从一个框架传给另一个框架，则这个数组的构造函数将有别于在第二个框架内本地创建的数组</li>
@@ -348,20 +354,20 @@
 <ol>
 <li><p>批量复制方法：<code>copyWithin()</code></p>
 <ul>
-<li>会按照指定范围<strong>浅复制</strong>数组中的部分内容，然后将它们插入到指定索引开始的位置。开始索引和结束索引则与 fill()使用同样的计算方法</li>
+<li>会按照指定范围<strong>浅复制</strong>数组中的部分内容，然后将它们插入到指定索引开始的位置。开始索引和结束索引则与fill()使用同样的计算方法</li>
 <li>索引过低、过高、反向都会忽略</li>
 </ul>
 </li>
 <li><p>填充数组方法：<code>fill()</code></p>
 <ul>
 <li>可以向一个已有的数组中插入全部或部分相同的值</li>
-<li>开始索引用于指定开始填充 的位置，它是可选的</li>
+<li>开始索引用于指定开始填充的位置，它是可选的</li>
 <li>如果不提供结束索引，则一直填充到数组末尾</li>
 <li>负值索引从数组末尾开始计算</li>
 <li>参数个数<ul>
 <li>1个：<code>fill(x)</code>，用x填充整个数组</li>
-<li>2个：<code>fill(x, a)</code>，用x填充索引大于a的元素</li>
-<li>3个：<code>fill(x, a, b)</code>，用x填充索引大于a小于b的元素</li>
+<li>2个：<code>fill(x,a)</code>，用x填充索引大于a的元素</li>
+<li>3个：<code>fill(x,a,b)</code>，用x填充索引大于a小于b的元素</li>
 </ul>
 </li>
 <li>索引过低、过高、反向都会忽略</li>
@@ -370,7 +376,7 @@
 </ol>
 <h4 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h4><ol>
 <li><code>toLocaleString</code><ul>
-<li>可能返回跟 <code>toString()</code>和 <code>valueOf()</code>相同的结果，但也不一定。在调用数组的<code> toLocaleString()</code>方法时，会得到一个逗号分隔的数组值的字符串。它与另外两个方法<strong>唯一的区别</strong>是，为了得到最终的字符串，<strong>会调用数组每个值的 toLocaleString()方法，而不是 toString()方法</strong></li>
+<li>可能返回跟<code>toString()</code>和<code>valueOf()</code>相同的结果，但也不一定。在调用数组的<code>toLocaleString()</code>方法时，会得到一个逗号分隔的数组值的字符串。它与另外两个方法<strong>唯一的区别</strong>是，为了得到最终的字符串，<strong>会调用数组每个值的toLocaleString()方法，而不是toString()方法</strong></li>
 </ul>
 </li>
 <li><code>toString</code><ul>
@@ -383,7 +389,7 @@
 </li>
 <li><code>join()</code><ul>
 <li>接收一个参数，即字符串分隔符，返回包含所有项的<strong>字符串</strong></li>
-<li>如果不传入任何参数，或者传入<code> undefined</code>，则仍然使用逗号作为分隔符</li>
+<li>如果不传入任何参数，或者传入<code>undefined</code>，则仍然使用逗号作为分隔符</li>
 </ul>
 </li>
 </ol>
@@ -408,9 +414,9 @@
 </li>
 <li><code>sort()</code><ul>
 <li>按照升序重新排列数组元素，即最小的值在前面，最大的值在后面</li>
-<li>会在每一项上调用 <code>String()</code>转型函数，<strong>然后比较字符串来决定顺序</strong></li>
+<li>会在每一项上调用<code>String()</code>转型函数，<strong>然后比较字符串来决定顺序</strong></li>
 <li>可以接收一个比较函数，用于判断哪个值应该排在前面<ul>
-<li>比较函数接收两个参数，如果第一个参数应该排在第二个参数前面，就返回负值；如果两个参数相等，就返回 0；如果第一个参数应该排在第二个参数后面，就返回正值。</li>
+<li>比较函数接收两个参数，如果第一个参数应该排在第二个参数前面，就返回负值；如果两个参数相等，就返回0；如果第一个参数应该排在第二个参数后面，就返回正值。</li>
 </ul>
 </li>
 </ul>
@@ -419,11 +425,11 @@
 <h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ol>
 <li><p><code>concat()</code></p>
 <blockquote>
-<p>在现有数组全部元素基础上 创建一个新数组</p>
+<p>在现有数组全部元素基础上创建一个新数组</p>
 </blockquote>
 <ul>
 <li>创建一个当前数组的副本，然后再把它的参数添加到副本末尾，最后返回这个新构建的数组</li>
-<li>如果传入一个或多个数组，则 <code>concat()</code>会把这些数组的每一项都添加到结果数组</li>
+<li>如果传入一个或多个数组，则<code>concat()</code>会把这些数组的每一项都添加到结果数组</li>
 <li>如果参数不是数组，则直接把它们添加到结果数组末尾</li>
 </ul>
 </li>
@@ -433,8 +439,8 @@
 </blockquote>
 <ul>
 <li>接收一个或两个参数：返回元素的开始索引和结束索引</li>
-<li>如果只有一个参数，则 <code>slice()</code>会返回该索引到数组末尾的所有元素</li>
-<li>如果有两个参数，则 <code>slice()</code>返回从开始索引到结束索引对应的所有元素</li>
+<li>如果只有一个参数，则<code>slice()</code>会返回该索引到数组末尾的所有元素</li>
+<li>如果有两个参数，则<code>slice()</code>返回从开始索引到结束索引对应的所有元素</li>
 <li>操作不影响原始数组</li>
 </ul>
 </li>
@@ -443,9 +449,9 @@
 <p>主要目的是在数组中间插入元素</p>
 </blockquote>
 <ul>
-<li>删除：传 2 个参数：要删除的第一个元素的位置和要删除的元素数量</li>
-<li>插入：传 3 个参数：开始位置、0（要删除的元素数量）和要插入的元素</li>
-<li>替换：传入 3 个参数：开始位置、要删除元素的数量和要插入的任意多个元素</li>
+<li>删除：传2个参数：要删除的第一个元素的位置和要删除的元素数量</li>
+<li>插入：传3个参数：开始位置、0（要删除的元素数量）和要插入的元素</li>
+<li>替换：传入3个参数：开始位置、要删除元素的数量和要插入的任意多个元素</li>
 </ul>
 </li>
 </ol>
@@ -464,8 +470,19 @@
 </ul>
 </li>
 <li><code>includes()</code><ul>
-<li>从数组前头（第一项）开始向后搜索</li>
-<li>返回布尔值</li>
+<li><p>从数组前头（第一项）开始向后搜索</p>
+</li>
+<li><p>返回布尔值</p>
+</li>
+<li><p>能正确处理<code>NaN</code></p>
+<ul>
+<li><pre><code class="javascript">constarr=[NaN];
+console.log(arr.indexOf(NaN)) //-1
+console.log(arr.includes(NaN))//true
+</code></pre>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -476,7 +493,7 @@
 </blockquote>
 <ul>
 <li>第一个参数是函数，此函数接受三个参数：元素、索引和数组本身，都从数组的最小索引开始</li>
-<li>可选第二个参数， 用于指定断言函数内部 this 的值</li>
+<li>可选第二个参数，用于指定断言函数内部this的值</li>
 </ul>
 <ol>
 <li><code>find()</code><ul>
@@ -491,11 +508,11 @@
 </li>
 </ol>
 <h4 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h4><blockquote>
-<p>每个方法接收两个参数：以每一项为参数运行的函数， 以及可选的作为函数运行上下文的作用域对象，传给每个方法的函数接收 3 个参数：数组元素、元素索引和数组本身。</p>
+<p>每个方法接收两个参数：以每一项为参数运行的函数，以及可选的作为函数运行上下文的作用域对象，传给每个方法的函数接收3个参数：数组元素、元素索引和数组本身。</p>
 </blockquote>
 <ol>
 <li><code>every()</code><ul>
-<li>对每一项函数都返回 <code>true</code>，则这个方法返回<code> true</code></li>
+<li>对每一项函数都返回<code>true</code>，则这个方法返回<code>true</code></li>
 </ul>
 </li>
 <li><code>filter()</code><ul>
@@ -505,7 +522,7 @@
 </li>
 <li><code>forEach()</code><ul>
 <li>每一项都运行传入的函数，没有返回值</li>
-<li>相当于使用 <code>for </code>循环遍历数组</li>
+<li>相当于使用<code>for</code>循环遍历数组</li>
 </ul>
 </li>
 <li><code>map()</code><ul>
@@ -513,7 +530,7 @@
 </ul>
 </li>
 <li><code>some()</code><ul>
-<li>如果有一项函数返回<code> true</code>，则这个方法返回<code> true</code>。</li>
+<li>如果有一项函数返回<code>true</code>，则这个方法返回<code>true</code>。</li>
 </ul>
 </li>
 </ol>
@@ -533,10 +550,10 @@
 </ul>
 </li>
 </ol>
-<h2 id="Map、WeakMap、Set以及WeakSet类型"><a href="#Map、WeakMap、Set以及WeakSet类型" class="headerlink" title="Map、WeakMap、Set以及WeakSet类型"></a>Map、WeakMap、Set以及WeakSet类型</h2><p>Map 的大多数特性都可以通过 Object 类型实现，但二者之间还是存在一些细微的差异</p>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>与<code> Object</code> 只能使用数值、字符串或符号作为键不同，<code>Map</code> 可以使用任何 JavaScript 数据类型作为键，内部使用严格相等的标准来检测键的匹配性。与<code>Object</code>类似，映射的值是没有限制</p>
+<h2 id="Map、WeakMap、Set以及WeakSet类型"><a href="#Map、WeakMap、Set以及WeakSet类型" class="headerlink" title="Map、WeakMap、Set以及WeakSet类型"></a>Map、WeakMap、Set以及WeakSet类型</h2><p>Map的大多数特性都可以通过Object类型实现，但二者之间还是存在一些细微的差异</p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>与<code>Object</code>只能使用数值、字符串或符号作为键不同，<code>Map</code>可以使用任何JavaScript数据类型作为键，内部使用严格相等的标准来检测键的匹配性。与<code>Object</code>类似，映射的值是没有限制</p>
 <h4 id="基本API"><a href="#基本API" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new Map()</code>：使用 <code>new </code>关键字和<code>Map</code>构造函数创建一个空映射<ul>
+<li><code>newMap()</code>：使用<code>new</code>关键字和<code>Map</code>构造函数创建一个空映射<ul>
 <li>可以传入一个可迭代对象，需要包含键/值对数组，且会按照迭代顺序插入到新映射实例</li>
 </ul>
 </li>
@@ -547,46 +564,46 @@
 <li><code>clear()</code></li>
 </ol>
 <h4 id="顺序与迭代"><a href="#顺序与迭代" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><ul>
-<li>可以通过<code>entries()</code>方法（或者<code> Symbol.iterator</code>属性，它引用 <code>entries()</code>）取得这个迭代器。因为<code> entries()</code>是默认迭代器，所以可以直接对映射实例使用扩展操作，把映射转换为数组</li>
-<li>可以调用映射的 <code>forEach(callback, opt_thisArg) </code>方法并传入回调，依次迭代每个键/值对<ul>
-<li>传入的回调接收可选的第二个参数，这个参数用于重写回调内部 this 的值</li>
+<li>可以通过<code>entries()</code>方法（或者<code>Symbol.iterator</code>属性，它引用<code>entries()</code>）取得这个迭代器。因为<code>entries()</code>是默认迭代器，所以可以直接对映射实例使用扩展操作，把映射转换为数组</li>
+<li>可以调用映射的<code>forEach(callback,opt_thisArg)</code>方法并传入回调，依次迭代每个键/值对<ul>
+<li>传入的回调接收可选的第二个参数，这个参数用于重写回调内部this的值</li>
 </ul>
 </li>
-<li><code>keys()</code>和 <code>values()</code>分别返回以插入顺序生成键和值的迭代器</li>
+<li><code>keys()</code>和<code>values()</code>分别返回以插入顺序生成键和值的迭代器</li>
 <li>键和值在迭代器遍历时是可以修改的，但映射内部的引用则无法修改</li>
 </ul>
 <h4 id="Object与Map的比较"><a href="#Object与Map的比较" class="headerlink" title="Object与Map的比较"></a><code>Object</code>与<code>Map</code>的比较</h4><ol>
 <li>内容占用<ul>
 <li>存储单个键/值对所占用的内存数量都会随键的数量线性增加</li>
-<li>给定固定大小的内存，<code>Map</code> 大约可以比 <code>Object</code> 多存储 50%的键/值对</li>
+<li>给定固定大小的内存，<code>Map</code>大约可以比<code>Object</code>多存储50%的键/值对</li>
 </ul>
 </li>
 <li>插入性能<ul>
 <li>插入新键/值对的消耗大致相当</li>
 <li>插入速度并不会随着键/值对数量而线性增加</li>
-<li>大量插入操作，那么显然 Map 的性能更佳</li>
+<li>大量插入操作，那么显然Map的性能更佳</li>
 </ul>
 </li>
 <li>查找速度<ul>
 <li>性能差异极小</li>
 <li>查找速度不会随着键/值对数量增加而线性增加</li>
-<li>涉及大量查找操作，那么某些情况下可能选 择 Object 更好一些</li>
+<li>涉及大量查找操作，那么某些情况下可能选择Object更好一些</li>
 </ul>
 </li>
 <li>删除性能<ul>
-<li>Map 的 delete()操作都比插入和查找更快</li>
-<li>涉及大量删除操作，那么毫无疑问应该选择 Map</li>
+<li>Map的delete()操作都比插入和查找更快</li>
+<li>涉及大量删除操作，那么毫无疑问应该选择Map</li>
 </ul>
 </li>
 </ol>
 <h3 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h3><ul>
-<li>弱映射中的键只能是 Object 或者继承自 Object 的类型，尝试使用非对象设置键会抛出 TypeError。值的类型没有限制。</li>
+<li>弱映射中的键只能是Object或者继承自Object的类型，尝试使用非对象设置键会抛出TypeError。值的类型没有限制。</li>
 <li>没有指向这个对象(键)的其他引用-&gt;键就会被当作垃圾回收-&gt;键值对从弱映射消失，成为空映射-&gt;值就没了引用-&gt;所以值就可以被当作垃圾进行回收</li>
-<li>因为 WeakMap 中的键/值对任何时候都可能被销毁，所以没必要提供迭代其键/值对的能力</li>
-<li>WeakMap 实例之所以限制只能用对象作为键，是为了保证只有通过键对象的引用才能取得值</li>
+<li>因为WeakMap中的键/值对任何时候都可能被销毁，所以没必要提供迭代其键/值对的能力</li>
+<li>WeakMap实例之所以限制只能用对象作为键，是为了保证只有通过键对象的引用才能取得值</li>
 </ul>
 <h4 id="基本API-1"><a href="#基本API-1" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new WeakMap()</code><ul>
+<li><code>newWeakMap()</code><ul>
 <li>可以传入一个可迭代对象，需要包含键/值对数组，且会按照迭代顺序插入到新映射实例</li>
 <li>初始化是全有或全无的操作，只要有一个键无效就会抛出错误，导致整个初始化失败</li>
 </ul>
@@ -600,9 +617,9 @@
 <li>私有变量</li>
 <li>DOM节点元数据</li>
 </ol>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><code>Set </code>可以包含任何 JavaScript 数据类型作为值</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><code>Set</code>可以包含任何JavaScript数据类型作为值</p>
 <h4 id="基本API-2"><a href="#基本API-2" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new Set()</code>：使用<code>new</code>关键字和<code>Set</code>构造函数创建一个空集合<ul>
+<li><code>newSet()</code>：使用<code>new</code>关键字和<code>Set</code>构造函数创建一个空集合<ul>
 <li>可以传入一个可迭代对象</li>
 </ul>
 </li>
@@ -614,18 +631,18 @@
 </li>
 <li><code>clear()</code></li>
 </ol>
-<h4 id="顺序与迭代-1"><a href="#顺序与迭代-1" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><p>Set 会维护值插入时的顺序，因此支持按顺序迭代。</p>
+<h4 id="顺序与迭代-1"><a href="#顺序与迭代-1" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><p>Set会维护值插入时的顺序，因此支持按顺序迭代。</p>
 <ul>
-<li>可以提供一个迭代器（<code>Iterator</code>），能以插入顺序生成集合内容。可以通过<code> values()</code>方法及其别名方法<code> keys()</code>（或者 <code>Symbol.iterator </code>属性，它引用<code> values()</code>）取得这个迭代器</li>
-<li>因为<code> values()</code>是默认迭代器，所以可以直接对集合实例使用扩展操作，把集合转换为数组</li>
-<li>集合的<code> entries()</code>方法返回一个迭代器，可以按照插入顺序产生包含两个元素的数组，这两个元素是集合中每个值的重复出现</li>
-<li>如果不使用迭代器，而是使用回调方式，则可以调用集合的 <code>forEach()</code>方法并传入回调，依次迭代每个键/值对。传入的回调接收可选的第二个参数，这个参数用于重写回调内部 <code>this</code> 的值</li>
+<li>可以提供一个迭代器（<code>Iterator</code>），能以插入顺序生成集合内容。可以通过<code>values()</code>方法及其别名方法<code>keys()</code>（或者<code>Symbol.iterator</code>属性，它引用<code>values()</code>）取得这个迭代器</li>
+<li>因为<code>values()</code>是默认迭代器，所以可以直接对集合实例使用扩展操作，把集合转换为数组</li>
+<li>集合的<code>entries()</code>方法返回一个迭代器，可以按照插入顺序产生包含两个元素的数组，这两个元素是集合中每个值的重复出现</li>
+<li>如果不使用迭代器，而是使用回调方式，则可以调用集合的<code>forEach()</code>方法并传入回调，依次迭代每个键/值对。传入的回调接收可选的第二个参数，这个参数用于重写回调内部<code>this</code>的值</li>
 </ul>
-<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>弱集合中的值只能是 <code>Object </code>或者继承自<code>Object</code>的类型，尝试使用非对象设置值会抛出<code> TypeError</code>。</p>
+<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>弱集合中的值只能是<code>Object</code>或者继承自<code>Object</code>的类型，尝试使用非对象设置值会抛出<code>TypeError</code>。</p>
 <p>当没有指向这个对象的其他引用-&gt;这个对象值就会被当作垃圾回收-&gt;这个值就从弱集合中消失了，成为空集合。</p>
-<p>WeakSet 之所以限制只能用对象作为值，是为了保证只有通过值对象的引用才能取得值。</p>
+<p>WeakSet之所以限制只能用对象作为值，是为了保证只有通过值对象的引用才能取得值。</p>
 <h4 id="基本API-3"><a href="#基本API-3" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new WeakSet()</code><ul>
+<li><code>newWeakSet()</code><ul>
 <li>可以传入一个可迭代对象</li>
 <li>初始化是全有或全无的操作，只要有一个值无效就会抛出错误，导致整个初始化失败</li>
 </ul>
@@ -643,7 +660,7 @@
 <h3 id="迭代与扩展操作"><a href="#迭代与扩展操作" class="headerlink" title="迭代与扩展操作"></a>迭代与扩展操作</h3><p><code>Array</code>、所有定型数组、<code>Map</code>、<code>Set</code></p>
 <ul>
 <li>都定义了默认迭代器</li>
-<li>都支持顺序迭代，都可以传入<code> for-of</code> 循环</li>
+<li>都支持顺序迭代，都可以传入<code>for-of</code>循环</li>
 <li>都兼容扩展操作符。扩展操作符在对可迭代对象执行浅复制时特别有用<ul>
 <li>浅复制意味着只会复制对象引用</li>
 </ul>
@@ -705,13 +722,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">34k</span>
+    <span title="Symbols count total">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31 mins.</span>
+    <span title="Reading time total">33 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">

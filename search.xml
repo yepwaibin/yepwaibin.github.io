@@ -19,13 +19,13 @@
 </li>
 <li><p>intergrity</p>
 <blockquote>
-<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错， 脚本不会执行，用于确保内容分发网络（CDN，Content Delivery Network）不会提 供恶意内容</p>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
 </blockquote>
 </li>
 <li><p>src</p>
 <ul>
 <li>会忽略行内脚本</li>
-<li>不会受浏览器的同源策略限制，但返回并被执行的 JavaScript 则受限制</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
 </ul>
 </li>
 <li><p>type</p>
@@ -57,7 +57,7 @@
 </li>
 <li><code>async</code><ul>
 <li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
-<li>异步脚本保证会在页面的 <code>load </code>事件前执行，但可能会在 <code>DOMContentLoaded</code>之前或之后</li>
+<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
 </ul>
 </li>
 </ul>
@@ -70,18 +70,18 @@
 <ul>
 <li>可维护性</li>
 <li>缓存<ul>
-<li>浏览器会根据特定的设置缓存所有外部链接的 JavaScript 文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
 </ul>
 </li>
 </ul>
-<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code> doctype</code> 切换文档模式，共有三中文档模块</p>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三中文档模块</p>
 <ol>
 <li>混杂模式</li>
 <li>标准模式</li>
 <li>准标准模式</li>
 </ol>
 <p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
-<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的 HTML 元素。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -116,13 +116,13 @@
 <li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
 <li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
 <li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
-<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promise finally()</code>，模板字面量修订</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
 <li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
 </ul>
 <h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
-<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在 HTML 中使 用扩展的 XML</p>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
 </blockquote>
-<p>DOM通过创建表示文档的树，通过DOM API进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
 <p>DOM三个Level</p>
 <ol>
 <li>Level1目标是映射文档结构</li>
@@ -133,7 +133,7 @@
 <li>DOM遍历和范围</li>
 </ul>
 </li>
-<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫 DOMLoad and Save 的新模块中），还有验证文档的方法（DOM Validation）。</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
 </ol>
 <h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
 <p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
@@ -141,15 +141,15 @@
 <ul>
 <li>弹出新浏览器窗口的能力</li>
 <li>移动、缩放和关闭浏览器窗口的能力</li>
-<li>navigator 对象，提供关于浏览器的详尽信息</li>
-<li>location 对象，提供浏览器加载页面的详尽信息</li>
-<li>screen 对象，提供关于用户屏幕分辨率的详尽信息</li>
-<li>performance 对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
-<li>对 cookie 的支持</li>
-<li>其他自定义对象，如 XMLHttpRequest 和 IE 的 ActiveXObject</li>
+<li>navigator对象，提供关于浏览器的详尽信息</li>
+<li>location对象，提供浏览器加载页面的详尽信息</li>
+<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对cookie的支持</li>
+<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
 </ul>
 <h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
-<p>原则上 <code>JavaScript</code> 与 <code>ECMAScript</code> 指的是同一个东西，但有时也会加以区分</p>
+<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
 <ul>
 <li><code>JavaScript</code>：指语言及其实现</li>
 <li><code>ECMAScript</code>：指语言标准及语言版本</li>
@@ -169,7 +169,7 @@
 <li>原始值<ul>
 <li>最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问</li>
 <li>不能有属性，但尝试添加属性不报错</li>
-<li>使用new关键字，Javascript会创建一个Object 类型的实例，但其行为类似原始值</li>
+<li>使用new关键字，Javascript会创建一个Object类型的实例，但其行为类似原始值</li>
 <li>赋值到另一个变量时，是新增一个新的原始值</li>
 </ul>
 </li>
@@ -192,28 +192,28 @@
 </ul>
 <p>确认类型</p>
 <ul>
-<li>typeof适合用来判断一个变量是否为原始类型（字符串、数值、布尔值或 undefined）</li>
+<li>typeof适合用来判断一个变量是否为原始类型（字符串、数值、布尔值或undefined）</li>
 <li>instanceof来判断它是什么类型对象<ul>
-<li>用 instanceof 检测原始值，则始终会返回 false</li>
+<li>用instanceof检测原始值，则始终会返回false</li>
 </ul>
 </li>
 </ul>
-<p>在把一个值赋给变量时，JavaScript 引擎必须确定这个值是原始值还是引用值。</p>
+<p>在把一个值赋给变量时，JavaScript引擎必须确定这个值是原始值还是引用值。</p>
 <h2 id="理解执行上下文"><a href="#理解执行上下文" class="headerlink" title="理解执行上下文"></a>理解执行上下文</h2><blockquote>
 <p>执行上下文就是当前代码的执行环境，包括全局执行上下文（就是最外层的上下文），函数执行上下文</p>
 </blockquote>
 <ul>
-<li>全局执行上下文：创建一个全局的 window 对象（浏览器的情况下），并且设置 <code>this</code> 的值等于这个全局对象。</li>
-<li>函数执行上下文：每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
 </ul>
 <p>js引擎内部有一个执行上下文栈，它是用于执行代码的调用栈，最底部是全局执行上下文栈，当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文。</p>
 <h3 id="理解三个重要属性"><a href="#理解三个重要属性" class="headerlink" title="理解三个重要属性"></a>理解三个重要属性</h3><ol>
 <li><p>变量对象</p>
-<p>每个上下文都有一个关联的变量对象， 而这个上下文中定义的所有变量和函数都存在于这个对象上。我们编写的代码无法访问变量对象</p>
+<p>每个上下文都有一个关联的变量对象，而这个上下文中定义的所有变量和函数都存在于这个对象上。我们编写的代码无法访问变量对象</p>
 <p><strong>活动对象</strong></p>
 <blockquote>
 <p>在函数上下文中，我们用活动对象来表示变量对象，活动对象和变量对象其实是一个东西，只有当进入一个执行环境时，这个执行上下文的变量对象才会被激活，此时称为活动对象（AO），只有活动对象上的各种属性才能被访问。</p>
-<p>活动对象是在进入函数上下文时刻被创建的，最初只有一个定义变量：arguments （全局上下文中没有这个变量），它通过函数的 arguments 属性初始化。arguments 属性值是 Arguments 对象（调用函数时，会为其创建一个Arguments对象，并自动初始化局部变量arguments，指代该Arguments对象。所有作为参数传入的值都会成为Arguments对象的数组元素。）</p>
+<p>活动对象是在进入函数上下文时刻被创建的，最初只有一个定义变量：arguments（全局上下文中没有这个变量），它通过函数的arguments属性初始化。arguments属性值是Arguments对象（调用函数时，会为其创建一个Arguments对象，并自动初始化局部变量arguments，指代该Arguments对象。所有作为参数传入的值都会成为Arguments对象的数组元素。）</p>
 </blockquote>
 <p>变量对象和活动对象的关系：</p>
 <p>未进入执行阶段之前，变量对象(VO)中的属性都不能访问，但是进入执行阶段之后，变量对象(VO)转变为了活动对象(AO)，里面的属性都能被访问了，然后开始进行执行阶段的操作。</p>
@@ -235,7 +235,7 @@
 <li>创建变量对象<ul>
 <li>初始化函数的所有形参<ul>
 <li>由名称和对应值组成的一个变量对象的属性被创建</li>
-<li>没有实参，属性值设为 undefined</li>
+<li>没有实参，属性值设为undefined</li>
 </ul>
 </li>
 <li>初始化函数声明<ul>
@@ -266,7 +266,7 @@
 <h3 id="标识符查找"><a href="#标识符查找" class="headerlink" title="标识符查找"></a>标识符查找</h3><p>搜索开始于作用域链前端，以给定的名称搜索对应的标识符。如果在局部上下文中找到该标识符，则搜索停止，变量确定；如果没有找到变量名，则继续沿作用域链搜索。这个过程一直持续到搜索至全局上下文的变量对象。如果仍然没有找到标识符，则说明其未声明。</p>
 <h2 id="理解垃圾回收"><a href="#理解垃圾回收" class="headerlink" title="理解垃圾回收"></a>理解垃圾回收</h2><p>Javascript通过自动内存管理实现内存分配和闲置资源回收。思路：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间（或者说在代码执行过程中某个预定的收集时间）就会自动运行</p>
 <p>两种策略</p>
-<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记；当变量离开上下文时， 也会被加上离开上下文的标记。</p>
+<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记；当变量离开上下文时，也会被加上离开上下文的标记。</p>
 <p>给变量加标记得两种实现思路</p>
 <ul>
 <li>当变量进入上下文时，反转某一位</li>
@@ -277,38 +277,38 @@
 <ul>
 <li>会标记内存中存储的所有变量</li>
 <li>将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉</li>
-<li>在此之后再被加上标记 的变量就是待删除的了吗，因为任何在上下文中的变量都访问不到它们了</li>
-<li>垃圾回收程序做一次内 存清理，销毁带标记的所有值并收回它们的内存</li>
+<li>在此之后再被加上标记的变量就是待删除的了吗，因为任何在上下文中的变量都访问不到它们了</li>
+<li>垃圾回收程序做一次内存清理，销毁带标记的所有值并收回它们的内存</li>
 </ul>
 <h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>思路</p>
 <ul>
 <li>对每个值都记录它被引用的次数</li>
-<li>声明变量并给它赋一个引用值时，这个值的引用数为 1</li>
-<li>如果同一个值又被赋给另一个变 量，那么引用数加 1</li>
-<li>如果保存对该值引用的变量被其他值给覆盖了，那么引用数减 1</li>
-<li>当一 个值的引用数为 0 时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了</li>
-<li>释放引用数为 0 的值的内存</li>
+<li>声明变量并给它赋一个引用值时，这个值的引用数为1</li>
+<li>如果同一个值又被赋给另一个变量，那么引用数加1</li>
+<li>如果保存对该值引用的变量被其他值给覆盖了，那么引用数减1</li>
+<li>当一个值的引用数为0时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了</li>
+<li>释放引用数为0的值的内存</li>
 </ul>
 <p>缺陷</p>
-<p>会有可能出现循环引用，如：对象 A 有一个指针指向对象 B，而对象 B 也引用了对象 A</p>
+<p>会有可能出现循环引用，如：对象A有一个指针指向对象B，而对象B也引用了对象A</p>
 <h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>垃圾回收程序会周期性运行，如果内存中分配了很多变量，则可能造成性能损失，因此垃圾回收的时间调度很重要。</p>
-<p>现代垃圾回收程序会基于对 JavaScript 运行时环境的探测来决定何时运行。探测机制因引擎而异， 但基本上都是根据已分配对象的大小和数量来判断的。V8 的堆增长策略会根据<strong>活跃对象的数量外加一些余量</strong>来确定何时再次垃圾回收。</p>
-<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>分配给浏览器得内存通常很小，因为要出于安全考虑，为的是避免运行大量 JavaScript 的网页耗尽系统内存而导致操作系统崩溃。内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。</p>
+<p>现代垃圾回收程序会基于对JavaScript运行时环境的探测来决定何时运行。探测机制因引擎而异，但基本上都是根据已分配对象的大小和数量来判断的。V8的堆增长策略会根据<strong>活跃对象的数量外加一些余量</strong>来确定何时再次垃圾回收。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>分配给浏览器得内存通常很小，因为要出于安全考虑，为的是避免运行大量JavaScript的网页耗尽系统内存而导致操作系统崩溃。内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。</p>
 <p>优化内存方法</p>
 <blockquote>
-<p>优化内存占用的最佳手段就是保证在执行 代码时只保存必要的数据。如果数据不再必要，那么把它设置为 null，从而释放其引用。这也可以叫 作解除引用。这个建议最适合全局变量和全局对象的属性</p>
+<p>优化内存占用的最佳手段就是保证在执行代码时只保存必要的数据。如果数据不再必要，那么把它设置为null，从而释放其引用。这也可以叫作解除引用。这个建议最适合全局变量和全局对象的属性</p>
 </blockquote>
 <ol>
-<li><p>使用const和let声明</p>
+<li><p>使用<code>const</code>和<code>let</code>声明</p>
 <p>块级作用域能更早地让垃圾回收程序介入，今早回收应该回收地内存</p>
 </li>
 <li><p>隐藏类和删除操作</p>
 <ul>
-<li>V8 会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。如果这实例共享同一个构造函数和原型，V8 会在后台配置，共享相同的隐藏类<ul>
-<li>后面如果某个实例新增新的属性，他们不会共享相同隐藏类，所以要避免 JavaScript 的“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性</li>
+<li>V8会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。如果这实例共享同一个构造函数和原型，V8会在后台配置，共享相同的隐藏类<ul>
+<li>后面如果某个实例新增新的属性，他们不会共享相同隐藏类，所以要避免JavaScript的“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性</li>
 </ul>
 </li>
-<li>动态删除属性与动态添加属性导致的后果一样。最佳实践是把不想要的属性设置为 null。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果</li>
+<li>动态删除属性与动态添加属性导致的后果一样。最佳实践是把不想要的属性设置为null。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果</li>
 </ul>
 </li>
 <li><p>静态分配（这个方法，大多数情况下，这都属于过早优化）</p>
@@ -316,7 +316,7 @@
 <p>浏览器决定何时运行垃圾回收程序的一个标准就是对象更替的速度。</p>
 <p>思路：</p>
 <ol>
-<li><p>使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。 </p>
+<li><p>使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。</p>
 </li>
 <li><p>应用程序可以向这个对象池请求一个对象、设置其属性、使用它，然后在操作完成后再把它还给对象池。</p>
 </li>
@@ -325,16 +325,16 @@
 </ol>
 </li>
 </ol>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>JavaScript 中的内存泄漏大部分是由不合理的引用导致的</p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>JavaScript中的内存泄漏大部分是由不合理的引用导致的</p>
 <p>可能出现的场景</p>
 <ol>
 <li><p>定时器导致</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line"> <span class="built_in">console</span>.log(name); </span><br><span class="line">&#125;, <span class="number">100</span>); </span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;Jake&quot;</span>;</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
 
-<p>只要定时器一直运行，回调函数中引用的 name 就会一直占用内存。因而垃圾回收程序就不会清理外部变量。</p>
+<p>只要定时器一直运行，回调函数中引用的name就会一直占用内存。因而垃圾回收程序就不会清理外部变量。</p>
 </li>
 <li><p>闭包</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> <span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"> <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> 	<span class="keyword">return</span> name; </span><br><span class="line"> &#125;; </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">&quot;Jake&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>闭包一直引用这外部函数的变量，垃圾回收程序无法去清理</p>
 </li>
@@ -376,382 +376,6 @@
 </ol>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基本引用类型</title>
-    <url>/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><p>引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念</p>
-<p>对象被认为是某个特定引用类型的实例。新对象通过使用 new 操作符后跟一个构造函数来创建。构造函数就是用来创建新对象的函数</p>
-<p>JavaScript 中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象</p>
-<span id="more"></span>
-
-<ul>
-<li>Object类型<ul>
-<li>一个基础类型</li>
-</ul>
-</li>
-<li>Array类型</li>
-<li>Date类型</li>
-<li>RegExp类型</li>
-</ul>
-<p>函数其实是 Function 类型的实例，这意味着函数也是对象。由于函数是对象，因此也就具有能够增强自身行为的方法</p>
-<p>当代码开始执行时，全局上下文中会存在两个内置对象：<code>Global </code>和 <code>Math</code>。其中，<code>Global </code>对象在 大多数 ECMAScript 实现中无法直接访问。不过，浏览器将其实现为 window 对象。所有全局变量和函 数都是 <code>Global </code>对象的属性。<code>Math </code>对象包含辅助完成复杂计算的属性和方法</p>
-<h2 id="基本Javascript数据类型"><a href="#基本Javascript数据类型" class="headerlink" title="基本Javascript数据类型"></a>基本Javascript数据类型</h2><h3 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h3><blockquote>
-<p>Date 类型将日期保存为自协调世界时（UTC，Universal Time Coordinated）时间 1970 年 1 月 1 日午夜（零时）至今所经过的毫秒数</p>
-</blockquote>
-<p>创建日期对象</p>
-<ul>
-<li><code>new Date()</code><ul>
-<li>构造函数</li>
-</ul>
-</li>
-<li>辅助方法：<ul>
-<li><code>Date.parse()</code><ul>
-<li>“月/日/年”</li>
-<li>“月名 日, 年”</li>
-<li>“周几 月名 日 年 时:分:秒 时区”，</li>
-<li><code>“YYYY-MM-DDTHH:mm:ss.sssZ”</code></li>
-<li><code>Date.parse()</code>会被Date构造函数隐式调用</li>
-</ul>
-</li>
-<li><code>Date.UTC()</code><ul>
-<li><code>Date.UTC()</code>方法也返回日期的毫秒表示</li>
-<li>参数是年、零起点月数（1 月是 0，2 月是 1，以此类推）、日（1<del>31）、时（0</del>23）、 分、秒和毫秒</li>
-<li><code>Date.UTC()</code>也会被 Date 构造函数隐式调用</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Date.now()</code><ul>
-<li>返回表示方法执行时日期和时间的毫秒数</li>
-<li>方便用于代码分析，计算运行时长</li>
-</ul>
-</li>
-<li><code>toLocaleString()</code><ul>
-<li>返回与浏览器运行的本地环境一致的日期和时间</li>
-</ul>
-</li>
-<li><code>toString()</code><ul>
-<li>返回带时区信息的日期和时间，而时间也是以 24 小时制（0~23）表示的</li>
-</ul>
-</li>
-<li><code>valueOf()</code><ul>
-<li>返回的是日期的毫秒表示</li>
-</ul>
-</li>
-</ul>
-<p>日期格式化方法</p>
-<h3 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h3><p><code>RegExp </code>类型支持正则表达式</p>
-<ul>
-<li><code>g</code><ul>
-<li>全局模式</li>
-</ul>
-</li>
-<li><code>i</code><ul>
-<li>不区分大小写</li>
-</ul>
-</li>
-</ul>
-<p>所有元字符在模式中也必须转义</p>
-<ul>
-<li><code>( [ &#123; \ ^ $ | ) ] &#125; ? * + . </code></li>
-<li>使用反斜杠来转义</li>
-</ul>
-<h4 id="正则表达式创建"><a href="#正则表达式创建" class="headerlink" title="正则表达式创建"></a>正则表达式创建</h4><ul>
-<li>字面量定义</li>
-<li><code>RegExp</code>构造函数创建<ul>
-<li>两个参数<ul>
-<li>模式字符串<ul>
-<li>因为是字符串，所以所有元字符都必须二次转义，<strong>包括转义字符序列</strong></li>
-</ul>
-</li>
-<li>（可选）标记字符串</li>
-</ul>
-</li>
-<li>可以基于已有的正则表达式实例，并可选择性地修改它们的标记</li>
-</ul>
-</li>
-</ul>
-<h4 id="RegExp实例方法"><a href="#RegExp实例方法" class="headerlink" title="RegExp实例方法"></a>RegExp实例方法</h4><ol>
-<li><p><code>exec()</code></p>
-<p>主要用于配合捕获组使用。这个方法只接收一个参数，即要应用模式的字符串。如果找到了匹配项，则<strong>返回包含第一个匹配信息的数组</strong>；如果没找到匹配项，则返回 null。</p>
-<p>这个数组的第一个元素是匹配整个模式的字符串， 其他元素是与表达式中的捕获组匹配的字符串</p>
-<p>两个额外属性</p>
-<ul>
-<li><code>index</code><ul>
-<li>字符串中匹配模式的起始位置</li>
-</ul>
-</li>
-<li><code>input</code><ul>
-<li>是要查找的字符串</li>
-</ul>
-</li>
-</ul>
-<p>如果模式设置了全局标记，则每次调用 <code>exec()</code>方法会返回一个匹配的信息；如果没有设置全局标记，则无论对同一个字符串调用多少次 exec()，也只会返回第一个匹配的信息</p>
-</li>
-<li><p><code>test()</code></p>
-<p>接收一个字符串参数。如果输入的文本与模式匹配，则参数 返回 <code>true</code>，否则返回 <code>false</code>。主要用于测试模式是否匹配。</p>
-<p><code>toLocaleString()</code>和<code> toString()</code>都返回正则表达式的字面量表示，<code>valueOf()</code>方法返回正则表达式本身</p>
-</li>
-</ol>
-<h2 id="原始值与原始值包装类型"><a href="#原始值与原始值包装类型" class="headerlink" title="原始值与原始值包装类型"></a>原始值与原始值包装类型</h2><blockquote>
-<p>每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。</p>
-</blockquote>
-<ul>
-<li>每种包装类型都映射到同名的原始类型</li>
-<li>在以读模式访问原始值时，后台会实例化一个原始值包装对象，通过这个对象可以操作数据</li>
-<li>涉及原始值的语句只要一执行完毕，包装对象就会立即销毁</li>
-</ul>
-<p>当原始值调用对象方法或属性时，发生三个事情</p>
-<ul>
-<li>创建原始值包装类型</li>
-<li>调用实例上特定的方法</li>
-<li>销毁实例</li>
-</ul>
-<p>引用类型与原始值包装类型的<strong>主要区别在于对象的生命周期</strong>。在通过 new 实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则<strong>只存在于访问它的那行代码执行期间</strong>。</p>
-<p>三个原始值包装类型</p>
-<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><blockquote>
-<p><code>Boolean</code> 是对应布尔值的引用类型。要创建一个 <code>Boolean</code> 对象，就使用 <code>Boolean</code> 构造函数并传入<code>true</code>或 <code>false</code></p>
-</blockquote>
-<ul>
-<li>重写<code> valueOf()</code>方法，返回一个原始值 true 或 false</li>
-<li><code>toString()</code>方法被调用时也会被覆盖，返回字符串”true”或”false”</li>
-</ul>
-<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><h4 id="重写了-valueOf-、toLocaleString-和-toString-方法"><a href="#重写了-valueOf-、toLocaleString-和-toString-方法" class="headerlink" title="重写了 valueOf()、toLocaleString()和 toString()方法"></a>重写了 <code>valueOf()</code>、<code>toLocaleString()</code>和<code> toString()</code>方法</h4><ul>
-<li><code>valueOf()</code>方法返回<code>Number</code>对象表示的原始数值</li>
-<li>另外两个方法返回数值字符串</li>
-<li><code>toString() </code>方法可选地接收一个表示基数的参数，并返回相应基数形式的数值字符串</li>
-</ul>
-<h4 id="将数值格式化为字符串方法"><a href="#将数值格式化为字符串方法" class="headerlink" title="将数值格式化为字符串方法"></a>将数值格式化为字符串方法</h4><ul>
-<li><code>toFixed()</code><ul>
-<li>返回包含指定小数点位数的数值字符串</li>
-</ul>
-</li>
-<li><code>toExponential()</code><ul>
-<li>返回以科学记数法（也称为指数记数法）表 示的数值字符串</li>
-<li>接收一个参数，表示结果中小数的位数</li>
-</ul>
-</li>
-<li><code>toPrecision()</code><ul>
-<li>接收一个参数，表示结果中数字的总位数</li>
-</ul>
-</li>
-</ul>
-<p><code>Number.isInteger()</code>方法，用于辨别一个数值是否保存为整数</p>
-<p>为了鉴别整数是否在合理数字范围内，可以使用 <code>Number.isSafeInteger()</code>方法</p>
-<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><blockquote>
-<p>String 是对应字符串的引用类型。要创建一个 String 对象，使用 String 构造函数并传入一个数值</p>
-</blockquote>
-<p><code>valueOf()</code>、<code>toLocaleString() </code>和 <code>toString()</code>都返回对象的原始字符串值，有一个<code>length</code>属性，表示字符串中字符的数量。</p>
-<p>JavaScript 字符串由 16 位码元（code unit）组成，在 Unicode 中称为基本多语言平面（BMP）</p>
-<ul>
-<li><code>charAt()</code>方法<ul>
-<li>返回给定索引位置的字符，由传给方法的整数参数指定</li>
-</ul>
-</li>
-<li><code>charCodeAt()</code><ul>
-<li>可以查看指定码元的字符编码</li>
-<li>返回指定索引位置的码元值</li>
-</ul>
-</li>
-<li><code>fromCharCode()</code><ul>
-<li>用于根据给定的 UTF-16 码元创建字符串中的字符</li>
-<li>可以接受任意多个数值，并返回将所有数值对应的字符拼接起来的字符串</li>
-</ul>
-</li>
-</ul>
-<p>对于扩展到Unicode 增补字符平面时，Unicode 采用了一个策略，即每个字符使用另外 16 位去选择一个增补平面。这种每个字符使用两个 16 位码元的策略称为<strong>代理对</strong></p>
-<ul>
-<li><code>codePointAt()</code><ul>
-<li>接收 16 位码元的索引并返回该索引位置上的码点(能识别完整的码点（16位或32位）)<ul>
-<li>码点是 Unicode 中一个字符的完整标识</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>fromCodePoint()</code><ul>
-<li>接收任意数量的码点，返回对应字符拼接起来的字符串</li>
-</ul>
-</li>
-<li><code>normalize()</code><ul>
-<li>规范化字符串</li>
-</ul>
-</li>
-</ul>
-<p>字符串操作方法</p>
-<ul>
-<li><code>concat()</code><ul>
-<li>将一个或多个字符串拼接成一个新字符串</li>
-<li><code>concat()</code>方法可以接收任意多个参数，因此可以一次性拼接多个字符串</li>
-<li>更常用的时<code>+</code>运算符</li>
-</ul>
-</li>
-<li>提取子字符串<ul>
-<li><code>slice()</code><ul>
-<li>第一个参数表示开始，第二个表示结束</li>
-<li>将所有负值参数都当成字 符串长度加上负参数值</li>
-</ul>
-</li>
-<li><code>substr()</code><ul>
-<li>第一个参数表示开始，第二个表示返回子字符串数量</li>
-<li>将第一个负参数值当成字符串长度加上该值，将第二个负参数值转换为 0</li>
-</ul>
-</li>
-<li><code>substring()</code><ul>
-<li>第一个参数表示开始，第二个表示结束</li>
-<li>将所有负参数值都转换为 0</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>定位子字符串<ul>
-<li><code>indexOf()</code><ul>
-<li>从开头开始查找子字符串</li>
-</ul>
-</li>
-<li><code>lastIndexOf()</code><ul>
-<li>从末尾开始查找子字符串</li>
-</ul>
-</li>
-<li>都可以接收可选的第二个参数，表示开始搜索的位置</li>
-</ul>
-</li>
-<li>判断字符串是否包含另一个字符串<ul>
-<li><code>startswith</code><ul>
-<li>检查开始于索引 0 的匹配项</li>
-<li>可选第二参数，表示开始搜索位置</li>
-</ul>
-</li>
-<li><code>endsWith</code><ul>
-<li>检查开始于索引(<code>string.length - substring.length</code>)的匹配项</li>
-<li>可选第二参数，表示当作字符串末尾位置</li>
-</ul>
-</li>
-<li><code>includes</code><ul>
-<li>检查整个字符串</li>
-<li>可选第二参数，表示开始搜索位置</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>trim()</code><ul>
-<li>创建字符串副本，删除前后所有空格符</li>
-<li><code>trimLeft()</code></li>
-<li><code>trimRight()</code></li>
-</ul>
-</li>
-<li><code>repeat</code><ul>
-<li>接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果。</li>
-</ul>
-</li>
-<li>填充字符<ul>
-<li><code>padStart()</code></li>
-<li><code>padEnd()</code></li>
-<li>第一个参数是长度，第二个参数是可选的填充字符串</li>
-<li>如果长度小于或等于字符串长度，则会返回原始字符串</li>
-</ul>
-</li>
-<li>字符串迭代于结构<ul>
-<li>原型上暴露了一个@@iterator 方法，表示可以迭代字符串的每个字符，在 for-of 循环中可以通过这个迭代器按序访问每个字符，有了这个迭代器之后，字符串就可以通过解构操作符来解构了</li>
-</ul>
-</li>
-<li>字符串大小写转换<ul>
-<li><code>toLowerCase()</code></li>
-<li><code>toUpperCase()</code></li>
-<li><code>toLocaleLowerCase()</code><ul>
-<li>基于特定地区实现</li>
-</ul>
-</li>
-<li><code>toLocaleUpperCase()</code><ul>
-<li>基于特定地区实现</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>字符串模式匹配<ul>
-<li><code>match()</code></li>
-<li><code>search()</code></li>
-<li><code>replace()</code><ul>
-<li>第二个参数可以是函数</li>
-</ul>
-</li>
-<li><code>split()</code><ul>
-<li>可传第二参数，确保返回数组大小不超过第二参数</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>localeCompare()<ul>
-<li>比较两个字符串，排前头返回负值，排后头返回正值，相等返回0</li>
-</ul>
-</li>
-</ul>
-<h3 id="单例内置对象"><a href="#单例内置对象" class="headerlink" title="单例内置对象"></a>单例内置对象</h3><blockquote>
-<p>任何由 ECMAScript 实现提供、与宿主环境无关，并在 ECMAScript 程序开始执行时就存在的对象</p>
-</blockquote>
-<h4 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h4><blockquote>
-<p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法</p>
-</blockquote>
-<p>方法</p>
-<ul>
-<li>URI编码方法<ul>
-<li><code>encodeURI()</code><ul>
-<li>不会编码属于 URL 组件的特殊字符，比如冒号、斜杠、问号、 井号</li>
-</ul>
-</li>
-<li><code>encodeURIComponent()</code><ul>
-<li>会编码它发现的所有非标准字符</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>URI解码方式<ul>
-<li><code>decodeURI()</code></li>
-<li><code>decodeURIComponent()</code></li>
-</ul>
-</li>
-</ul>
-<p><code>window</code>对象</p>
-<blockquote>
-<p>浏览器将 window 对象实现为 Global 对象的代理</p>
-</blockquote>
-<p>当一个函数在没有明确指定 this 值的情况下执行时，this 值等于Global 对象</p>
-<h4 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h4><blockquote>
-<p>保存数学公式、信息和计算的地方</p>
-</blockquote>
-<ul>
-<li><code>min()</code>与<code>max()</code></li>
-<li>舍入方法<ul>
-<li><code>ceil()</code><ul>
-<li>向上取整</li>
-</ul>
-</li>
-<li><code>floor()</code><ul>
-<li>向下取整</li>
-</ul>
-</li>
-<li><code>round()</code><ul>
-<li>四舍五入</li>
-</ul>
-</li>
-<li><code>fround()</code><ul>
-<li>返回数值最接近的单精度（32 位）浮点值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>random()<ul>
-<li>返回0-1范围内的随机数，包含0，不包含1</li>
-</ul>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -921,6 +545,382 @@
       </tags>
   </entry>
   <entry>
+    <title>基本引用类型</title>
+    <url>/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><p>引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念</p>
+<p>对象被认为是某个特定引用类型的实例。新对象通过使用new操作符后跟一个构造函数来创建。构造函数就是用来创建新对象的函数</p>
+<p>JavaScript中的对象是引用值，可以通过几种内置引用类型创建特定类型的对象</p>
+<span id="more"></span>
+
+<ul>
+<li>Object类型<ul>
+<li>一个基础类型</li>
+</ul>
+</li>
+<li>Array类型</li>
+<li>Date类型</li>
+<li>RegExp类型</li>
+</ul>
+<p>函数其实是Function类型的实例，这意味着函数也是对象。由于函数是对象，因此也就具有能够增强自身行为的方法</p>
+<p>当代码开始执行时，全局上下文中会存在两个内置对象：<code>Global</code>和<code>Math</code>。其中，<code>Global</code>对象在大多数ECMAScript实现中无法直接访问。不过，浏览器将其实现为window对象。所有全局变量和函数都是<code>Global</code>对象的属性。<code>Math</code>对象包含辅助完成复杂计算的属性和方法</p>
+<h2 id="基本Javascript数据类型"><a href="#基本Javascript数据类型" class="headerlink" title="基本Javascript数据类型"></a>基本Javascript数据类型</h2><h3 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h3><blockquote>
+<p>Date类型将日期保存为自协调世界时（UTC，UniversalTimeCoordinated）时间1970年1月1日午夜（零时）至今所经过的毫秒数</p>
+</blockquote>
+<p>创建日期对象</p>
+<ul>
+<li><code>new Date()</code><ul>
+<li>构造函数</li>
+</ul>
+</li>
+<li>辅助方法：<ul>
+<li><code>Date.parse()</code><ul>
+<li>“月/日/年”</li>
+<li>“月名日,年”</li>
+<li>“周几月名日年时:分:秒时区”，</li>
+<li><code>“YYYY-MM-DDTHH:mm:ss.sssZ”</code></li>
+<li><code>Date.parse()</code>会被Date构造函数隐式调用</li>
+</ul>
+</li>
+<li><code>Date.UTC()</code><ul>
+<li><code>Date.UTC()</code>方法也返回日期的毫秒表示</li>
+<li>参数是年、零起点月数（1月是0，2月是1，以此类推）、日（1<del>31）、时（0</del>23）、分、秒和毫秒</li>
+<li><code>Date.UTC()</code>也会被Date构造函数隐式调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Date.now()</code><ul>
+<li>返回表示方法执行时日期和时间的毫秒数</li>
+<li>方便用于代码分析，计算运行时长</li>
+</ul>
+</li>
+<li><code>toLocaleString()</code><ul>
+<li>返回与浏览器运行的本地环境一致的日期和时间</li>
+</ul>
+</li>
+<li><code>toString()</code><ul>
+<li>返回带时区信息的日期和时间，而时间也是以24小时制（0~23）表示的</li>
+</ul>
+</li>
+<li><code>valueOf()</code><ul>
+<li>返回的是日期的毫秒表示</li>
+</ul>
+</li>
+</ul>
+<p>日期格式化方法</p>
+<h3 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h3><p><code>RegExp</code>类型支持正则表达式</p>
+<ul>
+<li><code>g</code><ul>
+<li>全局模式</li>
+</ul>
+</li>
+<li><code>i</code><ul>
+<li>不区分大小写</li>
+</ul>
+</li>
+</ul>
+<p>所有元字符在模式中也必须转义</p>
+<ul>
+<li><code>([&#123;\^$|)]&#125;?*+.</code></li>
+<li>使用反斜杠来转义</li>
+</ul>
+<h4 id="正则表达式创建"><a href="#正则表达式创建" class="headerlink" title="正则表达式创建"></a>正则表达式创建</h4><ul>
+<li>字面量定义</li>
+<li><code>RegExp</code>构造函数创建<ul>
+<li>两个参数<ul>
+<li>模式字符串<ul>
+<li>因为是字符串，所以所有元字符都必须二次转义，<strong>包括转义字符序列</strong></li>
+</ul>
+</li>
+<li>（可选）标记字符串</li>
+</ul>
+</li>
+<li>可以基于已有的正则表达式实例，并可选择性地修改它们的标记</li>
+</ul>
+</li>
+</ul>
+<h4 id="RegExp实例方法"><a href="#RegExp实例方法" class="headerlink" title="RegExp实例方法"></a>RegExp实例方法</h4><ol>
+<li><p><code>exec()</code></p>
+<p>主要用于配合捕获组使用。这个方法只接收一个参数，即要应用模式的字符串。如果找到了匹配项，则<strong>返回包含第一个匹配信息的数组</strong>；如果没找到匹配项，则返回null。</p>
+<p>这个数组的第一个元素是匹配整个模式的字符串，其他元素是与表达式中的捕获组匹配的字符串</p>
+<p>两个额外属性</p>
+<ul>
+<li><code>index</code><ul>
+<li>字符串中匹配模式的起始位置</li>
+</ul>
+</li>
+<li><code>input</code><ul>
+<li>是要查找的字符串</li>
+</ul>
+</li>
+</ul>
+<p>如果模式设置了全局标记，则每次调用<code>exec()</code>方法会返回一个匹配的信息；如果没有设置全局标记，则无论对同一个字符串调用多少次exec()，也只会返回第一个匹配的信息</p>
+</li>
+<li><p><code>test()</code></p>
+<p>接收一个字符串参数。如果输入的文本与模式匹配，则参数返回<code>true</code>，否则返回<code>false</code>。主要用于测试模式是否匹配。</p>
+<p><code>toLocaleString()</code>和<code>toString()</code>都返回正则表达式的字面量表示，<code>valueOf()</code>方法返回正则表达式本身</p>
+</li>
+</ol>
+<h2 id="原始值与原始值包装类型"><a href="#原始值与原始值包装类型" class="headerlink" title="原始值与原始值包装类型"></a>原始值与原始值包装类型</h2><blockquote>
+<p>每当用到某个原始值的方法或属性时，后台都会创建一个相应原始包装类型的对象，从而暴露出操作原始值的各种方法。</p>
+</blockquote>
+<ul>
+<li>每种包装类型都映射到同名的原始类型</li>
+<li>在以读模式访问原始值时，后台会实例化一个原始值包装对象，通过这个对象可以操作数据</li>
+<li>涉及原始值的语句只要一执行完毕，包装对象就会立即销毁</li>
+</ul>
+<p>当原始值调用对象方法或属性时，发生三个事情</p>
+<ul>
+<li>创建原始值包装类型</li>
+<li>调用实例上特定的方法</li>
+<li>销毁实例</li>
+</ul>
+<p>引用类型与原始值包装类型的<strong>主要区别在于对象的生命周期</strong>。在通过new实例化引用类型后，得到的实例会在离开作用域时被销毁，而自动创建的原始值包装对象则<strong>只存在于访问它的那行代码执行期间</strong>。</p>
+<p>三个原始值包装类型</p>
+<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3><blockquote>
+<p><code>Boolean</code>是对应布尔值的引用类型。要创建一个<code>Boolean</code>对象，就使用<code>Boolean</code>构造函数并传入<code>true</code>或<code>false</code></p>
+</blockquote>
+<ul>
+<li>重写<code>valueOf()</code>方法，返回一个原始值true或false</li>
+<li><code>toString()</code>方法被调用时也会被覆盖，返回字符串”true”或”false”</li>
+</ul>
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><h4 id="重写了valueOf-、toLocaleString-和toString-方法"><a href="#重写了valueOf-、toLocaleString-和toString-方法" class="headerlink" title="重写了valueOf()、toLocaleString()和toString()方法"></a>重写了<code>valueOf()</code>、<code>toLocaleString()</code>和<code>toString()</code>方法</h4><ul>
+<li><code>valueOf()</code>方法返回<code>Number</code>对象表示的原始数值</li>
+<li>另外两个方法返回数值字符串</li>
+<li><code>toString()</code>方法可选地接收一个表示基数的参数，并返回相应基数形式的数值字符串</li>
+</ul>
+<h4 id="将数值格式化为字符串方法"><a href="#将数值格式化为字符串方法" class="headerlink" title="将数值格式化为字符串方法"></a>将数值格式化为字符串方法</h4><ul>
+<li><code>toFixed()</code><ul>
+<li>返回包含指定小数点位数的数值字符串</li>
+</ul>
+</li>
+<li><code>toExponential()</code><ul>
+<li>返回以科学记数法（也称为指数记数法）表示的数值字符串</li>
+<li>接收一个参数，表示结果中小数的位数</li>
+</ul>
+</li>
+<li><code>toPrecision()</code><ul>
+<li>接收一个参数，表示结果中数字的总位数</li>
+</ul>
+</li>
+</ul>
+<p><code>Number.isInteger()</code>方法，用于辨别一个数值是否保存为整数</p>
+<p>为了鉴别整数是否在合理数字范围内，可以使用<code>Number.isSafeInteger()</code>方法</p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><blockquote>
+<p>String是对应字符串的引用类型。要创建一个String对象，使用String构造函数并传入一个数值</p>
+</blockquote>
+<p><code>valueOf()</code>、<code>toLocaleString()</code>和<code>toString()</code>都返回对象的原始字符串值，有一个<code>length</code>属性，表示字符串中字符的数量。</p>
+<p>JavaScript字符串由16位码元（codeunit）组成，在Unicode中称为基本多语言平面（BMP）</p>
+<ul>
+<li><code>charAt()</code>方法<ul>
+<li>返回给定索引位置的字符，由传给方法的整数参数指定</li>
+</ul>
+</li>
+<li><code>charCodeAt()</code><ul>
+<li>可以查看指定码元的字符编码</li>
+<li>返回指定索引位置的码元值</li>
+</ul>
+</li>
+<li><code>fromCharCode()</code><ul>
+<li>用于根据给定的UTF-16码元创建字符串中的字符</li>
+<li>可以接受任意多个数值，并返回将所有数值对应的字符拼接起来的字符串</li>
+</ul>
+</li>
+</ul>
+<p>对于扩展到Unicode增补字符平面时，Unicode采用了一个策略，即每个字符使用另外16位去选择一个增补平面。这种每个字符使用两个16位码元的策略称为<strong>代理对</strong></p>
+<ul>
+<li><code>codePointAt()</code><ul>
+<li>接收16位码元的索引并返回该索引位置上的码点(能识别完整的码点（16位或32位）)<ul>
+<li>码点是Unicode中一个字符的完整标识</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>fromCodePoint()</code><ul>
+<li>接收任意数量的码点，返回对应字符拼接起来的字符串</li>
+</ul>
+</li>
+<li><code>normalize()</code><ul>
+<li>规范化字符串</li>
+</ul>
+</li>
+</ul>
+<p>字符串操作方法</p>
+<ul>
+<li><code>concat()</code><ul>
+<li>将一个或多个字符串拼接成一个新字符串</li>
+<li><code>concat()</code>方法可以接收任意多个参数，因此可以一次性拼接多个字符串</li>
+<li>更常用的时<code>+</code>运算符</li>
+</ul>
+</li>
+<li>提取子字符串<ul>
+<li><code>slice()</code><ul>
+<li>第一个参数表示开始，第二个表示结束</li>
+<li>将所有负值参数都当成字符串长度加上负参数值</li>
+</ul>
+</li>
+<li><code>substr()</code><ul>
+<li>第一个参数表示开始，第二个表示返回子字符串数量</li>
+<li>将第一个负参数值当成字符串长度加上该值，将第二个负参数值转换为0</li>
+</ul>
+</li>
+<li><code>substring()</code><ul>
+<li>第一个参数表示开始，第二个表示结束</li>
+<li>将所有负参数值都转换为0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定位子字符串<ul>
+<li><code>indexOf()</code><ul>
+<li>从开头开始查找子字符串</li>
+</ul>
+</li>
+<li><code>lastIndexOf()</code><ul>
+<li>从末尾开始查找子字符串</li>
+</ul>
+</li>
+<li>都可以接收可选的第二个参数，表示开始搜索的位置</li>
+</ul>
+</li>
+<li>判断字符串是否包含另一个字符串<ul>
+<li><code>startswith</code><ul>
+<li>检查开始于索引0的匹配项</li>
+<li>可选第二参数，表示开始搜索位置</li>
+</ul>
+</li>
+<li><code>endsWith</code><ul>
+<li>检查开始于索引(<code>string.length-substring.length</code>)的匹配项</li>
+<li>可选第二参数，表示当作字符串末尾位置</li>
+</ul>
+</li>
+<li><code>includes</code><ul>
+<li>检查整个字符串</li>
+<li>可选第二参数，表示开始搜索位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>trim()</code><ul>
+<li>创建字符串副本，删除前后所有空格符</li>
+<li><code>trimLeft()</code></li>
+<li><code>trimRight()</code></li>
+</ul>
+</li>
+<li><code>repeat</code><ul>
+<li>接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果。</li>
+</ul>
+</li>
+<li>填充字符<ul>
+<li><code>padStart()</code></li>
+<li><code>padEnd()</code></li>
+<li>第一个参数是长度，第二个参数是可选的填充字符串</li>
+<li>如果长度小于或等于字符串长度，则会返回原始字符串</li>
+</ul>
+</li>
+<li>字符串迭代于结构<ul>
+<li>原型上暴露了一个@@iterator方法，表示可以迭代字符串的每个字符，在for-of循环中可以通过这个迭代器按序访问每个字符，有了这个迭代器之后，字符串就可以通过解构操作符来解构了</li>
+</ul>
+</li>
+<li>字符串大小写转换<ul>
+<li><code>toLowerCase()</code></li>
+<li><code>toUpperCase()</code></li>
+<li><code>toLocaleLowerCase()</code><ul>
+<li>基于特定地区实现</li>
+</ul>
+</li>
+<li><code>toLocaleUpperCase()</code><ul>
+<li>基于特定地区实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字符串模式匹配<ul>
+<li><code>match()</code></li>
+<li><code>search()</code></li>
+<li><code>replace()</code><ul>
+<li>第二个参数可以是函数</li>
+</ul>
+</li>
+<li><code>split()</code><ul>
+<li>可传第二参数，确保返回数组大小不超过第二参数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>localeCompare()<ul>
+<li>比较两个字符串，排前头返回负值，排后头返回正值，相等返回0</li>
+</ul>
+</li>
+</ul>
+<h3 id="单例内置对象"><a href="#单例内置对象" class="headerlink" title="单例内置对象"></a>单例内置对象</h3><blockquote>
+<p>任何由ECMAScript实现提供、与宿主环境无关，并在ECMAScript程序开始执行时就存在的对象</p>
+</blockquote>
+<h4 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h4><blockquote>
+<p>Global对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法</p>
+</blockquote>
+<p>方法</p>
+<ul>
+<li>URI编码方法<ul>
+<li><code>encodeURI()</code><ul>
+<li>不会编码属于URL组件的特殊字符，比如冒号、斜杠、问号、井号</li>
+</ul>
+</li>
+<li><code>encodeURIComponent()</code><ul>
+<li>会编码它发现的所有非标准字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>URI解码方式<ul>
+<li><code>decodeURI()</code></li>
+<li><code>decodeURIComponent()</code></li>
+</ul>
+</li>
+</ul>
+<p><code>window</code>对象</p>
+<blockquote>
+<p>浏览器将window对象实现为Global对象的代理</p>
+</blockquote>
+<p>当一个函数在没有明确指定this值的情况下执行时，this值等于Global对象</p>
+<h4 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h4><blockquote>
+<p>保存数学公式、信息和计算的地方</p>
+</blockquote>
+<ul>
+<li><code>min()</code>与<code>max()</code></li>
+<li>舍入方法<ul>
+<li><code>ceil()</code><ul>
+<li>向上取整</li>
+</ul>
+</li>
+<li><code>floor()</code><ul>
+<li>向下取整</li>
+</ul>
+</li>
+<li><code>round()</code><ul>
+<li>四舍五入</li>
+</ul>
+</li>
+<li><code>fround()</code><ul>
+<li>返回数值最接近的单精度（32位）浮点值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>random()<ul>
+<li>返回0-1范围内的随机数，包含0，不包含1</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新年快乐</title>
     <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
     <content><![CDATA[<p>2022年希望有更好的明天</p>
@@ -950,6 +950,127 @@
       </tags>
   </entry>
   <entry>
+    <title>迭代器与生成器</title>
+    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
+<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
+<p>在无迭代器时，迭代有两个缺点</p>
+<ul>
+<li>迭代之前需要事先知道如何使用数据结构</li>
+<li>遍历顺序并不是数据结构固有的</li>
+</ul>
+<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
+<span id="more"></span>
+
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
+<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
+</blockquote>
+<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
+<p>可迭代对象</p>
+<ul>
+<li>包含元素有限</li>
+<li>具有无歧义的遍历顺序</li>
+</ul>
+<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
+<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
+<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
+<ul>
+<li>支持迭代的自我识别能力</li>
+<li>创建实现<code>Iterator</code>接口的对象的能力</li>
+</ul>
+<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
+<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
+<ul>
+<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
+<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
+<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
+<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
+</ul>
+<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
+<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
+<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
+<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
+<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
+<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
+<p>可能情形：</p>
+<ol>
+<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
+<li>解构操作并未消费所有值</li>
+</ol>
+<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
+<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
+<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
+</blockquote>
+<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
+<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
+<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
+<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
+<p>生成器函数</p>
+<ul>
+<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
+<li>初次调用生成器函数并不会打印日志</li>
+</ul>
+</li>
+<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
+<li><code>g===g[Symbol.iterator]()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
+<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
+</blockquote>
+<p>yield关键字</p>
+<ul>
+<li>有点像函数的中间返回语句<ul>
+<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
+<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
+</ul>
+</li>
+<li>只能在生成器函数内部使用</li>
+<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
+<li>可以作为函数的中间参数使用<ul>
+<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
+<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
+</ul>
+</li>
+<li><code>yield</code>关键字可以同时用于输入和输出</li>
+<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
+<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
+</ul>
+</li>
+</ul>
+<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
+<p>生成器对象作为可迭代对象</p>
+<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
+<ol>
+<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
+<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
+<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
+<li>错误处理会跳过对应的<code>yield</code></li>
+<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>语言基础</title>
     <url>/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
@@ -965,7 +1086,7 @@
 <li><p>注释</p>
 <ul>
 <li>单行注释<code>//</code></li>
-<li>块注释<code>/* */</code></li>
+<li>块注释<code>/**/</code></li>
 </ul>
 </li>
 <li><p>严格模式</p>
@@ -1026,7 +1147,7 @@ func()
 <li>声明同时必须初始化</li>
 <li>初始化后不能修改</li>
 <li>不能修改仅限于常量的引用<ul>
-<li>想让整个对象都不能修改，可以使用 <code>Object.freeze()</code></li>
+<li>想让整个对象都不能修改，可以使用<code>Object.freeze()</code></li>
 </ul>
 </li>
 <li>不能用于声明会自增的迭代变量</li>
@@ -1036,22 +1157,22 @@ func()
 </li>
 </ul>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>六种简单数据类型、一种复杂数据类型（Object）。可以使用<code>typeof</code>来确定任意变量的数据类型，它返回一个字符串</p>
-<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用 <code>var</code> 或<code> let</code> 声明了变量但没有初始化时，就相当于给变量赋予了<code> undefined</code> 值。在对<strong>未初始化</strong>的变量调用<code> typeof</code> 时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时， 返回的结果还是<code>&quot;undefined&quot;</code></p>
-<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null </code>值表示一个空对象指针，这也是给<code>typeof </code>传一个 <code>null</code> 会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用 <code>null </code>来填充该变量</p>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用<code>var</code>或<code>let</code>声明了变量但没有初始化时，就相当于给变量赋予了<code>undefined</code>值。在对<strong>未初始化</strong>的变量调用<code>typeof</code>时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时，返回的结果还是<code>&quot;undefined&quot;</code></p>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null</code>值表示一个空对象指针，这也是给<code>typeof</code>传一个<code>null</code>会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用<code>null</code>来填充该变量</p>
 <h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a><code>Boolean</code>类型</h3><p>两个字面量true、false</p>
 <p>要将一个其他类型的值转换为布尔值，可以调用特定的<code>Boolean()</code>转型函数，<code>Boolean()</code>转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。</p>
 <p><code>NaN</code>返回<code>false</code></p>
 <h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a><code>Number</code>类型</h3><ul>
-<li>Number 类型使用 IEEE 754 格式表示整数和浮点值。</li>
+<li>Number类型使用IEEE754格式表示整数和浮点值。</li>
 <li>整数也可以用八进制或十六进制字面量表示。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数</li>
-<li>正零和 负零在所有情况下都被认为是等同的</li>
+<li>正零和负零在所有情况下都被认为是等同的</li>
 </ul>
 <ol>
 <li><p>浮点数</p>
 <ul>
 <li>数值中必须包含小数点，而且小数点后面必须至少有一个数字，没有数字或只有0，则会变成整数</li>
-<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母 e，再加上一个要乘的 10 的多少次幂</li>
-<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2 == 0.3 </code>是false</li>
+<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母e，再加上一个要乘的10的多少次幂</li>
+<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2==0.3</code>是false</li>
 </ul>
 </li>
 <li><p>值的范围</p>
@@ -1075,10 +1196,10 @@ func()
 <p>不是数值</p>
 </blockquote>
 <ul>
-<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN </code>不等于包括 <code>NaN </code>在内的任何值</li>
+<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN</code>不等于包括<code>NaN</code>在内的任何值</li>
 <li><code>isNaN()</code>函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。<ol>
 <li>首先会调用对象的<code>valueOf()</code>方法，然后再确定返回的值是否可以转换为数值</li>
-<li>如果不能，再调用 <code>toString()</code>方法， 并测试其返回值</li>
+<li>如果不能，再调用<code>toString()</code>方法，并测试其返回值</li>
 </ol>
 </li>
 </ul>
@@ -1104,17 +1225,17 @@ func()
 </ul>
 </li>
 <li><code>parseInt()</code><ul>
-<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回 NaN</li>
+<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回NaN</li>
 <li>如果是，则继续依次检测每个字符，直到字符串末尾，或碰到非数值字符</li>
 <li>字符串以”0x”开头，就会被解释为十六进制整数</li>
-<li>以”0” 开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
+<li>以”0”开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
 <li>parseInt()也接收第二个参数，用于指定底数（进制数）。</li>
 </ul>
 </li>
 <li><code>parseFloat()</code><ul>
-<li>与<code>parseInt()</code>函数相似，从位置 0 开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
+<li>与<code>parseInt()</code>函数相似，从位置0开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
 <li>始终忽略字符串开头的零</li>
-<li>十六进制数值始终会返回 0。因为 parseFloat()只解析十进制值，因此不能指定底数</li>
+<li>十六进制数值始终会返回0。因为parseFloat()只解析十进制值，因此不能指定底数</li>
 </ul>
 </li>
 </ol>
@@ -1124,14 +1245,14 @@ func()
 <ul>
 <li>以某种引号作为字符串开头，必须仍然以该种引号作为字符串结尾。</li>
 <li>字符串的长度可以通过其<code>length</code>属性获取</li>
-<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改 某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
-<li>字符串值也有<code> toString()</code>方法， 该方法只是简单地返回自身的一个副本，<code>null </code>和<code> undefined</code> 值没有<code> toString()</code>方法</li>
+<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
+<li>字符串值也有<code>toString()</code>方法，该方法只是简单地返回自身的一个副本，<code>null</code>和<code>undefined</code>值没有<code>toString()</code>方法</li>
 <li>模板字面量保留反引号内部的空格，可以跨行定义字符串</li>
 </ul>
 <p>字符串插值</p>
 <ul>
-<li>模板字面量不是字符串，而是一种特殊的 JavaScript 句法表达式，只不过求值后得到的是字符串</li>
-<li>所有插入的值都会使用<code> toString()</code>强制转型为字符串，而且任何 JavaScript 表达式都可以用于插值。嵌套的模板字符串无须转义</li>
+<li>模板字面量不是字符串，而是一种特殊的JavaScript句法表达式，只不过求值后得到的是字符串</li>
+<li>所有插入的值都会使用<code>toString()</code>强制转型为字符串，而且任何JavaScript表达式都可以用于插值。嵌套的模板字符串无须转义</li>
 </ul>
 <p>标签函数</p>
 <ul>
@@ -1140,38 +1261,38 @@ func()
 </ul>
 <p>原始字符串</p>
 <ul>
-<li>可以直接获取原始的模板字面量内容（如换行符或 Unicode 字符），而不是被转换后的字符表示</li>
+<li>可以直接获取原始的模板字面量内容（如换行符或Unicode字符），而不是被转换后的字符表示</li>
 <li>默认的<code>String.raw</code>标签函数</li>
 </ul>
 <h3 id="Symbol类型"><a href="#Symbol类型" class="headerlink" title="Symbol类型"></a><code>Symbol</code>类型</h3><blockquote>
-<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非 字符串形式的对象属性。</p>
+<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非字符串形式的对象属性。</p>
 </blockquote>
 <ul>
-<li><p>使用<code> Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
+<li><p>使用<code>Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
 </li>
-<li><p><code>Symbol()</code>函数不能与 new 关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
+<li><p><code>Symbol()</code>函数不能与new关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
 <ul>
-<li>确实想使用符号包装对象，可以借用 Object()函数</li>
+<li>确实想使用符号包装对象，可以借用Object()函数</li>
 </ul>
 </li>
 <li><p>全局符号注册表</p>
 <ul>
 <li><blockquote>
-<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册 表中创建并重用符号。</p>
+<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册表中创建并重用符号。</p>
 </blockquote>
 </li>
 <li><p>方法：<code>Symbol.for()</code></p>
 <ul>
 <li>都执行幂等操作</li>
-<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同 字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
+<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
 </ul>
 </li>
 <li><p>全局注册表中的符号必须使用字符串键来创建，所以参数都会转换成字符串</p>
 </li>
 <li><p><code>Symbol.keyFor()</code>来查询全局注册表</p>
 <ul>
-<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回 <code>undefined</code>。</li>
-<li>如果传给<code> Symbol.keyFor()</code>的不是符号，则该方法抛出 <code>TypeError</code></li>
+<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回<code>undefined</code>。</li>
+<li>如果传给<code>Symbol.keyFor()</code>的不是符号，则该方法抛出<code>TypeError</code></li>
 </ul>
 </li>
 <li><p>凡是可以使用字符串或数值作为属性的地方，都可以使用符号</p>
@@ -1182,21 +1303,21 @@ func()
 </li>
 <li><p><code>Object.getOwnPropertyDescriptors()</code>会返回同时包含常规和符号属性描述符的对象</p>
 </li>
-<li><p><code>Reflect.ownKeys()</code>会返回两种类型 的键</p>
+<li><p><code>Reflect.ownKeys()</code>会返回两种类型的键</p>
 </li>
 </ul>
 </li>
 </ul>
 <h4 id="常用内置符号"><a href="#常用内置符号" class="headerlink" title="常用内置符号"></a>常用内置符号</h4><ol>
 <li><code>Symbol.asyncIterator</code><ul>
-<li>返回对象默认的<code> AsyncIterator</code>。 由<code>for-await-of</code>语句使用</li>
-<li>循环时，它们会调用以 <code>Symbol.asyncIterator </code>为键的函数，并期望这个函数会返回一个实现迭代器 API 的对象</li>
+<li>返回对象默认的<code>AsyncIterator</code>。由<code>for-await-of</code>语句使用</li>
+<li>循环时，它们会调用以<code>Symbol.asyncIterator</code>为键的函数，并期望这个函数会返回一个实现迭代器API的对象</li>
 </ul>
 </li>
 <li><code>Symbol.hasInstance</code><ul>
-<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由 <code>instanceof </code>操作符使用</li>
-<li>instanceof 操作符可以用来确定一个对象实例的原型链上是否有原型</li>
-<li>这个属性定义在 Function 的原型上</li>
+<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由<code>instanceof</code>操作符使用</li>
+<li>instanceof操作符可以用来确定一个对象实例的原型链上是否有原型</li>
+<li>这个属性定义在Function的原型上</li>
 </ul>
 </li>
 <li><code>Symbol.isConcatSpreadable</code><ol>
@@ -1221,11 +1342,11 @@ func()
 </ol>
 </li>
 <li><code>Symbol.iterator</code><ul>
-<li>该方法返回对象默认的迭代器。 由 <code>for-of </code>语句使用</li>
+<li>该方法返回对象默认的迭代器。由<code>for-of</code>语句使用</li>
 </ul>
 </li>
 <li><code>Symbol.match</code><ul>
-<li>用正则表达式去匹配字符串。由<code> String.prototype.match()</code>方法使用</li>
+<li>用正则表达式去匹配字符串。由<code>String.prototype.match()</code>方法使用</li>
 </ul>
 </li>
 <li><code>Symbol.replace</code><ul>
@@ -1233,30 +1354,30 @@ func()
 </ul>
 </li>
 <li><code>Symbol.search</code><ul>
-<li>返回字符串中匹配正则表达式的索引。由 <code>String.prototype.search()</code>方法使用</li>
+<li>返回字符串中匹配正则表达式的索引。由<code>String.prototype.search()</code>方法使用</li>
 </ul>
 </li>
 <li><code>Symbol.species</code><ul>
 <li>作为创建派生对象的构造函数</li>
-<li>用 Symbol.species 定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
+<li>用Symbol.species定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
 </ul>
 </li>
 <li><code>Symbol.split</code><ul>
-<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code> String.prototype.split()</code>方法使用</li>
+<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code>String.prototype.split()</code>方法使用</li>
 </ul>
 </li>
 <li><code>Symbol.toPrimitive</code><ul>
-<li>该方法将对象转换为相应的原始 值。由<code> ToPrimitive</code> 抽象操作使用</li>
+<li>该方法将对象转换为相应的原始值。由<code>ToPrimitive</code>抽象操作使用</li>
 </ul>
 </li>
 <li><code>Symbol.toStringTag</code><ul>
-<li>该字符串用于创建对象的默认字符串描述。由内置方法<code> Object.prototype.toString()</code>使用</li>
-<li>通过<code> toString()</code>方法获取对象标识时，会检索由 <code>Symbol.toStringTag </code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
+<li>该字符串用于创建对象的默认字符串描述。由内置方法<code>Object.prototype.toString()</code>使用</li>
+<li>通过<code>toString()</code>方法获取对象标识时，会检索由<code>Symbol.toStringTag</code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
 </ul>
 </li>
 </ol>
 <h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a><code>Object</code>类型</h3><blockquote>
-<p>就是一组数据和功能的集合，通过 new 操作符后跟对象类型的名称来创建</p>
+<p>就是一组数据和功能的集合，通过new操作符后跟对象类型的名称来创建</p>
 </blockquote>
 <ul>
 <li><code>constructor</code><ul>
@@ -1272,7 +1393,7 @@ func()
 </ul>
 </li>
 <li><code>propertyIsEnumerable(propertyName)</code><ul>
-<li>判断给定的属性是否可以使用<code>for-in </code>语句枚举</li>
+<li>判断给定的属性是否可以使用<code>for-in</code>语句枚举</li>
 </ul>
 </li>
 <li><code>toLocaleString()</code><ul>
@@ -1284,7 +1405,7 @@ func()
 </ul>
 </li>
 <li><code>valueOf()</code><ul>
-<li>返回对象对应的字符串、数值或布尔值表示。通常与<code> toString()</code>的返回值相同。</li>
+<li>返回对象对应的字符串、数值或布尔值表示。通常与<code>toString()</code>的返回值相同。</li>
 </ul>
 </li>
 </ul>
@@ -1310,9 +1431,9 @@ func()
 <li><code>switch</code></li>
 </ul>
 <h2 id="理解函数"><a href="#理解函数" class="headerlink" title="理解函数"></a>理解函数</h2><ul>
-<li>function 关键字声明，后跟一组参数，然后是函数体</li>
+<li>function关键字声明，后跟一组参数，然后是函数体</li>
 <li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
-<li>不需要指定是否返回值。任何函数在任何时间都可以使用 return 语句来返 回函数的值，用法是后跟要返回的值</li>
+<li>不需要指定是否返回值。任何函数在任何时间都可以使用return语句来返回函数的值，用法是后跟要返回的值</li>
 </ul>
 ]]></content>
       <categories>
@@ -1330,7 +1451,7 @@ func()
 </blockquote>
 <p>创建<code>Object</code>实例方法</p>
 <ol>
-<li>使用<code>new</code>操作符<code>new Object</code></li>
+<li>使用<code>new</code>操作符<code>newObject</code></li>
 <li>对象字面量<code>&#123;&#125;</code><ol>
 <li>属性名可以是字符串或数值，数值属性会自动转换为字符串</li>
 <li>属性名也可以是包含非字母数字字符，但要用中括号去存取</li>
@@ -1342,9 +1463,9 @@ func()
 
 <h2 id="数组与定型数组"><a href="#数组与定型数组" class="headerlink" title="数组与定型数组"></a>数组与定型数组</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h4><ol>
 <li>使用<code>Array</code>构造函数<ul>
-<li><code>new Array()</code>或<code>Array()</code></li>
-<li>可以传入一个数值，然后 length 属性就会被自动创建并设置为这个值</li>
-<li>也可以给 Array 构造函数传入要保存的元素</li>
+<li><code>newArray()</code>或<code>Array()</code></li>
+<li>可以传入一个数值，然后length属性就会被自动创建并设置为这个值</li>
+<li>也可以给Array构造函数传入要保存的元素</li>
 </ul>
 </li>
 <li>数组字面量<ul>
@@ -1353,9 +1474,9 @@ func()
 </li>
 <li><code>from()</code><ul>
 <li>将<strong>类数组结构</strong>转换为数组实例</li>
-<li>第一个参数是类数组对象，即任何可迭代的结构，或者有一个<code> length</code> 属性和可索引元素的结构</li>
+<li>第一个参数是类数组对象，即任何可迭代的结构，或者有一个<code>length</code>属性和可索引元素的结构</li>
 <li>可选第二个参数，映射函数参数。这个函数可以直接增强新数组的值</li>
-<li>可选第三个参数，用于指定映射函数中 this 的值，但这个重写的 this 值在箭头函数中不适用</li>
+<li>可选第三个参数，用于指定映射函数中this的值，但这个重写的this值在箭头函数中不适用</li>
 </ul>
 </li>
 <li><code>of()</code><ul>
@@ -1363,13 +1484,13 @@ func()
 </ul>
 </li>
 </ol>
-<p>ECMAScript 会将逗号之间相应索引位置的值当成空位</p>
+<p>ECMAScript会将逗号之间相应索引位置的值当成空位</p>
 <p>数组索引：在中括号中提供的索引表示要访问的值</p>
 <ul>
 <li>如果索引小于数组包含的元素数，则返回存储在相应位置的元素</li>
-<li>如果把一个值设置给超过数组最大索引的索引，则数组长度会自动扩展到该索引值加 1</li>
+<li>如果把一个值设置给超过数组最大索引的索引，则数组长度会自动扩展到该索引值加1</li>
 </ul>
-<p>通过修改<code> length</code> 属性，可以从数组末尾删除或添加元素。</p>
+<p>通过修改<code>length</code>属性，可以从数组末尾删除或添加元素。</p>
 <h4 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h4><ul>
 <li>通过<code>instanceof</code>操作符<ul>
 <li>缺陷：如果网页里有多个框架，则可能涉及两个不同的全局执行上下文，如果要把数组从一个框架传给另一个框架，则这个数组的构造函数将有别于在第二个框架内本地创建的数组</li>
@@ -1389,20 +1510,20 @@ func()
 <ol>
 <li><p>批量复制方法：<code>copyWithin()</code></p>
 <ul>
-<li>会按照指定范围<strong>浅复制</strong>数组中的部分内容，然后将它们插入到指定索引开始的位置。开始索引和结束索引则与 fill()使用同样的计算方法</li>
+<li>会按照指定范围<strong>浅复制</strong>数组中的部分内容，然后将它们插入到指定索引开始的位置。开始索引和结束索引则与fill()使用同样的计算方法</li>
 <li>索引过低、过高、反向都会忽略</li>
 </ul>
 </li>
 <li><p>填充数组方法：<code>fill()</code></p>
 <ul>
 <li>可以向一个已有的数组中插入全部或部分相同的值</li>
-<li>开始索引用于指定开始填充 的位置，它是可选的</li>
+<li>开始索引用于指定开始填充的位置，它是可选的</li>
 <li>如果不提供结束索引，则一直填充到数组末尾</li>
 <li>负值索引从数组末尾开始计算</li>
 <li>参数个数<ul>
 <li>1个：<code>fill(x)</code>，用x填充整个数组</li>
-<li>2个：<code>fill(x, a)</code>，用x填充索引大于a的元素</li>
-<li>3个：<code>fill(x, a, b)</code>，用x填充索引大于a小于b的元素</li>
+<li>2个：<code>fill(x,a)</code>，用x填充索引大于a的元素</li>
+<li>3个：<code>fill(x,a,b)</code>，用x填充索引大于a小于b的元素</li>
 </ul>
 </li>
 <li>索引过低、过高、反向都会忽略</li>
@@ -1411,7 +1532,7 @@ func()
 </ol>
 <h4 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h4><ol>
 <li><code>toLocaleString</code><ul>
-<li>可能返回跟 <code>toString()</code>和 <code>valueOf()</code>相同的结果，但也不一定。在调用数组的<code> toLocaleString()</code>方法时，会得到一个逗号分隔的数组值的字符串。它与另外两个方法<strong>唯一的区别</strong>是，为了得到最终的字符串，<strong>会调用数组每个值的 toLocaleString()方法，而不是 toString()方法</strong></li>
+<li>可能返回跟<code>toString()</code>和<code>valueOf()</code>相同的结果，但也不一定。在调用数组的<code>toLocaleString()</code>方法时，会得到一个逗号分隔的数组值的字符串。它与另外两个方法<strong>唯一的区别</strong>是，为了得到最终的字符串，<strong>会调用数组每个值的toLocaleString()方法，而不是toString()方法</strong></li>
 </ul>
 </li>
 <li><code>toString</code><ul>
@@ -1424,7 +1545,7 @@ func()
 </li>
 <li><code>join()</code><ul>
 <li>接收一个参数，即字符串分隔符，返回包含所有项的<strong>字符串</strong></li>
-<li>如果不传入任何参数，或者传入<code> undefined</code>，则仍然使用逗号作为分隔符</li>
+<li>如果不传入任何参数，或者传入<code>undefined</code>，则仍然使用逗号作为分隔符</li>
 </ul>
 </li>
 </ol>
@@ -1449,9 +1570,9 @@ func()
 </li>
 <li><code>sort()</code><ul>
 <li>按照升序重新排列数组元素，即最小的值在前面，最大的值在后面</li>
-<li>会在每一项上调用 <code>String()</code>转型函数，<strong>然后比较字符串来决定顺序</strong></li>
+<li>会在每一项上调用<code>String()</code>转型函数，<strong>然后比较字符串来决定顺序</strong></li>
 <li>可以接收一个比较函数，用于判断哪个值应该排在前面<ul>
-<li>比较函数接收两个参数，如果第一个参数应该排在第二个参数前面，就返回负值；如果两个参数相等，就返回 0；如果第一个参数应该排在第二个参数后面，就返回正值。</li>
+<li>比较函数接收两个参数，如果第一个参数应该排在第二个参数前面，就返回负值；如果两个参数相等，就返回0；如果第一个参数应该排在第二个参数后面，就返回正值。</li>
 </ul>
 </li>
 </ul>
@@ -1460,11 +1581,11 @@ func()
 <h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ol>
 <li><p><code>concat()</code></p>
 <blockquote>
-<p>在现有数组全部元素基础上 创建一个新数组</p>
+<p>在现有数组全部元素基础上创建一个新数组</p>
 </blockquote>
 <ul>
 <li>创建一个当前数组的副本，然后再把它的参数添加到副本末尾，最后返回这个新构建的数组</li>
-<li>如果传入一个或多个数组，则 <code>concat()</code>会把这些数组的每一项都添加到结果数组</li>
+<li>如果传入一个或多个数组，则<code>concat()</code>会把这些数组的每一项都添加到结果数组</li>
 <li>如果参数不是数组，则直接把它们添加到结果数组末尾</li>
 </ul>
 </li>
@@ -1474,8 +1595,8 @@ func()
 </blockquote>
 <ul>
 <li>接收一个或两个参数：返回元素的开始索引和结束索引</li>
-<li>如果只有一个参数，则 <code>slice()</code>会返回该索引到数组末尾的所有元素</li>
-<li>如果有两个参数，则 <code>slice()</code>返回从开始索引到结束索引对应的所有元素</li>
+<li>如果只有一个参数，则<code>slice()</code>会返回该索引到数组末尾的所有元素</li>
+<li>如果有两个参数，则<code>slice()</code>返回从开始索引到结束索引对应的所有元素</li>
 <li>操作不影响原始数组</li>
 </ul>
 </li>
@@ -1484,9 +1605,9 @@ func()
 <p>主要目的是在数组中间插入元素</p>
 </blockquote>
 <ul>
-<li>删除：传 2 个参数：要删除的第一个元素的位置和要删除的元素数量</li>
-<li>插入：传 3 个参数：开始位置、0（要删除的元素数量）和要插入的元素</li>
-<li>替换：传入 3 个参数：开始位置、要删除元素的数量和要插入的任意多个元素</li>
+<li>删除：传2个参数：要删除的第一个元素的位置和要删除的元素数量</li>
+<li>插入：传3个参数：开始位置、0（要删除的元素数量）和要插入的元素</li>
+<li>替换：传入3个参数：开始位置、要删除元素的数量和要插入的任意多个元素</li>
 </ul>
 </li>
 </ol>
@@ -1505,8 +1626,19 @@ func()
 </ul>
 </li>
 <li><code>includes()</code><ul>
-<li>从数组前头（第一项）开始向后搜索</li>
-<li>返回布尔值</li>
+<li><p>从数组前头（第一项）开始向后搜索</p>
+</li>
+<li><p>返回布尔值</p>
+</li>
+<li><p>能正确处理<code>NaN</code></p>
+<ul>
+<li><pre><code class="javascript">constarr=[NaN];
+console.log(arr.indexOf(NaN)) //-1
+console.log(arr.includes(NaN))//true
+</code></pre>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -1517,7 +1649,7 @@ func()
 </blockquote>
 <ul>
 <li>第一个参数是函数，此函数接受三个参数：元素、索引和数组本身，都从数组的最小索引开始</li>
-<li>可选第二个参数， 用于指定断言函数内部 this 的值</li>
+<li>可选第二个参数，用于指定断言函数内部this的值</li>
 </ul>
 <ol>
 <li><code>find()</code><ul>
@@ -1532,11 +1664,11 @@ func()
 </li>
 </ol>
 <h4 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h4><blockquote>
-<p>每个方法接收两个参数：以每一项为参数运行的函数， 以及可选的作为函数运行上下文的作用域对象，传给每个方法的函数接收 3 个参数：数组元素、元素索引和数组本身。</p>
+<p>每个方法接收两个参数：以每一项为参数运行的函数，以及可选的作为函数运行上下文的作用域对象，传给每个方法的函数接收3个参数：数组元素、元素索引和数组本身。</p>
 </blockquote>
 <ol>
 <li><code>every()</code><ul>
-<li>对每一项函数都返回 <code>true</code>，则这个方法返回<code> true</code></li>
+<li>对每一项函数都返回<code>true</code>，则这个方法返回<code>true</code></li>
 </ul>
 </li>
 <li><code>filter()</code><ul>
@@ -1546,7 +1678,7 @@ func()
 </li>
 <li><code>forEach()</code><ul>
 <li>每一项都运行传入的函数，没有返回值</li>
-<li>相当于使用 <code>for </code>循环遍历数组</li>
+<li>相当于使用<code>for</code>循环遍历数组</li>
 </ul>
 </li>
 <li><code>map()</code><ul>
@@ -1554,7 +1686,7 @@ func()
 </ul>
 </li>
 <li><code>some()</code><ul>
-<li>如果有一项函数返回<code> true</code>，则这个方法返回<code> true</code>。</li>
+<li>如果有一项函数返回<code>true</code>，则这个方法返回<code>true</code>。</li>
 </ul>
 </li>
 </ol>
@@ -1574,10 +1706,10 @@ func()
 </ul>
 </li>
 </ol>
-<h2 id="Map、WeakMap、Set以及WeakSet类型"><a href="#Map、WeakMap、Set以及WeakSet类型" class="headerlink" title="Map、WeakMap、Set以及WeakSet类型"></a>Map、WeakMap、Set以及WeakSet类型</h2><p>Map 的大多数特性都可以通过 Object 类型实现，但二者之间还是存在一些细微的差异</p>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>与<code> Object</code> 只能使用数值、字符串或符号作为键不同，<code>Map</code> 可以使用任何 JavaScript 数据类型作为键，内部使用严格相等的标准来检测键的匹配性。与<code>Object</code>类似，映射的值是没有限制</p>
+<h2 id="Map、WeakMap、Set以及WeakSet类型"><a href="#Map、WeakMap、Set以及WeakSet类型" class="headerlink" title="Map、WeakMap、Set以及WeakSet类型"></a>Map、WeakMap、Set以及WeakSet类型</h2><p>Map的大多数特性都可以通过Object类型实现，但二者之间还是存在一些细微的差异</p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>与<code>Object</code>只能使用数值、字符串或符号作为键不同，<code>Map</code>可以使用任何JavaScript数据类型作为键，内部使用严格相等的标准来检测键的匹配性。与<code>Object</code>类似，映射的值是没有限制</p>
 <h4 id="基本API"><a href="#基本API" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new Map()</code>：使用 <code>new </code>关键字和<code>Map</code>构造函数创建一个空映射<ul>
+<li><code>newMap()</code>：使用<code>new</code>关键字和<code>Map</code>构造函数创建一个空映射<ul>
 <li>可以传入一个可迭代对象，需要包含键/值对数组，且会按照迭代顺序插入到新映射实例</li>
 </ul>
 </li>
@@ -1588,46 +1720,46 @@ func()
 <li><code>clear()</code></li>
 </ol>
 <h4 id="顺序与迭代"><a href="#顺序与迭代" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><ul>
-<li>可以通过<code>entries()</code>方法（或者<code> Symbol.iterator</code>属性，它引用 <code>entries()</code>）取得这个迭代器。因为<code> entries()</code>是默认迭代器，所以可以直接对映射实例使用扩展操作，把映射转换为数组</li>
-<li>可以调用映射的 <code>forEach(callback, opt_thisArg) </code>方法并传入回调，依次迭代每个键/值对<ul>
-<li>传入的回调接收可选的第二个参数，这个参数用于重写回调内部 this 的值</li>
+<li>可以通过<code>entries()</code>方法（或者<code>Symbol.iterator</code>属性，它引用<code>entries()</code>）取得这个迭代器。因为<code>entries()</code>是默认迭代器，所以可以直接对映射实例使用扩展操作，把映射转换为数组</li>
+<li>可以调用映射的<code>forEach(callback,opt_thisArg)</code>方法并传入回调，依次迭代每个键/值对<ul>
+<li>传入的回调接收可选的第二个参数，这个参数用于重写回调内部this的值</li>
 </ul>
 </li>
-<li><code>keys()</code>和 <code>values()</code>分别返回以插入顺序生成键和值的迭代器</li>
+<li><code>keys()</code>和<code>values()</code>分别返回以插入顺序生成键和值的迭代器</li>
 <li>键和值在迭代器遍历时是可以修改的，但映射内部的引用则无法修改</li>
 </ul>
 <h4 id="Object与Map的比较"><a href="#Object与Map的比较" class="headerlink" title="Object与Map的比较"></a><code>Object</code>与<code>Map</code>的比较</h4><ol>
 <li>内容占用<ul>
 <li>存储单个键/值对所占用的内存数量都会随键的数量线性增加</li>
-<li>给定固定大小的内存，<code>Map</code> 大约可以比 <code>Object</code> 多存储 50%的键/值对</li>
+<li>给定固定大小的内存，<code>Map</code>大约可以比<code>Object</code>多存储50%的键/值对</li>
 </ul>
 </li>
 <li>插入性能<ul>
 <li>插入新键/值对的消耗大致相当</li>
 <li>插入速度并不会随着键/值对数量而线性增加</li>
-<li>大量插入操作，那么显然 Map 的性能更佳</li>
+<li>大量插入操作，那么显然Map的性能更佳</li>
 </ul>
 </li>
 <li>查找速度<ul>
 <li>性能差异极小</li>
 <li>查找速度不会随着键/值对数量增加而线性增加</li>
-<li>涉及大量查找操作，那么某些情况下可能选 择 Object 更好一些</li>
+<li>涉及大量查找操作，那么某些情况下可能选择Object更好一些</li>
 </ul>
 </li>
 <li>删除性能<ul>
-<li>Map 的 delete()操作都比插入和查找更快</li>
-<li>涉及大量删除操作，那么毫无疑问应该选择 Map</li>
+<li>Map的delete()操作都比插入和查找更快</li>
+<li>涉及大量删除操作，那么毫无疑问应该选择Map</li>
 </ul>
 </li>
 </ol>
 <h3 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h3><ul>
-<li>弱映射中的键只能是 Object 或者继承自 Object 的类型，尝试使用非对象设置键会抛出 TypeError。值的类型没有限制。</li>
+<li>弱映射中的键只能是Object或者继承自Object的类型，尝试使用非对象设置键会抛出TypeError。值的类型没有限制。</li>
 <li>没有指向这个对象(键)的其他引用-&gt;键就会被当作垃圾回收-&gt;键值对从弱映射消失，成为空映射-&gt;值就没了引用-&gt;所以值就可以被当作垃圾进行回收</li>
-<li>因为 WeakMap 中的键/值对任何时候都可能被销毁，所以没必要提供迭代其键/值对的能力</li>
-<li>WeakMap 实例之所以限制只能用对象作为键，是为了保证只有通过键对象的引用才能取得值</li>
+<li>因为WeakMap中的键/值对任何时候都可能被销毁，所以没必要提供迭代其键/值对的能力</li>
+<li>WeakMap实例之所以限制只能用对象作为键，是为了保证只有通过键对象的引用才能取得值</li>
 </ul>
 <h4 id="基本API-1"><a href="#基本API-1" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new WeakMap()</code><ul>
+<li><code>newWeakMap()</code><ul>
 <li>可以传入一个可迭代对象，需要包含键/值对数组，且会按照迭代顺序插入到新映射实例</li>
 <li>初始化是全有或全无的操作，只要有一个键无效就会抛出错误，导致整个初始化失败</li>
 </ul>
@@ -1641,9 +1773,9 @@ func()
 <li>私有变量</li>
 <li>DOM节点元数据</li>
 </ol>
-<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><code>Set </code>可以包含任何 JavaScript 数据类型作为值</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><code>Set</code>可以包含任何JavaScript数据类型作为值</p>
 <h4 id="基本API-2"><a href="#基本API-2" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new Set()</code>：使用<code>new</code>关键字和<code>Set</code>构造函数创建一个空集合<ul>
+<li><code>newSet()</code>：使用<code>new</code>关键字和<code>Set</code>构造函数创建一个空集合<ul>
 <li>可以传入一个可迭代对象</li>
 </ul>
 </li>
@@ -1655,18 +1787,18 @@ func()
 </li>
 <li><code>clear()</code></li>
 </ol>
-<h4 id="顺序与迭代-1"><a href="#顺序与迭代-1" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><p>Set 会维护值插入时的顺序，因此支持按顺序迭代。</p>
+<h4 id="顺序与迭代-1"><a href="#顺序与迭代-1" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h4><p>Set会维护值插入时的顺序，因此支持按顺序迭代。</p>
 <ul>
-<li>可以提供一个迭代器（<code>Iterator</code>），能以插入顺序生成集合内容。可以通过<code> values()</code>方法及其别名方法<code> keys()</code>（或者 <code>Symbol.iterator </code>属性，它引用<code> values()</code>）取得这个迭代器</li>
-<li>因为<code> values()</code>是默认迭代器，所以可以直接对集合实例使用扩展操作，把集合转换为数组</li>
-<li>集合的<code> entries()</code>方法返回一个迭代器，可以按照插入顺序产生包含两个元素的数组，这两个元素是集合中每个值的重复出现</li>
-<li>如果不使用迭代器，而是使用回调方式，则可以调用集合的 <code>forEach()</code>方法并传入回调，依次迭代每个键/值对。传入的回调接收可选的第二个参数，这个参数用于重写回调内部 <code>this</code> 的值</li>
+<li>可以提供一个迭代器（<code>Iterator</code>），能以插入顺序生成集合内容。可以通过<code>values()</code>方法及其别名方法<code>keys()</code>（或者<code>Symbol.iterator</code>属性，它引用<code>values()</code>）取得这个迭代器</li>
+<li>因为<code>values()</code>是默认迭代器，所以可以直接对集合实例使用扩展操作，把集合转换为数组</li>
+<li>集合的<code>entries()</code>方法返回一个迭代器，可以按照插入顺序产生包含两个元素的数组，这两个元素是集合中每个值的重复出现</li>
+<li>如果不使用迭代器，而是使用回调方式，则可以调用集合的<code>forEach()</code>方法并传入回调，依次迭代每个键/值对。传入的回调接收可选的第二个参数，这个参数用于重写回调内部<code>this</code>的值</li>
 </ul>
-<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>弱集合中的值只能是 <code>Object </code>或者继承自<code>Object</code>的类型，尝试使用非对象设置值会抛出<code> TypeError</code>。</p>
+<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>弱集合中的值只能是<code>Object</code>或者继承自<code>Object</code>的类型，尝试使用非对象设置值会抛出<code>TypeError</code>。</p>
 <p>当没有指向这个对象的其他引用-&gt;这个对象值就会被当作垃圾回收-&gt;这个值就从弱集合中消失了，成为空集合。</p>
-<p>WeakSet 之所以限制只能用对象作为值，是为了保证只有通过值对象的引用才能取得值。</p>
+<p>WeakSet之所以限制只能用对象作为值，是为了保证只有通过值对象的引用才能取得值。</p>
 <h4 id="基本API-3"><a href="#基本API-3" class="headerlink" title="基本API"></a>基本API</h4><ol>
-<li><code>new WeakSet()</code><ul>
+<li><code>newWeakSet()</code><ul>
 <li>可以传入一个可迭代对象</li>
 <li>初始化是全有或全无的操作，只要有一个值无效就会抛出错误，导致整个初始化失败</li>
 </ul>
@@ -1684,134 +1816,13 @@ func()
 <h3 id="迭代与扩展操作"><a href="#迭代与扩展操作" class="headerlink" title="迭代与扩展操作"></a>迭代与扩展操作</h3><p><code>Array</code>、所有定型数组、<code>Map</code>、<code>Set</code></p>
 <ul>
 <li>都定义了默认迭代器</li>
-<li>都支持顺序迭代，都可以传入<code> for-of</code> 循环</li>
+<li>都支持顺序迭代，都可以传入<code>for-of</code>循环</li>
 <li>都兼容扩展操作符。扩展操作符在对可迭代对象执行浅复制时特别有用<ul>
 <li>浅复制意味着只会复制对象引用</li>
 </ul>
 </li>
 <li>对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>迭代器与生成器</title>
-    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
-<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
-<p>在无迭代器时，迭代有两个缺点</p>
-<ul>
-<li>迭代之前需要事先知道如何使用数据结构</li>
-<li>遍历顺序并不是数据结构固有的</li>
-</ul>
-<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
-<span id="more"></span>
-
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
-<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
-<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的 <code>Iterable</code> 接口，而且可以通过迭代器<code>Iterator</code>消费</p>
-</blockquote>
-<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code> Iterable</code>接口的对象都有一个 <code>Symbol.iterator </code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
-<p> 可迭代对象</p>
-<ul>
-<li>包含元素有限</li>
-<li>具有无歧义的遍历顺序</li>
-</ul>
-<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有 <code>iterator </code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
-<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的 API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
-<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
-<ul>
-<li>支持迭代的自我识别能力</li>
-<li>创建实现<code>Iterator</code>接口的对象的能力</li>
-</ul>
-<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code> Symbol.iterator</code> 作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">    <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">    value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">    next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了 Iterable 接口，那这个对象也就实现了这个接口。</p>
-<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器 API 使用 next()方法在可迭代对象中遍历数据</p>
-<ul>
-<li>成功调用<code> next()</code>，都会返回一个<code> IteratorResult</code>对象<ul>
-<li><code>IteratorResult </code>对象包含两个对象：done和value<ul>
-<li><code>done </code>是一个布尔值，表示是否还可以再次调用<code> next()</code>取得下一个值</li>
-<li><code>value</code> 包含可迭代对象的下一个值（<code>done</code> 为<code> false</code>），或者<code> undefined</code>（<code>done</code> 为<code> true</code>）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>若不调用 <code>next()</code>，则无法知道迭代器的当前位置</li>
-</ul>
-<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code> done: true</code> 状态，后续调用 <code>next()</code>就一直返回同样的值了</p>
-<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
-<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
-<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
-<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与 Iterable 接口类似，任何实现 Iterator 接口的对象都可以作为迭代器使用。</p>
-<p><code>Symbol.iterator </code>属性引用的工厂函数 会返回相同的迭代器</p>
-<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的 <code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
-<p>可能情形：</p>
-<ol>
-<li><code>for-of </code>循环通过<code> break</code>、<code>continue</code>、<code>return </code>或 <code>throw </code>提前退出</li>
-<li>解构操作并未消费所有值</li>
-</ol>
-<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
-<p>因为<code> return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭， 可以测试这个迭代器实例的 <code>return </code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这 个方法并不能让它变成可关闭的。这是因为调用 <code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code> return()</code>方法还是会被调用</p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
-<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
-</blockquote>
-<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
-<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了 <code>Iterator </code>接口，因此具有<code> next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
-<p>next()方法的返回值类似于迭代器，有一个 <code>done</code> 属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次 next()就会让生成器到达 <code>done: true </code>状态</p>
-<p>value 属性是生成器函数的返回值，默认值为<code> undefined</code>，可以通过生成器函数的返回值指定</p>
-<p>生成器函数</p>
-<ul>
-<li>只会在初次调用<code> next()</code>方法后开始执行<ul>
-<li>初次调用生成器函数并不会打印日志</li>
-</ul>
-</li>
-<li>实现了<code> Iterable</code> 接口，它们默认的迭代器是自引用的<ul>
-<li><code>g === g[Symbol.iterator]()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
-<p>yield 关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到 yield 关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用 next()方法来恢复执行。</p>
-</blockquote>
-<p>yield 关键字</p>
-<ul>
-<li>有点像函数的中间返回语句<ul>
-<li>通过<code>yield</code>关键字退出的生成器函数会处在 <code>done: false</code> 状态</li>
-<li>通过<code>return </code>关键字退出的生成器函 数会处于<code> done: true</code>状态</li>
-</ul>
-</li>
-<li>只能在生成器函数内部使用</li>
-<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
-<li>可以作为函数的中间参数使用<ul>
-<li>上一次让生成器函数暂停的 yield 关键字会接收到传给 next()方法的第一个值</li>
-<li>第一次调用 <code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
-</ul>
-</li>
-<li><code>yield</code>关键字可以同时用于输入和输出</li>
-<li>使用星号增强 yield 的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
-<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
-</ul>
-</li>
-</ul>
-<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用 next() 不会影响其他生成器</p>
-<p>生成器对象作为可迭代对象</p>
-<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和 <code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
-<ol>
-<li>所有生成器对象都有<code> return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用 <code>next()</code>会显示 <code>done: true </code>状态，而提供的任何返回值都不会被存储或传播</li>
-<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器 就会关闭<ul>
-<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
-<li>错误处理会跳过对应的<code> yield</code></li>
-<li>如果生成器对象还没有开始执行，那么调用 <code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
-</ul>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -1845,7 +1856,7 @@ func()
 </ul>
 </li>
 <li>[[Enumerable]]<ul>
-<li>是否可以通过 for-in 循环返回</li>
+<li>是否可以通过for-in循环返回</li>
 <li>默认为true</li>
 </ul>
 </li>
@@ -1870,16 +1881,16 @@ func()
 </ul>
 </li>
 <li>[[Enumerable]]<ul>
-<li>是否可以通过 for-in 循环返回</li>
+<li>是否可以通过for-in循环返回</li>
 <li>默认为true</li>
 </ul>
 </li>
 <li>[[Get]]<ul>
-<li>获取函数，在读取属性时调用。默认值为 undefined。</li>
+<li>获取函数，在读取属性时调用。默认值为undefined。</li>
 </ul>
 </li>
 <li>[[Set]]<ul>
-<li>设置函数，在写入属性时调用。默认值为 undefined</li>
+<li>设置函数，在写入属性时调用。默认值为undefined</li>
 </ul>
 </li>
 </ul>
@@ -1887,8 +1898,8 @@ func()
 </ol>
 <h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ol>
 <li><code>Object.defineProperty()</code><ul>
-<li>接收 3 个参数：要给其添加属性的对象、属性的名称和一个描述符对象</li>
-<li>configurable、enumerable 和 writable 的值如果不指定，则都默认为 false</li>
+<li>接收3个参数：要给其添加属性的对象、属性的名称和一个描述符对象</li>
+<li>configurable、enumerable和writable的值如果不指定，则都默认为false</li>
 </ul>
 </li>
 <li>Object.defineProperties()<ul>
@@ -1902,7 +1913,7 @@ func()
 </ul>
 </li>
 <li>Object.getOwnPropertyDescriptors()<ul>
-<li>实际上会在每个自有属性上调用 Object.getOwnPropertyDescriptor()并在一个新对象中返回它们</li>
+<li>实际上会在每个自有属性上调用Object.getOwnPropertyDescriptor()并在一个新对象中返回它们</li>
 <li>接受一个参数，参数为对象</li>
 </ul>
 </li>
@@ -1916,16 +1927,49 @@ func()
 <li>与===很像，接受两个参数</li>
 </ul>
 </li>
+<li>isPrototypeOf()<ul>
+<li>确定两个对象之间的关系，只要原型链中包含这个原型，这个方法就返回true</li>
+</ul>
+</li>
+<li>Object.getPrototypeOf()<ul>
+<li>返回参数的内部特性[[Prototype]]的值</li>
+</ul>
+</li>
+<li>Object.setPrototypeOf()<ul>
+<li>可以向实例的私有特性[[Prototype]]写入一个新值。这样就可以重写一个对象的原型继承关系</li>
+<li>例子：Object.setPrototypeOf(A,B)，A的原型就指向B</li>
+</ul>
+</li>
+<li>Object.create()</li>
+</ol>
+<ul>
+<li>创建一个新对象，同时为其指定原型</li>
+<li>参数两个<ul>
+<li>第一个：作为新对象原型的对象</li>
+<li>第二个可选：给新对象定义额外属性的对象，Object.defineProperties()的第二个参数一样：每个新增属性都通过各自的描述符来描述。以这种方式添加的属性会遮蔽原型对象上的同名属性</li>
+</ul>
+</li>
+</ul>
+<ol start="11">
+<li>hasOwnProperty()<ul>
+<li>用于确定某个属性是在实例上还是在原型对象上。这个方法是继承自Object的，会在属性存在于调用它的对象实例上时返回true</li>
+</ul>
+</li>
+<li>Object.getOwnPropertySymbol()<ul>
+<li>取得以symbol为键的值，返回的是数组</li>
+<li>与Object.getOwnPropertyNames()类似，只是针对符号而已</li>
+</ul>
+</li>
 </ol>
 <p>增强的对象语法</p>
 <ol>
 <li>属性简写<ul>
 <li>只要使用变量名（不用再写冒号）就会自动被解释为同名的属性键</li>
-<li>如果没有找到同名变量，则会抛出 ReferenceError</li>
+<li>如果没有找到同名变量，则会抛出ReferenceError</li>
 </ul>
 </li>
 <li>可计算属性<ul>
-<li>可以在对象字面量中完成动态属性赋值。中括号内被当作 JavaScript 表达式求值</li>
+<li>可以在对象字面量中完成动态属性赋值。中括号内被当作JavaScript表达式求值</li>
 <li>抛出任何错误都会中断对象创建</li>
 </ul>
 </li>
@@ -1934,178 +1978,278 @@ func()
 <p>对象解构</p>
 <ul>
 <li>就是使用与对象匹配的结构来实现对象属性赋值</li>
-<li>解构在内部使用函数 ToObject()（不能在运行时环境中直接访问）把源数据结构转换为对象</li>
-<li>null 和 undefined 不能被解构，否则会抛出错误</li>
+<li>解构在内部使用函数ToObject()（不能在运行时环境中直接访问）把源数据结构转换为对象</li>
+<li>null和undefined不能被解构，否则会抛出错误</li>
 <li>解构并不要求变量必须在解构表达式中声明。不过，如果是给事先声明的变量赋值，则赋值表达式必须包含在一对括号中</li>
 <li>解构赋值可以使用嵌套结构，以匹配嵌套的属性</li>
 <li>一个解构表达式涉及多个赋值，开始的赋值成功而后面的赋值出错，则整个解构赋值只会完成一部分</li>
 </ul>
-<h2 id="理解对象创建过程"><a href="#理解对象创建过程" class="headerlink" title="理解对象创建过程"></a>理解对象创建过程</h2><p>缺陷：虽然使用 Object 构造函数或对象字面量可以方便地创建对象，但这些方式也有明显不足：创建具有同样接口的多个对象需要重复编写很多代码</p>
+<h2 id="理解对象创建过程"><a href="#理解对象创建过程" class="headerlink" title="理解对象创建过程"></a>理解对象创建过程</h2><p>缺陷：虽然使用Object构造函数或对象字面量可以方便地创建对象，但这些方式也有明显不足：创建具有同样接口的多个对象需要重复编写很多代码</p>
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><blockquote>
 <p>用于抽象创建特定对象的过程</p>
 <p>工厂模式虽然可以解决创建多个类似对象的问题，但没有解决对象标识问题</p>
 </blockquote>
 <p>有一个函数，传入参数给它，它在里面<strong>新建对象</strong>。并用参数完成赋值，再把对象返回出去。这个函数就叫做工厂函数。</p>
-<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>有一个函数，传入参数给它，属性和方法直接赋值给了 this。</p>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>有一个函数，传入参数给它，属性和方法直接赋值给了<code>this</code>。</p>
 <p>与工厂函数区别</p>
 <ul>
 <li>没有显式地创建对象</li>
-<li>属性和方法直接赋值给了 this</li>
-<li>没有 return</li>
+<li>属性和方法直接赋值给了<code>this</code></li>
+<li>没有<code>return</code></li>
 </ul>
-<p>用new 操作符创建实例，会发生以下事情</p>
+<p>用<code>new</code>操作符创建实例，会发生以下事情</p>
 <ul>
 <li>在内存中创建一个新对象</li>
-<li>这个新对象内部的<code>[[Prototype]]</code>特性被赋值为构造函数的 <code>prototype</code> 属性</li>
-<li>构造函数内部的 this 被赋值为这个新对象（即 this 指向新对象）</li>
+<li>这个新对象内部的<code>[[Prototype]]</code>特性被赋值为构造函数的<code>prototype</code>属性</li>
+<li>构造函数内部的this被赋值为这个新对象（即this指向新对象）</li>
 <li>执行构造函数内部的代码（给新对象添加属性）。</li>
 <li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象。</li>
 </ul>
-<p>实例有constructor属性，<strong>指向构造函数</strong></p>
+<p>实例有<code>constructor</code>属性，<strong>指向构造函数</strong></p>
 <ul>
-<li>constructor 本来是用于标识对象类型的</li>
+<li><code>constructor</code>本来是用于标识对象类型的</li>
 <li>定义自定义构造函数可以确保实例被标识为特定类型</li>
 </ul>
-<p>在调用一个函数而没有明确设置 this 值的情况下（即没有作为对象的方法调用，或 者没有使用 call()/apply()调用），this 始终指向 Global 对象。</p>
+<p>在调用一个函数而没有明确设置this值的情况下（即没有作为对象的方法调用，或者没有使用<code>call()/apply()</code>调用），<code>this</code>始终指向<code>Global</code>对象。</p>
 <p>构造函数问题：其定义的方法会在每个实例上都创建一遍，自定义类型引用的代码不能很好地聚集一起。</p>
 <p>此问题可以通过原型模式解决。</p>
-<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>每个函数都会创建一个 prototype 属性，这个属性是一个对象，包含应该由特定引用类型的实例 共享的属性和方法。这个对象就是通过调用构造函数创建的对象的原型。使用原型对象的好处是，在它上面定义的属性和方法可以被对象实例共享。</p>
-<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p>无论何时，只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属性（指向 原型对象）</p>
-<h2 id="理解继承"><a href="#理解继承" class="headerlink" title="理解继承"></a>理解继承</h2><h2 id="理解类"><a href="#理解类" class="headerlink" title="理解类"></a>理解类</h2><h2 id="8-2-创建对象"><a href="#8-2-创建对象" class="headerlink" title="8.2 创建对象"></a>8.2 创建对象</h2><p>原型模式</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>每个函数都会创建一个<code>prototype</code>属性，这个属性是一个对象，包含应该由特定引用类型的实例共享的属性和方法。这个对象就是通过调用构造函数创建的对象的原型。使用原型对象的好处是，在它上面定义的属性和方法可以被对象实例共享。</p>
+<h4 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h4><p>无论何时，只要创建一个函数，就会按照特定的规则为这个函数创建一个<code>prototype</code>属性（指向原型对象）。所有原型对象自动获得一个名为<code>constructor</code>的属性，指回与之关联的构造函数。</p>
+<p>每次调用构造函数创建一个新实例，这个实例的内部<code>[[Prototype]]</code>指针就会被赋值为构造函数的原型对象。脚本中没有访问这个<code>[[Prototype]]</code>特性的标准方式，但Firefox、Safari和Chrome会在每个对象上暴露<code>__proto__</code>属性，通过这个属性可以访问对象的原型。实例与构造函数原型之间有直接的联系，但实例与构造函数之间没有。</p>
+<p>实例、构造函数、原型对象三者关系</p>
 <ul>
-<li>每个函数都会创建一个prototype 属性（指向原型对象），默认情况下，所有原型对象自动获得一个名为 constructor 的属性，指回与之关联的构造函数</li>
-<li>prototype 属性是一个对象，包含应该由特定引用类型的实例共享的属性和方法。这个对象就是通过调用<strong>构造函数创建的对象</strong>（就是实例）的原型</li>
-<li>使用原型对象的好处是，在它上面定义的<strong>属性和方法可以被对象实例共享</strong>。原来在构造函数中直接赋给对象实例的值，可以直接赋值给它们的原型</li>
-<li>实例的内部<code>[[Prototype]]</code>指针就会被赋值为构造函数的原型对象</li>
+<li>构造函数有一个<code>prototype</code>属性。指向原型对象</li>
+<li>原型对象有一个<code>constructor</code>的属性，指回构造函数</li>
+<li>实例有一个内部<code>[[Prototype]]</code>指针，指着原型对象，可以用<code>__proto__</code>属性可以访问原型对象</li>
+<li>实例还有一个<code>constructor</code>属性，指向构造函数</li>
+<li>实例可以获取原型对象的属性，但修改不来原型对象的属性</li>
 </ul>
-<p>可以使用<code> isPrototypeOf()</code>方法确定两个对象之间的这种关系。本质上，<code>isPrototypeOf()</code>会在传入参数的<code>[[Prototype]]</code>指向调用它的对象时返回 true</p>
-<p>原型层级</p>
-<p>搜索开始于对象实例本身。如果在这个实例上发现了给定的名称，则返回该名称对应的值。如果没有找到这个属性，则搜索会沿着指针进入原 型对象，然后在原型对象上找到属性后，再返回对应的值。</p>
-<p>通过调用 hasOwnProperty()能够清楚地看到访问的是实例属性还是原型属性</p>
-<p>原型与in操作符</p>
-<p>只要通过对象可以访问，in 操作符就返回 true，而 hasOwnProperty()只有属性存在于实例上时才返回 true</p>
-<p>属性枚举顺序</p>
-<h3 id="对象迭代"><a href="#对象迭代" class="headerlink" title="对象迭代"></a>对象迭代</h3><p>Object.values()和 Object.entries()接收一个对象，返回它们内容的数组。Object.values() 返回对象值的数组，Object.entries()返回键/值对的数组。</p>
-<ol>
-<li>其他原型语法<br>Person.prototype 通过对象字面量创建新对象，这样重写之后，Person.prototype 的 constructor 属性就不指向Person 了。</li>
-<li>原型的动态性<br>先创建实例，而后对原型添加新的方法，旧的实例也会动态能使用到新的方法</li>
-<li>原生对象原型<br>通过原生对象的原型可以取得所有默认方法的引用，也可以给原生类型的实例定义新的方法。可以 像修改自定义对象原型一样修改原生对象原型，因此随时可以添加方法。</li>
-<li>原型问题<br>原型上的所有属性是在实例间共享的，这对函数来说比较合适，但对属性来说不合适，例如引用值被共享，一个实例修改了，另一个实例也会被修改。</li>
-</ol>
-<h2 id="8-3继承"><a href="#8-3继承" class="headerlink" title="8.3继承"></a>8.3继承</h2><h3 id="8-1原型链"><a href="#8-1原型链" class="headerlink" title="8.1原型链"></a>8.1原型链</h3><blockquote>
+<h4 id="原型和in操作符"><a href="#原型和in操作符" class="headerlink" title="原型和in操作符"></a>原型和in操作符</h4><ul>
+<li><code>in</code>操作符会在可以通过对象访问指定属性时返回<code>true</code>，无论该属性是<strong>在实例上还是在原型上</strong><ul>
+<li>在<code>for-in</code>循环中使用in操作符时，可以通过对象访问且可以被枚举的属性都会返回，包括实例属性和原型属性</li>
+</ul>
+</li>
+<li><code>Object.keys()</code>方法。这个方法接收一个对象作为参数，返回包含该对象所有可枚举属性名称的字符串数组</li>
+</ul>
+<h4 id="属性枚举顺序"><a href="#属性枚举顺序" class="headerlink" title="属性枚举顺序"></a>属性枚举顺序</h4><p><code>Object.getOwnPropertyNames()</code>、<code>Object.getOwnPropertySymbols()</code>和<code>Object.assign()</code>的枚举顺序是确定性的。先以升序枚举数值键，然后以插入顺序枚举字符串和符号键</p>
+<h3 id="对象迭代"><a href="#对象迭代" class="headerlink" title="对象迭代"></a>对象迭代</h3><p><code>Object.values()</code>和<code>Object.entries()</code>接收一个对象，返回它们内容的数组。<code>Object.values()</code>返回对象值的数组，<code>Object.entries()</code>返回键/值对的数组。</p>
+<p>直接用对象字面量重写原型对象，会丢失<code>constructor</code>属性，需要手动加上，并且要设置<code>[[Enumerable]]</code>为<code>false</code></p>
+<p>原型的动态性</p>
+<ul>
+<li>任何时候对原型对象所做的修改也会在实例上反映出来</li>
+<li>因为实例和原型之间的链接就是简单的指针</li>
+<li>如果重写原型，会切断最初原型与构造函数的联系，但实例引用的仍然是最初的原型</li>
+<li>实例只有指向原型的指针，没有指向构造函数的指针</li>
+</ul>
+<h4 id="原型问题"><a href="#原型问题" class="headerlink" title="原型问题"></a>原型问题</h4><ul>
+<li>弱化了向构造函数传递初始化参数的能力，会导致所有实例默认都取得相同的属性值</li>
+<li>最主要问题源自它的共享特性<ul>
+<li>对函数没问题，但对属性就有问题了，例如引用值被共享，一个实例修改了，另一个实例也会被修改。</li>
+</ul>
+</li>
+</ul>
+<p>应该不同的实例应该有属于自己的属性副本</p>
+<h2 id="理解继承"><a href="#理解继承" class="headerlink" title="理解继承"></a>理解继承</h2><blockquote>
+<p>JavaScript只有实现继承，继承实际方法，主要通过原型链实现</p>
+</blockquote>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><blockquote>
 <p>基本思想就是通过原型继承多个引用类型的属性和方法</p>
 </blockquote>
-<p>如果原型是另一个类型的实例呢，则这个原型本身有一个内部指针指向另一个原型，相应地另一个原型也有一个指针指向另一个构造函数。这样就在实例和原型之间构造了一条原型链。</p>
-<ol>
-<li><p>默认原型：所有类型都继承Object</p>
-</li>
-<li><p>原型与继承的关系</p>
-</li>
-</ol>
-<ul>
-<li>使用 instanceof 操作符，如果一个实例的原型链中出现过相应的构造函数，则 instanceof 返回 true。</li>
-<li>使用 isPrototypeOf()方法。原型链中的每个原型都可以调用这个方法，只要原型链中包含这个原型，这个方法就返回 true</li>
+<p>原型链的由来，如果一个原型是另一个类型的实例，意味着这个原型本身有个一内部指针指着另一个原型，相应的另一个原型也有一个指针指向另一个构造函数，这样，实例和原型之间构造了一条原型链。</p>
+<h4 id="默认原型"><a href="#默认原型" class="headerlink" title="默认原型"></a>默认原型</h4><p>默认情况下，所有引用类型都继承自Object，这也是通过原型链实现的。任何函数的默认原型都是一个Object的实例</p>
+<h4 id="原型与继承关系"><a href="#原型与继承关系" class="headerlink" title="原型与继承关系"></a>原型与继承关系</h4><ul>
+<li><code>instanceof</code>操作符</li>
+<li><code>isPrototypeOf()</code>方法<ul>
+<li>只要原型链中包含这个原型，这个方法就返回<code>true</code></li>
 </ul>
-<ol start="3">
-<li>关于方法</li>
-</ol>
-<ul>
-<li>新方法覆盖就方法</li>
-<li>以对象字面量方式创建原型方法会破坏之前的原型链，因为这相当于重写了原型链。</li>
+</li>
 </ul>
-<ol start="4">
-<li>原型链问题<ul>
+<h4 id="关于方法"><a href="#关于方法" class="headerlink" title="关于方法"></a>关于方法</h4><p>子类有时候需要覆盖父类的方法，或者增加父类没有的方法。为此，这些方法必须在原型赋值之后再添加到原型上</p>
+<p>以对象字面量方式创建原型方法会破坏之前的原型链，因为这相当于重写了原型链。</p>
+<h4 id="原型链问题"><a href="#原型链问题" class="headerlink" title="原型链问题"></a>原型链问题</h4><ul>
 <li>原型中包含的引用值会在所有实例间共享，这也是为什么属性通常会在构造函数中定义而不会定义在原型上的原因</li>
 <li>子类型在实例化时不能给父类型的构造函数传参</li>
 </ul>
+<h3 id="盗用构造函数"><a href="#盗用构造函数" class="headerlink" title="盗用构造函数"></a>盗用构造函数</h3><blockquote>
+<p>基本思路很简单：在子类构造函数中调用父类构造函数。所以可以使用<code>apply()</code>和<code>call()</code>方法以新创建的对象为上下文执行构造函数</p>
+</blockquote>
+<p>优点</p>
+<ul>
+<li>可以在子类构造函数中向父类构造函数传参</li>
+</ul>
+<p>问题</p>
+<ul>
+<li>必须在构造函数中定义方法，因此函数不能重用</li>
+<li>子类也不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式</li>
+</ul>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><blockquote>
+<p>综合了原型链和盗用构造函数，将两者的优点集中了起来。基本的思路是使用原型链继承原型上的属性和方法，而通过盗用构造函数继承实例属性</p>
+</blockquote>
+<p>优点</p>
+<ul>
+<li>实例都有自己的属性，并且还共享相同的方法<ul>
+<li>属性定义在构造函数，方法放到原型上</li>
+</ul>
 </li>
-</ol>
-<h3 id="8-2盗用构造函数"><a href="#8-2盗用构造函数" class="headerlink" title="8.2盗用构造函数"></a>8.2盗用构造函数</h3><blockquote>
-<p>在子类构造函数中调用父类构造函数</p>
+<li>保留了<code>instanceof</code>操作符和<code>isPrototypeOf()</code>方法识别合成对象的能力</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>最主要的效率问题就是父类构造函数始终会被调用两次<ul>
+<li>一次在是<strong>创建子类原型时</strong>调用</li>
+<li>另一次是在<strong>子类构造函数中</strong>调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><blockquote>
+<p>即使不自定义类型也可以通过原型实现对象之间的信息共享</p>
 </blockquote>
-<p>因为毕竟函数就是在特定上下文中执行代码的简单对象，所以可以使用 <code>apply()</code>和<code> call()</code>方法以新创建的对象为上下文执行构造函数。</p>
-<p>优点：可以在子类构造函数中向父类构造函数传参</p>
-<p>缺点：必须在构造函数中定义方法，因此函数不能重用。此外，子类也不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式</p>
-<h3 id="8-3组合继承"><a href="#8-3组合继承" class="headerlink" title="8.3组合继承"></a>8.3组合继承</h3><blockquote>
-<p>综合了原型链和盗用构造函数，使用原型链继承原型上的属性和方法，而通过盗用构造函数继承实例属性。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用场景：你有一个对象，想在它的基础上再创建一个新对象。你需要把这个对象先传给<code>object()</code>，然后再对返回的对象进行适当修改。</p>
+<p><code>Object.create()</code>方法在只有一个参数时，与这里的object()方法效果相同</p>
+<p>原型式继承非常适合不需要单独创建构造函数，但仍然需要在对象间共享信息的场合</p>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><blockquote>
+<p>思路类似于寄生构造函数和工厂模式：创建一个实现继承的函数，以某种方式增强对象，然后返回这个对象</p>
 </blockquote>
-<p>属性放在构造函数，方法放在原型链中</p>
-<h3 id="8-4原型式继承"><a href="#8-4原型式继承" class="headerlink" title="8.4原型式继承"></a>8.4原型式继承</h3><blockquote>
-<p>可以无须明确定义构造函数而实现继承，本质上是对给定对象执行浅复制。这种操作的结果之后还可以再进一步增强</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> clone = object(original); <span class="comment">// 通过调用函数创建一个新对象</span></span><br><span class="line">  clone.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;	<span class="comment">// 以某种方式增强这个对象</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> clone; <span class="comment">// 返回这个对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：通过寄生式继承给对象添加函数会导致函数难以重用，与构造函数模式类似。</p>
+<h3 id="寄生式组合继承"><a href="#寄生式组合继承" class="headerlink" title="寄生式组合继承"></a>寄生式组合继承</h3><blockquote>
+<p>寄生式组合继承通过盗用构造函数继承属性，但使用混合式原型链继承方法。基本思路是<strong>不通过调用父类构造函数给子类原型赋值</strong>，而是取得父类原型的一个副本。说到底就是使用寄生式继承来继承父类原型，然后将返回的新对象赋值给子类原型</p>
 </blockquote>
-<p>原型式继承非常适合<strong>不需要单独创建构造函数</strong>，但仍然需要在对象间共享信息的场合。但要记住，属性中包含的<strong>引用值始终会在相关对象间共享</strong>，跟使用原型模式是一样的</p>
-<p><code>Object.create()</code>方法将原型式继承的概念规范化，接收两个参数</p>
-<h3 id="8-5寄生式继承"><a href="#8-5寄生式继承" class="headerlink" title="8.5寄生式继承"></a>8.5寄生式继承</h3><blockquote>
-<p>即先基于一个对象创建一个新对象，然后再增强这个新对象，最后返回新对象。这个模式也被用在组合继承中，用于避免重复调用父类构造函数导致的浪费。</p>
-</blockquote>
-<h3 id="8-6寄生式组合继承"><a href="#8-6寄生式组合继承" class="headerlink" title="8.6寄生式组合继承"></a>8.6寄生式组合继承</h3><blockquote>
-<p>寄生组合继承被认为是实现基于类型继承的最有效方式</p>
-</blockquote>
-<blockquote>
-<p>我了解的 js 中实现继承的几种方式有：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">subType, superType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prototype = object(superType.prototype); <span class="comment">// 创建对象</span></span><br><span class="line">  prototype.constructor = subType; <span class="comment">// 增强对象</span></span><br><span class="line">  subType.prototype = prototype; <span class="comment">// 赋值对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该函数核心逻辑</p>
+<ul>
+<li>接受两个参数<ul>
+<li>子类构造函数</li>
+<li>父类构造函数</li>
+</ul>
+</li>
+<li>创建父类原型的一个副本</li>
+<li>返回的<code>prototype</code>对象设置<code>constructor</code>属性，解决由于重写原型导致默认<code>constructor</code>丢失的问题</li>
+<li>将新创建的对象赋值给子类型的原型</li>
+</ul>
+<p>寄生式组合继承可以算是引用类型继承的最佳模式</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
 <p>（1）第一种是以原型链的方式来实现继承，但是这种实现方式存在的缺点是，在包含有引用类型的数据时，会被所有的实例对象所共享，容易造成修改的混乱。还有就是在创建子类型的时候不能向超类型传递参数。</p>
 <p>（2）第二种方式是使用借用构造函数的方式，这种方式是通过在子类型的函数中调用超类型的构造函数来实现的，这一种方法解决了不能向超类型传递参数的缺点，但是它存在的一个问题就是无法实现函数方法的复用，并且超类型原型定义的方法子类型也没有办法访问到。</p>
 <p>（3）第三种方式是组合继承，组合继承是将原型链和借用构造函数组合起来使用的一种方式。通过借用构造函数的方式来实现类型的属性的继承，通过将子类型的原型设置为超类型的实例来实现方法的继承。这种方式解决了上面的两种模式单独使用时的问题，但是由于我们是以超类型的实例来作为子类型的原型，所以调用了两次超类的构造函数，造成了子类型的原型中多了很多不必要的属性。</p>
-<p>（4）第四种方式是原型式继承，原型式继承的主要思路就是基于已有的对象来创建新的对象，实现的原理是，向函数中传入一个对象，然后返回一个以这个对象为原型的对象。这种继承的思路主要不是为了实现创造一种新的类型，只是对某个对象实现一种简单继承，ES5 中定义的 Object.create() 方法就是原型式继承的实现。缺点与原型链方式相同。</p>
+<p>（4）第四种方式是原型式继承，原型式继承的主要思路就是基于已有的对象来创建新的对象，实现的原理是，向函数中传入一个对象，然后返回一个以这个对象为原型的对象。这种继承的思路主要不是为了实现创造一种新的类型，只是对某个对象实现一种简单继承，ES5中定义的<code>Object.create()</code>方法就是原型式继承的实现。缺点与原型链方式相同。</p>
 <p>（5）第五种方式是寄生式继承，寄生式继承的思路是创建一个用于封装继承过程的函数，通过传入一个对象，然后复制一个对象的副本，然后对象进行扩展，最后返回这个对象。这个扩展的过程就可以理解是一种继承。这种继承的优点就是对一个简单对象实现继承，如果这个对象不是我们的自定义类型时。缺点是没有办法实现函数的复用。</p>
 <p>（6）第六种方式是寄生式组合继承，组合继承的缺点就是使用超类型的实例做为子类型的原型，导致添加了不必要的原型属性。寄生式组合继承的方式是使用超类型的原型的副本来作为子类型的原型，这样就避免了创建不必要的属性。</p>
 </blockquote>
-<h2 id="8-4-类"><a href="#8-4-类" class="headerlink" title="8.4 类"></a>8.4 类</h2><h3 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h3><ol>
-<li>类声明<br><code>class Person &#123;&#125;</code></li>
-<li>类表达式<br><code>const Animal = class &#123;&#125;</code></li>
+<h2 id="理解类"><a href="#理解类" class="headerlink" title="理解类"></a>理解类</h2><p>定义类</p>
+<ol>
+<li>类声明</li>
+<li>类表达式</li>
 </ol>
-<p>类定义声明不能提升</p>
-<h3 id="类构造函数"><a href="#类构造函数" class="headerlink" title="类构造函数"></a>类构造函数</h3><p>把类表达式赋值给变量后，可以通过 name 属性取得类表达式的名称</p>
-<p>使用 new 调用类的构造函数会执行如下操作：</p>
+<p>类</p>
 <ul>
-<li>在内存中创建一个新对象。 </li>
-<li>这个新对象内部的[[Prototype]]指针被赋值为构造函数的 prototype 属性。 </li>
-<li>构造函数内部的 this 被赋值为这个新对象（即 this 指向新对象）。 </li>
-<li>执行构造函数内部的代码（给新对象添加属性）。 </li>
+<li>表达式在它们被求值前也不能引用</li>
+<li>类声明不能提升</li>
+<li>受块级作用域限制</li>
+<li>可以包含构造函数方法、实例方法、获取函数、设置函数和静态类方法，但这些都不是必需的</li>
+<li>可以通过<code>name</code>属性取得类表达式的名称字符串。但不能在类表达式作用域外部访问这个标识符</li>
+<li>可以像函数一样在任何地方定义</li>
+<li>也可以立即实例化</li>
+</ul>
+<h3 id="类构造函数"><a href="#类构造函数" class="headerlink" title="类构造函数"></a>类构造函数</h3><p><code>constructor</code>关键字用于在类定义块内部创建类的构造函数。方法名constructor会告诉解释器在使用<code>new</code>操作符创建类的新实例时，应该调用这个函数</p>
+<p>使用<code>new</code>调用类的构造函数会执行如下操作：</p>
+<ul>
+<li>在内存中创建一个新对象。</li>
+<li>这个新对象内部的<code>[[Prototype]]</code>指针被赋值为构造函数的<code>prototype</code>属性。</li>
+<li>构造函数内部的<code>this</code>被赋值为这个新对象（即<code>this</code>指向新对象）。</li>
+<li>执行构造函数内部的代码（给新对象添加属性）。</li>
 <li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象</li>
 </ul>
-<p>默认情况下，类构造函数会在执行之后<strong>返回 this 对象</strong>。构造函数返回的对象会被用作实例化的对象，如果没有什么引用新创建的 this 对象，那么这个对象会被销毁。不过，如果返回的不是 this 对象，而是其他对象，那么这个对象不会通过 instanceof 操作符检测出跟类有关联，因为这个对象的原型指针并没有被修改。</p>
+<p>默认情况下，类构造函数会在执行之后<strong>返回<code>this</code>对象</strong>。构造函数返回的对象会被用作实例化的对象，如果没有什么引用新创建的<code>this</code>对象，那么这个对象会被销毁。不过，如果返回的不是this对象，而是其他对象，那么这个对象不会通过<code>instanceof</code>操作符检测出跟类有关联，因为这个对象的原型指针并没有被修改。</p>
 <p>类构造函数与构造函数的主要区别：</p>
-<p>调用类构造函数必须使用 new 操作符。而普通构造函数如果 不使用 new 调用，那么就会以全局的 this（通常是 window）作为内部对象。调用类构造函数时如果 忘了使用 new 则会抛出错误</p>
-<p>类中定义的 constructor 方法不会被当成构造函数，在对它使用 instanceof 操作符时会返回 false。但是，如果在创建实例时直接将类构造函数当成普通构造函数来 使用，那么 instanceof 操作符的返回值会反转</p>
-<p>类可以作为参数传递</p>
-<p>类可以立即实例化</p>
-<h3 id="实例、原型和类成员"><a href="#实例、原型和类成员" class="headerlink" title="实例、原型和类成员"></a>实例、原型和类成员</h3><p>每次通过new调用类标识符时，都会执行类构造函数</p>
-<p>放在<strong>构造函数</strong>的方法是各自独立的，放在<strong>构造函数外类块中</strong>的方法（即为原型方法）可以共享。</p>
-<p>构造函数外类块中的方法都会定义在类的原型上</p>
-<p>每个实例都对应一个唯一的成员对象，这意味着所有成员都不会在原型上共享：</p>
-<ol start="3">
+<ul>
+<li>调用类构造函数必须使用<code>new</code>操作符</li>
+<li>而普通构造函数如果不使用<code>new</code>调用，那么就会以全局的<code>this</code>（通常是<code>window</code>）作为内部对象</li>
+<li>调用类构造函数时如果忘了使用<code>new</code>则会抛出错误</li>
+</ul>
+<p>可以使用<code>instanceof</code>操作符检查一个对象与类构造函数，以确定这个对象是不是类的实例</p>
+<p>类中定义的<code>constructor</code>方法不会被当成构造函数，在对它使用<code>instanceof</code>操作符时会返回<code>false</code>。但是，如果在创建实例时直接将类构造函数当成普通构造函数来使用，那么<code>instanceof</code>操作符的返回值会反转</p>
+<h3 id="实例、原型和类成员"><a href="#实例、原型和类成员" class="headerlink" title="实例、原型和类成员"></a>实例、原型和类成员</h3><ol>
+<li><p>实例成员</p>
+<ul>
+<li><p>每次通过<code>new</code>调用类标识符时，都会执行类构造函数，在这个函数内部，可以为新创建的实例（<code>this</code>）添加“自有”属性</p>
+</li>
+<li><p>放在<strong>构造函数</strong>的方法是各自独立的，放在<strong>构造函数外类块中</strong>的方法（即为原型方法）可以共享。</p>
+</li>
+</ul>
+</li>
+<li><p>原型方法与访问器</p>
+<ul>
+<li><p>方法可以定义在类构造函数中或者类块中，但不能在类块中给原型添加原始值或对象作为成员数据</p>
+</li>
+<li><p>类方法等同于对象属性，因此可以使用字符串、符号或计算的值作为键</p>
+</li>
+<li><p>类定义也支持获取和设置访问器</p>
+</li>
+</ul>
+</li>
 <li><p>静态类方法</p>
-<p>使用 static 关键字作为前缀，在静态成员中，<strong>this 引用类自身</strong>。</p>
-<p>适合作为实例工厂</p>
+<ul>
+<li>使用static关键字作为前缀，在静态成员中，**<code>this</code>引用类自身**。</li>
+<li>通常用于执行不特定于实例的操作，也不要求存在类的实例</li>
+<li>与原型成员类似，静态成员每个类上只能有一个。</li>
+<li>静态类方法非常适合作为实例工厂</li>
+</ul>
 </li>
 <li><p>非函数原型和类成员</p>
-<p>类定义并不显式支持在原型或类上添加成员数据，但在类定义外部，可以手动添加</p>
+<ul>
+<li>类定义并不显式支持在原型或类上添加成员数据，但在类定义外部，可以手动添加</li>
+</ul>
 </li>
 <li><p>迭代器与生成器方法</p>
-<p>类定义语法支持在原型和类本身上定义生成器方法</p>
-<p>因为支持生成器方法，所以可以通过添加一个默认的迭代器，把类实例变成可迭代对象</p>
+<ul>
+<li>类定义语法支持在原型和类本身上定义生成器方法</li>
+<li>因为支持生成器方法，所以可以通过添加一个默认的迭代器，把类实例变成可迭代对象</li>
+</ul>
 </li>
 </ol>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ol>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><blockquote>
+<p>背后依旧使用的原型链</p>
+</blockquote>
+<ol>
 <li><p>继承基础</p>
-<p>支持<strong>单继承</strong>，使用<code>extends</code>关键字，可以继承任何拥有<code>[[Construct]]</code>和原型的对象</p>
-<p>派生类都会通过原型链访问到类和原型上定义的方法。this 的值会反映调用相应方法的实例或者类</p>
+<p>支持<strong>单继承</strong>，使用<code>extends</code>关键字，可以继承任何拥有<code>[[Construct]]</code>和原型的对象，不仅可以继承一个类，也可以继承普通的构造函数</p>
+<p>派生类都会通过原型链访问到类和原型上定义的方法。this的值会反映调用相应方法的实例或者类</p>
 </li>
-<li><p>构造函数、<code>HomeObject </code>和 <code>super()</code></p>
-<p>派生类的方法可以通过 super 关键字引用它们的原型。这个关键字只能在派生类中使用，而且仅限于类构造函数、实例方法和静态方法内部。在类构造函数中使用 super 可以调用父类构造函数。</p>
+<li><p>构造函数、<code>HomeObject</code>和<code>super()</code></p>
+<p>派生类的方法可以通过super关键字引用它们的原型。这个关键字只能在派生类中使用，而且仅限于类构造函数、实例方法和静态方法内部。在类构造函数中使用super可以调用父类构造函数。</p>
+<p>ES6给类构造函数和静态方法添加了内部特性<code>[[HomeObject]]</code>，这个特性是一个指针，指向定义该方法的对象。</p>
 <p>使用<code>super()</code>几个关键点：</p>
 <ul>
-<li>super 只能在派生类构造函数和静态方法中使用</li>
-<li>不能单独引用 super 关键字，要么用它调用构造函数，要么用它引用静态方法</li>
-<li>调用 super()会调用父类构造函数，并将返回的实例赋值给 this</li>
-<li>super()的行为如同调用构造函数，如果需要给父类构造函数传参，则需要手动传入</li>
-<li>如果没有定义类构造函数，在实例化派生类时会调用 super()，而且会传入所有传给派生类的参数。</li>
-<li>在类构造函数中，不能在调用 super()之前引用 this</li>
-<li>如果在派生类中显式定义了构造函数，则要么必须在其中调用 super()，要么必须在其中返回一个对象</li>
+<li><code>super</code>只能在派生类构造函数和静态方法中使用</li>
+<li>不能单独引用super关键字，要么用它调用构造函数，要么用它引用静态方法</li>
+<li>调用<code>super()</code>会调用父类构造函数，并将返回的实例赋值给<code>this</code></li>
+<li><code>super()</code>的行为如同调用构造函数，如果需要给父类构造函数传参，则需要手动传入</li>
+<li>如果没有定义类构造函数，在实例化派生类时会调用<code>super()</code>，而且会传入所有传给派生类的参数。</li>
+<li>在类构造函数中，不能在调用<code>super()</code>之前引用<code>this</code></li>
+<li>如果在派生类中显式定义了构造函数，则要么必须在其中调用<code>super()</code>，要么必须在其中返回一个对象</li>
 </ul>
 </li>
 <li><p>抽象基类</p>
+<ul>
+<li>可供其他类继承，但本身不会被实例化</li>
+<li><code>new.target</code>保存通过<code>new</code>关键字调用的类或函数<ul>
+<li>通过在实例化时检测<code>new.target</code>是不是抽象基类，可以阻止对抽象基类的实例化</li>
+</ul>
+</li>
+<li>因为原型方法在调用类构造函数之前就已经存在了，所以可以通过<code>this</code>关键字来检查相应的方法</li>
+</ul>
+</li>
+<li><p>继承内置类型</p>
+<ul>
+<li>ES6类为继承内置引用类型提供了顺畅的机制，开发者可以方便地扩展内置类型</li>
+</ul>
+</li>
+<li><p>类混入</p>
 </li>
 </ol>
 ]]></content>

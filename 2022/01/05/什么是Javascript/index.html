@@ -31,7 +31,7 @@
 <meta property="og:description" content="Javascript历史回顾  最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证  最早有两个版本的Javascript  网景的Javascript 微软IE的JScript  由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了ECMA-262，也就是ECMAScript这个脚本语法标准">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-05T14:49:10.000Z">
-<meta property="article:modified_time" content="2022-01-06T15:00:57.979Z">
+<meta property="article:modified_time" content="2022-01-10T08:25:05.543Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-01-06 23:00:57" itemprop="dateModified" datetime="2022-01-06T23:00:57+08:00">2022-01-06</time>
+      <time title="Modified: 2022-01-10 16:25:05" itemprop="dateModified" datetime="2022-01-10T16:25:05+08:00">2022-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,13 +313,13 @@
 <li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
 <li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
 <li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
-<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promise finally()</code>，模板字面量修订</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
 <li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
 </ul>
 <h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
-<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在 HTML 中使 用扩展的 XML</p>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
 </blockquote>
-<p>DOM通过创建表示文档的树，通过DOM API进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
 <p>DOM三个Level</p>
 <ol>
 <li>Level1目标是映射文档结构</li>
@@ -330,7 +330,7 @@
 <li>DOM遍历和范围</li>
 </ul>
 </li>
-<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫 DOMLoad and Save 的新模块中），还有验证文档的方法（DOM Validation）。</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
 </ol>
 <h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
 <p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
@@ -338,15 +338,15 @@
 <ul>
 <li>弹出新浏览器窗口的能力</li>
 <li>移动、缩放和关闭浏览器窗口的能力</li>
-<li>navigator 对象，提供关于浏览器的详尽信息</li>
-<li>location 对象，提供浏览器加载页面的详尽信息</li>
-<li>screen 对象，提供关于用户屏幕分辨率的详尽信息</li>
-<li>performance 对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
-<li>对 cookie 的支持</li>
-<li>其他自定义对象，如 XMLHttpRequest 和 IE 的 ActiveXObject</li>
+<li>navigator对象，提供关于浏览器的详尽信息</li>
+<li>location对象，提供浏览器加载页面的详尽信息</li>
+<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对cookie的支持</li>
+<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
 </ul>
 <h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
-<p>原则上 <code>JavaScript</code> 与 <code>ECMAScript</code> 指的是同一个东西，但有时也会加以区分</p>
+<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
 <ul>
 <li><code>JavaScript</code>：指语言及其实现</li>
 <li><code>ECMAScript</code>：指语言标准及语言版本</li>
@@ -406,13 +406,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">34k</span>
+    <span title="Symbols count total">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31 mins.</span>
+    <span title="Reading time total">33 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">

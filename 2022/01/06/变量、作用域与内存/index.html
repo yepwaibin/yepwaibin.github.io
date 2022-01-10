@@ -23,15 +23,15 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="通过变量使用原始值与引用值 原始值 最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问 不能有属性，但尝试添加属性不报错 使用new关键字，Javascript会创建一个Object 类型的实例，但其行为类似原始值 赋值到另一个变量时，是新增一个新的原始值   引用值 由多个值构成的对象，存储在堆内存中，保存引用值的变量按引用访问 可以随时增删改其属性和方法 赋值到另一个变量时，只是">
+<meta name="description" content="通过变量使用原始值与引用值 原始值 最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问 不能有属性，但尝试添加属性不报错 使用new关键字，Javascript会创建一个Object类型的实例，但其行为类似原始值 赋值到另一个变量时，是新增一个新的原始值   引用值 由多个值构成的对象，存储在堆内存中，保存引用值的变量按引用访问 可以随时增删改其属性和方法 赋值到另一个变量时，只是复">
 <meta property="og:type" content="article">
 <meta property="og:title" content="变量、作用域与内存">
 <meta property="og:url" content="http://example.com/2022/01/06/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="通过变量使用原始值与引用值 原始值 最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问 不能有属性，但尝试添加属性不报错 使用new关键字，Javascript会创建一个Object 类型的实例，但其行为类似原始值 赋值到另一个变量时，是新增一个新的原始值   引用值 由多个值构成的对象，存储在堆内存中，保存引用值的变量按引用访问 可以随时增删改其属性和方法 赋值到另一个变量时，只是">
+<meta property="og:description" content="通过变量使用原始值与引用值 原始值 最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问 不能有属性，但尝试添加属性不报错 使用new关键字，Javascript会创建一个Object类型的实例，但其行为类似原始值 赋值到另一个变量时，是新增一个新的原始值   引用值 由多个值构成的对象，存储在堆内存中，保存引用值的变量按引用访问 可以随时增删改其属性和方法 赋值到另一个变量时，只是复">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-06T15:21:29.000Z">
-<meta property="article:modified_time" content="2022-01-07T16:53:09.288Z">
+<meta property="article:modified_time" content="2022-01-10T08:21:06.965Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-01-08 00:53:09" itemprop="dateModified" datetime="2022-01-08T00:53:09+08:00">2022-01-08</time>
+      <time title="Modified: 2022-01-10 16:21:06" itemprop="dateModified" datetime="2022-01-10T16:21:06+08:00">2022-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -294,7 +294,7 @@
 <li>原始值<ul>
 <li>最简单的数据，大小固定，保存在栈内存中，保存原始值的变量按值访问</li>
 <li>不能有属性，但尝试添加属性不报错</li>
-<li>使用new关键字，Javascript会创建一个Object 类型的实例，但其行为类似原始值</li>
+<li>使用new关键字，Javascript会创建一个Object类型的实例，但其行为类似原始值</li>
 <li>赋值到另一个变量时，是新增一个新的原始值</li>
 </ul>
 </li>
@@ -317,28 +317,28 @@
 </ul>
 <p>确认类型</p>
 <ul>
-<li>typeof适合用来判断一个变量是否为原始类型（字符串、数值、布尔值或 undefined）</li>
+<li>typeof适合用来判断一个变量是否为原始类型（字符串、数值、布尔值或undefined）</li>
 <li>instanceof来判断它是什么类型对象<ul>
-<li>用 instanceof 检测原始值，则始终会返回 false</li>
+<li>用instanceof检测原始值，则始终会返回false</li>
 </ul>
 </li>
 </ul>
-<p>在把一个值赋给变量时，JavaScript 引擎必须确定这个值是原始值还是引用值。</p>
+<p>在把一个值赋给变量时，JavaScript引擎必须确定这个值是原始值还是引用值。</p>
 <h2 id="理解执行上下文"><a href="#理解执行上下文" class="headerlink" title="理解执行上下文"></a>理解执行上下文</h2><blockquote>
 <p>执行上下文就是当前代码的执行环境，包括全局执行上下文（就是最外层的上下文），函数执行上下文</p>
 </blockquote>
 <ul>
-<li>全局执行上下文：创建一个全局的 window 对象（浏览器的情况下），并且设置 <code>this</code> 的值等于这个全局对象。</li>
-<li>函数执行上下文：每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
 </ul>
 <p>js引擎内部有一个执行上下文栈，它是用于执行代码的调用栈，最底部是全局执行上下文栈，当代码执行流进入函数时，函数的上下文被推到一个上下文栈上。在函数执行完之后，上下文栈会弹出该函数上下文，将控制权返还给之前的执行上下文。</p>
 <h3 id="理解三个重要属性"><a href="#理解三个重要属性" class="headerlink" title="理解三个重要属性"></a>理解三个重要属性</h3><ol>
 <li><p>变量对象</p>
-<p>每个上下文都有一个关联的变量对象， 而这个上下文中定义的所有变量和函数都存在于这个对象上。我们编写的代码无法访问变量对象</p>
+<p>每个上下文都有一个关联的变量对象，而这个上下文中定义的所有变量和函数都存在于这个对象上。我们编写的代码无法访问变量对象</p>
 <p><strong>活动对象</strong></p>
 <blockquote>
 <p>在函数上下文中，我们用活动对象来表示变量对象，活动对象和变量对象其实是一个东西，只有当进入一个执行环境时，这个执行上下文的变量对象才会被激活，此时称为活动对象（AO），只有活动对象上的各种属性才能被访问。</p>
-<p>活动对象是在进入函数上下文时刻被创建的，最初只有一个定义变量：arguments （全局上下文中没有这个变量），它通过函数的 arguments 属性初始化。arguments 属性值是 Arguments 对象（调用函数时，会为其创建一个Arguments对象，并自动初始化局部变量arguments，指代该Arguments对象。所有作为参数传入的值都会成为Arguments对象的数组元素。）</p>
+<p>活动对象是在进入函数上下文时刻被创建的，最初只有一个定义变量：arguments（全局上下文中没有这个变量），它通过函数的arguments属性初始化。arguments属性值是Arguments对象（调用函数时，会为其创建一个Arguments对象，并自动初始化局部变量arguments，指代该Arguments对象。所有作为参数传入的值都会成为Arguments对象的数组元素。）</p>
 </blockquote>
 <p>变量对象和活动对象的关系：</p>
 <p>未进入执行阶段之前，变量对象(VO)中的属性都不能访问，但是进入执行阶段之后，变量对象(VO)转变为了活动对象(AO)，里面的属性都能被访问了，然后开始进行执行阶段的操作。</p>
@@ -360,7 +360,7 @@
 <li>创建变量对象<ul>
 <li>初始化函数的所有形参<ul>
 <li>由名称和对应值组成的一个变量对象的属性被创建</li>
-<li>没有实参，属性值设为 undefined</li>
+<li>没有实参，属性值设为undefined</li>
 </ul>
 </li>
 <li>初始化函数声明<ul>
@@ -391,7 +391,7 @@
 <h3 id="标识符查找"><a href="#标识符查找" class="headerlink" title="标识符查找"></a>标识符查找</h3><p>搜索开始于作用域链前端，以给定的名称搜索对应的标识符。如果在局部上下文中找到该标识符，则搜索停止，变量确定；如果没有找到变量名，则继续沿作用域链搜索。这个过程一直持续到搜索至全局上下文的变量对象。如果仍然没有找到标识符，则说明其未声明。</p>
 <h2 id="理解垃圾回收"><a href="#理解垃圾回收" class="headerlink" title="理解垃圾回收"></a>理解垃圾回收</h2><p>Javascript通过自动内存管理实现内存分配和闲置资源回收。思路：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间（或者说在代码执行过程中某个预定的收集时间）就会自动运行</p>
 <p>两种策略</p>
-<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记；当变量离开上下文时， 也会被加上离开上下文的标记。</p>
+<h3 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h3><p>当变量进入上下文，比如在函数内部声明一个变量时，这个变量会被加上存在于上下文中的标记；当变量离开上下文时，也会被加上离开上下文的标记。</p>
 <p>给变量加标记得两种实现思路</p>
 <ul>
 <li>当变量进入上下文时，反转某一位</li>
@@ -402,38 +402,38 @@
 <ul>
 <li>会标记内存中存储的所有变量</li>
 <li>将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉</li>
-<li>在此之后再被加上标记 的变量就是待删除的了吗，因为任何在上下文中的变量都访问不到它们了</li>
-<li>垃圾回收程序做一次内 存清理，销毁带标记的所有值并收回它们的内存</li>
+<li>在此之后再被加上标记的变量就是待删除的了吗，因为任何在上下文中的变量都访问不到它们了</li>
+<li>垃圾回收程序做一次内存清理，销毁带标记的所有值并收回它们的内存</li>
 </ul>
 <h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>思路</p>
 <ul>
 <li>对每个值都记录它被引用的次数</li>
-<li>声明变量并给它赋一个引用值时，这个值的引用数为 1</li>
-<li>如果同一个值又被赋给另一个变 量，那么引用数加 1</li>
-<li>如果保存对该值引用的变量被其他值给覆盖了，那么引用数减 1</li>
-<li>当一 个值的引用数为 0 时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了</li>
-<li>释放引用数为 0 的值的内存</li>
+<li>声明变量并给它赋一个引用值时，这个值的引用数为1</li>
+<li>如果同一个值又被赋给另一个变量，那么引用数加1</li>
+<li>如果保存对该值引用的变量被其他值给覆盖了，那么引用数减1</li>
+<li>当一个值的引用数为0时，就说明没办法再访问到这个值了，因此可以安全地收回其内存了</li>
+<li>释放引用数为0的值的内存</li>
 </ul>
 <p>缺陷</p>
-<p>会有可能出现循环引用，如：对象 A 有一个指针指向对象 B，而对象 B 也引用了对象 A</p>
+<p>会有可能出现循环引用，如：对象A有一个指针指向对象B，而对象B也引用了对象A</p>
 <h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>垃圾回收程序会周期性运行，如果内存中分配了很多变量，则可能造成性能损失，因此垃圾回收的时间调度很重要。</p>
-<p>现代垃圾回收程序会基于对 JavaScript 运行时环境的探测来决定何时运行。探测机制因引擎而异， 但基本上都是根据已分配对象的大小和数量来判断的。V8 的堆增长策略会根据<strong>活跃对象的数量外加一些余量</strong>来确定何时再次垃圾回收。</p>
-<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>分配给浏览器得内存通常很小，因为要出于安全考虑，为的是避免运行大量 JavaScript 的网页耗尽系统内存而导致操作系统崩溃。内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。</p>
+<p>现代垃圾回收程序会基于对JavaScript运行时环境的探测来决定何时运行。探测机制因引擎而异，但基本上都是根据已分配对象的大小和数量来判断的。V8的堆增长策略会根据<strong>活跃对象的数量外加一些余量</strong>来确定何时再次垃圾回收。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>分配给浏览器得内存通常很小，因为要出于安全考虑，为的是避免运行大量JavaScript的网页耗尽系统内存而导致操作系统崩溃。内存限制不仅影响变量分配，也影响调用栈以及能够同时在一个线程中执行的语句数量。</p>
 <p>优化内存方法</p>
 <blockquote>
-<p>优化内存占用的最佳手段就是保证在执行 代码时只保存必要的数据。如果数据不再必要，那么把它设置为 null，从而释放其引用。这也可以叫 作解除引用。这个建议最适合全局变量和全局对象的属性</p>
+<p>优化内存占用的最佳手段就是保证在执行代码时只保存必要的数据。如果数据不再必要，那么把它设置为null，从而释放其引用。这也可以叫作解除引用。这个建议最适合全局变量和全局对象的属性</p>
 </blockquote>
 <ol>
-<li><p>使用const和let声明</p>
+<li><p>使用<code>const</code>和<code>let</code>声明</p>
 <p>块级作用域能更早地让垃圾回收程序介入，今早回收应该回收地内存</p>
 </li>
 <li><p>隐藏类和删除操作</p>
 <ul>
-<li>V8 会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。如果这实例共享同一个构造函数和原型，V8 会在后台配置，共享相同的隐藏类<ul>
-<li>后面如果某个实例新增新的属性，他们不会共享相同隐藏类，所以要避免 JavaScript 的“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性</li>
+<li>V8会将创建的对象与隐藏类关联起来，以跟踪它们的属性特征。如果这实例共享同一个构造函数和原型，V8会在后台配置，共享相同的隐藏类<ul>
+<li>后面如果某个实例新增新的属性，他们不会共享相同隐藏类，所以要避免JavaScript的“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性</li>
 </ul>
 </li>
-<li>动态删除属性与动态添加属性导致的后果一样。最佳实践是把不想要的属性设置为 null。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果</li>
+<li>动态删除属性与动态添加属性导致的后果一样。最佳实践是把不想要的属性设置为null。这样可以保持隐藏类不变和继续共享，同时也能达到删除引用值供垃圾回收程序回收的效果</li>
 </ul>
 </li>
 <li><p>静态分配（这个方法，大多数情况下，这都属于过早优化）</p>
@@ -441,7 +441,7 @@
 <p>浏览器决定何时运行垃圾回收程序的一个标准就是对象更替的速度。</p>
 <p>思路：</p>
 <ol>
-<li><p>使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。 </p>
+<li><p>使用对象池。在初始化的某一时刻，可以创建一个对象池，用来管理一组可回收的对象。</p>
 </li>
 <li><p>应用程序可以向这个对象池请求一个对象、设置其属性、使用它，然后在操作完成后再把它还给对象池。</p>
 </li>
@@ -450,16 +450,16 @@
 </ol>
 </li>
 </ol>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>JavaScript 中的内存泄漏大部分是由不合理的引用导致的</p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>JavaScript中的内存泄漏大部分是由不合理的引用导致的</p>
 <p>可能出现的场景</p>
 <ol>
 <li><p>定时器导致</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line"> <span class="built_in">console</span>.log(name); </span><br><span class="line">&#125;, <span class="number">100</span>); </span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;Jake&quot;</span>;</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
 
-<p>只要定时器一直运行，回调函数中引用的 name 就会一直占用内存。因而垃圾回收程序就不会清理外部变量。</p>
+<p>只要定时器一直运行，回调函数中引用的name就会一直占用内存。因而垃圾回收程序就不会清理外部变量。</p>
 </li>
 <li><p>闭包</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> <span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>; </span><br><span class="line"> <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line"> 	<span class="keyword">return</span> name; </span><br><span class="line"> &#125;; </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = <span class="string">&quot;Jake&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>闭包一直引用这外部函数的变量，垃圾回收程序无法去清理</p>
 </li>
@@ -556,13 +556,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">34k</span>
+    <span title="Symbols count total">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">31 mins.</span>
+    <span title="Reading time total">33 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">
