@@ -1,6 +1,993 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CSS基础</title>
+    <url>/2022/01/18/CSS%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<blockquote>
+<p>用来定义页面元素的样式</p>
+</blockquote>
+<ul>
+<li>设置字体颜色</li>
+<li>位置、大小</li>
+<li>添加动画效果</li>
+</ul>
+<h2 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h2><p>样式规则</p>
+<ul>
+<li>选择器</li>
+<li>属性</li>
+<li>属性值</li>
+<li>声明<ul>
+<li>属性+属性值</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="样式来源"><a href="#样式来源" class="headerlink" title="样式来源"></a>样式来源</h2><ul>
+<li>外联</li>
+<li>内部</li>
+<li>内联<ul>
+<li>不需要写选择器</li>
+</ul>
+</li>
+</ul>
+<p>优先级：内联 &gt; 内部样式 &gt; 外联样式</p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>用法</th>
+<th>优先级权重</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>标签选择器</td>
+<td><code>div</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>类名选择器</td>
+<td><code>.classname</code></td>
+<td>10</td>
+</tr>
+<tr>
+<td>id选择器</td>
+<td><code>#id</code>，需要唯一</td>
+<td>100</td>
+</tr>
+<tr>
+<td>属性选择器</td>
+<td><code>[]</code>，可以做匹配</td>
+<td>10</td>
+</tr>
+<tr>
+<td>通配选择器</td>
+<td><code>*</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>伪类选择器</td>
+<td><code>:</code>，分为状态伪类和结构伪类</td>
+<td>10</td>
+</tr>
+<tr>
+<td>伪元素选择器</td>
+<td><code>::</code></td>
+<td>1</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>!important</code>声明优先级最高</li>
+<li>优先级相同，后出现样式生效</li>
+</ul>
+<h2 id="组合方式"><a href="#组合方式" class="headerlink" title="组合方式"></a>组合方式</h2><ul>
+<li>AB（直接组合）<ul>
+<li>满足A，并且满足B</li>
+</ul>
+</li>
+<li>A B（后代组合）<ul>
+<li>选中B，且B是A的后代</li>
+</ul>
+</li>
+<li>A &gt; B（亲子组合）<ul>
+<li>选中B，且B是A的<strong>子代</strong></li>
+</ul>
+</li>
+<li>A ~ B（兄弟选择器）<ul>
+<li>选中B，它与A是同级，且在A后面</li>
+</ul>
+</li>
+<li>A + B（相邻选择器）<ul>
+<li>选中B，且它紧跟在A后</li>
+</ul>
+</li>
+<li>选择器组<ul>
+<li>逗号隔开</li>
+</ul>
+</li>
+</ul>
+<h2 id="CSS如何工作"><a href="#CSS如何工作" class="headerlink" title="CSS如何工作"></a>CSS如何工作</h2><p>解析HTML时，加载CSS，解析CSS，把样式添加到DOM节点</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>某些属性会自动继承父元素的<strong>计算值</strong>，除非显示指定一个值</p>
+<ul>
+<li>可以显性继承inherit</li>
+</ul>
+<h3 id="无继承属性"><a href="#无继承属性" class="headerlink" title="无继承属性"></a>无继承属性</h3><ul>
+<li>盒子模型属性</li>
+<li>定位属性<ul>
+<li><code>float</code>、<code>position</code>、上下左右、<code>min-（长宽）</code>、<code>max-（长宽）</code></li>
+</ul>
+</li>
+<li>轮廓样式<ul>
+<li><code>outline</code>、<code>outline-（style、width、color）</code></li>
+</ul>
+</li>
+<li>。。。</li>
+</ul>
+<h3 id="有继承属性"><a href="#有继承属性" class="headerlink" title="有继承属性"></a>有继承属性</h3><ul>
+<li>字体属性</li>
+<li>文本属性<ul>
+<li><code>line-height</code>、<code>word-spacing</code>、<code>letter-spacing</code>、<code>text-indent</code>文本缩进</li>
+</ul>
+</li>
+<li>列表布局</li>
+</ul>
+<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>有两种，可以通过<code>box-sizing</code>设置</p>
+<ul>
+<li>标准盒模型<ul>
+<li><code>content-box</code></li>
+<li><code>width</code>、<code>height</code>的数值只是内容的宽高<ul>
+<li><code>height</code>，容器有指定高度时，百分数才生效</li>
+<li><code>width</code>，百分数相对于容器的content box宽度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>怪异盒模型<ul>
+<li><code>border-box</code></li>
+<li><code>width</code>、<code>height</code>的数值等于（内容+内边距+边框）</li>
+</ul>
+</li>
+</ul>
+<h3 id="盒模型组成"><a href="#盒模型组成" class="headerlink" title="盒模型组成"></a>盒模型组成</h3><ul>
+<li><code>content</code></li>
+<li><code>padding</code><ul>
+<li>百分数相对容器宽度</li>
+</ul>
+</li>
+<li><code>border</code><ul>
+<li><p><code>border-weight</code></p>
+</li>
+<li><p><code>border-style</code></p>
+</li>
+<li><p><code>border-color</code></p>
+</li>
+<li><p>可以画三角形</p>
+</li>
+</ul>
+</li>
+<li><code>margin</code><ul>
+<li><code>margin</code> 重叠合并<ul>
+<li>只在垂直方向</li>
+</ul>
+</li>
+<li><code>margin:auto</code>可以水平居中</li>
+<li>百分数相对于容器宽度</li>
+</ul>
+</li>
+</ul>
+<h2 id="块级、行级区别"><a href="#块级、行级区别" class="headerlink" title="块级、行级区别"></a>块级、行级区别</h2><h3 id="行级"><a href="#行级" class="headerlink" title="行级"></a>行级</h3><ul>
+<li><code>display:inline</code></li>
+<li>和其他行级盒子放在一行或拆成多行</li>
+<li>盒模型中的<code>width</code>和<code>height</code>属性不能用</li>
+<li>可以设置水平方向的<code>margin</code>和<code>padding</code>属性，单不能设置垂直方向的<code>margin</code>和<code>padding</code>属性</li>
+<li>只包含行级盒子的容器会创建一个IFC<ul>
+<li>盒子在一行水平摆放</li>
+<li>一行放不下，换行显示</li>
+<li><code>text-align</code>决定一行内盒子的水平对齐</li>
+<li><code>vertical-align</code>决定垂直对齐</li>
+<li>会避开浮动元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="块级"><a href="#块级" class="headerlink" title="块级"></a>块级</h3><ul>
+<li><code>display:block</code></li>
+<li>不和其他盒子并列摆放</li>
+<li>使用所有的盒模型属性</li>
+<li><strong>某些</strong>（不是所有块级盒子）容器会创建一个BFC<ul>
+<li>根元素</li>
+<li>浮动、绝对定位、<code>inline-block</code></li>
+<li>Flex子项、Grid子项</li>
+<li><code>overflow</code>值不是<code>visible</code></li>
+<li><code>display：flow-root</code></li>
+<li>BFC排版规则<ul>
+<li>盒子从上到下拜访</li>
+<li><strong>垂直</strong><code>margin</code>合并</li>
+<li>BFC内，盒子的<code>margin</code>不会与外面的合并</li>
+<li>BFC不会和浮动元素重叠</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="inline-block"><a href="#inline-block" class="headerlink" title="inline-block"></a>inline-block</h3><ul>
+<li>设置为<code>inline</code>对象，但呈现<strong>内容</strong>时作为<code>block</code>对象呈现</li>
+<li>所以可以设置宽高</li>
+</ul>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><ul>
+<li>确定内容的大小和位置的算法</li>
+<li>依据元素、容器、兄弟节点和内容等信息来计算</li>
+</ul>
+<h3 id="三大类"><a href="#三大类" class="headerlink" title="三大类"></a>三大类</h3><h4 id="常规流"><a href="#常规流" class="headerlink" title="常规流"></a>常规流</h4><ul>
+<li><blockquote>
+<p>大规则：块级从上到下，行级从左到右、根元素、浮动和绝对定位会脱离常规流</p>
+</blockquote>
+</li>
+<li><p>行级</p>
+</li>
+<li><p>块级</p>
+</li>
+<li><p>表格布局</p>
+</li>
+<li><p>FlexBox</p>
+<ul>
+<li>控制摆放流向</li>
+<li>摆放顺序</li>
+<li>盒子宽带高度</li>
+<li>水平垂直对齐</li>
+<li>是否允许折行</li>
+</ul>
+</li>
+<li><p>Grid布局</p>
+</li>
+</ul>
+<h4 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h4><p>最早用于文字环绕图片</p>
+<h4 id="绝对定位"><a href="#绝对定位" class="headerlink" title="绝对定位"></a>绝对定位</h4><h3 id="两栏布局实现"><a href="#两栏布局实现" class="headerlink" title="两栏布局实现"></a>两栏布局实现</h3><blockquote>
+<p>左定宽，右自适应</p>
+</blockquote>
+<ul>
+<li>左浮动，右<code>margin-left</code>值等于左宽</li>
+<li>左浮动，右设置<code>overflow: hidden</code>触发BFC</li>
+<li>用flex，左定宽，右设置<code>flex: 1</code>，容器<code>display: flex</code></li>
+<li>用grid，容器<code>display: grid; grid-template-columns: 200px 1fr</code></li>
+<li>左绝对定位，右<code>margin-left</code>设为左的宽度，父级元素记得设为非<code>static</code></li>
+</ul>
+<h3 id="三栏布局实现"><a href="#三栏布局实现" class="headerlink" title="三栏布局实现"></a>三栏布局实现</h3><p>详细请看<a href="https://sweet-kk.github.io/css-layout/">docsify文档网站</a></p>
+<h2 id="理解BFC（块级格式上下文）"><a href="#理解BFC（块级格式上下文）" class="headerlink" title="理解BFC（块级格式上下文）"></a>理解BFC（块级格式上下文）</h2><p>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。</p>
+<p>触发条件</p>
+<ul>
+<li>根元素<code>：body</code>；</li>
+<li><code>float </code>除<code>none</code>以外的值；</li>
+<li><code>position (absolute、fixed)</code>；</li>
+<li><code>display </code>值为：<code>inline-block</code>、<code>table-cell</code>、<code>table-caption</code>、<code>flex</code>等；</li>
+<li><code>overflow</code> 值为：<code>hidden</code>、<code>auto</code>、<code>scroll</code>；</li>
+</ul>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>解决<code>margin</code>重叠问题</li>
+<li>解决高度坍塌问题</li>
+<li>清除浮动<ul>
+<li>BFC区域不会与浮动的容器发生重叠</li>
+</ul>
+</li>
+</ul>
+<h2 id="flex语法及使用"><a href="#flex语法及使用" class="headerlink" title="flex语法及使用"></a>flex语法及使用</h2><h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><ul>
+<li><code>display:flex</code>，行内元素可以<code>display:inline-flex</code></li>
+<li><code>flex-direction</code><ul>
+<li><code>row,row-reverse,column,column-reverse</code></li>
+</ul>
+</li>
+<li><code>flex-wrap</code><ul>
+<li><code>nowrap,wrap,wrap-reverse</code></li>
+</ul>
+</li>
+<li><code>justify-content</code><ul>
+<li><code>flex-start,flex-end,center,space-between(两边靠边),space-around</code></li>
+</ul>
+</li>
+<li><code>align-items</code><ul>
+<li><code>flex-start,flex-end,center,baseline,stretch(默认值，将占满整个容器高度)</code></li>
+</ul>
+</li>
+<li><code>align-content</code><ul>
+<li>多个轴线对齐方式，只有一根，属性不起作用</li>
+<li><code>flex-start,flex-end,center,space-between,space-around,stretch</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="子项"><a href="#子项" class="headerlink" title="子项"></a>子项</h3><ul>
+<li>order<ul>
+<li>排列顺序，数值越小，排列越靠前，默认为0</li>
+</ul>
+</li>
+<li>flex-grow<ul>
+<li>放大比例，默认0，即如果存在剩余空间，也不放大</li>
+</ul>
+</li>
+<li>flex-shrink<ul>
+<li>缩小比例，默认为1，即如果空间不足，该项目将缩小。</li>
+<li>负值无效</li>
+</ul>
+</li>
+<li>flex-basis<ul>
+<li>可以理解为content-box上width的值一样作用</li>
+<li>默认值为<code>auto</code>，即项目的本来大小</li>
+</ul>
+</li>
+<li>flex<ul>
+<li>flex-grow,flex-shrink,flex-basis三个的简写</li>
+<li>默认值0 1 auto</li>
+<li>填auto，相当于（1 1 auto）</li>
+<li>填none，相当于（0 0 auto）</li>
+</ul>
+</li>
+<li>align-self<ul>
+<li>单个子项的对齐方式</li>
+<li>默认值auto，表示继承父元素的align-items属性，没有父元素，则等同stretch</li>
+<li>auto,flex-start,flex-end,center,baseline,stretch</li>
+</ul>
+</li>
+</ul>
+<h2 id="Grid语法及使用"><a href="#Grid语法及使用" class="headerlink" title="Grid语法及使用"></a>Grid语法及使用</h2><p>二维布局</p>
+<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><ul>
+<li>display:grid，行内元素也可以设成display: inline-grid</li>
+<li>grid-template-columns<ul>
+<li>定义每一列的列宽</li>
+<li>单位可以时绝对单位，百分数，fr</li>
+<li>属性值可以是repeat()函数<ul>
+<li>此函数接受两个参数，第一个是重复次数（可以填auto-fil，表示自动填充），第二个是所要重复的值</li>
+</ul>
+</li>
+<li>minmax()，接受两个参数（最小值和最大轴），产生一个长度范围</li>
+<li>可以指定网格线名字<ul>
+<li>例如：<code> [c1] 100px [c2] 100px [c3] auto [c4];</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>gird-template-rows<ul>
+<li>定义每一行的行高</li>
+<li>单位可以时绝对单位，百分数，fr</li>
+<li>repeat()</li>
+<li>minmax()</li>
+<li>可以指定网格线名字</li>
+</ul>
+</li>
+<li>grid-row-gap<ul>
+<li>设置行与行的间隔</li>
+</ul>
+</li>
+<li>gird-column-gap<ul>
+<li>设置列与列的间隔</li>
+</ul>
+</li>
+<li>grid-gap<ul>
+<li>合并上面两个，先行后列</li>
+</ul>
+</li>
+<li>grid-template-areas<ul>
+<li>用于定义区域</li>
+<li>如果某些区域不需要利用，则使用”点”（<code>.</code>）表示</li>
+</ul>
+</li>
+<li>grid-auto-flow<ul>
+<li>划分网格以后，容器的子元素会按照顺序，自动放置在每一个网格</li>
+<li>默认值row，先行后列；column，先列后行；<code>row dense</code>表示”先行后列”，并且尽可能紧密填满，尽量不出现空格；<code>column dense</code>表示”先列后行”，并且尽可能紧密填满，尽量不出现空格</li>
+</ul>
+</li>
+<li>justify-items<ul>
+<li>设置<strong>单元格内容</strong>的水平位置（左中右）</li>
+<li>start,end,center,stretch(默认值)</li>
+</ul>
+</li>
+<li>align-items<ul>
+<li>设置<strong>单元格内容</strong>的垂直位置（上中下）</li>
+<li>start,end,center,stretch(默认值)</li>
+</ul>
+</li>
+<li>place-items<ul>
+<li>合并简写形式</li>
+</ul>
+</li>
+<li>justify-content<ul>
+<li><strong>整个内容区域</strong>在容器里面的水平位置（左中右）</li>
+<li>start,end,center,stretch,space-around,space-between,space-evenly(项目与项目的间隔相等，项目与容器边框之间也是同样长度的间隔)</li>
+</ul>
+</li>
+<li>align-content<ul>
+<li><strong>整个内容区域</strong>在容器里面的垂直位置（上中下）</li>
+<li>属性值一样</li>
+</ul>
+</li>
+<li>place-content<ul>
+<li>上面的合并形式</li>
+</ul>
+</li>
+<li>grid-auto-columns</li>
+<li>grid-auto-rows</li>
+<li>grid-template<ul>
+<li><code>grid-template-columns</code>、<code>grid-template-rows</code>和<code>grid-template-areas</code>这三个属性的合并简写形式</li>
+</ul>
+</li>
+<li>grid<ul>
+<li><code>grid-template-rows</code>、<code>grid-template-columns</code>、<code>grid-template-areas</code>、 <code>grid-auto-rows</code>、<code>grid-auto-columns</code>、<code>grid-auto-flow</code>这六个属性的合并简写形式</li>
+</ul>
+</li>
+</ul>
+<h3 id="子项-1"><a href="#子项-1" class="headerlink" title="子项"></a>子项</h3><ul>
+<li>grid-column-start</li>
+<li>grid-column-end</li>
+<li>grid-row-start</li>
+<li>grid-row-end<ul>
+<li>指定项目位置，属性值是第几条边框线</li>
+</ul>
+</li>
+<li>grid-column<ul>
+<li><code>grid-column-start</code>和<code>grid-column-end</code>的合并简写形式</li>
+<li>中间加<code>/</code>分隔开</li>
+</ul>
+</li>
+<li>gird-row<ul>
+<li><code>grid-row-start</code>属性和<code>grid-row-end</code>的合并简写形式</li>
+<li>中间加<code>/</code></li>
+</ul>
+</li>
+<li>grid-area<ul>
+<li>指定项目放在哪一个区域，和容器属性值grid-template-area搭配</li>
+<li>还可用作<code>grid-row-start</code>、<code>grid-column-start</code>、<code>grid-row-end</code>、<code>grid-column-end</code>的合并简写形式<ul>
+<li>中间加<code>/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>justify-self<ul>
+<li>跟<code>justify-items</code>属性的用法完全一致，但只作用于单个项目</li>
+</ul>
+</li>
+<li>align-self<ul>
+<li>跟<code>align-items</code>属性的用法完全一致，也是只作用于单个项目</li>
+</ul>
+</li>
+<li>place-self<ul>
+<li><code>align-self</code>属性和<code>justify-self</code>属性的合并简写形式</li>
+</ul>
+</li>
+</ul>
+<h2 id="CSS求值过程"><a href="#CSS求值过程" class="headerlink" title="CSS求值过程"></a>CSS求值过程</h2><p><img src="/images/CSS%E5%9F%BA%E7%A1%80/value.svg" alt="value"></p>
+<h2 id="常问面经"><a href="#常问面经" class="headerlink" title="常问面经"></a>常问面经</h2><h3 id="隐藏元素方法"><a href="#隐藏元素方法" class="headerlink" title="隐藏元素方法"></a>隐藏元素方法</h3><ul>
+<li>display:none<ul>
+<li>渲染树上直接移除，不占据任何空间</li>
+<li>产生回流和重绘</li>
+</ul>
+</li>
+<li>visibility:hidden<ul>
+<li>仍然在渲染树中，占据空间依然存在</li>
+<li>只产生重绘</li>
+<li>子元素设置visibility：visible，可以让子孙节点显示</li>
+</ul>
+</li>
+<li>opacity:0</li>
+<li>position:absolute，将它移出屏幕</li>
+<li>z-index:负值</li>
+<li>transform:scale(0,0)<ul>
+<li>元素缩小到0，元素仍在页面中占据位置，但是不会响应绑定的监听事件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="单位区别"><a href="#单位区别" class="headerlink" title="单位区别"></a>单位区别</h3><ul>
+<li>px为绝对像素<ul>
+<li>我们写的是逻辑像素，实际测的是物理像素</li>
+<li>图片像素&gt;物理像素，才不会失真</li>
+</ul>
+</li>
+<li>em相对长度，是相对父元素</li>
+<li>rem相对长度，是相对根元素</li>
+<li>%，是相对父元素的百分之几</li>
+<li>vh、vw是相对视口</li>
+<li>vmin，vw和vh中较小值</li>
+<li>vmax，vw和vh中较大值</li>
+</ul>
+<h3 id="如何判断元素是否在可视区域"><a href="#如何判断元素是否在可视区域" class="headerlink" title="如何判断元素是否在可视区域"></a>如何判断元素是否在可视区域</h3><h3 id="如何做适配"><a href="#如何做适配" class="headerlink" title="如何做适配"></a>如何做适配</h3><ul>
+<li>使用CSS媒体查询</li>
+<li>使用相对单位</li>
+</ul>
+<h2 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h2><h3 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h3><ul>
+<li><code>#</code></li>
+<li><code>rgb()</code></li>
+<li><code>hsl()</code><ul>
+<li>色相</li>
+<li>饱和度<ul>
+<li>0-100%</li>
+</ul>
+</li>
+<li>亮度<ul>
+<li>0-100%</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关键字</li>
+<li><code>rgba</code><ul>
+<li>a是透明度，0是完全不透明</li>
+</ul>
+</li>
+<li><code>hsla</code></li>
+</ul>
+<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><ul>
+<li><p><code>font-family</code></p>
+<ul>
+<li><p>可以设定多个字体，用逗号隔开，从左到右逐个匹配，匹配到就使用，不再向后匹配</p>
+</li>
+<li><p>字体列表最后要使用通用字体族</p>
+</li>
+<li><p>英文字体要放在中文字体前面</p>
+<ul>
+<li>因为，中文一般包含了英文字体，中文字体放前面，一般都被匹配了，那么放在后面的英文字体就匹配不了英文字体</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Web font</p>
+<ul>
+<li>从网络加载资源</li>
+</ul>
+</li>
+<li><p><code>font-size</code></p>
+<ul>
+<li>关键字</li>
+<li><code>px</code></li>
+<li><code>em</code>、<code>rem</code></li>
+<li><code>%</code></li>
+</ul>
+</li>
+<li><p><code>font-weight</code></p>
+<ul>
+<li>关键字<ul>
+<li><code>normal</code>（400）</li>
+<li><code>bold</code>（700）</li>
+</ul>
+</li>
+<li>直接设置数值<ul>
+<li>有时候系统没有那么多对应数值的font-weight字体，所以，一般都是设成400或者700，以适应所有系统</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>line-height</code></p>
+<ul>
+<li>行高</li>
+<li>数值带单位</li>
+<li>数值不带单位<ul>
+<li>数值乘以font-size值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>font-(style weight size/height family)</code></p>
+</li>
+<li><p><code>text-align</code></p>
+<ul>
+<li><code>left</code></li>
+<li><code>right</code></li>
+<li><code>center</code></li>
+<li><code>justify</code><ul>
+<li>两端对齐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>spacing</code></p>
+<ul>
+<li><code>letter-spacing</code></li>
+<li><code>word-spacing</code></li>
+</ul>
+</li>
+<li><p><code>text-indent</code></p>
+<ul>
+<li>文字缩进</li>
+<li>可正可负</li>
+</ul>
+</li>
+<li><p><code>text-decoration</code></p>
+</li>
+<li><p><code>white-space</code></p>
+</li>
+</ul>
+<p><code>overflow</code></p>
+<ul>
+<li><code>visible</code><ul>
+<li>溢出</li>
+</ul>
+</li>
+<li><code>hidden</code></li>
+<li><code>scroll</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>青训营</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>面经</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML中的Javascript</title>
+    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
+    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
+<li><p>async</p>
+</li>
+<li><p>crossorigin</p>
+<blockquote>
+<p>配置相关CORS设置</p>
+</blockquote>
+<ul>
+<li>anonymous</li>
+<li>use-credentials</li>
+</ul>
+</li>
+<li><p>defer</p>
+</li>
+<li><p>intergrity</p>
+<blockquote>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
+</blockquote>
+</li>
+<li><p>src</p>
+<ul>
+<li>会忽略行内脚本</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
+</ul>
+</li>
+<li><p>type</p>
+<ul>
+<li><code>text/javascript</code></li>
+<li><code>module</code><ul>
+<li>会被当成ES6模块</li>
+<li>脚本加载解析过程与defer相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
+<li><p>行内脚本</p>
+<p>下载和执行会阻塞<code>HTML</code>的解析</p>
+</li>
+<li><p>外部脚本</p>
+<ul>
+<li>不加<code>async</code>和<code>defer</code><ul>
+<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
+</ul>
+</li>
+<li><code>defer</code><ul>
+<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+</ul>
+</li>
+<li><code>async</code><ul>
+<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
+<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态加载脚本</p>
+<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
+</li>
+</ol>
+<p>建议都使用外部脚本，原因：</p>
+<ul>
+<li>可维护性</li>
+<li>缓存<ul>
+<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
+<ol>
+<li>混杂模式</li>
+<li>标准模式</li>
+<li>准标准模式</li>
+</ol>
+<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML基础</title>
+    <url>/2022/01/18/HTML%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="前端关注点"><a href="#前端关注点" class="headerlink" title="前端关注点"></a>前端关注点</h2><ul>
+<li>解决GUI人机交互问题</li>
+<li>跨终端<ul>
+<li>PC/移动浏览器</li>
+<li>客户端/小程序</li>
+<li>VR/AR等</li>
+</ul>
+</li>
+<li>Web技术栈</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="前端技术栈"><a href="#前端技术栈" class="headerlink" title="前端技术栈"></a>前端技术栈</h2><p>服务器端通过网络协议与客户端交流</p>
+<p>而前端主要指下面三个部分</p>
+<ul>
+<li>Javascript（行为）</li>
+<li>CSS（样式）</li>
+<li>HTML（内容）</li>
+</ul>
+<h2 id="关注方面"><a href="#关注方面" class="headerlink" title="关注方面"></a>关注方面</h2><ul>
+<li><p>功能</p>
+<ul>
+<li>首要部分</li>
+</ul>
+</li>
+<li><p>美观</p>
+</li>
+<li><p>无障碍</p>
+</li>
+<li><p>安全</p>
+<ul>
+<li>用户数据安全</li>
+</ul>
+</li>
+<li><p>性能</p>
+</li>
+<li><p>兼容性</p>
+<ul>
+<li>跨端</li>
+</ul>
+</li>
+<li><p>体验</p>
+</li>
+</ul>
+<h2 id="HTML是什么"><a href="#HTML是什么" class="headerlink" title="HTML是什么"></a>HTML是什么</h2><blockquote>
+<p>HyperText Markup Language</p>
+</blockquote>
+<ul>
+<li>HyperText<ul>
+<li>图片、标题、链接、表格</li>
+</ul>
+</li>
+<li>Markup Language<ul>
+<li>标签</li>
+</ul>
+</li>
+</ul>
+<h3 id="DOCTYPE的作⽤"><a href="#DOCTYPE的作⽤" class="headerlink" title="DOCTYPE的作⽤"></a>DOCTYPE的作⽤</h3><p>决定HTML使用哪个版本，并且浏览器根据这个来决定使用哪一种的渲染模式，有两种渲染模式</p>
+<ul>
+<li>标准模式<ul>
+<li>按照最佳的相关规范进行渲染</li>
+</ul>
+</li>
+<li>怪异模式<ul>
+<li>一种比较宽松的向后兼容的方式显示</li>
+</ul>
+</li>
+</ul>
+<p>浏览器拿到HTML后，将其解析为DOM树</p>
+<h2 id="HTML语法"><a href="#HTML语法" class="headerlink" title="HTML语法"></a>HTML语法</h2><ul>
+<li>标签和属性不区分大小写</li>
+<li>空标签可以不闭合</li>
+<li>属性值推荐用引号包裹</li>
+<li>某些属性值可以省略</li>
+</ul>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>ol、li</li>
+<li>ul、li</li>
+<li>dl、dt、dd<ul>
+<li>定义列表</li>
+<li>定义标题</li>
+<li>定义描述</li>
+</ul>
+</li>
+</ul>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><ul>
+<li>a<ul>
+<li>href<ul>
+<li>跳转链接位置</li>
+</ul>
+</li>
+<li>target</li>
+</ul>
+</li>
+<li>img<ul>
+<li>src</li>
+<li>alt</li>
+</ul>
+</li>
+<li>audio<ul>
+<li>src</li>
+<li>controls<ul>
+<li>播放控件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>video<ul>
+<li>src</li>
+<li>controls</li>
+</ul>
+</li>
+</ul>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><ul>
+<li>input<ul>
+<li>placeholder</li>
+<li>type<ul>
+<li>range</li>
+<li>number</li>
+<li>date</li>
+<li>checkbox</li>
+<li>radio<ul>
+<li>name属性设置相同属性值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>textarea<ul>
+<li>多行输入</li>
+</ul>
+</li>
+<li>select option</li>
+<li>datalist option<ul>
+<li>提示补全</li>
+</ul>
+</li>
+</ul>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>blockquote</li>
+<li>长引用<ul>
+<li>cite属性，引用来源</li>
+</ul>
+</li>
+<li>cite<ul>
+<li>短引用</li>
+<li>作品、名字</li>
+</ul>
+</li>
+<li>q<ul>
+<li>短引用</li>
+<li>一句话</li>
+</ul>
+</li>
+<li>code<ul>
+<li>代码引用</li>
+</ul>
+</li>
+</ul>
+<h3 id="文本标签"><a href="#文本标签" class="headerlink" title="文本标签"></a>文本标签</h3><ul>
+<li>strong<ul>
+<li>表示事情非常重要、严重</li>
+</ul>
+</li>
+<li>em<ul>
+<li>语气上的强调</li>
+</ul>
+</li>
+</ul>
+<h3 id="内容划分"><a href="#内容划分" class="headerlink" title="内容划分"></a>内容划分</h3><ul>
+<li>header<ul>
+<li>nav</li>
+</ul>
+</li>
+<li>main<ul>
+<li>artticle</li>
+</ul>
+</li>
+<li>aside</li>
+<li>footer</li>
+</ul>
+<h2 id="语义化"><a href="#语义化" class="headerlink" title="语义化"></a>语义化</h2><p>元素、属性、属性值都拥有某些含义</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>开发者<ul>
+<li>代码可读性</li>
+<li>可维护性</li>
+</ul>
+</li>
+<li>浏览器</li>
+<li>搜索引擎<ul>
+<li>提取关键词、排序</li>
+<li>搜索引擎优化</li>
+</ul>
+</li>
+<li>屏幕阅读器<ul>
+<li>提升无障碍性</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何做到语义化"><a href="#如何做到语义化" class="headerlink" title="如何做到语义化"></a>如何做到语义化</h3><ul>
+<li>了解标签、属性含义</li>
+<li>思考什么标签最适合描述这个内容</li>
+</ul>
+]]></content>
+      <categories>
+        <category>青训营</category>
+      </categories>
+      <tags>
+        <tag>面经</tag>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是Javascript</title>
+    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
+    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
+<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
+</blockquote>
+<p>最早有两个版本的Javascript</p>
+<ol>
+<li>网景的Javascript</li>
+<li>微软IE的JScript</li>
+</ol>
+<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
+<span id="more"></span>
+
+<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
+<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
+<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
+</blockquote>
+<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
+<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
+<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
+<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
+<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
+<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
+<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
+<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
+<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
+</blockquote>
+<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM三个Level</p>
+<ol>
+<li>Level1目标是映射文档结构</li>
+<li>Level2新增模块<ul>
+<li>DOM视图</li>
+<li>DOM事件</li>
+<li>DOM样式</li>
+<li>DOM遍历和范围</li>
+</ul>
+</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
+</ol>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
+<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
+</blockquote>
+<ul>
+<li>弹出新浏览器窗口的能力</li>
+<li>移动、缩放和关闭浏览器窗口的能力</li>
+<li>navigator对象，提供关于浏览器的详尽信息</li>
+<li>location对象，提供浏览器加载页面的详尽信息</li>
+<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对cookie的支持</li>
+<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
+</ul>
+<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
+<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
+<ul>
+<li><code>JavaScript</code>：指语言及其实现</li>
+<li><code>ECMAScript</code>：指语言标准及语言版本</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>代理与反射</title>
     <url>/2022/01/10/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h2 id="代理基础"><a href="#代理基础" class="headerlink" title="代理基础"></a>代理基础</h2><blockquote>
@@ -207,88 +1194,134 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML中的Javascript</title>
-    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
-    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
-<li><p>async</p>
-</li>
-<li><p>crossorigin</p>
-<blockquote>
-<p>配置相关CORS设置</p>
-</blockquote>
-<ul>
-<li>anonymous</li>
-<li>use-credentials</li>
+    <title>函数</title>
+    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
+<li>函数表达式<ul>
+<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
 </ul>
 </li>
-<li><p>defer</p>
-</li>
-<li><p>intergrity</p>
-<blockquote>
-<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
-</blockquote>
-</li>
-<li><p>src</p>
-<ul>
-<li>会忽略行内脚本</li>
-<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
-</ul>
-</li>
-<li><p>type</p>
-<ul>
-<li><code>text/javascript</code></li>
-<li><code>module</code><ul>
-<li>会被当成ES6模块</li>
-<li>脚本加载解析过程与defer相同</li>
+<li>函数声明<ul>
+<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义<ul>
+<li>这个过程叫函数声明提升</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>箭头函数<ul>
+<li>非常适合嵌入函数</li>
+<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
+<li>没有 prototype 属性</li>
 </ul>
+</li>
+</ol>
+<p>函数名就是指向函数地指针。</p>
 <span id="more"></span>
 
-<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
-<li><p>行内脚本</p>
-<p>下载和执行会阻塞<code>HTML</code>的解析</p>
+<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内 部访问 arguments 对象，从中取得传进来的每个参数值。</p>
+<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永 远不可能直接访问外部函数的这两个变量。</p>
+<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
+<li>一个类数组对象（但不是 Array 的实例）</li>
+<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
+<li>可以跟命名参数一起使用</li>
+<li>它的值始终会与对应的命名参数同步<ul>
+<li>修改arguments上的值，会使得命名参数的值会变化</li>
+<li>它们在内存中是分开的，只不过会保持同步</li>
+</ul>
 </li>
-<li><p>外部脚本</p>
+<li>有一个callee属性，是一个指向 arguments 对象所在函数的 指针<ul>
+<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
+</ul>
+</li>
+</ul>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
+<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
+</blockquote>
 <ul>
-<li>不加<code>async</code>和<code>defer</code><ul>
-<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
+<li>在标准函数中，<strong>this 到底引用哪个对象必须到 函数被调用时才能确定</strong></li>
+<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
+</ul>
+<p>函数没有重载，后定义的会覆盖先定义</p>
+<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
+<li>new.target<ul>
+<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的 构造函数。</li>
 </ul>
 </li>
-<li><code>defer</code><ul>
-<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+<li>length<ul>
+<li>保存函数定义的命名参数的个数</li>
 </ul>
 </li>
-<li><code>async</code><ul>
-<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
-<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
+<li>prototype<ul>
+<li>保存引用类型所有实例 方法的地方</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>动态加载脚本</p>
-<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
 </li>
 </ol>
-<p>建议都使用外部脚本，原因：</p>
+<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
 <ul>
-<li>可维护性</li>
-<li>缓存<ul>
-<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+<li>apply()<ul>
+<li>第二个参数可以是Array实例，也可以是arguments对象</li>
+</ul>
+</li>
+<li>call()<ul>
+<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
+</ul>
+</li>
+<li>bind()<ul>
+<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
 </ul>
 </li>
 </ul>
-<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
-<ol>
-<li>混杂模式</li>
-<li>标准模式</li>
-<li>准标准模式</li>
-</ol>
-<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
-<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
-]]></content>
+<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
+<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
+<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
+<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
+<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
+<p>递归函数通常的形式是一个函数通过名称调用自己</p>
+</blockquote>
+<p>在写递归函数时使用 arguments.callee 可 以避免函数名被改名，导致递归出错这个问题</p>
+<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
+<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
+</blockquote>
+<p>优化条件</p>
+<blockquote>
+<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
+</blockquote>
+<ul>
+<li>代码在严格模式下执行<ul>
+<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
+</ul>
+</li>
+<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
+<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
+<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
+</ul>
+<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
+<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
+</blockquote>
+<p>回顾作用域链概念</p>
+<blockquote>
+<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
+</blockquote>
+<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它 会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在 调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着 会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
+<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
+<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留 在内存中，直到内部函数被销毁后才会被销毁</p>
+<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭 包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
+<p>闭包有时会产生<strong>内存泄漏</strong></p>
+<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
+<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组 括号后面的第二组括号会立即调用前面的函数表达式</p>
+</blockquote>
+<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同 样的隔离</p>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
+<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的 变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
+</blockquote>
+<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部 的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
+<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
+<ul>
+<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访 问构造函数中定义的所有变量和函数的能力。</li>
+</ul>
+<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
+<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
+<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
       </categories>
@@ -510,78 +1543,6 @@
 </ol>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是Javascript</title>
-    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
-    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
-<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
-</blockquote>
-<p>最早有两个版本的Javascript</p>
-<ol>
-<li>网景的Javascript</li>
-<li>微软IE的JScript</li>
-</ol>
-<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
-<span id="more"></span>
-
-<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
-<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
-<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
-</blockquote>
-<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
-<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
-<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
-<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
-<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
-<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
-<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
-<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
-<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
-<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
-</ul>
-<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
-<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
-</blockquote>
-<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
-<p>DOM三个Level</p>
-<ol>
-<li>Level1目标是映射文档结构</li>
-<li>Level2新增模块<ul>
-<li>DOM视图</li>
-<li>DOM事件</li>
-<li>DOM样式</li>
-<li>DOM遍历和范围</li>
-</ul>
-</li>
-<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
-</ol>
-<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
-<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
-</blockquote>
-<ul>
-<li>弹出新浏览器窗口的能力</li>
-<li>移动、缩放和关闭浏览器窗口的能力</li>
-<li>navigator对象，提供关于浏览器的详尽信息</li>
-<li>location对象，提供浏览器加载页面的详尽信息</li>
-<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
-<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
-<li>对cookie的支持</li>
-<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
-</ul>
-<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
-<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
-<ul>
-<li><code>JavaScript</code>：指语言及其实现</li>
-<li><code>ECMAScript</code>：指语言标准及语言版本</li>
-</ul>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -1127,139 +2088,15 @@
       </tags>
   </entry>
   <entry>
-    <title>函数</title>
-    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
-<li>函数表达式<ul>
-<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
-</ul>
-</li>
-<li>函数声明<ul>
-<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义<ul>
-<li>这个过程叫函数声明提升</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>箭头函数<ul>
-<li>非常适合嵌入函数</li>
-<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
-<li>没有 prototype 属性</li>
-</ul>
-</li>
-</ol>
-<p>函数名就是指向函数地指针。</p>
-<span id="more"></span>
-
-<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内 部访问 arguments 对象，从中取得传进来的每个参数值。</p>
-<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永 远不可能直接访问外部函数的这两个变量。</p>
-<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
-<li>一个类数组对象（但不是 Array 的实例）</li>
-<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
-<li>可以跟命名参数一起使用</li>
-<li>它的值始终会与对应的命名参数同步<ul>
-<li>修改arguments上的值，会使得命名参数的值会变化</li>
-<li>它们在内存中是分开的，只不过会保持同步</li>
-</ul>
-</li>
-<li>有一个callee属性，是一个指向 arguments 对象所在函数的 指针<ul>
-<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
-</ul>
-</li>
-</ul>
-<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
-<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
-</blockquote>
-<ul>
-<li>在标准函数中，<strong>this 到底引用哪个对象必须到 函数被调用时才能确定</strong></li>
-<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
-</ul>
-<p>函数没有重载，后定义的会覆盖先定义</p>
-<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
-<li>new.target<ul>
-<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的 构造函数。</li>
-</ul>
-</li>
-<li>length<ul>
-<li>保存函数定义的命名参数的个数</li>
-</ul>
-</li>
-<li>prototype<ul>
-<li>保存引用类型所有实例 方法的地方</li>
-</ul>
-</li>
-</ol>
-<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
-<ul>
-<li>apply()<ul>
-<li>第二个参数可以是Array实例，也可以是arguments对象</li>
-</ul>
-</li>
-<li>call()<ul>
-<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
-</ul>
-</li>
-<li>bind()<ul>
-<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
-</ul>
-</li>
-</ul>
-<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
-<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
-<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
-<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
-<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
-<p>递归函数通常的形式是一个函数通过名称调用自己</p>
-</blockquote>
-<p>在写递归函数时使用 arguments.callee 可 以避免函数名被改名，导致递归出错这个问题</p>
-<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
-<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
-</blockquote>
-<p>优化条件</p>
-<blockquote>
-<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
-</blockquote>
-<ul>
-<li>代码在严格模式下执行<ul>
-<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
-</ul>
-</li>
-<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
-<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
-<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
-</ul>
-<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
-<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
-</blockquote>
-<p>回顾作用域链概念</p>
-<blockquote>
-<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
-</blockquote>
-<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它 会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在 调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着 会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
-<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
-<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留 在内存中，直到内部函数被销毁后才会被销毁</p>
-<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭 包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
-<p>闭包有时会产生<strong>内存泄漏</strong></p>
-<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
-<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组 括号后面的第二组括号会立即调用前面的函数表达式</p>
-</blockquote>
-<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同 样的隔离</p>
-<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
-<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的 变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
-</blockquote>
-<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部 的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
-<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
-<ul>
-<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访 问构造函数中定义的所有变量和函数的能力。</li>
-</ul>
-<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
-<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
-<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
+    <title>新年快乐</title>
+    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
+    <content><![CDATA[<p>2022年希望有更好的明天</p>
+]]></content>
       <categories>
-        <category>Javascript高级程序设计</category>
+        <category>随记</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
+        <tag>杂记</tag>
       </tags>
   </entry>
   <entry>
@@ -1275,6 +2112,10 @@
 <h3 id="2022-01-12"><a href="#2022-01-12" class="headerlink" title="2022-01-12"></a>2022-01-12</h3><p>被梦境缠绕<code>00:07</code></p>
 <h3 id="2022-01-13"><a href="#2022-01-13" class="headerlink" title="2022-01-13"></a>2022-01-13</h3><p>洗澡成为了一项唯一的娱乐活动，一天洗三次= =。天气也太冷了吧<code>00:31</code></p>
 <h3 id="2022-01-14"><a href="#2022-01-14" class="headerlink" title="2022-01-14"></a>2022-01-14</h3><p>coding【bam:O’Fama】<code>01:35</code></p>
+<h3 id="2022-01-15"><a href="#2022-01-15" class="headerlink" title="2022-01-15"></a>2022-01-15</h3><p>给点耐心给自己<code>00:54</code></p>
+<h3 id="2022-01-16"><a href="#2022-01-16" class="headerlink" title="2022-01-16"></a>2022-01-16</h3><p>这学期最后一次篮球，也是崴脚之后第一次打。心情愉悦，能和熟悉的，半熟悉的朋友，边吹水边打:)<code>01:42</code></p>
+<h3 id="2022-01-17"><a href="#2022-01-17" class="headerlink" title="2022-01-17"></a>2022-01-17</h3><p>7人女仆桌游馆，尬玩尬玩=.=，还回想起以前中学，跟着朋友被第一次带去女仆咖啡厅，好蛇皮←_←今天回个家吃饭，原本想复诊牙科，结果周一到周四都被约满了，只能祈祷下周能提前约到，不然大概率只能年后再看了。<code>00:08</code></p>
+<h3 id="2022-01-18"><a href="#2022-01-18" class="headerlink" title="2022-01-18"></a>2022-01-18</h3><p>虽然只看了剪辑，lgd和rng的比赛还是精彩呀。毕设被追的有点紧，简单写了点页面，要找点时间把后端给写了<code>02:23</code></p>
 ]]></content>
       <categories>
         <category>日常</category>
@@ -1648,139 +2489,6 @@ func()
 <li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
 <li>不需要指定是否返回值。任何函数在任何时间都可以使用return语句来返回函数的值，用法是后跟要返回的值</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新年快乐</title>
-    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
-    <content><![CDATA[<p>2022年希望有更好的明天</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>迭代器与生成器</title>
-    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
-<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
-<p>在无迭代器时，迭代有两个缺点</p>
-<ul>
-<li>迭代之前需要事先知道如何使用数据结构</li>
-<li>遍历顺序并不是数据结构固有的</li>
-</ul>
-<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
-<span id="more"></span>
-
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
-<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
-<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
-</blockquote>
-<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
-<p>可迭代对象</p>
-<ul>
-<li>包含元素有限</li>
-<li>具有无歧义的遍历顺序</li>
-</ul>
-<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
-<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
-<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
-<ul>
-<li>支持迭代的自我识别能力</li>
-<li>创建实现<code>Iterator</code>接口的对象的能力</li>
-</ul>
-<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
-<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
-<ul>
-<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
-<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
-<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
-<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
-</ul>
-<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
-<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
-<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
-<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
-<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
-<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
-<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
-<p>可能情形：</p>
-<ol>
-<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
-<li>解构操作并未消费所有值</li>
-</ol>
-<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
-<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
-<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
-</blockquote>
-<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
-<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
-<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
-<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
-<p>生成器函数</p>
-<ul>
-<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
-<li>初次调用生成器函数并不会打印日志</li>
-</ul>
-</li>
-<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
-<li><code>g===g[Symbol.iterator]()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
-<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
-</blockquote>
-<p>yield关键字</p>
-<ul>
-<li>有点像函数的中间返回语句<ul>
-<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
-<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
-</ul>
-</li>
-<li>只能在生成器函数内部使用</li>
-<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
-<li>可以作为函数的中间参数使用<ul>
-<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
-<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
-</ul>
-</li>
-<li><code>yield</code>关键字可以同时用于输入和输出</li>
-<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
-<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
-</ul>
-</li>
-</ul>
-<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
-<p>生成器对象作为可迭代对象</p>
-<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
-<ol>
-<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
-<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
-<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
-<li>错误处理会跳过对应的<code>yield</code></li>
-<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
-</ul>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -2172,6 +2880,127 @@ console.log(arr.includes(NaN))//true
 </li>
 <li>对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>迭代器与生成器</title>
+    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
+<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
+<p>在无迭代器时，迭代有两个缺点</p>
+<ul>
+<li>迭代之前需要事先知道如何使用数据结构</li>
+<li>遍历顺序并不是数据结构固有的</li>
+</ul>
+<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
+<span id="more"></span>
+
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
+<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
+</blockquote>
+<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
+<p>可迭代对象</p>
+<ul>
+<li>包含元素有限</li>
+<li>具有无歧义的遍历顺序</li>
+</ul>
+<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
+<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
+<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
+<ul>
+<li>支持迭代的自我识别能力</li>
+<li>创建实现<code>Iterator</code>接口的对象的能力</li>
+</ul>
+<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
+<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
+<ul>
+<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
+<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
+<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
+<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
+</ul>
+<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
+<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
+<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
+<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
+<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
+<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
+<p>可能情形：</p>
+<ol>
+<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
+<li>解构操作并未消费所有值</li>
+</ol>
+<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
+<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
+<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
+</blockquote>
+<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
+<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
+<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
+<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
+<p>生成器函数</p>
+<ul>
+<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
+<li>初次调用生成器函数并不会打印日志</li>
+</ul>
+</li>
+<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
+<li><code>g===g[Symbol.iterator]()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
+<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
+</blockquote>
+<p>yield关键字</p>
+<ul>
+<li>有点像函数的中间返回语句<ul>
+<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
+<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
+</ul>
+</li>
+<li>只能在生成器函数内部使用</li>
+<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
+<li>可以作为函数的中间参数使用<ul>
+<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
+<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
+</ul>
+</li>
+<li><code>yield</code>关键字可以同时用于输入和输出</li>
+<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
+<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
+</ul>
+</li>
+</ul>
+<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
+<p>生成器对象作为可迭代对象</p>
+<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
+<ol>
+<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
+<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
+<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
+<li>错误处理会跳过对应的<code>yield</code></li>
+<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
