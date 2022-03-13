@@ -23,15 +23,15 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="函数表达式、函数声明及箭头函数 函数表达式 必须等到代码执行到它那一行，才会在执行上下文中生成函数定义   函数声明 JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义 这个过程叫函数声明提升     箭头函数 非常适合嵌入函数 不能使用 arguments、super 和 new.target，也不能用作构造函数 没有 prototype 属性">
+<meta name="description" content="函数表达式、函数声明及箭头函数 函数表达式 必须等到代码执行到它那一行，才会在执行上下文中生成函数定义   函数声明 JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义 这个过程叫函数声明提升     箭头函数 非常适合嵌入函数 不能使用 arguments、super 和 new.target，也不能用作构造函数 没有 prototype 属性    函">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数">
 <meta property="og:url" content="http://example.com/2022/01/11/%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="函数表达式、函数声明及箭头函数 函数表达式 必须等到代码执行到它那一行，才会在执行上下文中生成函数定义   函数声明 JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义 这个过程叫函数声明提升     箭头函数 非常适合嵌入函数 不能使用 arguments、super 和 new.target，也不能用作构造函数 没有 prototype 属性">
+<meta property="og:description" content="函数表达式、函数声明及箭头函数 函数表达式 必须等到代码执行到它那一行，才会在执行上下文中生成函数定义   函数声明 JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义 这个过程叫函数声明提升     箭头函数 非常适合嵌入函数 不能使用 arguments、super 和 new.target，也不能用作构造函数 没有 prototype 属性    函">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-11T04:56:07.000Z">
-<meta property="article:modified_time" content="2022-01-13T07:28:16.368Z">
+<meta property="article:modified_time" content="2022-03-08T09:00:06.100Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
@@ -165,18 +165,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -247,7 +247,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-01-13 15:28:16" itemprop="dateModified" datetime="2022-01-13T15:28:16+08:00">2022-01-13</time>
+      <time title="Modified: 2022-03-08 17:00:06" itemprop="dateModified" datetime="2022-03-08T17:00:06+08:00">2022-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,7 +296,7 @@
 </ul>
 </li>
 <li>函数声明<ul>
-<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义<ul>
+<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义<ul>
 <li>这个过程叫函数声明提升</li>
 </ul>
 </li>
@@ -312,8 +312,8 @@
 <p>函数名就是指向函数地指针。</p>
 <span id="more"></span>
 
-<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内 部访问 arguments 对象，从中取得传进来的每个参数值。</p>
-<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永 远不可能直接访问外部函数的这两个变量。</p>
+<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内部访问 arguments 对象，从中取得传进来的每个参数值。</p>
+<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永远不可能直接访问外部函数的这两个变量。</p>
 <h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
 <li>一个类数组对象（但不是 Array 的实例）</li>
 <li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
@@ -323,7 +323,7 @@
 <li>它们在内存中是分开的，只不过会保持同步</li>
 </ul>
 </li>
-<li>有一个callee属性，是一个指向 arguments 对象所在函数的 指针<ul>
+<li>有一个callee属性，是一个指向 arguments 对象所在函数的指针<ul>
 <li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
 </ul>
 </li>
@@ -332,13 +332,13 @@
 <p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
 </blockquote>
 <ul>
-<li>在标准函数中，<strong>this 到底引用哪个对象必须到 函数被调用时才能确定</strong></li>
+<li>在标准函数中，<strong>this 到底引用哪个对象必须到函数被调用时才能确定</strong></li>
 <li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
 </ul>
 <p>函数没有重载，后定义的会覆盖先定义</p>
 <h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
 <li>new.target<ul>
-<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的 构造函数。</li>
+<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的构造函数。</li>
 </ul>
 </li>
 <li>length<ul>
@@ -346,7 +346,7 @@
 </ul>
 </li>
 <li>prototype<ul>
-<li>保存引用类型所有实例 方法的地方</li>
+<li>保存引用类型所有实例方法的地方</li>
 </ul>
 </li>
 </ol>
@@ -372,7 +372,7 @@
 <h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
 <p>递归函数通常的形式是一个函数通过名称调用自己</p>
 </blockquote>
-<p>在写递归函数时使用 arguments.callee 可 以避免函数名被改名，导致递归出错这个问题</p>
+<p>在写递归函数时使用 arguments.callee 可以避免函数名被改名，导致递归出错这个问题</p>
 <h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
 <p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
 </blockquote>
@@ -394,24 +394,24 @@
 </blockquote>
 <p>回顾作用域链概念</p>
 <blockquote>
-<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
+<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
 </blockquote>
-<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它 会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在 调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着 会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
+<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
 <p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
-<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留 在内存中，直到内部函数被销毁后才会被销毁</p>
-<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭 包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
+<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留在内存中，直到内部函数被销毁后才会被销毁</p>
+<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
 <p>闭包有时会产生<strong>内存泄漏</strong></p>
 <h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
-<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组 括号后面的第二组括号会立即调用前面的函数表达式</p>
+<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组括号后面的第二组括号会立即调用前面的函数表达式</p>
 </blockquote>
-<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同 样的隔离</p>
+<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同样的隔离</p>
 <h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
-<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的 变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
+<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
 </blockquote>
-<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部 的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
+<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
 <p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
 <ul>
-<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访 问构造函数中定义的所有变量和函数的能力。</li>
+<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访问构造函数中定义的所有变量和函数的能力。</li>
 </ul>
 <p>所带来的问题：必须通过构造函数来实现这种隔离</p>
 <p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
@@ -470,13 +470,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">49k</span>
+    <span title="Symbols count total">53k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">45 mins.</span>
+    <span title="Reading time total">48 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">

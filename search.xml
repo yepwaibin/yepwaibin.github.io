@@ -916,393 +916,355 @@
       </tags>
   </entry>
   <entry>
-    <title>React</title>
-    <url>/2022/01/21/React/</url>
-    <content><![CDATA[<h2 id="历史和应用"><a href="#历史和应用" class="headerlink" title="历史和应用"></a>历史和应用</h2><ul>
-<li>一个东西的出现，往往是因为在某个历史阶段人们产生了某些需求</li>
-<li>新的东西出现肯定是因为之前的东西不好用</li>
+    <title>Document</title>
+    <url>/2022/01/22/Document/</url>
+    <content><![CDATA[<h2 id="浏览器环境和规格"><a href="#浏览器环境和规格" class="headerlink" title="浏览器环境和规格"></a>浏览器环境和规格</h2><p>在浏览器中，window有两种角色</p>
+<ul>
+<li>Javascript代码的全局对象</li>
+<li>代表浏览器窗口，并提供控制它的方法</li>
 </ul>
+<p>document 对象是页面的主要“入口点”。我们可以使用它来更改或创建页面上的任何内容。</p>
 <span id="more"></span>
 
-<h3 id="React的原型：FaxJS"><a href="#React的原型：FaxJS" class="headerlink" title="React的原型：FaxJS"></a>React的原型：FaxJS</h3><ul>
-<li>客户端或服务端渲染</li>
-<li>响应式<ul>
-<li>状态更新-&gt;UI更新</li>
-</ul>
-</li>
-<li>性能好</li>
-<li>结构化</li>
-</ul>
-<p><a href="https://www.youtube.com/watch?v=GW0rj4sNH2w">Tom Occhino and Jordan Walke: JS Apps at Facebook</a></p>
-<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>例子：苹果官网手机价格变化</p>
-<h3 id="UI编程痛点"><a href="#UI编程痛点" class="headerlink" title="UI编程痛点"></a>UI编程痛点</h3><ul>
-<li>状态更新，UI不会自动更新，需要手动调用DOM进行更新<ul>
-<li>需改良：状态更新，UI自动更新</li>
-</ul>
-</li>
-<li>欠缺基本的代码层面的封装和隔离，代码层面没有组件化<ul>
-<li>需改良：前端代码组件化，可复用，可封装</li>
-</ul>
-</li>
-<li>UI之间的数据依赖关系需要手动维护，如果依赖链路长，则会遇到回调地狱<ul>
-<li>需改良：状态之间互相依赖关系，只需声明即可</li>
-</ul>
-</li>
-</ul>
-<p>例子：火警，烧水</p>
-<h3 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h3><ol>
-<li>事件</li>
-<li>执行既定的回调</li>
-<li>状态变更</li>
-<li>UI更新</li>
-</ol>
-<p>回到苹果官网例子，对页面进行组件化划分</p>
+<h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>每个树的节点都是一个对象，一共12种，通常用到4种</p>
 <ul>
-<li>组件是 组件的组合/原子组件</li>
-<li>组件内拥有状态，外部不可见</li>
-<li>父组件可将状态传入组件内部</li>
+<li>document——DOM的入口点</li>
+<li>元素节点——HTML标签，并形成文档结构</li>
+<li>文本节点</li>
+<li>注释</li>
 </ul>
-<h3 id="状态归属问题"><a href="#状态归属问题" class="headerlink" title="状态归属问题"></a>状态归属问题</h3><ul>
-<li>确定“数据”应该放在哪个组件里保存</li>
-<li>状态归属于两个节点向上寻找到最近的祖宗节点<ul>
-<li>又会带来一个问题，数据有时经常性放在很上层的组件上，这会失去了组件复用的初衷</li>
-<li>子组件如何触发改变上层组件数据的事件？<ul>
-<li>通过上层组件传递函数到子组件，子组件再调用此函数</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
-<li>React是单向数据流还是双向数据流<ul>
-<li>是单向数据流</li>
-<li>父组件能把状态传给子组件，而子组件并不能把状态网上传给父组件，只是单纯的执行了父组件传下来的函数，从而能改变了父组件的状态</li>
-</ul>
-</li>
-<li>如何解决状态不合理上升的问题</li>
-<li>组件的状态改变后，如何更新DOM</li>
-</ol>
-<p>状态应是局部性</p>
-<h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><ol>
-<li>组件声明了状态和UI的映射</li>
-<li>组件有Props/State两种状态<ul>
-<li>内部拥有私有状态State</li>
-<li>外部能接受Props状态，提供复用性</li>
-<li>根据当前State/Props返回一个UI</li>
-</ul>
-</li>
-<li>“组件”可由其他组件拼接而成</li>
-</ol>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
-<li><p>组件挂载时</p>
-<ul>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#constructor"><strong><code>constructor()</code></strong></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidmount"><strong><code>componentDidMount()</code></strong></a></p>
-</li>
-</ul>
-</li>
-<li><p>组件更新时</p>
-<ul>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate"><strong><code>componentDidUpdate()</code></strong></a></li>
-</ul>
-</li>
-<li><p>组件卸载时</p>
-<ul>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount"><strong><code>componentWillUnmount()</code></strong></a></li>
-</ul>
-</li>
-</ol>
-<h2 id="hooks写法"><a href="#hooks写法" class="headerlink" title="hooks写法"></a>hooks写法</h2><p>副作用</p>
-<ul>
-<li>改变了外部的东西</li>
-</ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现时存在的三个问题"><a href="#实现时存在的三个问题" class="headerlink" title="实现时存在的三个问题"></a>实现时存在的三个问题</h3><ol>
-<li>JSX不符合JS标准</li>
-<li>返回的JSX发生改变时如何更新DOM</li>
-<li>State/Props更新时，要重新触发render函数（render函数就是组件函数）</li>
-</ol>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
-<li>转义JSX</li>
-<li>使用虚拟DOM<ul>
-<li>虚拟DOM是一种用于和真实DOM同步，而在JS内存中维护的一个对象，它具有和DOM类似的树状结构，并和DOM可以建立一一对应的关系</li>
-<li>真实的DOM不是JS内存中的对象，而是浏览器维护的一个状态</li>
-</ul>
-</li>
-<li>diff算法更新DOM<ul>
-<li>我们只能通过DOM接口去修改DOM，而不能直接去修改DOM。但是我们可以声明一个变量，和真实DOM有类似结构的变量，每次更新的时候，都生成一个新的虚拟DOM，再使用diff算法去对比新旧虚拟DOM，再去修改真实DOM</li>
-</ul>
-</li>
-</ol>
-<p>插入一个问题：既然所有前端框架都是声明式的，那为什么不把声明式直接植入到浏览器中，自带声明式，这样就不用框架了。</p>
-<ul>
-<li>因为，浏览器自己作为应用平台，不能只提供更高层的东西，因为这样会把浏览器的自由度变得更低了。</li>
-</ul>
-<h3 id="diff算法核心"><a href="#diff算法核心" class="headerlink" title="diff算法核心"></a>diff算法核心</h3><ol>
-<li>不同类型的元素-&gt;替换</li>
-<li>同类型的DOM元素-&gt;更新</li>
-<li>同类型的组件元素-&gt;递归</li>
-</ol>
-<p>更新次数少与计算速度快的抉择</p>
-<p>用层次遍历，每个节点只遍历一次，时间复杂度<code>O(n^3)</code>降到<code>O(n)</code></p>
-<p>出现一个问题：但父组件的状态发生改变，子组件和嵌套的子组件都要去递归的发生改变，其实这样很耗费性能，所以要考虑如何去优化。</p>
-<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><ul>
-<li>指令式编程<ul>
-<li>一步步写清楚</li>
-</ul>
-</li>
-<li>声明式编程<ul>
-<li>只需说明你的目的</li>
-</ul>
-</li>
-<li>响应式编程<ul>
-<li>是声明式编程的一个类别</li>
-<li>不仅像声明式编程一样，还可以自动更新UI</li>
-</ul>
-</li>
-</ul>
-<h2 id="状态管理库"><a href="#状态管理库" class="headerlink" title="状态管理库"></a>状态管理库</h2><blockquote>
-<p>将状态抽离的UI外部进行统一管理</p>
+<h2 id="遍历DOM"><a href="#遍历DOM" class="headerlink" title="遍历DOM"></a>遍历DOM</h2><h3 id="对象间链接"><a href="#对象间链接" class="headerlink" title="对象间链接"></a>对象间链接</h3><blockquote>
+<p>对所有节点，是包含元素节点，文本节点，注释等</p>
 </blockquote>
-<p>问题：假如所有数据都放到外部的Store中，那么会与外部store发生强耦合，可复用性就变差。所以要如何选择哪些状态放到Store，哪些状态只放在自身组件中。</p>
-<p>可以把Store看成这样：这个store是多个组件（把这多个组件看成一个大的整体组件）内部的一个state</p>
-<h3 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h3><p>当前状态，收到外部事件，前一道下一个状态</p>
-<h2 id="应用级框架科普"><a href="#应用级框架科普" class="headerlink" title="应用级框架科普"></a>应用级框架科普</h2><ul>
-<li>next<ul>
-<li>了解一间公司vercel</li>
+<p><img src="../images/Document/fd565c1de6fcacaa600a120b4d23797.png" alt="fd565c1de6fcacaa600a120b4d23797"></p>
+<p>顶层树节点可以直接获取</p>
+<ul>
+<li><code>document.documentElement</code>——<code>&lt;html&gt;</code></li>
+<li><code>document.body</code></li>
+<li><code>document.head</code></li>
+</ul>
+<p>两个术语</p>
+<ul>
+<li>子节点——直系的子元素<ul>
+<li>childNodes列出<strong>所有</strong>子节点，<strong>包括文本节点</strong><ul>
+<li>返回的不是数组，而是集合，一个类数组的可迭代对象，可以用Array.from方法用它来创建一个”真“数组，使得能使用数组的方法</li>
+<li>DOM集合是只读的，</li>
+<li>是实时的——例如先取得<code>elem.childNodes</code>的引用，而后修改DOM，那么节点的更新会自动出现在集合中</li>
 </ul>
 </li>
-<li>modernJs<ul>
-<li>字节的全栈开发框架</li>
+<li>firstChild访问第一个子元素</li>
+<li>lastChild访问最后一个子元素</li>
 </ul>
 </li>
-<li>Blitz<ul>
-<li>无API思想的全栈开发框架</li>
+<li>子孙元素——嵌套在给定元素中所有的元素</li>
+</ul>
+<p>兄弟节点</p>
+<ul>
+<li>nextSibling下一个兄弟节点</li>
+<li>previousSibling上一个兄弟节点</li>
+</ul>
+<p>父节点</p>
+<ul>
+<li>parentNode</li>
+</ul>
+<h3 id="元素节点导航链接"><a href="#元素节点导航链接" class="headerlink" title="元素节点导航链接"></a>元素节点导航链接</h3><p><img src="../images/Document/595929645f562545efc0a04edc7fe05.png" alt="595929645f562545efc0a04edc7fe05"></p>
+<ul>
+<li>children——元素节点的子代的节点</li>
+<li>firstElementChild</li>
+<li>lastElementChild</li>
+<li>previousElementSibling</li>
+<li>nextElementSibling</li>
+<li>parentElement</li>
+</ul>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
+<li>table.rows——<code>&lt;tr&gt;</code>元素的<strong>集合</strong><ul>
+<li>tr.cells<ul>
+<li>给定<code>&lt;tr&gt;</code>中的<code>&lt;td&gt;</code>和<code>&lt;th&gt;</code>单元格的集合</li>
 </ul>
 </li>
+<li>tr.sectionRowIndex<ul>
+<li>给定的<code>&lt;tr&gt;</code>在封闭的<code>&lt;thead&gt;/&lt;tbody&gt;/&lt;tfoot&gt;</code>中的位置（索引）。</li>
+</ul>
+</li>
+<li>tr.rowIndex<ul>
+<li>整个表格<code>&lt;tr&gt;</code>的编号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>table.caption</li>
+<li>table.tHead</li>
+<li>table.tFoot</li>
+<li>table.tBodies——<code>&lt;tbody&gt;</code>元素的集合</li>
+<li><code>&lt;td&gt;</code>和<code>&lt;th&gt;</code><ul>
+<li>td.cellIndex在封闭的<code>&lt;tr&gt;</code>中单元格的编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ol>
+<li>getElement*<ul>
+<li>document.getElementById(id)</li>
+</ul>
+</li>
+<li>querySelector*<ul>
+<li>elem.querySelectorAll(CSS)<ul>
+<li>返回 elem 中与给定 CSS 选择器匹配的<strong>所有</strong>元素</li>
+<li>静态集合，像固定的数组</li>
+</ul>
+</li>
+<li>elem.querySelector(CSS)<ul>
+<li>返回给定 CSS 选择器的<strong>第一个</strong>元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>elem.matches(CSS)<ul>
+<li>检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false</li>
+</ul>
+</li>
+<li>elem.closest(CSS)<ul>
+<li>查找与 CSS 选择器匹配的<strong>最近的祖先</strong></li>
+</ul>
+</li>
+<li>“getElementsBy*”方法，返回的都是<strong>实时的集合</strong>，始终反映的是文档的当前状态<ul>
+<li>elem.getElementsByTagName(tag)</li>
+<li>elem.getElementsByClassName(className)</li>
+<li>document.getElementsByName(name)</li>
+</ul>
+</li>
+<li>elemA.contains(elemB)<ul>
+<li>elemB 在 elemA 内或者 elemA==elemB就返回true</li>
+</ul>
+</li>
+</ol>
+<h2 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h2><ul>
+<li>innerHTML<ul>
+<li>仅对元素节点有效<ul>
+<li>文本节点、注释节点用<code>data</code>属性获取内容</li>
+</ul>
+</li>
+<li>+= 是会重写，先抹除原先内容，再把原先内容和附加内容结合，赋值过去<ul>
+<li>因此所有的图片和其他资源都将重写加载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>outerHTML<ul>
+<li>写入 outerHTML 不会改变元素。而是在 DOM 中替换它<ul>
+<li>写入后，DOM会显示新写入的，但打印出来却是旧的值</li>
+</ul>
+</li>
+<li>outerHTML 赋值不会修改 DOM 元素，而是将其从 DOM 中删除并在其位置插入新的 HTML。</li>
+</ul>
+</li>
+<li>textContent<ul>
+<li>只返回文本，就像所有<code>tag</code>都被剪掉了一样</li>
+<li>写入比innerHTML安全一些，因为，innerHTML写入的内容会作为html插入，而textContent只当成文本插入</li>
+</ul>
+</li>
+<li>hidden<ul>
+<li>设置为true与CSS中，<code>display: none</code>做着相同的事情</li>
+</ul>
+</li>
+</ul>
+<p>大多数标准 HTML 特性（attribute）都具有相应的 DOM 属性。</p>
+<h2 id="特性-写在-HTML-中的内容-和属性-DOM-对象中的内容"><a href="#特性-写在-HTML-中的内容-和属性-DOM-对象中的内容" class="headerlink" title="特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)"></a>特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)</h2><blockquote>
+<p>当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）</p>
+<p>但特性—属性映射并不是一一对应的</p>
+</blockquote>
+<h3 id="DOM属性"><a href="#DOM属性" class="headerlink" title="DOM属性"></a>DOM属性</h3><p>DOM节点是常规的Javascript的对象</p>
+<ul>
+<li>大小写敏感</li>
+<li>可以设多种值</li>
+</ul>
+<h2 id="HTML特性"><a href="#HTML特性" class="headerlink" title="HTML特性"></a>HTML特性</h2><ul>
+<li>当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别<strong>标准的</strong>特性并以此创建 DOM 属性。而<strong>非标准的</strong>就没有相对应的 DOM 属性，会变成了<code>undefined</code></li>
+<li>大小写不敏感</li>
+<li>值总是字符串类型</li>
+</ul>
+<p>所有特性（标准的非标准的）都可以通过使用以下方法进行访问：</p>
+<ul>
+<li>elem.hasAttribute(name) — 检查特性是否存在</li>
+<li>elem.getAttribute(name) — 获取这个特性值</li>
+<li>elem.setAttribute(name, value) — 设置这个特性值</li>
+<li>elem.removeAttribute(name) — 移除这个特性。</li>
+</ul>
+<h3 id="属性-特性同步"><a href="#属性-特性同步" class="headerlink" title="属性-特性同步"></a>属性-特性同步</h3><p>当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然</p>
+<ul>
+<li>例外：如<code>input.value</code>只能从特性同步到属性</li>
+</ul>
+<h3 id="非标准特性dataset"><a href="#非标准特性dataset" class="headerlink" title="非标准特性dataset"></a>非标准特性dataset</h3><blockquote>
+<p>非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素</p>
+</blockquote>
+<p>为了避免冲突，所有以 <code>data-</code> 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。</p>
+<p>用法：</p>
+<ul>
+<li>如果一个 elem 有一个名为 <code>data-about</code> 的特性，那么可以通过 <code>elem.dataset.about</code> 取到它</li>
+<li>多词特性可以以驼峰式进行调用</li>
+</ul>
+<h2 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h2><h3 id="创建一个元素"><a href="#创建一个元素" class="headerlink" title="创建一个元素"></a>创建一个元素</h3><ul>
+<li><code>document.createElement(tag)</code><ul>
+<li>元素节点</li>
+</ul>
+</li>
+<li><code>document.createTextNode(text)</code><ul>
+<li>文本节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><ul>
+<li>className</li>
+</ul>
+<h3 id="填充消息"><a href="#填充消息" class="headerlink" title="填充消息"></a>填充消息</h3><ul>
+<li>innerHTML</li>
+</ul>
+<h3 id="插入方法"><a href="#插入方法" class="headerlink" title="插入方法"></a>插入方法</h3><p>字符串被以一种安全的方式插入到页面中，就像 <code>elem.textContent </code>所做的一样——不会被当成html插入，只当成文本</p>
+<ul>
+<li>node.append(nodes or strings)<ul>
+<li>在 node <strong>末尾</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.prepend()<ul>
+<li>在node<strong>开头</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.before()<ul>
+<li>在node<strong>前面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.after()<ul>
+<li>在node<strong>后面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.replaceWIth()<ul>
+<li>将node替换给定的节点或字符串</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>elem.insertAdjacentHTML(where, html) </p>
+<ul>
+<li>内容作为 HTML 代码插入，如同innerHTML</li>
+<li>where如下面的值</li>
+</ul>
+<p><img src="../images/Document/image-20220313160632338.png" alt="image-20220313160632338"></p>
+</li>
+</ul>
+<h3 id="节点移除"><a href="#节点移除" class="headerlink" title="节点移除"></a>节点移除</h3><ul>
+<li>node.remove()</li>
+</ul>
+<h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul>
+<li>cloneNode(true/false)<ul>
+<li>true为深克隆，具有所有特性 （attribute）和子元素</li>
+<li>false，则不克隆子元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="DocumentFragment"><a href="#DocumentFragment" class="headerlink" title="DocumentFragment"></a>DocumentFragment</h3><p>可以理解为容器</p>
+<h2 id="样式和类"><a href="#样式和类" class="headerlink" title="样式和类"></a>样式和类</h2><h3 id="className"><a href="#className" class="headerlink" title="className"></a>className</h3><p>它将替换类中的整个字符串</p>
+<h3 id="classList"><a href="#classList" class="headerlink" title="classList"></a>classList</h3><p>可迭代</p>
+<p>方法</p>
+<ul>
+<li>add()<ul>
+<li>添加一个类</li>
+</ul>
+</li>
+<li>remove()<ul>
+<li>移除一个类</li>
+</ul>
+</li>
+<li>toggle()<ul>
+<li>如果类不存在就添加类，存在就移除它</li>
+</ul>
+</li>
+</ul>
+<h3 id="重置样式属性"><a href="#重置样式属性" class="headerlink" title="重置样式属性"></a>重置样式属性</h3><p>设为空字符</p>
+<p><code>elem.style.* = &quot;&quot;</code></p>
+<p>使用 style.* 来对各个样式属性进行赋值时，需要有单位，且不能一下子设置所有属性，因为 div.style 是一个对象，并且它是只读的，设置完整属性可用<code>style.cssText</code></p>
+<h3 id="计算样式getComputedStyle"><a href="#计算样式getComputedStyle" class="headerlink" title="计算样式getComputedStyle"></a>计算样式getComputedStyle</h3><p><code>getComputedStyle(element, [pseudo])</code></p>
+<ul>
+<li>element <ul>
+<li>需要被读取样式值的元素</li>
+</ul>
+</li>
+<li>pseudo <ul>
+<li>伪元素（如果需要），例如 ::before 。空字符串或无参数则意味着元素本身。</li>
+</ul>
+</li>
+</ul>
+<h2 id="元素大小和滚动"><a href="#元素大小和滚动" class="headerlink" title="元素大小和滚动"></a>元素大小和滚动</h2><p>几何属性，这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”</p>
+<p><img src="../images/Document/image-20220313164146836.png" alt="image-20220313164146836"></p>
+<ul>
+<li>offsetParent 是最接近的祖先<ul>
+<li>最近祖先为下列之一<ul>
+<li>CSS 定位的（ position 为 absolute ， relative 或 fixed ）</li>
+<li>或<code>&lt;td&gt;,&lt;th&gt;,&lt;table&gt;</code></li>
+<li>或<code>&lt;body&gt;</code></li>
+</ul>
+</li>
+<li>值有可能为null<ul>
+<li>未显示的元素（ display:none 或者不在文档中）</li>
+<li>对于<code>&lt;body&gt;,&lt;html&gt;</code></li>
+<li>对于带有position：fixed元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性 offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标</li>
+<li>offsetWidth/offsetHeight 是完整边框<ul>
+<li>content width/height + 2个padding width/height + 2个margin width/height</li>
+</ul>
+</li>
+<li>对于未显示的元素，几何属性为 0/null<ul>
+<li>用几何属性来检查一个元素是否被隐藏</li>
+</ul>
+</li>
+<li>clientTop<ul>
+<li>上边框宽度</li>
+</ul>
+</li>
+<li>clientLeft<ul>
+<li>左边框宽度</li>
+</ul>
+</li>
+<li>clientWidth/clientHeight<ul>
+<li>元素边框内区域的大小——content width/height + 2个 padding width/height</li>
+</ul>
+</li>
+<li>scrollWidth/scrollHeight<ul>
+<li>就像 clientWidth/clientHeight ，但它们还包括滚动出（隐藏）的部分</li>
+</ul>
+</li>
+<li>scrollLeft/scrollTop<ul>
+<li>是元素的隐藏、滚动部分的 width/height</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用几何属性的原因"><a href="#使用几何属性的原因" class="headerlink" title="使用几何属性的原因"></a>使用几何属性的原因</h3><ol>
+<li>首先，CSS width/height 取决于另一个属性： box-sizing ，它定义了“什么是” CSS 宽度和高度。出于 CSS 的目的而对 box-sizing 进行的更改可能会破坏 此类 JavaScript 操作。</li>
+<li>其次，CSS 的 width/height 可能是 auto ，例如内联（inline）元素。但在 JavaScript 中，我们需要 一个确切的 px 大小，以便我们在计算中使用它。</li>
+</ol>
+<h2 id="Window大小和滚动"><a href="#Window大小和滚动" class="headerlink" title="Window大小和滚动"></a>Window大小和滚动</h2><p>使用 document.documentElement 的 clientWidth/clientHeight返回文档可见部分，这个值不包括滚动条。</p>
+<h3 id="获得当前滚动"><a href="#获得当前滚动" class="headerlink" title="获得当前滚动"></a>获得当前滚动</h3><ul>
+<li>scrollLeft/scrollTop </li>
+</ul>
+<h3 id="调整滚动位置"><a href="#调整滚动位置" class="headerlink" title="调整滚动位置"></a>调整滚动位置</h3><ul>
+<li>方法 scrollBy(x,y) 将页面滚动至 相对于当前位置的 (x, y) 位置</li>
+<li>方法 scrollTo(pageX,pageY) 将页面滚动至绝对坐标，使得可见部分的左上角具有相对于文档左上角的坐标 (pageX, pageY) 。就像设置了 scrollLeft/scrollTop 一样。</li>
+</ul>
+<h3 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h3><p>设置overflow：hidden</p>
+<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><h3 id="元素坐标-getBoundingClinetRect"><a href="#元素坐标-getBoundingClinetRect" class="headerlink" title="元素坐标 getBoundingClinetRect()"></a>元素坐标 getBoundingClinetRect()</h3><p><img src="../images/Document/image-20220313171141878.png" alt="image-20220313171141878"></p>
+<p>页面上的任何点都有坐标：</p>
+<ul>
+<li>相对于窗口的坐标 — elem.getBoundingClientRect() 。</li>
+<li>相对于文档的坐标 — elem.getBoundingClientRect() 加上当前页面滚动。</li>
 </ul>
 ]]></content>
       <categories>
-        <category>青训营</category>
+        <category>现代Javascript教程</category>
       </categories>
       <tags>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是Javascript</title>
-    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
-    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
-<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
-</blockquote>
-<p>最早有两个版本的Javascript</p>
-<ol>
-<li>网景的Javascript</li>
-<li>微软IE的JScript</li>
-</ol>
-<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
-<span id="more"></span>
-
-<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
-<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
-<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
-</blockquote>
-<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
-<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
-<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
-<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
-<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
-<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
-<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
-<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
-<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
-<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
-</ul>
-<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
-<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
-</blockquote>
-<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
-<p>DOM三个Level</p>
-<ol>
-<li>Level1目标是映射文档结构</li>
-<li>Level2新增模块<ul>
-<li>DOM视图</li>
-<li>DOM事件</li>
-<li>DOM样式</li>
-<li>DOM遍历和范围</li>
-</ul>
-</li>
-<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
-</ol>
-<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
-<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
-</blockquote>
-<ul>
-<li>弹出新浏览器窗口的能力</li>
-<li>移动、缩放和关闭浏览器窗口的能力</li>
-<li>navigator对象，提供关于浏览器的详尽信息</li>
-<li>location对象，提供浏览器加载页面的详尽信息</li>
-<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
-<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
-<li>对cookie的支持</li>
-<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
-</ul>
-<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
-<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
-<ul>
-<li><code>JavaScript</code>：指语言及其实现</li>
-<li><code>ECMAScript</code>：指语言标准及语言版本</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>函数</title>
-    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
-<li>函数表达式<ul>
-<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
-</ul>
-</li>
-<li>函数声明<ul>
-<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中 生成函数定义<ul>
-<li>这个过程叫函数声明提升</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>箭头函数<ul>
-<li>非常适合嵌入函数</li>
-<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
-<li>没有 prototype 属性</li>
-</ul>
-</li>
-</ol>
-<p>函数名就是指向函数地指针。</p>
-<span id="more"></span>
-
-<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内 部访问 arguments 对象，从中取得传进来的每个参数值。</p>
-<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永 远不可能直接访问外部函数的这两个变量。</p>
-<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
-<li>一个类数组对象（但不是 Array 的实例）</li>
-<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
-<li>可以跟命名参数一起使用</li>
-<li>它的值始终会与对应的命名参数同步<ul>
-<li>修改arguments上的值，会使得命名参数的值会变化</li>
-<li>它们在内存中是分开的，只不过会保持同步</li>
-</ul>
-</li>
-<li>有一个callee属性，是一个指向 arguments 对象所在函数的 指针<ul>
-<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
-</ul>
-</li>
-</ul>
-<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
-<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
-</blockquote>
-<ul>
-<li>在标准函数中，<strong>this 到底引用哪个对象必须到 函数被调用时才能确定</strong></li>
-<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
-</ul>
-<p>函数没有重载，后定义的会覆盖先定义</p>
-<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
-<li>new.target<ul>
-<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的 构造函数。</li>
-</ul>
-</li>
-<li>length<ul>
-<li>保存函数定义的命名参数的个数</li>
-</ul>
-</li>
-<li>prototype<ul>
-<li>保存引用类型所有实例 方法的地方</li>
-</ul>
-</li>
-</ol>
-<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
-<ul>
-<li>apply()<ul>
-<li>第二个参数可以是Array实例，也可以是arguments对象</li>
-</ul>
-</li>
-<li>call()<ul>
-<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
-</ul>
-</li>
-<li>bind()<ul>
-<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
-</ul>
-</li>
-</ul>
-<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
-<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
-<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
-<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
-<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
-<p>递归函数通常的形式是一个函数通过名称调用自己</p>
-</blockquote>
-<p>在写递归函数时使用 arguments.callee 可 以避免函数名被改名，导致递归出错这个问题</p>
-<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
-<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
-</blockquote>
-<p>优化条件</p>
-<blockquote>
-<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
-</blockquote>
-<ul>
-<li>代码在严格模式下执行<ul>
-<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
-</ul>
-</li>
-<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
-<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
-<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
-</ul>
-<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
-<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
-</blockquote>
-<p>回顾作用域链概念</p>
-<blockquote>
-<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对 象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
-</blockquote>
-<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它 会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在 调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着 会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
-<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
-<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留 在内存中，直到内部函数被销毁后才会被销毁</p>
-<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭 包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
-<p>闭包有时会产生<strong>内存泄漏</strong></p>
-<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
-<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组 括号后面的第二组括号会立即调用前面的函数表达式</p>
-</blockquote>
-<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同 样的隔离</p>
-<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
-<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的 变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
-</blockquote>
-<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部 的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
-<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
-<ul>
-<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访 问构造函数中定义的所有变量和函数的能力。</li>
-</ul>
-<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
-<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
-<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
+        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -1503,6 +1465,396 @@
 <h3 id="属性验证"><a href="#属性验证" class="headerlink" title="属性验证"></a>属性验证</h3><p>因为所有赋值操作都会触发set()捕获器，所以可以根据所赋的值决定是允许还是拒绝赋值</p>
 <h3 id="函数与构造函数参数验证"><a href="#函数与构造函数参数验证" class="headerlink" title="函数与构造函数参数验证"></a>函数与构造函数参数验证</h3><p>跟保护和验证对象属性类似，也可对函数和构造函数参数进行审查。比如，可以让函数只接收某种类型的值</p>
 <h3 id="数据绑定与可观察对象"><a href="#数据绑定与可观察对象" class="headerlink" title="数据绑定与可观察对象"></a>数据绑定与可观察对象</h3><p>通过代理可以把运行时中原本不相关的部分联系到一起。这样就可以实现各种模式，从而让不同的代码互操作</p>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React</title>
+    <url>/2022/01/21/React/</url>
+    <content><![CDATA[<h2 id="历史和应用"><a href="#历史和应用" class="headerlink" title="历史和应用"></a>历史和应用</h2><ul>
+<li>一个东西的出现，往往是因为在某个历史阶段人们产生了某些需求</li>
+<li>新的东西出现肯定是因为之前的东西不好用</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="React的原型：FaxJS"><a href="#React的原型：FaxJS" class="headerlink" title="React的原型：FaxJS"></a>React的原型：FaxJS</h3><ul>
+<li>客户端或服务端渲染</li>
+<li>响应式<ul>
+<li>状态更新-&gt;UI更新</li>
+</ul>
+</li>
+<li>性能好</li>
+<li>结构化</li>
+</ul>
+<p><a href="https://www.youtube.com/watch?v=GW0rj4sNH2w">Tom Occhino and Jordan Walke: JS Apps at Facebook</a></p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>例子：苹果官网手机价格变化</p>
+<h3 id="UI编程痛点"><a href="#UI编程痛点" class="headerlink" title="UI编程痛点"></a>UI编程痛点</h3><ul>
+<li>状态更新，UI不会自动更新，需要手动调用DOM进行更新<ul>
+<li>需改良：状态更新，UI自动更新</li>
+</ul>
+</li>
+<li>欠缺基本的代码层面的封装和隔离，代码层面没有组件化<ul>
+<li>需改良：前端代码组件化，可复用，可封装</li>
+</ul>
+</li>
+<li>UI之间的数据依赖关系需要手动维护，如果依赖链路长，则会遇到回调地狱<ul>
+<li>需改良：状态之间互相依赖关系，只需声明即可</li>
+</ul>
+</li>
+</ul>
+<p>例子：火警，烧水</p>
+<h3 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h3><ol>
+<li>事件</li>
+<li>执行既定的回调</li>
+<li>状态变更</li>
+<li>UI更新</li>
+</ol>
+<p>回到苹果官网例子，对页面进行组件化划分</p>
+<ul>
+<li>组件是 组件的组合/原子组件</li>
+<li>组件内拥有状态，外部不可见</li>
+<li>父组件可将状态传入组件内部</li>
+</ul>
+<h3 id="状态归属问题"><a href="#状态归属问题" class="headerlink" title="状态归属问题"></a>状态归属问题</h3><ul>
+<li>确定“数据”应该放在哪个组件里保存</li>
+<li>状态归属于两个节点向上寻找到最近的祖宗节点<ul>
+<li>又会带来一个问题，数据有时经常性放在很上层的组件上，这会失去了组件复用的初衷</li>
+<li>子组件如何触发改变上层组件数据的事件？<ul>
+<li>通过上层组件传递函数到子组件，子组件再调用此函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>React是单向数据流还是双向数据流<ul>
+<li>是单向数据流</li>
+<li>父组件能把状态传给子组件，而子组件并不能把状态网上传给父组件，只是单纯的执行了父组件传下来的函数，从而能改变了父组件的状态</li>
+</ul>
+</li>
+<li>如何解决状态不合理上升的问题</li>
+<li>组件的状态改变后，如何更新DOM</li>
+</ol>
+<p>状态应是局部性</p>
+<h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><ol>
+<li>组件声明了状态和UI的映射</li>
+<li>组件有Props/State两种状态<ul>
+<li>内部拥有私有状态State</li>
+<li>外部能接受Props状态，提供复用性</li>
+<li>根据当前State/Props返回一个UI</li>
+</ul>
+</li>
+<li>“组件”可由其他组件拼接而成</li>
+</ol>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
+<li><p>组件挂载时</p>
+<ul>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#constructor"><strong><code>constructor()</code></strong></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidmount"><strong><code>componentDidMount()</code></strong></a></p>
+</li>
+</ul>
+</li>
+<li><p>组件更新时</p>
+<ul>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate"><strong><code>componentDidUpdate()</code></strong></a></li>
+</ul>
+</li>
+<li><p>组件卸载时</p>
+<ul>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount"><strong><code>componentWillUnmount()</code></strong></a></li>
+</ul>
+</li>
+</ol>
+<h2 id="hooks写法"><a href="#hooks写法" class="headerlink" title="hooks写法"></a>hooks写法</h2><p>副作用</p>
+<ul>
+<li>改变了外部的东西</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现时存在的三个问题"><a href="#实现时存在的三个问题" class="headerlink" title="实现时存在的三个问题"></a>实现时存在的三个问题</h3><ol>
+<li>JSX不符合JS标准</li>
+<li>返回的JSX发生改变时如何更新DOM</li>
+<li>State/Props更新时，要重新触发render函数（render函数就是组件函数）</li>
+</ol>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
+<li>转义JSX</li>
+<li>使用虚拟DOM<ul>
+<li>虚拟DOM是一种用于和真实DOM同步，而在JS内存中维护的一个对象，它具有和DOM类似的树状结构，并和DOM可以建立一一对应的关系</li>
+<li>真实的DOM不是JS内存中的对象，而是浏览器维护的一个状态</li>
+</ul>
+</li>
+<li>diff算法更新DOM<ul>
+<li>我们只能通过DOM接口去修改DOM，而不能直接去修改DOM。但是我们可以声明一个变量，和真实DOM有类似结构的变量，每次更新的时候，都生成一个新的虚拟DOM，再使用diff算法去对比新旧虚拟DOM，再去修改真实DOM</li>
+</ul>
+</li>
+</ol>
+<p>插入一个问题：既然所有前端框架都是声明式的，那为什么不把声明式直接植入到浏览器中，自带声明式，这样就不用框架了。</p>
+<ul>
+<li>因为，浏览器自己作为应用平台，不能只提供更高层的东西，因为这样会把浏览器的自由度变得更低了。</li>
+</ul>
+<h3 id="diff算法核心"><a href="#diff算法核心" class="headerlink" title="diff算法核心"></a>diff算法核心</h3><ol>
+<li>不同类型的元素-&gt;替换</li>
+<li>同类型的DOM元素-&gt;更新</li>
+<li>同类型的组件元素-&gt;递归</li>
+</ol>
+<p>更新次数少与计算速度快的抉择</p>
+<p>用层次遍历，每个节点只遍历一次，时间复杂度<code>O(n^3)</code>降到<code>O(n)</code></p>
+<p>出现一个问题：但父组件的状态发生改变，子组件和嵌套的子组件都要去递归的发生改变，其实这样很耗费性能，所以要考虑如何去优化。</p>
+<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><ul>
+<li>指令式编程<ul>
+<li>一步步写清楚</li>
+</ul>
+</li>
+<li>声明式编程<ul>
+<li>只需说明你的目的</li>
+</ul>
+</li>
+<li>响应式编程<ul>
+<li>是声明式编程的一个类别</li>
+<li>不仅像声明式编程一样，还可以自动更新UI</li>
+</ul>
+</li>
+</ul>
+<h2 id="状态管理库"><a href="#状态管理库" class="headerlink" title="状态管理库"></a>状态管理库</h2><blockquote>
+<p>将状态抽离的UI外部进行统一管理</p>
+</blockquote>
+<p>问题：假如所有数据都放到外部的Store中，那么会与外部store发生强耦合，可复用性就变差。所以要如何选择哪些状态放到Store，哪些状态只放在自身组件中。</p>
+<p>可以把Store看成这样：这个store是多个组件（把这多个组件看成一个大的整体组件）内部的一个state</p>
+<h3 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h3><p>当前状态，收到外部事件，前一道下一个状态</p>
+<h2 id="应用级框架科普"><a href="#应用级框架科普" class="headerlink" title="应用级框架科普"></a>应用级框架科普</h2><ul>
+<li>next<ul>
+<li>了解一间公司vercel</li>
+</ul>
+</li>
+<li>modernJs<ul>
+<li>字节的全栈开发框架</li>
+</ul>
+</li>
+<li>Blitz<ul>
+<li>无API思想的全栈开发框架</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>青训营</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>函数</title>
+    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
+<li>函数表达式<ul>
+<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
+</ul>
+</li>
+<li>函数声明<ul>
+<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义<ul>
+<li>这个过程叫函数声明提升</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>箭头函数<ul>
+<li>非常适合嵌入函数</li>
+<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
+<li>没有 prototype 属性</li>
+</ul>
+</li>
+</ol>
+<p>函数名就是指向函数地指针。</p>
+<span id="more"></span>
+
+<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内部访问 arguments 对象，从中取得传进来的每个参数值。</p>
+<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永远不可能直接访问外部函数的这两个变量。</p>
+<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
+<li>一个类数组对象（但不是 Array 的实例）</li>
+<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
+<li>可以跟命名参数一起使用</li>
+<li>它的值始终会与对应的命名参数同步<ul>
+<li>修改arguments上的值，会使得命名参数的值会变化</li>
+<li>它们在内存中是分开的，只不过会保持同步</li>
+</ul>
+</li>
+<li>有一个callee属性，是一个指向 arguments 对象所在函数的指针<ul>
+<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
+</ul>
+</li>
+</ul>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
+<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
+</blockquote>
+<ul>
+<li>在标准函数中，<strong>this 到底引用哪个对象必须到函数被调用时才能确定</strong></li>
+<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
+</ul>
+<p>函数没有重载，后定义的会覆盖先定义</p>
+<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
+<li>new.target<ul>
+<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的构造函数。</li>
+</ul>
+</li>
+<li>length<ul>
+<li>保存函数定义的命名参数的个数</li>
+</ul>
+</li>
+<li>prototype<ul>
+<li>保存引用类型所有实例方法的地方</li>
+</ul>
+</li>
+</ol>
+<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
+<ul>
+<li>apply()<ul>
+<li>第二个参数可以是Array实例，也可以是arguments对象</li>
+</ul>
+</li>
+<li>call()<ul>
+<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
+</ul>
+</li>
+<li>bind()<ul>
+<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
+</ul>
+</li>
+</ul>
+<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
+<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
+<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
+<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
+<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
+<p>递归函数通常的形式是一个函数通过名称调用自己</p>
+</blockquote>
+<p>在写递归函数时使用 arguments.callee 可以避免函数名被改名，导致递归出错这个问题</p>
+<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
+<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
+</blockquote>
+<p>优化条件</p>
+<blockquote>
+<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
+</blockquote>
+<ul>
+<li>代码在严格模式下执行<ul>
+<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
+</ul>
+</li>
+<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
+<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
+<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
+</ul>
+<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
+<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
+</blockquote>
+<p>回顾作用域链概念</p>
+<blockquote>
+<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
+</blockquote>
+<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
+<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
+<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留在内存中，直到内部函数被销毁后才会被销毁</p>
+<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
+<p>闭包有时会产生<strong>内存泄漏</strong></p>
+<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
+<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组括号后面的第二组括号会立即调用前面的函数表达式</p>
+</blockquote>
+<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同样的隔离</p>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
+<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
+</blockquote>
+<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
+<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
+<ul>
+<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访问构造函数中定义的所有变量和函数的能力。</li>
+</ul>
+<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
+<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
+<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是Javascript</title>
+    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
+    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
+<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
+</blockquote>
+<p>最早有两个版本的Javascript</p>
+<ol>
+<li>网景的Javascript</li>
+<li>微软IE的JScript</li>
+</ol>
+<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
+<span id="more"></span>
+
+<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
+<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
+<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
+</blockquote>
+<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
+<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
+<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
+<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
+<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
+<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
+<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
+<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
+<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
+</blockquote>
+<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM三个Level</p>
+<ol>
+<li>Level1目标是映射文档结构</li>
+<li>Level2新增模块<ul>
+<li>DOM视图</li>
+<li>DOM事件</li>
+<li>DOM样式</li>
+<li>DOM遍历和范围</li>
+</ul>
+</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
+</ol>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
+<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
+</blockquote>
+<ul>
+<li>弹出新浏览器窗口的能力</li>
+<li>移动、缩放和关闭浏览器窗口的能力</li>
+<li>navigator对象，提供关于浏览器的详尽信息</li>
+<li>location对象，提供浏览器加载页面的详尽信息</li>
+<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对cookie的支持</li>
+<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
+</ul>
+<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
+<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
+<ul>
+<li><code>JavaScript</code>：指语言及其实现</li>
+<li><code>ECMAScript</code>：指语言标准及语言版本</li>
+</ul>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -2284,24 +2636,7 @@
   <entry>
     <title>2022日常</title>
     <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2><h3 id="2022-01-07"><a href="#2022-01-07" class="headerlink" title="2022-01-07"></a>2022-01-07</h3><p>以为新买的手表坏了，显示2021，拿起来才发现原来是20:21，本想顺手拍个照记录一下时间，按下快门，照片里却变成了20:22。<code>1:17</code></p>
-<h3 id="2022-01-08"><a href="#2022-01-08" class="headerlink" title="2022-01-08"></a>2022-01-08</h3><p>走在街上谈论到某些事情时候，突然想到王小波在书引用到弗洛伊德的一些话，当人处于一个痛苦的环境下，并且无法改变这种痛苦，那么人就会把这种痛苦看作一种是快乐，去享受着。没去确认语句的具体细节，但大概是这个意思。<code>00:48</code></p>
-<span id="more"></span>
-
-<h3 id="2022-01-09"><a href="#2022-01-09" class="headerlink" title="2022-01-09"></a>2022-01-09</h3><p>放纵了一天，明天好好干<code>00:38</code></p>
-<h3 id="2022-01-10"><a href="#2022-01-10" class="headerlink" title="2022-01-10"></a>2022-01-10</h3><p>八合里吃牛，燥热。还有50天？猛干<code>2:18</code></p>
-<h3 id="2022-01-11"><a href="#2022-01-11" class="headerlink" title="2022-01-11"></a>2022-01-11</h3><p>讲少点qnhhfd词汇<code>00:29</code></p>
-<h3 id="2022-01-12"><a href="#2022-01-12" class="headerlink" title="2022-01-12"></a>2022-01-12</h3><p>被梦境缠绕<code>00:07</code></p>
-<h3 id="2022-01-13"><a href="#2022-01-13" class="headerlink" title="2022-01-13"></a>2022-01-13</h3><p>洗澡成为了一项唯一的娱乐活动，一天洗三次= =。天气也太冷了吧<code>00:31</code></p>
-<h3 id="2022-01-14"><a href="#2022-01-14" class="headerlink" title="2022-01-14"></a>2022-01-14</h3><p>coding【bam:O’Fama】<code>01:35</code></p>
-<h3 id="2022-01-15"><a href="#2022-01-15" class="headerlink" title="2022-01-15"></a>2022-01-15</h3><p>给点耐心给自己<code>00:54</code></p>
-<h3 id="2022-01-16"><a href="#2022-01-16" class="headerlink" title="2022-01-16"></a>2022-01-16</h3><p>这学期最后一次篮球，也是崴脚之后第一次打。心情愉悦，能和熟悉的，半熟悉的朋友，边吹水边打:)<code>01:42</code></p>
-<h3 id="2022-01-17"><a href="#2022-01-17" class="headerlink" title="2022-01-17"></a>2022-01-17</h3><p>7人女仆桌游馆，尬玩尬玩=.=，还回想起以前中学，跟着朋友被第一次带去女仆咖啡厅，好蛇皮←_←今天回个家吃饭，原本想复诊牙科，结果周一到周四都被约满了，只能祈祷下周能提前约到，不然大概率只能年后再看了。<code>00:08</code></p>
-<h3 id="2022-01-18"><a href="#2022-01-18" class="headerlink" title="2022-01-18"></a>2022-01-18</h3><p>虽然只看了剪辑，lgd和rng的比赛还是精彩呀。毕设被追的有点紧，简单写了点页面，要找点时间把后端给写了<code>02:23</code></p>
-<h3 id="2022-01-19"><a href="#2022-01-19" class="headerlink" title="2022-01-19"></a>2022-01-19</h3><p>毕设会议取消<code>02:13</code></p>
-<h3 id="2022-01-20"><a href="#2022-01-20" class="headerlink" title="2022-01-20"></a>2022-01-20</h3><p>透支<code>03:00</code></p>
-<h3 id="2022-01-21"><a href="#2022-01-21" class="headerlink" title="2022-01-21"></a>2022-01-21</h3><p>高中、天台、四人，一年一次烧烤<code>02:58</code></p>
-]]></content>
+    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2>]]></content>
       <categories>
         <category>日常</category>
       </categories>
