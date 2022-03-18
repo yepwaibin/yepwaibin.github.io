@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 6.0.0">
 
 
@@ -22,7 +21,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yepwaibin.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yepwaibin.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="HTTP介绍http是什么，用来做什么的是数据传输协议。Web浏览器、服务器和相关Web应用程序都是通过http相互通信的 Web客户端、服务端发送请求的一般称为客户端，响应请求的一般称为服务端。HTTP客户端和HTTP服务端共同构成了万维网的基本组件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP基础">
@@ -30,13 +29,13 @@
 <meta property="og:site_name" content="Sky&#39;s Blog">
 <meta property="og:description" content="HTTP介绍http是什么，用来做什么的是数据传输协议。Web浏览器、服务器和相关Web应用程序都是通过http相互通信的 Web客户端、服务端发送请求的一般称为客户端，响应请求的一般称为服务端。HTTP客户端和HTTP服务端共同构成了万维网的基本组件">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yepwaibin.github.io/.io//02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png">
+<meta property="og:image" content="https://yepwaibin.github.io/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png">
 <meta property="article:published_time" content="2022-02-17T02:26:43.000Z">
 <meta property="article:modified_time" content="2022-03-16T16:53:15.564Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yepwaibin.github.io/.io//02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png">
+<meta name="twitter:image" content="https://yepwaibin.github.io/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png">
 
 
 <link rel="canonical" href="https://yepwaibin.github.io/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/">
@@ -167,18 +166,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -616,8 +615,7 @@
 </ul>
 <p>Connection首部不能转发出去，报文转发出去前，一定要删除Connection首部，只能用于一跳</p>
 <h4 id="串行事务处理时延"><a href="#串行事务处理时延" class="headerlink" title="串行事务处理时延"></a>串行事务处理时延</h4><p>每个事务一个接着一个连接</p>
-<img src="/.io//02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png" class title="link">
-
+<p><img src="/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png" alt="link"></p>
 <p>优化</p>
 <ul>
 <li>并行连接<ul>
@@ -681,6 +679,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" rel="next" title="理解执行上下文">
+                  理解执行上下文 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -712,13 +713,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">61k</span>
+    <span title="Symbols count total">63k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">56 mins.</span>
+    <span title="Reading time total">57 mins.</span>
   </span>
 </div>
 <div class="busuanzi-count">

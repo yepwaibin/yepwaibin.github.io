@@ -610,6 +610,358 @@
       </tags>
   </entry>
   <entry>
+    <title>Document</title>
+    <url>/2022/01/22/Document/</url>
+    <content><![CDATA[<h2 id="浏览器环境和规格"><a href="#浏览器环境和规格" class="headerlink" title="浏览器环境和规格"></a>浏览器环境和规格</h2><p>在浏览器中，window有两种角色</p>
+<ul>
+<li>Javascript代码的全局对象</li>
+<li>代表浏览器窗口，并提供控制它的方法</li>
+</ul>
+<p>document 对象是页面的主要“入口点”。我们可以使用它来更改或创建页面上的任何内容。</p>
+<span id="more"></span>
+
+<h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>每个树的节点都是一个对象，一共12种，通常用到4种</p>
+<ul>
+<li>document——DOM的入口点</li>
+<li>元素节点——HTML标签，并形成文档结构</li>
+<li>文本节点</li>
+<li>注释</li>
+</ul>
+<h2 id="遍历DOM"><a href="#遍历DOM" class="headerlink" title="遍历DOM"></a>遍历DOM</h2><h3 id="对象间链接"><a href="#对象间链接" class="headerlink" title="对象间链接"></a>对象间链接</h3><blockquote>
+<p>对所有节点，是包含元素节点，文本节点，注释等</p>
+</blockquote>
+<p><img src="/2022/01/22/Document/fd565c1de6fcacaa600a120b4d23797.png" alt="fd565c1de6fcacaa600a120b4d23797"></p>
+<p>顶层树节点可以直接获取</p>
+<ul>
+<li><code>document.documentElement</code>——<code>&lt;html&gt;</code></li>
+<li><code>document.body</code></li>
+<li><code>document.head</code></li>
+</ul>
+<p>两个术语</p>
+<ul>
+<li>子节点——直系的子元素<ul>
+<li>childNodes列出<strong>所有</strong>子节点，<strong>包括文本节点</strong><ul>
+<li>返回的不是数组，而是集合，一个类数组的可迭代对象，可以用Array.from方法用它来创建一个”真“数组，使得能使用数组的方法</li>
+<li>DOM集合是只读的，</li>
+<li>是实时的——例如先取得<code>elem.childNodes</code>的引用，而后修改DOM，那么节点的更新会自动出现在集合中</li>
+</ul>
+</li>
+<li>firstChild访问第一个子元素</li>
+<li>lastChild访问最后一个子元素</li>
+</ul>
+</li>
+<li>子孙元素——嵌套在给定元素中所有的元素</li>
+</ul>
+<p>兄弟节点</p>
+<ul>
+<li>nextSibling下一个兄弟节点</li>
+<li>previousSibling上一个兄弟节点</li>
+</ul>
+<p>父节点</p>
+<ul>
+<li>parentNode</li>
+</ul>
+<h3 id="元素节点导航链接"><a href="#元素节点导航链接" class="headerlink" title="元素节点导航链接"></a>元素节点导航链接</h3><p><img src="/2022/01/22/Document/595929645f562545efc0a04edc7fe05.png" alt="595929645f562545efc0a04edc7fe05"></p>
+<ul>
+<li>children——元素节点的子代的节点</li>
+<li>firstElementChild</li>
+<li>lastElementChild</li>
+<li>previousElementSibling</li>
+<li>nextElementSibling</li>
+<li>parentElement</li>
+</ul>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
+<li>table.rows——<code>&lt;tr&gt;</code>元素的<strong>集合</strong><ul>
+<li>tr.cells<ul>
+<li>给定<code>&lt;tr&gt;</code>中的<code>&lt;td&gt;</code>和<code>&lt;th&gt;</code>单元格的集合</li>
+</ul>
+</li>
+<li>tr.sectionRowIndex<ul>
+<li>给定的<code>&lt;tr&gt;</code>在封闭的<code>&lt;thead&gt;/&lt;tbody&gt;/&lt;tfoot&gt;</code>中的位置（索引）。</li>
+</ul>
+</li>
+<li>tr.rowIndex<ul>
+<li>整个表格<code>&lt;tr&gt;</code>的编号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>table.caption</li>
+<li>table.tHead</li>
+<li>table.tFoot</li>
+<li>table.tBodies——<code>&lt;tbody&gt;</code>元素的集合</li>
+<li><code>&lt;td&gt;</code>和<code>&lt;th&gt;</code><ul>
+<li>td.cellIndex在封闭的<code>&lt;tr&gt;</code>中单元格的编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ol>
+<li>getElement*<ul>
+<li>document.getElementById(id)</li>
+</ul>
+</li>
+<li>querySelector*<ul>
+<li>elem.querySelectorAll(CSS)<ul>
+<li>返回 elem 中与给定 CSS 选择器匹配的<strong>所有</strong>元素</li>
+<li>静态集合，像固定的数组</li>
+</ul>
+</li>
+<li>elem.querySelector(CSS)<ul>
+<li>返回给定 CSS 选择器的<strong>第一个</strong>元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>elem.matches(CSS)<ul>
+<li>检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false</li>
+</ul>
+</li>
+<li>elem.closest(CSS)<ul>
+<li>查找与 CSS 选择器匹配的<strong>最近的祖先</strong></li>
+</ul>
+</li>
+<li>“getElementsBy*”方法，返回的都是<strong>实时的集合</strong>，始终反映的是文档的当前状态<ul>
+<li>elem.getElementsByTagName(tag)</li>
+<li>elem.getElementsByClassName(className)</li>
+<li>document.getElementsByName(name)</li>
+</ul>
+</li>
+<li>elemA.contains(elemB)<ul>
+<li>elemB 在 elemA 内或者 elemA==elemB就返回true</li>
+</ul>
+</li>
+</ol>
+<h2 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h2><ul>
+<li>innerHTML<ul>
+<li>仅对元素节点有效<ul>
+<li>文本节点、注释节点用<code>data</code>属性获取内容</li>
+</ul>
+</li>
+<li>+= 是会重写，先抹除原先内容，再把原先内容和附加内容结合，赋值过去<ul>
+<li>因此所有的图片和其他资源都将重写加载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>outerHTML<ul>
+<li>写入 outerHTML 不会改变元素。而是在 DOM 中替换它<ul>
+<li>写入后，DOM会显示新写入的，但打印出来却是旧的值</li>
+</ul>
+</li>
+<li>outerHTML 赋值不会修改 DOM 元素，而是将其从 DOM 中删除并在其位置插入新的 HTML。</li>
+</ul>
+</li>
+<li>textContent<ul>
+<li>只返回文本，就像所有<code>tag</code>都被剪掉了一样</li>
+<li>写入比innerHTML安全一些，因为，innerHTML写入的内容会作为html插入，而textContent只当成文本插入</li>
+</ul>
+</li>
+<li>hidden<ul>
+<li>设置为true与CSS中，<code>display: none</code>做着相同的事情</li>
+</ul>
+</li>
+</ul>
+<p>大多数标准 HTML 特性（attribute）都具有相应的 DOM 属性。</p>
+<h2 id="特性-写在-HTML-中的内容-和属性-DOM-对象中的内容"><a href="#特性-写在-HTML-中的内容-和属性-DOM-对象中的内容" class="headerlink" title="特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)"></a>特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)</h2><blockquote>
+<p>当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）</p>
+<p>但特性—属性映射并不是一一对应的</p>
+</blockquote>
+<h3 id="DOM属性"><a href="#DOM属性" class="headerlink" title="DOM属性"></a>DOM属性</h3><p>DOM节点是常规的Javascript的对象</p>
+<ul>
+<li>大小写敏感</li>
+<li>可以设多种值</li>
+</ul>
+<h2 id="HTML特性"><a href="#HTML特性" class="headerlink" title="HTML特性"></a>HTML特性</h2><ul>
+<li>当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别<strong>标准的</strong>特性并以此创建 DOM 属性。而<strong>非标准的</strong>就没有相对应的 DOM 属性，会变成了<code>undefined</code></li>
+<li>大小写不敏感</li>
+<li>值总是字符串类型</li>
+</ul>
+<p>所有特性（标准的非标准的）都可以通过使用以下方法进行访问：</p>
+<ul>
+<li>elem.hasAttribute(name) — 检查特性是否存在</li>
+<li>elem.getAttribute(name) — 获取这个特性值</li>
+<li>elem.setAttribute(name, value) — 设置这个特性值</li>
+<li>elem.removeAttribute(name) — 移除这个特性。</li>
+</ul>
+<h3 id="属性-特性同步"><a href="#属性-特性同步" class="headerlink" title="属性-特性同步"></a>属性-特性同步</h3><p>当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然</p>
+<ul>
+<li>例外：如<code>input.value</code>只能从特性同步到属性</li>
+</ul>
+<h3 id="非标准特性dataset"><a href="#非标准特性dataset" class="headerlink" title="非标准特性dataset"></a>非标准特性dataset</h3><blockquote>
+<p>非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素</p>
+</blockquote>
+<p>为了避免冲突，所有以 <code>data-</code> 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。</p>
+<p>用法：</p>
+<ul>
+<li>如果一个 elem 有一个名为 <code>data-about</code> 的特性，那么可以通过 <code>elem.dataset.about</code> 取到它</li>
+<li>多词特性可以以驼峰式进行调用</li>
+</ul>
+<h2 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h2><h3 id="创建一个元素"><a href="#创建一个元素" class="headerlink" title="创建一个元素"></a>创建一个元素</h3><ul>
+<li><code>document.createElement(tag)</code><ul>
+<li>元素节点</li>
+</ul>
+</li>
+<li><code>document.createTextNode(text)</code><ul>
+<li>文本节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><ul>
+<li>className</li>
+</ul>
+<h3 id="填充消息"><a href="#填充消息" class="headerlink" title="填充消息"></a>填充消息</h3><ul>
+<li>innerHTML</li>
+</ul>
+<h3 id="插入方法"><a href="#插入方法" class="headerlink" title="插入方法"></a>插入方法</h3><p>字符串被以一种安全的方式插入到页面中，就像 <code>elem.textContent </code>所做的一样——不会被当成html插入，只当成文本</p>
+<ul>
+<li>node.append(nodes or strings)<ul>
+<li>在 node <strong>末尾</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.prepend()<ul>
+<li>在node<strong>开头</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.before()<ul>
+<li>在node<strong>前面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.after()<ul>
+<li>在node<strong>后面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.replaceWIth()<ul>
+<li>将node替换给定的节点或字符串</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>elem.insertAdjacentHTML(where, html) </p>
+<ul>
+<li>内容作为 HTML 代码插入，如同innerHTML</li>
+<li>where如下面的值</li>
+</ul>
+<p><img src="/2022/01/22/Document/image-20220313160632338.png" alt="image-20220313160632338"></p>
+</li>
+</ul>
+<h3 id="节点移除"><a href="#节点移除" class="headerlink" title="节点移除"></a>节点移除</h3><ul>
+<li>node.remove()</li>
+</ul>
+<h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul>
+<li>cloneNode(true/false)<ul>
+<li>true为深克隆，具有所有特性 （attribute）和子元素</li>
+<li>false，则不克隆子元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="DocumentFragment"><a href="#DocumentFragment" class="headerlink" title="DocumentFragment"></a>DocumentFragment</h3><p>可以理解为容器</p>
+<h2 id="样式和类"><a href="#样式和类" class="headerlink" title="样式和类"></a>样式和类</h2><h3 id="className"><a href="#className" class="headerlink" title="className"></a>className</h3><p>它将替换类中的整个字符串</p>
+<h3 id="classList"><a href="#classList" class="headerlink" title="classList"></a>classList</h3><p>可迭代</p>
+<p>方法</p>
+<ul>
+<li>add()<ul>
+<li>添加一个类</li>
+</ul>
+</li>
+<li>remove()<ul>
+<li>移除一个类</li>
+</ul>
+</li>
+<li>toggle()<ul>
+<li>如果类不存在就添加类，存在就移除它</li>
+</ul>
+</li>
+</ul>
+<h3 id="重置样式属性"><a href="#重置样式属性" class="headerlink" title="重置样式属性"></a>重置样式属性</h3><p>设为空字符</p>
+<p><code>elem.style.* = &quot;&quot;</code></p>
+<p>使用 style.* 来对各个样式属性进行赋值时，需要有单位，且不能一下子设置所有属性，因为 div.style 是一个对象，并且它是只读的，设置完整属性可用<code>style.cssText</code></p>
+<h3 id="计算样式getComputedStyle"><a href="#计算样式getComputedStyle" class="headerlink" title="计算样式getComputedStyle"></a>计算样式getComputedStyle</h3><p><code>getComputedStyle(element, [pseudo])</code></p>
+<ul>
+<li>element <ul>
+<li>需要被读取样式值的元素</li>
+</ul>
+</li>
+<li>pseudo <ul>
+<li>伪元素（如果需要），例如 ::before 。空字符串或无参数则意味着元素本身。</li>
+</ul>
+</li>
+</ul>
+<h2 id="元素大小和滚动"><a href="#元素大小和滚动" class="headerlink" title="元素大小和滚动"></a>元素大小和滚动</h2><p>几何属性，这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”</p>
+<p><img src="/2022/01/22/Document/image-20220313164146836.png" alt="image-20220313164146836"></p>
+<ul>
+<li>offsetParent 是最接近的祖先<ul>
+<li>最近祖先为下列之一<ul>
+<li>CSS 定位的（ position 为 absolute ， relative 或 fixed ）</li>
+<li>或<code>&lt;td&gt;,&lt;th&gt;,&lt;table&gt;</code></li>
+<li>或<code>&lt;body&gt;</code></li>
+</ul>
+</li>
+<li>值有可能为null<ul>
+<li>未显示的元素（ display:none 或者不在文档中）</li>
+<li>对于<code>&lt;body&gt;,&lt;html&gt;</code></li>
+<li>对于带有position：fixed元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性 offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标</li>
+<li>offsetWidth/offsetHeight 是完整边框<ul>
+<li>content width/height + 2个padding width/height + 2个margin width/height</li>
+</ul>
+</li>
+<li>对于未显示的元素，几何属性为 0/null<ul>
+<li>用几何属性来检查一个元素是否被隐藏</li>
+</ul>
+</li>
+<li>clientTop<ul>
+<li>上边框宽度</li>
+</ul>
+</li>
+<li>clientLeft<ul>
+<li>左边框宽度</li>
+</ul>
+</li>
+<li>clientWidth/clientHeight<ul>
+<li>元素边框内区域的大小——content width/height + 2个 padding width/height</li>
+</ul>
+</li>
+<li>scrollWidth/scrollHeight<ul>
+<li>就像 clientWidth/clientHeight ，但它们还包括滚动出（隐藏）的部分</li>
+</ul>
+</li>
+<li>scrollLeft/scrollTop<ul>
+<li>是元素的隐藏、滚动部分的 width/height</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用几何属性的原因"><a href="#使用几何属性的原因" class="headerlink" title="使用几何属性的原因"></a>使用几何属性的原因</h3><ol>
+<li>首先，CSS width/height 取决于另一个属性： box-sizing ，它定义了“什么是” CSS 宽度和高度。出于 CSS 的目的而对 box-sizing 进行的更改可能会破坏 此类 JavaScript 操作。</li>
+<li>其次，CSS 的 width/height 可能是 auto ，例如内联（inline）元素。但在 JavaScript 中，我们需要 一个确切的 px 大小，以便我们在计算中使用它。</li>
+</ol>
+<h2 id="Window大小和滚动"><a href="#Window大小和滚动" class="headerlink" title="Window大小和滚动"></a>Window大小和滚动</h2><p>使用 document.documentElement 的 clientWidth/clientHeight返回文档可见部分，这个值不包括滚动条。</p>
+<h3 id="获得当前滚动"><a href="#获得当前滚动" class="headerlink" title="获得当前滚动"></a>获得当前滚动</h3><ul>
+<li>scrollLeft/scrollTop </li>
+</ul>
+<h3 id="调整滚动位置"><a href="#调整滚动位置" class="headerlink" title="调整滚动位置"></a>调整滚动位置</h3><ul>
+<li>方法 scrollBy(x,y) 将页面滚动至 相对于当前位置的 (x, y) 位置</li>
+<li>方法 scrollTo(pageX,pageY) 将页面滚动至绝对坐标，使得可见部分的左上角具有相对于文档左上角的坐标 (pageX, pageY) 。就像设置了 scrollLeft/scrollTop 一样。</li>
+</ul>
+<h3 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h3><p>设置overflow：hidden</p>
+<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><h3 id="元素坐标-getBoundingClinetRect"><a href="#元素坐标-getBoundingClinetRect" class="headerlink" title="元素坐标 getBoundingClinetRect()"></a>元素坐标 getBoundingClinetRect()</h3><p><img src="/2022/01/22/Document/image-20220313171141878.png" alt="image-20220313171141878"></p>
+<p>页面上的任何点都有坐标：</p>
+<ul>
+<li>相对于窗口的坐标 — elem.getBoundingClientRect() 。</li>
+<li>相对于文档的坐标 — elem.getBoundingClientRect() 加上当前页面滚动。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>现代Javascript教程</category>
+      </categories>
+      <tags>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTML中的Javascript</title>
     <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
     <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
@@ -916,6 +1268,180 @@
       </tags>
   </entry>
   <entry>
+    <title>事件简介</title>
+    <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
+<li><p>鼠标</p>
+<ul>
+<li><p><code>click</code></p>
+</li>
+<li><p><code>contextmenu</code></p>
+</li>
+<li><p><code>mouseover/mouseout</code></p>
+</li>
+<li><p><code>mousedown/mouseup</code></p>
+</li>
+<li><p><code>mousemove</code></p>
+</li>
+</ul>
+</li>
+<li><p>键盘</p>
+<ul>
+<li>keydown</li>
+<li>keyup</li>
+</ul>
+</li>
+<li><p>表单</p>
+<ul>
+<li>submit</li>
+<li>focus</li>
+</ul>
+</li>
+<li><p>Document事件</p>
+<ul>
+<li>DOMContentLoaded</li>
+</ul>
+</li>
+<li><p>CSS</p>
+<ul>
+<li>transitionend</li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>移除一个处理程序——赋值为<code>null</code></p>
+<p>处理程序中的 this 的值是对应的元素。就是处理程序所在的那个元素</p>
+<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p><code>element.addEventListener(event, handler[, options]);</code></p>
+<ul>
+<li>options<ul>
+<li><code>once</code> ：如果为 true ，那么会在被触发后自动删除监听器</li>
+<li><code>capture</code> ：事件处理的阶段，我们稍后将在 冒泡和捕获 一章中介绍。由于历史原因， options 也可以是 false/true ，它与 {capture: false/true} 相同</li>
+<li><code>passive</code> ：如果为 true ，那么处理程序将不会调用 <code>preventDefault() </code><ul>
+<li>用途：passive: true 选项告诉浏览器，处理程序不会取消滚动。然后浏览器立即滚动页面以提供最大程度的流畅体验，并通过某种方式处理事件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="移除处理程序-removeEventListener"><a href="#移除处理程序-removeEventListener" class="headerlink" title="移除处理程序 removeEventListener"></a>移除处理程序 removeEventListener</h3><p>element.removeEventListener(event, handler[, options])</p>
+<ul>
+<li>handler函数要与之前添加事件函数是同一个</li>
+</ul>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>当事件发生时，浏览器会创建一个<code>event</code> 对象，将详细信息放入其中，并将其作为参数传递给处理程序</p>
+<ul>
+<li>event.type<ul>
+<li>事件类型</li>
+</ul>
+</li>
+<li>event.currentTarget<ul>
+<li>与this相同（除非是箭头函数，或this被绑定其他东西）</li>
+</ul>
+</li>
+<li>event.eventPhase<ul>
+<li>当前阶段（capturing=1，target=2，bubbling=3）</li>
+</ul>
+</li>
+</ul>
+<h2 id="冒泡和捕获"><a href="#冒泡和捕获" class="headerlink" title="冒泡和捕获"></a>冒泡和捕获</h2><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><blockquote>
+<p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素上的处理程序，然后一直向上到其他祖先上的处理程序</p>
+</blockquote>
+<p>几乎所有事件都是冒泡，例外：focus事件</p>
+<p>event.target</p>
+<ul>
+<li>父元素上的处理程序始终可以获取事件<strong>实际发生位置</strong>的详细信息</li>
+<li>与this和event.currentTarget不同，它们是“当前”元素</li>
+</ul>
+<h4 id="停止冒泡"><a href="#停止冒泡" class="headerlink" title="停止冒泡"></a>停止冒泡</h4><p>event.stopPropagation</p>
+<ul>
+<li>event.stopPropagation() 停止向上移动，但是当前元素上的其他处理程序都会继续运行。</li>
+<li>event.stopImmediatePropagation() 方法，可以用于停止冒泡，并阻止当前元素上的处理程序运行。使用该方法之后，其他处理程序就不会被执行</li>
+</ul>
+<h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>事件传播三个阶段</p>
+<ol>
+<li>捕获阶段<ul>
+<li>事件（从 Window）向下走近元素</li>
+</ul>
+</li>
+<li>目标阶段<ul>
+<li>事件到达目标元素</li>
+</ul>
+</li>
+<li>冒泡阶段</li>
+</ol>
+<p>事件是默认是冒泡，修改为捕获阶段的操作： capture 选项设置为 true。</p>
+<p>用addEventListener添加事件为捕获时，移除的时候也要标注为捕获，这样才能正确删除处理程序</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><blockquote>
+<p>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个 处理程序 —— 而是将单个处理程序放在它们的共同祖先上。</p>
+<p>事件必须是冒泡</p>
+</blockquote>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
+<li>在容器（container）上放一个处理程序</li>
+<li>在处理程序中 —— 检查源元素 event.target</li>
+<li>如果事件发生在我们感兴趣的元素内，那么处理该事件。</li>
+</ol>
+<p>搭配下列方法，做事件委托</p>
+<ul>
+<li>event.target.closest(selector)<ul>
+<li>返回与 selector 匹配的最近的祖先</li>
+</ul>
+</li>
+<li>selector1.containes(selector2)<ul>
+<li>检查selector2是否在selector1中</li>
+</ul>
+</li>
+</ul>
+<h3 id="“行为”模式"><a href="#“行为”模式" class="headerlink" title="“行为”模式"></a>“行为”模式</h3><blockquote>
+<p>使用事件委托将“行为（behavior）”以 声明方式 添加到具有特殊特性 （attribute）和类的元素中</p>
+</blockquote>
+<p>行为模式分为两个部分</p>
+<ol>
+<li>我们将自定义特性<strong>添加</strong>到描述其行为的元素</li>
+<li>用文档范围级的处理程序追踪事件，如果事件发生在具有特定特性的元素上 —— 则执行行为（action）。</li>
+</ol>
+<h2 id="浏览器默认行为"><a href="#浏览器默认行为" class="headerlink" title="浏览器默认行为"></a>浏览器默认行为</h2><h3 id="阻止浏览器行为方式"><a href="#阻止浏览器行为方式" class="headerlink" title="阻止浏览器行为方式"></a>阻止浏览器行为方式</h3><ul>
+<li>event.preventDefault()</li>
+<li>如果处理程序是使用<code>on&lt;event&gt;</code>，则返回false也有效</li>
+<li>如果默认行为被阻止，则event.defaultPrevented属性为true，否则为false</li>
+</ul>
+<p>event.stopPropagation() 和 event.preventDefault()</p>
+<p>之间毫无相关，一个是阻止冒泡，一个是阻止默认行为</p>
+<h2 id="创建自定义事件"><a href="#创建自定义事件" class="headerlink" title="创建自定义事件"></a>创建自定义事件</h2><h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><ol>
+<li><p><code>new Event(type, [, options])</code></p>
+<ul>
+<li><p>type: 类型</p>
+</li>
+<li><p>options</p>
+<ul>
+<li>bubbles: true/false —— 如果为 true ，那么事件会冒泡</li>
+<li>cancelable: true/false —— 如果为 true ，那么“默认行为”就会被阻止<ul>
+<li>如果 event.preventDefault() 应该有效，则 cancelable: true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>`new CustomEvent(type, detail)</p>
+</li>
+</ol>
+<h3 id="派发-dispatchEvent-event"><a href="#派发-dispatchEvent-event" class="headerlink" title="派发 dispatchEvent(event)"></a>派发 dispatchEvent(event)</h3><blockquote>
+<p>相当于触发了这个event事件</p>
+</blockquote>
+<h3 id="事件的发生顺序"><a href="#事件的发生顺序" class="headerlink" title="事件的发生顺序"></a>事件的发生顺序</h3><p>事件中的事件是<strong>同步的</strong>，通常事件是在队列中处理的。也就是说：如果浏览器正在处理 onclick ，这时发生了 一个新的事件，例如鼠标移动了，那么它的处理程序会被排入队列，相应的 mousemove 处理程序将在 onclick 事件处理完成后被调用</p>
+<p>但也有例外：一个事件是在另一个事件<strong>中</strong>发起的。例如使用 dispatchEvent 。这类事件将会被立即处理，即在新的事件处理程序被调用之后， 恢复到当前的事件处理程序</p>
+<ul>
+<li>例如点击事件里面的处理程序中又派发了事件，则这类事件将会被立即处理</li>
+</ul>
+]]></content>
+      <categories>
+        <category>现代Javascript教程</category>
+      </categories>
+      <tags>
+        <tag>浏览器事件</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React</title>
     <url>/2022/01/21/React/</url>
     <content><![CDATA[<h2 id="历史和应用"><a href="#历史和应用" class="headerlink" title="历史和应用"></a>历史和应用</h2><ul>
@@ -1095,180 +1621,6 @@
       </categories>
       <tags>
         <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>事件简介</title>
-    <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
-<li><p>鼠标</p>
-<ul>
-<li><p><code>click</code></p>
-</li>
-<li><p><code>contextmenu</code></p>
-</li>
-<li><p><code>mouseover/mouseout</code></p>
-</li>
-<li><p><code>mousedown/mouseup</code></p>
-</li>
-<li><p><code>mousemove</code></p>
-</li>
-</ul>
-</li>
-<li><p>键盘</p>
-<ul>
-<li>keydown</li>
-<li>keyup</li>
-</ul>
-</li>
-<li><p>表单</p>
-<ul>
-<li>submit</li>
-<li>focus</li>
-</ul>
-</li>
-<li><p>Document事件</p>
-<ul>
-<li>DOMContentLoaded</li>
-</ul>
-</li>
-<li><p>CSS</p>
-<ul>
-<li>transitionend</li>
-</ul>
-</li>
-</ol>
-<span id="more"></span>
-
-<p>移除一个处理程序——赋值为<code>null</code></p>
-<p>处理程序中的 this 的值是对应的元素。就是处理程序所在的那个元素</p>
-<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p><code>element.addEventListener(event, handler[, options]);</code></p>
-<ul>
-<li>options<ul>
-<li><code>once</code> ：如果为 true ，那么会在被触发后自动删除监听器</li>
-<li><code>capture</code> ：事件处理的阶段，我们稍后将在 冒泡和捕获 一章中介绍。由于历史原因， options 也可以是 false/true ，它与 {capture: false/true} 相同</li>
-<li><code>passive</code> ：如果为 true ，那么处理程序将不会调用 <code>preventDefault() </code><ul>
-<li>用途：passive: true 选项告诉浏览器，处理程序不会取消滚动。然后浏览器立即滚动页面以提供最大程度的流畅体验，并通过某种方式处理事件。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="移除处理程序-removeEventListener"><a href="#移除处理程序-removeEventListener" class="headerlink" title="移除处理程序 removeEventListener"></a>移除处理程序 removeEventListener</h3><p>element.removeEventListener(event, handler[, options])</p>
-<ul>
-<li>handler函数要与之前添加事件函数是同一个</li>
-</ul>
-<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>当事件发生时，浏览器会创建一个<code>event</code> 对象，将详细信息放入其中，并将其作为参数传递给处理程序</p>
-<ul>
-<li>event.type<ul>
-<li>事件类型</li>
-</ul>
-</li>
-<li>event.currentTarget<ul>
-<li>与this相同（除非是箭头函数，或this被绑定其他东西）</li>
-</ul>
-</li>
-<li>event.eventPhase<ul>
-<li>当前阶段（capturing=1，target=2，bubbling=3）</li>
-</ul>
-</li>
-</ul>
-<h2 id="冒泡和捕获"><a href="#冒泡和捕获" class="headerlink" title="冒泡和捕获"></a>冒泡和捕获</h2><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><blockquote>
-<p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素上的处理程序，然后一直向上到其他祖先上的处理程序</p>
-</blockquote>
-<p>几乎所有事件都是冒泡，例外：focus事件</p>
-<p>event.target</p>
-<ul>
-<li>父元素上的处理程序始终可以获取事件<strong>实际发生位置</strong>的详细信息</li>
-<li>与this和event.currentTarget不同，它们是“当前”元素</li>
-</ul>
-<h4 id="停止冒泡"><a href="#停止冒泡" class="headerlink" title="停止冒泡"></a>停止冒泡</h4><p>event.stopPropagation</p>
-<ul>
-<li>event.stopPropagation() 停止向上移动，但是当前元素上的其他处理程序都会继续运行。</li>
-<li>event.stopImmediatePropagation() 方法，可以用于停止冒泡，并阻止当前元素上的处理程序运行。使用该方法之后，其他处理程序就不会被执行</li>
-</ul>
-<h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>事件传播三个阶段</p>
-<ol>
-<li>捕获阶段<ul>
-<li>事件（从 Window）向下走近元素</li>
-</ul>
-</li>
-<li>目标阶段<ul>
-<li>事件到达目标元素</li>
-</ul>
-</li>
-<li>冒泡阶段</li>
-</ol>
-<p>事件是默认是冒泡，修改为捕获阶段的操作： capture 选项设置为 true。</p>
-<p>用addEventListener添加事件为捕获时，移除的时候也要标注为捕获，这样才能正确删除处理程序</p>
-<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><blockquote>
-<p>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个 处理程序 —— 而是将单个处理程序放在它们的共同祖先上。</p>
-<p>事件必须是冒泡</p>
-</blockquote>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
-<li>在容器（container）上放一个处理程序</li>
-<li>在处理程序中 —— 检查源元素 event.target</li>
-<li>如果事件发生在我们感兴趣的元素内，那么处理该事件。</li>
-</ol>
-<p>搭配下列方法，做事件委托</p>
-<ul>
-<li>event.target.closest(selector)<ul>
-<li>返回与 selector 匹配的最近的祖先</li>
-</ul>
-</li>
-<li>selector1.containes(selector2)<ul>
-<li>检查selector2是否在selector1中</li>
-</ul>
-</li>
-</ul>
-<h3 id="“行为”模式"><a href="#“行为”模式" class="headerlink" title="“行为”模式"></a>“行为”模式</h3><blockquote>
-<p>使用事件委托将“行为（behavior）”以 声明方式 添加到具有特殊特性 （attribute）和类的元素中</p>
-</blockquote>
-<p>行为模式分为两个部分</p>
-<ol>
-<li>我们将自定义特性<strong>添加</strong>到描述其行为的元素</li>
-<li>用文档范围级的处理程序追踪事件，如果事件发生在具有特定特性的元素上 —— 则执行行为（action）。</li>
-</ol>
-<h2 id="浏览器默认行为"><a href="#浏览器默认行为" class="headerlink" title="浏览器默认行为"></a>浏览器默认行为</h2><h3 id="阻止浏览器行为方式"><a href="#阻止浏览器行为方式" class="headerlink" title="阻止浏览器行为方式"></a>阻止浏览器行为方式</h3><ul>
-<li>event.preventDefault()</li>
-<li>如果处理程序是使用<code>on&lt;event&gt;</code>，则返回false也有效</li>
-<li>如果默认行为被阻止，则event.defaultPrevented属性为true，否则为false</li>
-</ul>
-<p>event.stopPropagation() 和 event.preventDefault()</p>
-<p>之间毫无相关，一个是阻止冒泡，一个是阻止默认行为</p>
-<h2 id="创建自定义事件"><a href="#创建自定义事件" class="headerlink" title="创建自定义事件"></a>创建自定义事件</h2><h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><ol>
-<li><p><code>new Event(type, [, options])</code></p>
-<ul>
-<li><p>type: 类型</p>
-</li>
-<li><p>options</p>
-<ul>
-<li>bubbles: true/false —— 如果为 true ，那么事件会冒泡</li>
-<li>cancelable: true/false —— 如果为 true ，那么“默认行为”就会被阻止<ul>
-<li>如果 event.preventDefault() 应该有效，则 cancelable: true</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>`new CustomEvent(type, detail)</p>
-</li>
-</ol>
-<h3 id="派发-dispatchEvent-event"><a href="#派发-dispatchEvent-event" class="headerlink" title="派发 dispatchEvent(event)"></a>派发 dispatchEvent(event)</h3><blockquote>
-<p>相当于触发了这个event事件</p>
-</blockquote>
-<h3 id="事件的发生顺序"><a href="#事件的发生顺序" class="headerlink" title="事件的发生顺序"></a>事件的发生顺序</h3><p>事件中的事件是<strong>同步的</strong>，通常事件是在队列中处理的。也就是说：如果浏览器正在处理 onclick ，这时发生了 一个新的事件，例如鼠标移动了，那么它的处理程序会被排入队列，相应的 mousemove 处理程序将在 onclick 事件处理完成后被调用</p>
-<p>但也有例外：一个事件是在另一个事件<strong>中</strong>发起的。例如使用 dispatchEvent 。这类事件将会被立即处理，即在新的事件处理程序被调用之后， 恢复到当前的事件处理程序</p>
-<ul>
-<li>例如点击事件里面的处理程序中又派发了事件，则这类事件将会被立即处理</li>
-</ul>
-]]></content>
-      <categories>
-        <category>现代Javascript教程</category>
-      </categories>
-      <tags>
-        <tag>浏览器事件</tag>
       </tags>
   </entry>
   <entry>
@@ -2409,6 +2761,21 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Local search</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="首页博文只展示部分文字"><a href="#首页博文只展示部分文字" class="headerlink" title="首页博文只展示部分文字"></a>首页博文只展示部分文字</h3><p>在文章想要分割的位置中添加一行<code>&lt;!--more--&gt;</code></p>
+<h3 id="markdown上使用图片，网页上能正常显示"><a href="#markdown上使用图片，网页上能正常显示" class="headerlink" title="markdown上使用图片，网页上能正常显示"></a>markdown上使用图片，网页上能正常显示</h3><ul>
+<li>修改根目录下的<code>_config.yml</code>文件，把<code>post_asset_folder</code>字段改为<code>true</code><ul>
+<li>改为之后，新建文章时<code>hexo new 文章标题</code>，_posts不仅会出现md文件，而且会出现一个同名的<strong>文件夹</strong>，之后这个文件夹放你要引用的图片</li>
+</ul>
+</li>
+<li>修改typora设置<img src="/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/5dcd1adfc992651e437559aa46f4476.png" alt="5dcd1adfc992651e437559aa46f4476"><ul>
+<li>以后拖拽图片进文章内之后，图片会自动添加到同名文件夹下面</li>
+</ul>
+</li>
+<li>下载插件<code>npm install hexo-asset-image --save</code></li>
+</ul>
+<p>根据网上的信息，这时候就<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>，按道理就能看到图片了，但结果我的就是不行，图片路径出现了<code>/.io//*******.png</code>，就前面会多出<code>/.io//</code>这个前缀，导致图片不能显示。</p>
+<p><strong>解决方法</strong></p>
+<p>修改一下项目根目录<code>/node_modules/hexo-asset-image/index.js</code>的24行左右，把 <code>link.lastIndexOf(&#39;.&#39;)</code> 修改为 <code>link.lastIndexOf(&#39;/&#39;)</code>就可以了。</p>
+<p><img src="/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/750ad85a47d9fa795e13bb8d4bf195e.png" alt="750ad85a47d9fa795e13bb8d4bf195e"></p>
 <h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
 <li><code>hexo init [folder]</code> <ul>
 <li>Hexo 默认在目前的文件夹建立网站。</li>
@@ -2453,6 +2820,77 @@
       </categories>
       <tags>
         <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理解执行上下文</title>
+    <url>/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
+    <content><![CDATA[<h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
+<ul>
+<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+<li><code>Eval </code>函数执行上下文</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
+<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
+<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
+</blockquote>
+<ol>
+<li><p>创建变量对象</p>
+<blockquote>
+<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+</blockquote>
+<ol>
+<li><p>初始化函数的所有形参</p>
+<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为undefined</li>
+</ul>
+</li>
+<li><p>初始化函数声明</p>
+<ul>
+<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li><p>初始变量声明</p>
+<ul>
+<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
+</li>
+<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>建立作用域</p>
+<ol>
+<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
+</ol>
+</li>
+<li><p>确定this指向</p>
+<ul>
+<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
+</ul>
+</li>
+</ol>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
+<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
+<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
+</blockquote>
+<ul>
+<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
+<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深入理解Javascript</category>
+      </categories>
+      <tags>
+        <tag>执行上下文</tag>
       </tags>
   </entry>
   <entry>
@@ -3352,358 +3790,6 @@ console.log(arr.includes(NaN))//true
       </tags>
   </entry>
   <entry>
-    <title>Document</title>
-    <url>/2022/01/22/Document/Document/</url>
-    <content><![CDATA[<h2 id="浏览器环境和规格"><a href="#浏览器环境和规格" class="headerlink" title="浏览器环境和规格"></a>浏览器环境和规格</h2><p>在浏览器中，window有两种角色</p>
-<ul>
-<li>Javascript代码的全局对象</li>
-<li>代表浏览器窗口，并提供控制它的方法</li>
-</ul>
-<p>document 对象是页面的主要“入口点”。我们可以使用它来更改或创建页面上的任何内容。</p>
-<span id="more"></span>
-
-<h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>每个树的节点都是一个对象，一共12种，通常用到4种</p>
-<ul>
-<li>document——DOM的入口点</li>
-<li>元素节点——HTML标签，并形成文档结构</li>
-<li>文本节点</li>
-<li>注释</li>
-</ul>
-<h2 id="遍历DOM"><a href="#遍历DOM" class="headerlink" title="遍历DOM"></a>遍历DOM</h2><h3 id="对象间链接"><a href="#对象间链接" class="headerlink" title="对象间链接"></a>对象间链接</h3><blockquote>
-<p>对所有节点，是包含元素节点，文本节点，注释等</p>
-</blockquote>
-<p><img src="/.io//fd565c1de6fcacaa600a120b4d23797.png" alt="fd565c1de6fcacaa600a120b4d23797"></p>
-<p>顶层树节点可以直接获取</p>
-<ul>
-<li><code>document.documentElement</code>——<code>&lt;html&gt;</code></li>
-<li><code>document.body</code></li>
-<li><code>document.head</code></li>
-</ul>
-<p>两个术语</p>
-<ul>
-<li>子节点——直系的子元素<ul>
-<li>childNodes列出<strong>所有</strong>子节点，<strong>包括文本节点</strong><ul>
-<li>返回的不是数组，而是集合，一个类数组的可迭代对象，可以用Array.from方法用它来创建一个”真“数组，使得能使用数组的方法</li>
-<li>DOM集合是只读的，</li>
-<li>是实时的——例如先取得<code>elem.childNodes</code>的引用，而后修改DOM，那么节点的更新会自动出现在集合中</li>
-</ul>
-</li>
-<li>firstChild访问第一个子元素</li>
-<li>lastChild访问最后一个子元素</li>
-</ul>
-</li>
-<li>子孙元素——嵌套在给定元素中所有的元素</li>
-</ul>
-<p>兄弟节点</p>
-<ul>
-<li>nextSibling下一个兄弟节点</li>
-<li>previousSibling上一个兄弟节点</li>
-</ul>
-<p>父节点</p>
-<ul>
-<li>parentNode</li>
-</ul>
-<h3 id="元素节点导航链接"><a href="#元素节点导航链接" class="headerlink" title="元素节点导航链接"></a>元素节点导航链接</h3><p><img src="/.io//595929645f562545efc0a04edc7fe05.png" alt="595929645f562545efc0a04edc7fe05"></p>
-<ul>
-<li>children——元素节点的子代的节点</li>
-<li>firstElementChild</li>
-<li>lastElementChild</li>
-<li>previousElementSibling</li>
-<li>nextElementSibling</li>
-<li>parentElement</li>
-</ul>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
-<li>table.rows——<code>&lt;tr&gt;</code>元素的<strong>集合</strong><ul>
-<li>tr.cells<ul>
-<li>给定<code>&lt;tr&gt;</code>中的<code>&lt;td&gt;</code>和<code>&lt;th&gt;</code>单元格的集合</li>
-</ul>
-</li>
-<li>tr.sectionRowIndex<ul>
-<li>给定的<code>&lt;tr&gt;</code>在封闭的<code>&lt;thead&gt;/&lt;tbody&gt;/&lt;tfoot&gt;</code>中的位置（索引）。</li>
-</ul>
-</li>
-<li>tr.rowIndex<ul>
-<li>整个表格<code>&lt;tr&gt;</code>的编号</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>table.caption</li>
-<li>table.tHead</li>
-<li>table.tFoot</li>
-<li>table.tBodies——<code>&lt;tbody&gt;</code>元素的集合</li>
-<li><code>&lt;td&gt;</code>和<code>&lt;th&gt;</code><ul>
-<li>td.cellIndex在封闭的<code>&lt;tr&gt;</code>中单元格的编号</li>
-</ul>
-</li>
-</ul>
-<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ol>
-<li>getElement*<ul>
-<li>document.getElementById(id)</li>
-</ul>
-</li>
-<li>querySelector*<ul>
-<li>elem.querySelectorAll(CSS)<ul>
-<li>返回 elem 中与给定 CSS 选择器匹配的<strong>所有</strong>元素</li>
-<li>静态集合，像固定的数组</li>
-</ul>
-</li>
-<li>elem.querySelector(CSS)<ul>
-<li>返回给定 CSS 选择器的<strong>第一个</strong>元素</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>elem.matches(CSS)<ul>
-<li>检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false</li>
-</ul>
-</li>
-<li>elem.closest(CSS)<ul>
-<li>查找与 CSS 选择器匹配的<strong>最近的祖先</strong></li>
-</ul>
-</li>
-<li>“getElementsBy*”方法，返回的都是<strong>实时的集合</strong>，始终反映的是文档的当前状态<ul>
-<li>elem.getElementsByTagName(tag)</li>
-<li>elem.getElementsByClassName(className)</li>
-<li>document.getElementsByName(name)</li>
-</ul>
-</li>
-<li>elemA.contains(elemB)<ul>
-<li>elemB 在 elemA 内或者 elemA==elemB就返回true</li>
-</ul>
-</li>
-</ol>
-<h2 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h2><ul>
-<li>innerHTML<ul>
-<li>仅对元素节点有效<ul>
-<li>文本节点、注释节点用<code>data</code>属性获取内容</li>
-</ul>
-</li>
-<li>+= 是会重写，先抹除原先内容，再把原先内容和附加内容结合，赋值过去<ul>
-<li>因此所有的图片和其他资源都将重写加载</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>outerHTML<ul>
-<li>写入 outerHTML 不会改变元素。而是在 DOM 中替换它<ul>
-<li>写入后，DOM会显示新写入的，但打印出来却是旧的值</li>
-</ul>
-</li>
-<li>outerHTML 赋值不会修改 DOM 元素，而是将其从 DOM 中删除并在其位置插入新的 HTML。</li>
-</ul>
-</li>
-<li>textContent<ul>
-<li>只返回文本，就像所有<code>tag</code>都被剪掉了一样</li>
-<li>写入比innerHTML安全一些，因为，innerHTML写入的内容会作为html插入，而textContent只当成文本插入</li>
-</ul>
-</li>
-<li>hidden<ul>
-<li>设置为true与CSS中，<code>display: none</code>做着相同的事情</li>
-</ul>
-</li>
-</ul>
-<p>大多数标准 HTML 特性（attribute）都具有相应的 DOM 属性。</p>
-<h2 id="特性-写在-HTML-中的内容-和属性-DOM-对象中的内容"><a href="#特性-写在-HTML-中的内容-和属性-DOM-对象中的内容" class="headerlink" title="特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)"></a>特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)</h2><blockquote>
-<p>当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）</p>
-<p>但特性—属性映射并不是一一对应的</p>
-</blockquote>
-<h3 id="DOM属性"><a href="#DOM属性" class="headerlink" title="DOM属性"></a>DOM属性</h3><p>DOM节点是常规的Javascript的对象</p>
-<ul>
-<li>大小写敏感</li>
-<li>可以设多种值</li>
-</ul>
-<h2 id="HTML特性"><a href="#HTML特性" class="headerlink" title="HTML特性"></a>HTML特性</h2><ul>
-<li>当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别<strong>标准的</strong>特性并以此创建 DOM 属性。而<strong>非标准的</strong>就没有相对应的 DOM 属性，会变成了<code>undefined</code></li>
-<li>大小写不敏感</li>
-<li>值总是字符串类型</li>
-</ul>
-<p>所有特性（标准的非标准的）都可以通过使用以下方法进行访问：</p>
-<ul>
-<li>elem.hasAttribute(name) — 检查特性是否存在</li>
-<li>elem.getAttribute(name) — 获取这个特性值</li>
-<li>elem.setAttribute(name, value) — 设置这个特性值</li>
-<li>elem.removeAttribute(name) — 移除这个特性。</li>
-</ul>
-<h3 id="属性-特性同步"><a href="#属性-特性同步" class="headerlink" title="属性-特性同步"></a>属性-特性同步</h3><p>当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然</p>
-<ul>
-<li>例外：如<code>input.value</code>只能从特性同步到属性</li>
-</ul>
-<h3 id="非标准特性dataset"><a href="#非标准特性dataset" class="headerlink" title="非标准特性dataset"></a>非标准特性dataset</h3><blockquote>
-<p>非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素</p>
-</blockquote>
-<p>为了避免冲突，所有以 <code>data-</code> 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。</p>
-<p>用法：</p>
-<ul>
-<li>如果一个 elem 有一个名为 <code>data-about</code> 的特性，那么可以通过 <code>elem.dataset.about</code> 取到它</li>
-<li>多词特性可以以驼峰式进行调用</li>
-</ul>
-<h2 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h2><h3 id="创建一个元素"><a href="#创建一个元素" class="headerlink" title="创建一个元素"></a>创建一个元素</h3><ul>
-<li><code>document.createElement(tag)</code><ul>
-<li>元素节点</li>
-</ul>
-</li>
-<li><code>document.createTextNode(text)</code><ul>
-<li>文本节点</li>
-</ul>
-</li>
-</ul>
-<h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><ul>
-<li>className</li>
-</ul>
-<h3 id="填充消息"><a href="#填充消息" class="headerlink" title="填充消息"></a>填充消息</h3><ul>
-<li>innerHTML</li>
-</ul>
-<h3 id="插入方法"><a href="#插入方法" class="headerlink" title="插入方法"></a>插入方法</h3><p>字符串被以一种安全的方式插入到页面中，就像 <code>elem.textContent </code>所做的一样——不会被当成html插入，只当成文本</p>
-<ul>
-<li>node.append(nodes or strings)<ul>
-<li>在 node <strong>末尾</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.prepend()<ul>
-<li>在node<strong>开头</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.before()<ul>
-<li>在node<strong>前面</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.after()<ul>
-<li>在node<strong>后面</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.replaceWIth()<ul>
-<li>将node替换给定的节点或字符串</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>elem.insertAdjacentHTML(where, html) </p>
-<ul>
-<li>内容作为 HTML 代码插入，如同innerHTML</li>
-<li>where如下面的值</li>
-</ul>
-<p><img src="/.io//image-20220313160632338.png" alt="image-20220313160632338"></p>
-</li>
-</ul>
-<h3 id="节点移除"><a href="#节点移除" class="headerlink" title="节点移除"></a>节点移除</h3><ul>
-<li>node.remove()</li>
-</ul>
-<h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul>
-<li>cloneNode(true/false)<ul>
-<li>true为深克隆，具有所有特性 （attribute）和子元素</li>
-<li>false，则不克隆子元素</li>
-</ul>
-</li>
-</ul>
-<h3 id="DocumentFragment"><a href="#DocumentFragment" class="headerlink" title="DocumentFragment"></a>DocumentFragment</h3><p>可以理解为容器</p>
-<h2 id="样式和类"><a href="#样式和类" class="headerlink" title="样式和类"></a>样式和类</h2><h3 id="className"><a href="#className" class="headerlink" title="className"></a>className</h3><p>它将替换类中的整个字符串</p>
-<h3 id="classList"><a href="#classList" class="headerlink" title="classList"></a>classList</h3><p>可迭代</p>
-<p>方法</p>
-<ul>
-<li>add()<ul>
-<li>添加一个类</li>
-</ul>
-</li>
-<li>remove()<ul>
-<li>移除一个类</li>
-</ul>
-</li>
-<li>toggle()<ul>
-<li>如果类不存在就添加类，存在就移除它</li>
-</ul>
-</li>
-</ul>
-<h3 id="重置样式属性"><a href="#重置样式属性" class="headerlink" title="重置样式属性"></a>重置样式属性</h3><p>设为空字符</p>
-<p><code>elem.style.* = &quot;&quot;</code></p>
-<p>使用 style.* 来对各个样式属性进行赋值时，需要有单位，且不能一下子设置所有属性，因为 div.style 是一个对象，并且它是只读的，设置完整属性可用<code>style.cssText</code></p>
-<h3 id="计算样式getComputedStyle"><a href="#计算样式getComputedStyle" class="headerlink" title="计算样式getComputedStyle"></a>计算样式getComputedStyle</h3><p><code>getComputedStyle(element, [pseudo])</code></p>
-<ul>
-<li>element <ul>
-<li>需要被读取样式值的元素</li>
-</ul>
-</li>
-<li>pseudo <ul>
-<li>伪元素（如果需要），例如 ::before 。空字符串或无参数则意味着元素本身。</li>
-</ul>
-</li>
-</ul>
-<h2 id="元素大小和滚动"><a href="#元素大小和滚动" class="headerlink" title="元素大小和滚动"></a>元素大小和滚动</h2><p>几何属性，这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”</p>
-<p><img src="/.io//image-20220313164146836.png" alt="image-20220313164146836"></p>
-<ul>
-<li>offsetParent 是最接近的祖先<ul>
-<li>最近祖先为下列之一<ul>
-<li>CSS 定位的（ position 为 absolute ， relative 或 fixed ）</li>
-<li>或<code>&lt;td&gt;,&lt;th&gt;,&lt;table&gt;</code></li>
-<li>或<code>&lt;body&gt;</code></li>
-</ul>
-</li>
-<li>值有可能为null<ul>
-<li>未显示的元素（ display:none 或者不在文档中）</li>
-<li>对于<code>&lt;body&gt;,&lt;html&gt;</code></li>
-<li>对于带有position：fixed元素</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>属性 offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标</li>
-<li>offsetWidth/offsetHeight 是完整边框<ul>
-<li>content width/height + 2个padding width/height + 2个margin width/height</li>
-</ul>
-</li>
-<li>对于未显示的元素，几何属性为 0/null<ul>
-<li>用几何属性来检查一个元素是否被隐藏</li>
-</ul>
-</li>
-<li>clientTop<ul>
-<li>上边框宽度</li>
-</ul>
-</li>
-<li>clientLeft<ul>
-<li>左边框宽度</li>
-</ul>
-</li>
-<li>clientWidth/clientHeight<ul>
-<li>元素边框内区域的大小——content width/height + 2个 padding width/height</li>
-</ul>
-</li>
-<li>scrollWidth/scrollHeight<ul>
-<li>就像 clientWidth/clientHeight ，但它们还包括滚动出（隐藏）的部分</li>
-</ul>
-</li>
-<li>scrollLeft/scrollTop<ul>
-<li>是元素的隐藏、滚动部分的 width/height</li>
-</ul>
-</li>
-</ul>
-<h3 id="使用几何属性的原因"><a href="#使用几何属性的原因" class="headerlink" title="使用几何属性的原因"></a>使用几何属性的原因</h3><ol>
-<li>首先，CSS width/height 取决于另一个属性： box-sizing ，它定义了“什么是” CSS 宽度和高度。出于 CSS 的目的而对 box-sizing 进行的更改可能会破坏 此类 JavaScript 操作。</li>
-<li>其次，CSS 的 width/height 可能是 auto ，例如内联（inline）元素。但在 JavaScript 中，我们需要 一个确切的 px 大小，以便我们在计算中使用它。</li>
-</ol>
-<h2 id="Window大小和滚动"><a href="#Window大小和滚动" class="headerlink" title="Window大小和滚动"></a>Window大小和滚动</h2><p>使用 document.documentElement 的 clientWidth/clientHeight返回文档可见部分，这个值不包括滚动条。</p>
-<h3 id="获得当前滚动"><a href="#获得当前滚动" class="headerlink" title="获得当前滚动"></a>获得当前滚动</h3><ul>
-<li>scrollLeft/scrollTop </li>
-</ul>
-<h3 id="调整滚动位置"><a href="#调整滚动位置" class="headerlink" title="调整滚动位置"></a>调整滚动位置</h3><ul>
-<li>方法 scrollBy(x,y) 将页面滚动至 相对于当前位置的 (x, y) 位置</li>
-<li>方法 scrollTo(pageX,pageY) 将页面滚动至绝对坐标，使得可见部分的左上角具有相对于文档左上角的坐标 (pageX, pageY) 。就像设置了 scrollLeft/scrollTop 一样。</li>
-</ul>
-<h3 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h3><p>设置overflow：hidden</p>
-<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><h3 id="元素坐标-getBoundingClinetRect"><a href="#元素坐标-getBoundingClinetRect" class="headerlink" title="元素坐标 getBoundingClinetRect()"></a>元素坐标 getBoundingClinetRect()</h3><p><img src="/.io//image-20220313171141878.png" alt="image-20220313171141878"></p>
-<p>页面上的任何点都有坐标：</p>
-<ul>
-<li>相对于窗口的坐标 — elem.getBoundingClientRect() 。</li>
-<li>相对于文档的坐标 — elem.getBoundingClientRect() 加上当前页面滚动。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>现代Javascript教程</category>
-      </categories>
-      <tags>
-        <tag>浏览器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>对象、类与面向对象编程</title>
     <url>/2022/01/09/%E5%AF%B9%E8%B1%A1%E3%80%81%E7%B1%BB%E4%B8%8E%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><blockquote>
@@ -4459,8 +4545,7 @@ console.log(arr.includes(NaN))//true
 </ul>
 <p>Connection首部不能转发出去，报文转发出去前，一定要删除Connection首部，只能用于一跳</p>
 <h4 id="串行事务处理时延"><a href="#串行事务处理时延" class="headerlink" title="串行事务处理时延"></a>串行事务处理时延</h4><p>每个事务一个接着一个连接</p>
-<img src="/.io//02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png" class title="link">
-
+<p><img src="/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/link.png" alt="link"></p>
 <p>优化</p>
 <ul>
 <li>并行连接<ul>
