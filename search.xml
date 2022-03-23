@@ -1450,65 +1450,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI事件</title>
-    <url>/2022/03/18/UI%E4%BA%8B%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ul>
-<li>mousedown/moseup<ul>
-<li>点击/释放</li>
-</ul>
-</li>
-<li>mouseover/mouseout<ul>
-<li>移入/移出</li>
-</ul>
-</li>
-<li>mousemove<ul>
-<li>鼠标移动</li>
-</ul>
-</li>
-<li>click</li>
-<li>dbclick<ul>
-<li>双击</li>
-</ul>
-</li>
-<li>contextmenu<ul>
-<li>右键触发</li>
-</ul>
-</li>
-</ul>
-<h3 id="鼠标按钮"><a href="#鼠标按钮" class="headerlink" title="鼠标按钮"></a>鼠标按钮</h3><p>event.button</p>
-<ul>
-<li>左键-0</li>
-<li>中键-1</li>
-<li>右键-2</li>
-<li>后退按键-3</li>
-<li>前进按键-4</li>
-</ul>
-<h3 id="组合键"><a href="#组合键" class="headerlink" title="组合键"></a>组合键</h3><ul>
-<li>shiftKey ： Shift</li>
-<li>altKey ： Alt （或对于 Mac 是 Opt ）</li>
-<li>ctrlKey ： Ctrl</li>
-<li>metaKey ：对于 Mac 是 Cmd</li>
-</ul>
-<h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><ul>
-<li>相对于窗口的坐标： clientX 和 clientY <ul>
-<li>以窗口左上角做参照物</li>
-</ul>
-</li>
-<li>相对于文档的坐标： pageX 和 pageY <ul>
-<li>以文档左上角做参照物</li>
-</ul>
-</li>
-</ul>
-<h3 id="防止复制"><a href="#防止复制" class="headerlink" title="防止复制"></a>防止复制</h3><p>oncopy=”return false”</p>
-]]></content>
-      <categories>
-        <category>现代Javascript教程</category>
-      </categories>
-      <tags>
-        <tag>UI事件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>事件简介</title>
     <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
@@ -2127,142 +2068,6 @@ setTimeout( function timer() &#123;
       </tags>
   </entry>
   <entry>
-    <title>函数</title>
-    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
-<li>函数表达式<ul>
-<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
-</ul>
-</li>
-<li>函数声明<ul>
-<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义<ul>
-<li>这个过程叫函数声明提升</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>箭头函数<ul>
-<li>非常适合嵌入函数</li>
-<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
-<li>没有 prototype 属性</li>
-</ul>
-</li>
-</ol>
-<p>函数名就是指向函数地指针。</p>
-<span id="more"></span>
-
-<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内部访问 arguments 对象，从中取得传进来的每个参数值。</p>
-<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永远不可能直接访问外部函数的这两个变量。</p>
-<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
-<li>一个类数组对象（但不是 Array 的实例）</li>
-<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
-<li>可以跟命名参数一起使用</li>
-<li>它的值始终会与对应的命名参数同步<ul>
-<li>修改arguments上的值，会使得命名参数的值会变化</li>
-<li>它们在内存中是分开的，只不过会保持同步</li>
-</ul>
-</li>
-<li>有一个callee属性，是一个指向 arguments 对象所在函数的指针<ul>
-<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
-</ul>
-</li>
-</ul>
-<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
-<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
-</blockquote>
-<ul>
-<li>在标准函数中，<strong>this 到底引用哪个对象必须到函数被调用时才能确定</strong></li>
-<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
-</ul>
-<p>函数没有重载，后定义的会覆盖先定义</p>
-<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
-<li>new.target<ul>
-<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的构造函数。</li>
-</ul>
-</li>
-<li>length<ul>
-<li>保存函数定义的命名参数的个数</li>
-</ul>
-</li>
-<li>prototype<ul>
-<li>保存引用类型所有实例方法的地方</li>
-</ul>
-</li>
-</ol>
-<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
-<ul>
-<li>apply()<ul>
-<li>第二个参数可以是Array实例，也可以是arguments对象</li>
-</ul>
-</li>
-<li>call()<ul>
-<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
-</ul>
-</li>
-<li>bind()<ul>
-<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
-</ul>
-</li>
-</ul>
-<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
-<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
-<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
-<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
-<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
-<p>递归函数通常的形式是一个函数通过名称调用自己</p>
-</blockquote>
-<p>在写递归函数时使用 arguments.callee 可以避免函数名被改名，导致递归出错这个问题</p>
-<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
-<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
-</blockquote>
-<p>优化条件</p>
-<blockquote>
-<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
-</blockquote>
-<ul>
-<li>代码在严格模式下执行<ul>
-<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
-</ul>
-</li>
-<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
-<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
-<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
-</ul>
-<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
-<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
-</blockquote>
-<p>回顾作用域链概念</p>
-<blockquote>
-<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
-</blockquote>
-<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
-<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
-<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留在内存中，直到内部函数被销毁后才会被销毁</p>
-<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
-<p>闭包有时会产生<strong>内存泄漏</strong></p>
-<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
-<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组括号后面的第二组括号会立即调用前面的函数表达式</p>
-</blockquote>
-<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同样的隔离</p>
-<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
-<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
-</blockquote>
-<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
-<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
-<ul>
-<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访问构造函数中定义的所有变量和函数的能力。</li>
-</ul>
-<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
-<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
-<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>变量、作用域与内存</title>
     <url>/2022/01/06/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<h2 id="通过变量使用原始值与引用值"><a href="#通过变量使用原始值与引用值" class="headerlink" title="通过变量使用原始值与引用值"></a>通过变量使用原始值与引用值</h2><ol>
@@ -2485,6 +2290,142 @@ setTimeout( function timer() &#123;
       </tags>
   </entry>
   <entry>
+    <title>函数</title>
+    <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
+<li>函数表达式<ul>
+<li>必须等到代码执行到它那一行，才会在执行上下文中生成函数定义</li>
+</ul>
+</li>
+<li>函数声明<ul>
+<li>JavaScript 引擎在任何代码执行之前，会先读取函数声明，并在执行上下文中生成函数定义<ul>
+<li>这个过程叫函数声明提升</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>箭头函数<ul>
+<li>非常适合嵌入函数</li>
+<li>不能使用 arguments、super 和 new.target，也不能用作构造函数</li>
+<li>没有 prototype 属性</li>
+</ul>
+</li>
+</ol>
+<p>函数名就是指向函数地指针。</p>
+<span id="more"></span>
+
+<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><p>参数在内部表现为一个数组，在使用 function 关键字定义（非箭头）函数时，可以在函数内部访问 arguments 对象，从中取得传进来的每个参数值。</p>
+<p>每个函数在被调用时都会自动创建两个特殊变量：this 和 arguments。内部函数永远不可能直接访问外部函数的这两个变量。</p>
+<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><ul>
+<li>一个类数组对象（但不是 Array 的实例）</li>
+<li>可以通过 arguments 对象的 length 属性检查传入的参数个数</li>
+<li>可以跟命名参数一起使用</li>
+<li>它的值始终会与对应的命名参数同步<ul>
+<li>修改arguments上的值，会使得命名参数的值会变化</li>
+<li>它们在内存中是分开的，只不过会保持同步</li>
+</ul>
+</li>
+<li>有一个callee属性，是一个指向 arguments 对象所在函数的指针<ul>
+<li>使用 arguments.callee 就可以让函数逻辑与函数名解耦</li>
+</ul>
+</li>
+</ul>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><blockquote>
+<p>在标准函数中，this 引用的是把函数当成方法调用的上下文对象，这时候通常称其为 this 值</p>
+</blockquote>
+<ul>
+<li>在标准函数中，<strong>this 到底引用哪个对象必须到函数被调用时才能确定</strong></li>
+<li>在箭头函数中，<strong>this引用的是定义箭头函数的上下文</strong></li>
+</ul>
+<p>函数没有重载，后定义的会覆盖先定义</p>
+<h3 id="函数属性"><a href="#函数属性" class="headerlink" title="函数属性"></a>函数属性</h3><ol>
+<li>new.target<ul>
+<li>如果函数是正常调用的，则 new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的构造函数。</li>
+</ul>
+</li>
+<li>length<ul>
+<li>保存函数定义的命名参数的个数</li>
+</ul>
+</li>
+<li>prototype<ul>
+<li>保存引用类型所有实例方法的地方</li>
+</ul>
+</li>
+</ol>
+<h3 id="apply-、call-、bind-区别"><a href="#apply-、call-、bind-区别" class="headerlink" title="apply()、call()、bind()区别"></a>apply()、call()、bind()区别</h3><p>第一个参数都是this的值</p>
+<ul>
+<li>apply()<ul>
+<li>第二个参数可以是Array实例，也可以是arguments对象</li>
+</ul>
+</li>
+<li>call()<ul>
+<li>除去第一个参数，剩下参数都是逐个传递传给到被调用函数</li>
+</ul>
+</li>
+<li>bind()<ul>
+<li>bind()方法会创建一个新的函数实例， 其 this 值会被绑定到传给 bind()的对象</li>
+</ul>
+</li>
+</ul>
+<p>使用 apply()还是 call()，完全取决于怎么给要调用的函数传参更方便，他们真正强大的地方并不是给函数传参，而是<strong>控制函数调用上下文即函数体内 this 值的能力</strong></p>
+<h2 id="默认参数及扩展操作符"><a href="#默认参数及扩展操作符" class="headerlink" title="默认参数及扩展操作符"></a>默认参数及扩展操作符</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES6之后，支持显式定义默认参数。给参数传 undefined 相当于没有传值。</p>
+<p>默认参数上，实际上和使用 let 关键字顺序声明变量一样，按照定义它们的顺序依次被初始化，后定义默认值的参数可以引用先定义的参数，但反过来不行，会有TDZ，参数也存在于自己的作用域中，它们不能引用函数体的作用域。</p>
+<h3 id="扩展操作符"><a href="#扩展操作符" class="headerlink" title="扩展操作符"></a>扩展操作符</h3><p>扩展操作符既可以用于调用函数时传参，也可以用于定义函数参数</p>
+<h2 id="使用函数实现递归"><a href="#使用函数实现递归" class="headerlink" title="使用函数实现递归"></a>使用函数实现递归</h2><blockquote>
+<p>递归函数通常的形式是一个函数通过名称调用自己</p>
+</blockquote>
+<p>在写递归函数时使用 arguments.callee 可以避免函数名被改名，导致递归出错这个问题</p>
+<h3 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h3><blockquote>
+<p>内存管理优化机制，让 JavaScript 引擎在满足条件时可以重用栈帧。具体来说，即外部函数的返回值是一个内部函数的返回值。</p>
+</blockquote>
+<p>优化条件</p>
+<blockquote>
+<p>尾调用优化的条件就是确定外部栈帧真的没有必要存在了</p>
+</blockquote>
+<ul>
+<li>代码在严格模式下执行<ul>
+<li>之所以要求严格模式，主要因为在非严格模式下函数调用中允许使用 f.arguments 和 f.caller，而它们都会引用外部函数的栈帧。</li>
+</ul>
+</li>
+<li><strong>外部函数的返回值是对尾调用函数的调用</strong></li>
+<li>尾调用函数<strong>返回后不需要执行额外的逻辑</strong></li>
+<li>尾调用函数<strong>不是引用外部函数作用域中自由变量的闭包</strong></li>
+</ul>
+<h2 id="使用闭包实现私有变量"><a href="#使用闭包实现私有变量" class="headerlink" title="使用闭包实现私有变量"></a>使用闭包实现私有变量</h2><blockquote>
+<p>闭包：指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。</p>
+</blockquote>
+<p>回顾作用域链概念</p>
+<blockquote>
+<p>在调用一个函数时，会为这个函数调用创建一个执行上下文，并创建一个作用域链。然后用 arguments 和其他命名参数来初始化这个函数的活动对象。外部函数的活动对象是内部函数作用域链上的第二个对象。这个作用域链一直向外串起了所有包含函数的活动对象，直到全局执行上下文才终止</p>
+</blockquote>
+<p>函数执行时，每个执行上下文中都会有一个包含其中变量的对象。全局上下文中的叫变量对象，它会在代码执行期间始终存在。而函数局部上下文中的叫活动对象，只在函数执行期间存在。在定义函数时，就会为它创建作用域链，预装载全局变量对象，并保存在内部的[[Scope]]中。在调用这个函数时，会创建相应的执行上下文，然后通过复制函数的[[Scope]]来创建其作用域链。接着会创建函数的活动对象（用作变量对象）并将其推入作用域链的前端。</p>
+<p>作用域链其实是一个包含指针的列表，每个指针分别指向一个变量对象，但物理上并不会包含相应的对象。</p>
+<p>在一个函数内部定义的函数会把外部函数的的活动对象添加到自己的作用域链中，外部函数活动对象并不能在它执行完毕后销毁，因为内部函数的作用域链中仍然有对它的引用，外部函数执行上下文的作用域链会销毁，但它的活动对象仍然会保留在内存中，直到内部函数被销毁后才会被销毁</p>
+<p>因为闭包会保留它们包含函数的作用域，所以比其他函数更占用内存。过度使用闭包可能导致内存过度占用，因此建议仅在十分必要时使用。</p>
+<p>闭包有时会产生<strong>内存泄漏</strong></p>
+<h3 id="立即调用的函数表达式IIFE"><a href="#立即调用的函数表达式IIFE" class="headerlink" title="立即调用的函数表达式IIFE"></a>立即调用的函数表达式IIFE</h3><blockquote>
+<p>类似于函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组括号后面的第二组括号会立即调用前面的函数表达式</p>
+</blockquote>
+<p>ES5以前，为了防止变量定义外泄，IIFE 是个非常有效的方式，ES6之后，IIFE 就没有那么必要了，因为块级作用域中的变量无须 IIFE 就可以实现同样的隔离</p>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="私有变量"></a>私有变量</h3><blockquote>
+<p>任何定义在函数或块中的变量，都可以认为是私有的，因为在这个函数或块的外部无法访问其中的变量，私有变量包括函数参数、局部变量，以及函数内部定义的其他函数</p>
+</blockquote>
+<p>如果这个函数中创建了一个闭包，则这个闭包能通过其作用域链访问其外部的这 3 个变量。基于这一点，就可以创建出能够访问私有变量的公有方法</p>
+<p>特权方法是能够访问函数私有变量（及私有函数）的公有方法</p>
+<ul>
+<li>这个模式是把所有私有变量和私有函数都定义在构造函数中。然后，再创建一个能够访问这些私有成员的特权方法。这样做之所以可行，是因为定义在构造函数中的特权方法其实是一个闭包，它具有访问构造函数中定义的所有变量和函数的能力。</li>
+</ul>
+<p>所带来的问题：必须通过构造函数来实现这种隔离</p>
+<p>解决方法：使用静态私有变量实现特权方法可以避免这个问题。</p>
+<h4 id="静态私有变量"><a href="#静态私有变量" class="headerlink" title="静态私有变量"></a>静态私有变量</h4><h4 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h4>]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基本引用类型</title>
     <url>/2022/01/08/%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h2><p>引用类型是把数据和功能组织到一起的结构，有点像类，但和类不是一个概念</p>
@@ -2523,7 +2464,7 @@ setTimeout( function timer() &#123;
 </li>
 <li><code>Date.UTC()</code><ul>
 <li><code>Date.UTC()</code>方法也返回日期的毫秒表示</li>
-<li>参数是年、零起点月数（1月是0，2月是1，以此类推）、日（1<del>31）、时（0</del>23）、分、秒和毫秒</li>
+<li>参数是年、零起点月数（1月是0，2月是1，以此类推）、日（1<code>~</code>31）、时（0<code>~</code>23）、分、秒和毫秒</li>
 <li><code>Date.UTC()</code>也会被Date构造函数隐式调用</li>
 </ul>
 </li>
@@ -2861,29 +2802,6 @@ setTimeout( function timer() &#123;
       </tags>
   </entry>
   <entry>
-    <title>新年快乐</title>
-    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
-    <content><![CDATA[<p>2022年希望有更好的明天</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2022日常</title>
-    <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2>]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搭建一个自己的博客</title>
     <url>/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="Hexo-快速搭建"><a href="#Hexo-快速搭建" class="headerlink" title="Hexo 快速搭建"></a>Hexo 快速搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
@@ -3072,6 +2990,100 @@ setTimeout( function timer() &#123;
 ]]></content>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新年快乐</title>
+    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
+    <content><![CDATA[<p>2022年希望有更好的明天</p>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理解执行上下文</title>
+    <url>/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
+    <content><![CDATA[<h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
+<ul>
+<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+<li><code>Eval </code>函数执行上下文</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
+<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
+<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
+</blockquote>
+<ol>
+<li><p>创建变量对象</p>
+<blockquote>
+<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+</blockquote>
+<ol>
+<li><p>初始化函数的所有形参</p>
+<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为undefined</li>
+</ul>
+</li>
+<li><p>初始化函数声明</p>
+<ul>
+<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li><p>初始变量声明</p>
+<ul>
+<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
+</li>
+<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>建立作用域</p>
+<ol>
+<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
+</ol>
+</li>
+<li><p>确定this指向</p>
+<ul>
+<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
+</ul>
+</li>
+</ol>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
+<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
+<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
+</blockquote>
+<ul>
+<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
+<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深入理解Javascript</category>
+      </categories>
+      <tags>
+        <tag>执行上下文</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2022日常</title>
+    <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2>]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -3569,77 +3581,6 @@ func()
       </tags>
   </entry>
   <entry>
-    <title>理解执行上下文</title>
-    <url>/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
-    <content><![CDATA[<h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
-<ul>
-<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
-<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
-<li><code>Eval </code>函数执行上下文</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
-<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
-<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
-</blockquote>
-<ol>
-<li><p>创建变量对象</p>
-<blockquote>
-<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
-<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
-</blockquote>
-<ol>
-<li><p>初始化函数的所有形参</p>
-<ul>
-<li>由名称和对应值组成的一个变量对象的属性被创建</li>
-<li>没有实参，属性值设为undefined</li>
-</ul>
-</li>
-<li><p>初始化函数声明</p>
-<ul>
-<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
-<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
-</ul>
-</li>
-<li><p>初始变量声明</p>
-<ul>
-<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
-</li>
-<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>建立作用域</p>
-<ol>
-<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
-</ol>
-</li>
-<li><p>确定this指向</p>
-<ul>
-<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
-</ul>
-</li>
-</ol>
-<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
-<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
-<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
-</blockquote>
-<ul>
-<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
-<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深入理解Javascript</category>
-      </categories>
-      <tags>
-        <tag>执行上下文</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>集合引用类型</title>
     <url>/2022/01/08/%E9%9B%86%E5%90%88%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><blockquote>
@@ -3659,7 +3600,7 @@ func()
 
 <h2 id="数组与定型数组"><a href="#数组与定型数组" class="headerlink" title="数组与定型数组"></a>数组与定型数组</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><h4 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h4><ol>
 <li>使用<code>Array</code>构造函数<ul>
-<li><code>newArray()</code>或<code>Array()</code></li>
+<li><code>new Array()</code>或<code>Array()</code></li>
 <li>可以传入一个数值，然后length属性就会被自动创建并设置为这个值</li>
 <li>也可以给Array构造函数传入要保存的元素</li>
 </ul>
