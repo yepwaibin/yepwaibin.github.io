@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yepwaibin.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="CommonJs导出 exports module.exports 但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是 module 所以在Node中真正用于导出的其实根本不是exports，而是module.exports 本质上，这两个导出是一样的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块化">
+<meta property="og:url" content="https://yepwaibin.github.io/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Sky&#39;s Blog">
+<meta property="og:description" content="CommonJs导出 exports module.exports 但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是 module 所以在Node中真正用于导出的其实根本不是exports，而是module.exports 本质上，这两个导出是一样的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-27T11:49:33.000Z">
+<meta property="article:modified_time" content="2022-03-27T11:50:40.817Z">
+<meta property="article:author" content="Sky">
+<meta property="article:tag" content="模块化">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://yepwaibin.github.io/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yepwaibin.github.io/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/","path":"2022/03/27/模块化/","title":"模块化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>模块化 | Sky's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Sky's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonJs"><span class="nav-text">CommonJs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA"><span class="nav-text">导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E2%80%94%E2%80%94require-X"><span class="nav-text">引入——require(X)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-text">模块加载过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJs%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-text">CommonJs加载过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES-Modules"><span class="nav-text">ES Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E2%80%94%E2%80%94export"><span class="nav-text">导出——export</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E2%80%94%E2%80%94import"><span class="nav-text">导入——import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-%E4%B8%8E-import-%E7%BB%93%E5%90%88"><span class="nav-text">export 与 import 结合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES-Module%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B"><span class="nav-text">ES Module加载过程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Sky"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Sky</p>
+  <div class="site-description" itemprop="description">World is powered by solitude</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yepwaibin.github.io/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Sky">
+      <meta itemprop="description" content="World is powered by solitude">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sky's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模块化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-03-27 19:49:33 / Modified: 19:50:40" itemprop="dateCreated datePublished" datetime="2022-03-27T19:49:33+08:00">2022-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><ul>
+<li>exports</li>
+<li>module.exports<ul>
+<li>但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是 module</li>
+<li>所以在Node中真正用于导出的其实根本不是exports，而是module.exports</li>
+<li>本质上，这两个导出是一样的</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="引入——require-X"><a href="#引入——require-X" class="headerlink" title="引入——require(X)"></a>引入——require(X)</h3><ul>
+<li>X是一个核心模块<ul>
+<li>直接返回核心模块，并且停止查找</li>
+</ul>
+</li>
+<li>X是以 ./ 或 ../ 或 /（根目录）开头的，将X当做一个文件在对应的目录下查找<ul>
+<li>如果有后缀名，按照后缀名的格式查找对应的文件</li>
+<li>如果没有后缀名，会按照如下顺序<ul>
+<li>直接查找文件X</li>
+<li>查找X.js文件</li>
+<li>查找X.json文件</li>
+<li>查找X.node文件</li>
+</ul>
+</li>
+<li>没有找到对应的文件，将X作为一个目录<ul>
+<li>查找目录下面的index文件</li>
+<li>查找X/index.js文件</li>
+<li>查找X/index.json文件</li>
+<li>查找X/index.node文件</li>
+</ul>
+</li>
+<li>如果没有找到，那么报错：not found</li>
+</ul>
+</li>
+<li>直接是一个X（没有路径），并且X不是一个核心模块</li>
+</ul>
+<h3 id="模块加载过程"><a href="#模块加载过程" class="headerlink" title="模块加载过程"></a>模块加载过程</h3><ul>
+<li>模块在被第一次引入时，模块中的js代码会被运行一次</li>
+<li>模块被多次引入时，会缓存，最终只加载（运行）一次<ul>
+<li>每个模块对象module都有一个属性：loaded</li>
+<li>为false表示还没有加载，为true表示已经加载</li>
+</ul>
+</li>
+<li>如果有循环引入，Node采用的是深度优先算法加载模块</li>
+</ul>
+<h3 id="CommonJs加载过程"><a href="#CommonJs加载过程" class="headerlink" title="CommonJs加载过程"></a>CommonJs加载过程</h3><ul>
+<li>加载js文件的过程是运行时加载的，<strong>并且是同步的</strong></li>
+<li>CommonJS通过module.exports导出的是一个对象，由于指着同一对象，所以一个地方修改了对象属性，其他地方也会被修改</li>
+</ul>
+<h2 id="ES-Modules"><a href="#ES-Modules" class="headerlink" title="ES Modules"></a>ES Modules</h2><ul>
+<li>使用了import和export关键字</li>
+<li>它采用编译期的静态分析，并且也加入了动态引用的方式</li>
+</ul>
+<h3 id="导出——export"><a href="#导出——export" class="headerlink" title="导出——export"></a>导出——export</h3><ul>
+<li>在语句声明的前面直接加上export关键字</li>
+<li>将所有需要导出的标识符，放到export后面的 <code>&#123;&#125;</code>中<ul>
+<li>这里的<code> &#123;&#125;</code>里面不是ES6的对象字面量的增强写法，{}也不是表示一个对象的</li>
+</ul>
+</li>
+<li>导出时给标识符起一个别名</li>
+<li>默认导出——default</li>
+</ul>
+<h3 id="导入——import"><a href="#导入——import" class="headerlink" title="导入——import"></a>导入——import</h3><ul>
+<li><code>import &#123;标识符列表&#125; from &#39;模块&#39;</code><ul>
+<li>这里的{}也不是一个对象，里面只是存放导入的标识符列表内容</li>
+</ul>
+</li>
+<li>导入时给标识符起别名</li>
+<li>通过<code> *</code> 将模块功能放到一个模块功能对象上</li>
+</ul>
+<p>通过import加载一个模块，是不可以在其放到逻辑代码中的，因为ES Module在被JS引擎解析时，就必须知道它的依赖关系。</p>
+<p>假如要动态引入，可以使用import()函数，来动态加载</p>
+<h3 id="export-与-import-结合"><a href="#export-与-import-结合" class="headerlink" title="export 与 import 结合"></a>export 与 import 结合</h3><ul>
+<li><code>export &#123;xxx as yyy&#125; from &#39;./zzz&#39;</code></li>
+</ul>
+<h3 id="ES-Module加载过程"><a href="#ES-Module加载过程" class="headerlink" title="ES Module加载过程"></a>ES Module加载过程</h3><ul>
+<li>加载js文件的过程是<strong>编译（解析）</strong>时加载的，<strong>并且是异步的</strong><ul>
+<li>所以有时候也称ES Module是静态解析的，而不是动态或者运行时解析的</li>
+</ul>
+</li>
+<li>export导出的是变量本身的引用，在导出一个变量时，js引擎会解析这个语法，并且创建<strong>模块环境记录</strong>，模块环境记录会和变量进行绑定，并且这个绑定是实时的，</li>
+<li>在导入的地方，我们是可以<strong>实时</strong>的获取到绑定的最新值的，且在导入的地方<strong>不可以修改变量</strong>，因为它只是被绑定到了这个变量上（其实是一个<strong>常量</strong>）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag"># 模块化</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" rel="prev" title="理解事件循环">
+                  <i class="fa fa-chevron-left"></i> 理解事件循环
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sky</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">71k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:04</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.7/pdfobject.min.js","integrity":"sha256-ph3Dk89VmuTVXG6x/RDzk53SU9LPdAh1tpv0UvnDZ2I="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
