@@ -22,28 +22,28 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yepwaibin.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="什么是执行上下文执行上下文就是当前代码的执行环境，包含三种类型  全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置this的值等于这个全局对象。 函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。 Eval 函数执行上下文">
+<meta name="description" content="path获取路径信息 path.dirname()：获取文件的父文件夹 path.basename()：获取文件名； path.extname()：获取文件扩展名 __dirname：获取父文件夹路径">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解执行上下文">
-<meta property="og:url" content="https://yepwaibin.github.io/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/index.html">
+<meta property="og:title" content="常用内置模块">
+<meta property="og:url" content="https://yepwaibin.github.io/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/index.html">
 <meta property="og:site_name" content="Sky&#39;s Blog">
-<meta property="og:description" content="什么是执行上下文执行上下文就是当前代码的执行环境，包含三种类型  全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置this的值等于这个全局对象。 函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。 Eval 函数执行上下文">
+<meta property="og:description" content="path获取路径信息 path.dirname()：获取文件的父文件夹 path.basename()：获取文件名； path.extname()：获取文件扩展名 __dirname：获取父文件夹路径">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-18T03:23:55.000Z">
-<meta property="article:modified_time" content="2022-03-18T09:41:31.495Z">
+<meta property="article:published_time" content="2022-03-28T15:53:49.000Z">
+<meta property="article:modified_time" content="2022-03-28T15:54:43.019Z">
 <meta property="article:author" content="Sky">
-<meta property="article:tag" content="执行上下文">
+<meta property="article:tag" content="模块">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://yepwaibin.github.io/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+<link rel="canonical" href="https://yepwaibin.github.io/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yepwaibin.github.io/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/","path":"2022/03/18/理解执行上下文/","title":"理解执行上下文"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yepwaibin.github.io/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/","path":"2022/03/28/常用内置模块/","title":"常用内置模块"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>理解执行上下文 | Sky's Blog</title>
+<title>常用内置模块 | Sky's Blog</title>
   
 
 
@@ -149,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">什么是执行上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">执行上下文生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%98%B6%E6%AE%B5"><span class="nav-text">创建阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5"><span class="nav-text">执行阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E9%98%B6%E6%AE%B5"><span class="nav-text">回收阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88"><span class="nav-text">什么是执行上下文栈</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-text">path</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E4%BF%A1%E6%81%AF"><span class="nav-text">获取路径信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5"><span class="nav-text">路径拼接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fs"><span class="nav-text">fs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E6%93%8D%E4%BD%9C"><span class="nav-text">文件夹操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#events"><span class="nav-text">events</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -215,7 +215,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yepwaibin.github.io/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+    <link itemprop="mainEntityOfPage" href="https://yepwaibin.github.io/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          理解执行上下文
+          常用内置模块
         </h1>
 
         <div class="post-meta-container">
@@ -240,7 +240,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-03-18 11:23:55 / Modified: 17:41:31" itemprop="dateCreated datePublished" datetime="2022-03-18T11:23:55+08:00">2022-03-18</time>
+      <time title="Created: 2022-03-28 23:53:49 / Modified: 23:54:43" itemprop="dateCreated datePublished" datetime="2022-03-28T23:53:49+08:00">2022-03-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,7 +248,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Javascript/" itemprop="url" rel="index"><span itemprop="name">深入理解Javascript</span></a>
+          <a href="/categories/node/" itemprop="url" rel="index"><span itemprop="name">node</span></a>
         </span>
     </span>
 
@@ -265,7 +265,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>978</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -283,65 +283,84 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
-<ul>
-<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
-<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
-<li><code>Eval </code>函数执行上下文</li>
+        <h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><h3 id="获取路径信息"><a href="#获取路径信息" class="headerlink" title="获取路径信息"></a>获取路径信息</h3><ul>
+<li><code>path.dirname()</code>：获取文件的父文件夹</li>
+<li><code>path.basename()</code>：获取文件名；</li>
+<li><code>path.extname()</code>：获取文件扩展名</li>
+<li><code>__dirname</code>：获取父文件夹路径</li>
 </ul>
 <span id="more"></span>
 
-<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
-<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
-<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
+<h3 id="路径拼接"><a href="#路径拼接" class="headerlink" title="路径拼接"></a>路径拼接</h3><ul>
+<li><code>path.join()</code></li>
+<li><code>path.resolve()</code><ul>
+<li>resolve函数会判断我们拼接的路径前面是否有/或../或./</li>
+<li>如果有表示是一个绝对路径，会返回对应的拼接路径</li>
+<li>如果没有，那么会和当前执行文件所在的文件夹进行路径的拼接</li>
+</ul>
+</li>
+</ul>
+<h2 id="fs"><a href="#fs" class="headerlink" title="fs"></a>fs</h2><p>大多有三种操作方式</p>
+<ul>
+<li>同步操作</li>
+<li>异步回调函数操作</li>
+<li>异步Promise操作</li>
+</ul>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><ul>
+<li><code>fs.statSync(路径)</code></li>
+<li><code>fs.stat(路径，回调函数)</code></li>
+<li><code>fs.promise.stat(路径).then(state=&gt;console.log(state))</code></li>
+</ul>
+<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><p>Node.js抽象出操作系统之间的特定差异，并为所有打开的文件分配一个数字型的文件描述符</p>
+<ul>
+<li>fs.open()方法用于分配新的文件描述符，一旦被分配，则文件描述符可用于从文件读取数据、向文件写入数据、或请求关于文件的信息</li>
+<li><code>fs.open(路径，&quot;r&quot;，(err,fd)=&gt;console.log(fd))</code><ul>
+<li><code>fd</code>为文件描述符</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
+<li><code>fs.readFile(path，[,options], callback)</code>：读取文件的内容</li>
+<li><code>fs.writeFile(file, data[,options], callback)</code>：在文件中写入内容</li>
+</ul>
+<p>options参数</p>
+<ul>
+<li>flag：写入方式<ul>
+<li><code>w</code>打开文件写入，默认值</li>
+<li><code>w+</code>打开文件进行读写，如果不存在则创建文件</li>
+<li><code>r+</code>打开文件进行读写，如果不存在那么抛出异常</li>
+<li><code>r</code>打开文件读取，读取时的默认值</li>
+<li><code>a</code>打开要写入的文件，将流放在文件末尾。如果不存在则创建文件</li>
+<li><code>a+</code>打开文件以进行读写，将流放在文件末尾。如果不存在则创建文件</li>
+</ul>
+</li>
+<li>encoding：字符编码<ul>
+<li>不填写encoding，默认返回的结果是Buffer</li>
+<li><code>utf-8</code>能显示中文</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h3><ul>
+<li><code>fs.exists()</code>判断文件夹是否存在，<code>fs.isDirectory()</code>判断是否是文件夹</li>
+<li><code>fs.mkdir()</code>或者<code>fs.mkdirSync()</code>创建一个新文件夹</li>
+<li><code>fs.readdir(文件夹路径，(err,files)=&gt;&#123;&#125;)</code></li>
+<li><code>fs.rename(旧文件，新文件，(err)=&gt;&#123;&#125;)</code></li>
+</ul>
+<h2 id="events"><a href="#events" class="headerlink" title="events"></a>events</h2><blockquote>
+<p>发出事件和监听事件都是通过<code>EventEmitter</code>类来完成的，它们都属于<code>events</code>对象。<code>constEventEmitter=require(&#39;events&#39;)</code>，<code>constemitter=newEventEmitter()</code></p>
 </blockquote>
-<ol>
-<li><p>创建变量对象</p>
-<blockquote>
-<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
-<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
-</blockquote>
-<ol>
-<li><p>初始化函数的所有形参</p>
 <ul>
-<li>由名称和对应值组成的一个变量对象的属性被创建</li>
-<li>没有实参，属性值设为undefined</li>
-</ul>
-</li>
-<li><p>初始化函数声明</p>
-<ul>
-<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
-<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
-</ul>
-</li>
-<li><p>初始变量声明</p>
-<ul>
-<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
-</li>
-<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>建立作用域</p>
-<ol>
-<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
-</ol>
-</li>
-<li><p>确定this指向</p>
-<ul>
-<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
-</ul>
-</li>
-</ol>
-<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
-<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
-<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
-</blockquote>
-<ul>
-<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
-<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
+<li><code>emitter.on(eventName,listener)</code>：监听事件，也可以使用<code>addListener</code></li>
+<li><code>emitter.off(eventName,listener)</code>：移除事件监听，也可以使用<code>removeListener</code></li>
+<li><code>emitter.emit(eventName[,...args])</code>：发出事件，可以携带一些参数</li>
+<li><code>emitter.eventNames()</code>：返回当前EventEmitter对象注册的事件字符串数组</li>
+<li><code>emitter.getMaxListeners()</code>：返回当前EventEmitter对象的最大监听器数量</li>
+<li><code>emitter.listenerCount</code>(事件名称)：返回当前EventEmitter对象某一个事件名称，监听器的个数</li>
+<li><code>emitter.listeners</code>(事件名称)：返回当前EventEmitter对象某个事件监听器上所有的监听器数组</li>
+<li><code>emitter.once(eventName,listener)</code>：事件监听一次</li>
+<li><code>emitter.prependListener()</code>：将监听事件添加到最前面</li>
+<li><code>emitter.prependOnceListener()</code>：将监听事件添加到最前面，但是只监听一次</li>
+<li><code>emitter.removeAllListeners([eventName])</code>：移除所有的监听器</li>
 </ul>
 
     </div>
@@ -352,21 +371,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" rel="tag"># 执行上下文</a>
+              <a href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag"># 模块</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/02/17/HTTP%E5%9F%BA%E7%A1%80/HTTP%E5%9F%BA%E7%A1%80/" rel="prev" title="HTTP基础">
-                  <i class="fa fa-chevron-left"></i> HTTP基础
+                <a href="/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" rel="prev" title="包管理工具">
+                  <i class="fa fa-chevron-left"></i> 包管理工具
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/03/22/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/" rel="next" title="作用域和闭包">
-                  作用域和闭包 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
