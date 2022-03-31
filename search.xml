@@ -5221,4 +5221,79 @@ console.log(arr.includes(NaN))//true
         <tag>HTTP</tag>
       </tags>
   </entry>
+  <entry>
+    <title>express简单使用</title>
+    <url>/2022/03/31/express%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>脚手架<ul>
+<li><code>npm install -g express-generator</code></li>
+<li><code>express express-demo</code></li>
+<li><code>npm install</code></li>
+<li><code>node bin/www</code></li>
+</ul>
+</li>
+<li>从零搭建<ul>
+<li><code>npm init -y</code></li>
+<li><code>npm install express</code></li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// express其实是一个函数: createApplication</span></span><br><span class="line"><span class="comment">// 返回app</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听路径</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;Hello Express&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启监听</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;express初体验服务器启动成功~&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><blockquote>
+<p>中间件函数能够访问请求对象 (<code>req</code>)、响应对象 (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数</p>
+</blockquote>
+<p>中间件函数可以执行以下任务：</p>
+<ul>
+<li>执行任何代码。</li>
+<li>对请求和响应对象进行更改。</li>
+<li>结束请求/响应循环。</li>
+<li>调用堆栈中的下一个中间件函数。</li>
+</ul>
+<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
+<h3 id="普通中间件"><a href="#普通中间件" class="headerlink" title="普通中间件"></a>普通中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// use注册一个中间件(回调函数)</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;注册了一个普通的中间件~&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径中间件"><a href="#路径中间件" class="headerlink" title="路径中间件"></a>路径中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路径匹配的中间件</span></span><br><span class="line">app.use(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home middleware 01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径和方法中间件"><a href="#路径和方法中间件" class="headerlink" title="路径和方法中间件"></a>路径和方法中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="连续注册中间件"><a href="#连续注册中间件" class="headerlink" title="连续注册中间件"></a>连续注册中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&quot;/home&quot;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 02&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 03&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 04&quot;</span>);</span><br><span class="line">  res.end(<span class="string">&quot;home page&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用中间件-body解析"><a href="#应用中间件-body解析" class="headerlink" title="应用中间件 body解析"></a>应用中间件 body解析</h2><h3 id="手动解析"><a href="#手动解析" class="headerlink" title="手动解析"></a>手动解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 手动解析</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">    req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> info = <span class="built_in">JSON</span>.parse(data.toString());</span><br><span class="line">      req.body = info;</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    req.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置解析"><a href="#内置解析" class="headerlink" title="内置解析"></a>内置解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// express内置解析</span></span><br><span class="line">app.use(express.json())</span><br></pre></td></tr></table></figure>
+
+<h3 id="urlencoded解析"><a href="#urlencoded解析" class="headerlink" title="urlencoded解析"></a>urlencoded解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extended</span></span><br><span class="line"><span class="comment">// true: 那么对urlencoded进行解析时, 它使用的是第三方库: qs</span></span><br><span class="line"><span class="comment">// false: 那么对urlencoded进行解析时, 它使用的是Node内置模块: querystring</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">true</span>&#125;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">&#x27;./uploads/&#x27;</span>);		<span class="comment">//把文件放置的位置</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件命名</span></span><br><span class="line">    cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + path.extname(file.originalname));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">  <span class="comment">// dest: &#x27;./uploads/&#x27;</span></span><br><span class="line">  storage</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/login&#x27;</span>, upload.any(), <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.end(<span class="string">&quot;用户登录成功~&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="form-data解析"><a href="#form-data解析" class="headerlink" title="form-data解析"></a>form-data解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = multer();</span><br><span class="line">app.use(upload.any());</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询参数params和query"><a href="#查询参数params和query" class="headerlink" title="查询参数params和query"></a>查询参数params和query</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">req.params</span><br><span class="line"></span><br><span class="line">req.query</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应数据"><a href="#响应数据" class="headerlink" title="响应数据"></a>响应数据</h2><ul>
+<li>end</li>
+<li>json<ul>
+<li>可以传入很多的类型：object、array、string、boolean、number、null等，它们会被转换成json格式返回</li>
+</ul>
+</li>
+<li>status</li>
+</ul>
+<h2 id="express路由"><a href="#express路由" class="headerlink" title="express路由"></a>express路由</h2><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在userRoute.js文件中，编写关于user的中间件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建可安装的模块化路由处理程序</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.json(<span class="string">`<span class="subst">$&#123;req.params.id&#125;</span>用户的信息`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在app.js文件中引入user路由</span></span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routers/users&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里指定路径，userRoute.js中就可以省略/user</span></span><br><span class="line">app.use(<span class="string">&quot;/users&quot;</span>, userRouter);</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态服务器"><a href="#静态服务器" class="headerlink" title="静态服务器"></a>静态服务器</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./build&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>express</tag>
+      </tags>
+  </entry>
 </search>
