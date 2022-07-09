@@ -962,96 +962,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML中的Javascript</title>
-    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
-    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
-<li><p>async</p>
-</li>
-<li><p>crossorigin</p>
-<blockquote>
-<p>配置相关CORS设置</p>
-</blockquote>
-<ul>
-<li>anonymous</li>
-<li>use-credentials</li>
-</ul>
-</li>
-<li><p>defer</p>
-</li>
-<li><p>intergrity</p>
-<blockquote>
-<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
-</blockquote>
-</li>
-<li><p>src</p>
-<ul>
-<li>会忽略行内脚本</li>
-<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
-</ul>
-</li>
-<li><p>type</p>
-<ul>
-<li><code>text/javascript</code></li>
-<li><code>module</code><ul>
-<li>会被当成ES6模块</li>
-<li>脚本加载解析过程与defer相同</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
-<li><p>行内脚本</p>
-<p>下载和执行会阻塞<code>HTML</code>的解析</p>
-</li>
-<li><p>外部脚本</p>
-<ul>
-<li>不加<code>async</code>和<code>defer</code><ul>
-<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
-</ul>
-</li>
-<li><code>defer</code><ul>
-<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
-</ul>
-</li>
-<li><code>async</code><ul>
-<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
-<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>动态加载脚本</p>
-<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
-</li>
-</ol>
-<p>建议都使用外部脚本，原因：</p>
-<ul>
-<li>可维护性</li>
-<li>缓存<ul>
-<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
-</ul>
-</li>
-</ul>
-<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
-<ol>
-<li>混杂模式</li>
-<li>标准模式</li>
-<li>准标准模式</li>
-</ol>
-<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
-<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTML基础</title>
     <url>/2022/01/18/HTML%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="前端关注点"><a href="#前端关注点" class="headerlink" title="前端关注点"></a>前端关注点</h2><ul>
@@ -1450,6 +1360,606 @@
       </tags>
   </entry>
   <entry>
+    <title>UI事件</title>
+    <url>/2022/03/18/UI%E4%BA%8B%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ul>
+<li>mousedown/moseup<ul>
+<li>点击/释放</li>
+</ul>
+</li>
+<li>mouseover/mouseout<ul>
+<li>移入/移出</li>
+</ul>
+</li>
+<li>mousemove<ul>
+<li>鼠标移动</li>
+</ul>
+</li>
+<li>click</li>
+<li>dbclick<ul>
+<li>双击</li>
+</ul>
+</li>
+<li>contextmenu<ul>
+<li>右键触发</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="鼠标按钮"><a href="#鼠标按钮" class="headerlink" title="鼠标按钮"></a>鼠标按钮</h3><p>event.button</p>
+<ul>
+<li>左键-0</li>
+<li>中键-1</li>
+<li>右键-2</li>
+<li>后退按键-3</li>
+<li>前进按键-4</li>
+</ul>
+<h3 id="组合键"><a href="#组合键" class="headerlink" title="组合键"></a>组合键</h3><ul>
+<li>shiftKey ： Shift</li>
+<li>altKey ： Alt （或对于 Mac 是 Opt ）</li>
+<li>ctrlKey ： Ctrl</li>
+<li>metaKey ：对于 Mac 是 Cmd</li>
+</ul>
+<h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><ul>
+<li>相对于窗口的坐标： clientX 和 clientY <ul>
+<li>以窗口左上角做参照物</li>
+</ul>
+</li>
+<li>相对于文档的坐标： pageX 和 pageY <ul>
+<li>以文档左上角做参照物</li>
+</ul>
+</li>
+</ul>
+<h3 id="防止复制"><a href="#防止复制" class="headerlink" title="防止复制"></a>防止复制</h3><p>oncopy=”return false”</p>
+<h2 id="移动鼠标"><a href="#移动鼠标" class="headerlink" title="移动鼠标"></a>移动鼠标</h2><h3 id="事件-mouseover-和-mouseout"><a href="#事件-mouseover-和-mouseout" class="headerlink" title="事件 mouseover 和 mouseout"></a>事件 mouseover 和 mouseout</h3><p>当鼠标指针移到某个元素上时， mouseover 事件就会发生，而当鼠标离开该元素 时， mouseout 事件就会发生。注意：快速移动鼠标可能会跳过中间元素</p>
+<p><img src="/2022/03/18/UI%E4%BA%8B%E4%BB%B6/8844cdf43e0eae86ff31997af9fada4.png" alt="鼠标事件图"></p>
+<ul>
+<li>对于mouseover<ul>
+<li>event.target —— 是鼠标移过的那个元素</li>
+<li>event.relatedTarget —— 是鼠标来自的那个元素（ relatedTarget → target ）</li>
+</ul>
+</li>
+<li>对于mouseout<ul>
+<li>event.target —— 是鼠标离开的元素</li>
+<li>event.relatedTarget —— 是鼠标移动到的，当前指针位置下的元素 （ target → relatedTarget ）</li>
+</ul>
+</li>
+</ul>
+<p>如果 mouseover 被触发了，则必须有 mouseout</p>
+<h4 id="嵌套元素"><a href="#嵌套元素" class="headerlink" title="嵌套元素"></a>嵌套元素</h4><p>当鼠标指针从<code> #parent</code> 元素移动到<code>#child</code>时，会在父元素上触发两 个处理程序：<code>mouseout</code>和 <code>mouseover</code>。因为时间会冒泡，子元素触发mouseover事件，向上冒泡，父元素就会捕获到。</p>
+<h3 id="事件-mouseenter-和-mouseleave"><a href="#事件-mouseenter-和-mouseleave" class="headerlink" title="事件 mouseenter 和 mouseleave"></a>事件 mouseenter 和 mouseleave</h3><p>与前面事件 mouseover 和 mouseout 区别</p>
+<ul>
+<li>元素内部与后代之间的转换不会产生影响</li>
+<li>事件 mouseenter/mouseleave 不会冒泡</li>
+</ul>
+<h2 id="鼠标拖放事件"><a href="#鼠标拖放事件" class="headerlink" title="鼠标拖放事件"></a>鼠标拖放事件</h2><p>事件流： ball.mousedown → document.mousemove → ball.mouseup （不要忘记取消原生 ondragstart ）</p>
+]]></content>
+      <categories>
+        <category>现代Javascript教程</category>
+      </categories>
+      <tags>
+        <tag>UI事件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>express简单使用</title>
+    <url>/2022/03/31/express%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>脚手架<ul>
+<li><code>npm install -g express-generator</code></li>
+<li><code>express express-demo</code></li>
+<li><code>npm install</code></li>
+<li><code>node bin/www</code></li>
+</ul>
+</li>
+<li>从零搭建<ul>
+<li><code>npm init -y</code></li>
+<li><code>npm install express</code></li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// express其实是一个函数: createApplication</span></span><br><span class="line"><span class="comment">// 返回app</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听路径</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;Hello Express&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启监听</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;express初体验服务器启动成功~&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><blockquote>
+<p>中间件函数能够访问请求对象 (<code>req</code>)、响应对象 (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数</p>
+</blockquote>
+<p>中间件函数可以执行以下任务：</p>
+<ul>
+<li>执行任何代码。</li>
+<li>对请求和响应对象进行更改。</li>
+<li>结束请求/响应循环。</li>
+<li>调用堆栈中的下一个中间件函数。</li>
+</ul>
+<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
+<h3 id="普通中间件"><a href="#普通中间件" class="headerlink" title="普通中间件"></a>普通中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// use注册一个中间件(回调函数)</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;注册了一个普通的中间件~&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径中间件"><a href="#路径中间件" class="headerlink" title="路径中间件"></a>路径中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路径匹配的中间件</span></span><br><span class="line">app.use(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home middleware 01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径和方法中间件"><a href="#路径和方法中间件" class="headerlink" title="路径和方法中间件"></a>路径和方法中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="连续注册中间件"><a href="#连续注册中间件" class="headerlink" title="连续注册中间件"></a>连续注册中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&quot;/home&quot;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 02&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 03&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 04&quot;</span>);</span><br><span class="line">  res.end(<span class="string">&quot;home page&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用中间件-body解析"><a href="#应用中间件-body解析" class="headerlink" title="应用中间件 body解析"></a>应用中间件 body解析</h2><h3 id="手动解析"><a href="#手动解析" class="headerlink" title="手动解析"></a>手动解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 手动解析</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">    req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> info = <span class="built_in">JSON</span>.parse(data.toString());</span><br><span class="line">      req.body = info;</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    req.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置解析"><a href="#内置解析" class="headerlink" title="内置解析"></a>内置解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// express内置解析</span></span><br><span class="line">app.use(express.json())</span><br></pre></td></tr></table></figure>
+
+<h3 id="urlencoded解析"><a href="#urlencoded解析" class="headerlink" title="urlencoded解析"></a>urlencoded解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extended</span></span><br><span class="line"><span class="comment">// true: 那么对urlencoded进行解析时, 它使用的是第三方库: qs</span></span><br><span class="line"><span class="comment">// false: 那么对urlencoded进行解析时, 它使用的是Node内置模块: querystring</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">true</span>&#125;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">&#x27;./uploads/&#x27;</span>);		<span class="comment">//把文件放置的位置</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件命名</span></span><br><span class="line">    cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + path.extname(file.originalname));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">  <span class="comment">// dest: &#x27;./uploads/&#x27;</span></span><br><span class="line">  storage</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/login&#x27;</span>, upload.any(), <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.end(<span class="string">&quot;用户登录成功~&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="form-data解析"><a href="#form-data解析" class="headerlink" title="form-data解析"></a>form-data解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = multer();</span><br><span class="line">app.use(upload.any());</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询参数params和query"><a href="#查询参数params和query" class="headerlink" title="查询参数params和query"></a>查询参数params和query</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">req.params</span><br><span class="line"></span><br><span class="line">req.query</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应数据"><a href="#响应数据" class="headerlink" title="响应数据"></a>响应数据</h2><ul>
+<li>end</li>
+<li>json<ul>
+<li>可以传入很多的类型：object、array、string、boolean、number、null等，它们会被转换成json格式返回</li>
+</ul>
+</li>
+<li>status</li>
+</ul>
+<h2 id="express路由"><a href="#express路由" class="headerlink" title="express路由"></a>express路由</h2><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在userRoute.js文件中，编写关于user的中间件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建可安装的模块化路由处理程序</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.json(<span class="string">`<span class="subst">$&#123;req.params.id&#125;</span>用户的信息`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在app.js文件中引入user路由</span></span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routers/users&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里指定路径，userRoute.js中就可以省略/user</span></span><br><span class="line">app.use(<span class="string">&quot;/users&quot;</span>, userRouter);</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态服务器"><a href="#静态服务器" class="headerlink" title="静态服务器"></a>静态服务器</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./build&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>this和对象原型</title>
+    <url>/2022/03/22/this%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%8E%9F%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="关于this"><a href="#关于this" class="headerlink" title="关于this"></a>关于this</h2><blockquote>
+<p>使用this的原因：this提供了一种更优雅的方式来隐式“传递”一个对象引用，因此可以将API设计得更加简洁并且易于复用</p>
+</blockquote>
+<ul>
+<li>this实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用</li>
+<li>当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this就是记录的其中一个属性，会在函数执行的过程中用到。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="this解析"><a href="#this解析" class="headerlink" title="this解析"></a>this解析</h2><h3 id="this绑定规则"><a href="#this绑定规则" class="headerlink" title="this绑定规则"></a>this绑定规则</h3><h4 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h4><ul>
+<li>独立函数调用。可以把这条规则看作是无法应用其他规则时的默认规则</li>
+<li>如果使用严格模式，那么全局对象将无法使用默认绑定，因此this会绑定到undefined</li>
+</ul>
+<h4 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h4><ul>
+<li>当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象</li>
+</ul>
+<h4 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h4><ul>
+<li>call</li>
+<li>apply</li>
+<li>bind</li>
+</ul>
+<h4 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h4><ul>
+<li>在内存中创建一个新对象</li>
+<li>这个新对象内部的<code>[[Prototype]]</code>特性被赋值为构造函数的<code>prototype</code>属性</li>
+<li>构造函数内部的this被赋值为这个新对象（即this指向新对象）</li>
+<li>执行构造函数内部的代码（给新对象添加属性）。</li>
+<li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象。</li>
+</ul>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><ol>
+<li>函数是否在new中调用（new绑定）？如果是的话this绑定的是新创建的对象</li>
+<li>是否通过call、apply（显式绑定）或者硬绑定调用</li>
+<li>是否在某个上下文对象中调用（隐式绑定）</li>
+<li>都不是的话，使用默认绑定</li>
+</ol>
+<h3 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h3><p>把null或者undefined作为this的绑定对象传入call、apply或者bind，这些值在调用时会被忽略，实际应用的是默认绑定规则</p>
+<h3 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h3><ul>
+<li>箭头函数不使用this的四种标准规则，而是根据当前的词法作用域来决定this，具体来说，箭头函数会继承外层函数调用的this绑定（无论this绑定到什么）。</li>
+<li>箭头函数的绑定无法被修改</li>
+</ul>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>声明式和构造式</p>
+<ul>
+<li>唯一的区别是，在文字声明中你可以添加多个 键 / 值对，但是在构造形式中你必须逐个添加属性</li>
+</ul>
+<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>在引擎内部，这些值的存储方式是多种多样的，一般并不会存 在对象容器内部。存储在对象容器内部的是这些属性的名称，它们就像指针（从技术角度 来说就是引用）一样，指向这些值真正的存储位置</p>
+<ul>
+<li><code>.</code> 操作符<ul>
+<li>通 常被称为“属性访问”</li>
+</ul>
+</li>
+<li><code>[]</code> 操作符<ul>
+<li>通常被称为“键访问”</li>
+</ul>
+</li>
+</ul>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组期望的是数值下标，不过它并不限制值的类型。如果添加了命名属性（非数值下标），数组的 length 值并不会发 生变化</p>
+<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><ul>
+<li>浅复制<ul>
+<li>Object.assign() 方法的第一个参数是目标对象，之后还可以跟一个 或多个源对象。它会遍历一个或多个源对象的所有可枚举 的自有键，并把它们复制（使用 = 操作符赋值）到目标对象，最 后返回目标对象</li>
+</ul>
+</li>
+<li>深复制</li>
+</ul>
+<h4 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h4><ul>
+<li>value</li>
+<li>writable</li>
+<li>enumerable</li>
+<li>configurable</li>
+</ul>
+<h4 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h4><ul>
+<li>对象常量<ul>
+<li>writable:false</li>
+<li>configurable: false</li>
+</ul>
+</li>
+<li>禁止扩展<ul>
+<li>Object.preventExtensions()</li>
+</ul>
+</li>
+<li>密封<ul>
+<li>Object.seal(..) 会创建一个“密封”的对象，这个方法实际上会在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false</li>
+</ul>
+</li>
+<li>冻结<ul>
+<li>Object.freeze(..) 会创建一个冻结对象，这个方法实际上会在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false，这样就无法修改它们 的值</li>
+</ul>
+</li>
+</ul>
+<h4 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h4><ul>
+<li>in 操作符会检查属性是否在对象及其 [[Prototype]] 原型链中</li>
+<li>hasOwnProperty(..) 只会检查属性是否在 myObject 对象中，不会检查 [[Prototype]] 链</li>
+</ul>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ul>
+<li>forEach() 会遍历数组中的所有值并忽略回调函数的返回值</li>
+<li>every() 会一直运行直到 122 ｜ 第 3 章 回调函数返回 false</li>
+<li>some() 会一直运行直到回调函数返回 true</li>
+<li>for..of 循环首先会向被访问对象请求一个迭代器对象，然后通过调用迭代器对象的 next() 方法来遍历所有返回值</li>
+</ul>
+<p>ES6 中的符号 Symbol.iterator 来获取对象的 @@iterator 内部属 性，但是 @@iterator 本身并不是一个迭代 器对象，而是一个返回迭代器对象的函数</p>
+<h2 id="混合对象“类”"><a href="#混合对象“类”" class="headerlink" title="混合对象“类”"></a>混合对象“类”</h2>]]></content>
+      <categories>
+        <category>你不知道的Javascript</category>
+      </categories>
+      <tags>
+        <tag>this</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML中的Javascript</title>
+    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
+    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
+<li><p>async</p>
+</li>
+<li><p>crossorigin</p>
+<blockquote>
+<p>配置相关CORS设置</p>
+</blockquote>
+<ul>
+<li>anonymous</li>
+<li>use-credentials</li>
+</ul>
+</li>
+<li><p>defer</p>
+</li>
+<li><p>intergrity</p>
+<blockquote>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
+</blockquote>
+</li>
+<li><p>src</p>
+<ul>
+<li>会忽略行内脚本</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
+</ul>
+</li>
+<li><p>type</p>
+<ul>
+<li><code>text/javascript</code></li>
+<li><code>module</code><ul>
+<li>会被当成ES6模块</li>
+<li>脚本加载解析过程与defer相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
+<li><p>行内脚本</p>
+<p>下载和执行会阻塞<code>HTML</code>的解析</p>
+</li>
+<li><p>外部脚本</p>
+<ul>
+<li>不加<code>async</code>和<code>defer</code><ul>
+<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
+</ul>
+</li>
+<li><code>defer</code><ul>
+<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+</ul>
+</li>
+<li><code>async</code><ul>
+<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
+<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态加载脚本</p>
+<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
+</li>
+</ol>
+<p>建议都使用外部脚本，原因：</p>
+<ul>
+<li>可维护性</li>
+<li>缓存<ul>
+<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
+<ol>
+<li>混杂模式</li>
+<li>标准模式</li>
+<li>准标准模式</li>
+</ol>
+<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack使用</title>
+    <url>/2022/07/09/webpack%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><blockquote>
+<p>静态模块化打包工具</p>
+<p>打包流程</p>
+<ol>
+<li>根据命令或配置文件找到入口文件</li>
+<li>从入口开始，生成一个依赖关系图，此依赖关系图包含程序<strong>所需</strong>的所有模块</li>
+<li>根据依赖关系图，遍历图结构，打包一个个模块</li>
+</ol>
+</blockquote>
+<ul>
+<li>入口</li>
+<li>出口</li>
+<li>loader</li>
+<li>plugin</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="安装Webpack"><a href="#安装Webpack" class="headerlink" title="安装Webpack"></a>安装Webpack</h2><ol>
+<li>创建package.json文件，用于管理项目信息、库依赖</li>
+<li>安装局部webpack</li>
+<li>使用webpack</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm init</span><br><span class="line">npm install webpack -D</span><br><span class="line">npm install webpack-cli -D #webpack4.0+执行时需要依赖到webpack-cli</span><br><span class="line">npx webpack #npx会去当前根目录的node_module里找webpack，不会去全局找</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>可以在package.json文件中，添加脚本（）</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;build&quot;: &quot;webpack&quot;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 之后运行npm run build就可执行脚本打包，且webpack使用的使局部</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>根目录<code>webpack.config.js</code>文件进行配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&quot;./src/index.js&quot;</span>, <span class="comment">//入口文件</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&quot;bundle.js&quot;</span>,	<span class="comment">//出口文件</span></span><br><span class="line">    <span class="attr">path</span>: path.resolve(__dirname, <span class="string">&quot;./dist&quot;</span>)	<span class="comment">//出口文件夹</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="loader-的简单使用"><a href="#loader-的简单使用" class="headerlink" title="loader 的简单使用"></a>loader 的简单使用</h2><blockquote>
+<p><em>loader</em> 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效模块，然后你就可以利用 webpack 的打包能力，对它们进行处理。</p>
+</blockquote>
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p>根目录下新建文件</p>
+<ul>
+<li>src<ul>
+<li>css<ul>
+<li>style.css</li>
+</ul>
+</li>
+<li>js<ul>
+<li>element.js</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// elememt.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;../css/style.css&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> divEl = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">divEl.className = <span class="string">&quot;title&quot;</span>;</span><br><span class="line">divEl.innerHTML = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* style.css */</span></span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>npm run build</code>会直接报错，因为缺少解析style.css的loader</p>
+<p>所以需要安装<code>css-loader</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install css-loader -D</span><br></pre></td></tr></table></figure>
+
+<p>在<code>webpack.config.js</code>配置<code>css-loader</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,	<span class="comment">//对资源进行匹配</span></span><br><span class="line">            use: [</span><br><span class="line">                <span class="string">&quot;css-loader&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次运行<code>npm run build</code>没报错，但css没生效，因为css-loader只会进行解析，不会将解析后的css插入页面中</p>
+<p>需要安装<code>style-loader</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install style-loader -D</span><br></pre></td></tr></table></figure>
+
+<p>同样在<code>webpack.config.js</code>配置<code>style-loader</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">            use: [</span><br><span class="line">                <span class="string">&quot;style-loader&quot;</span></span><br><span class="line">                <span class="string">&quot;css-loader&quot;</span>	<span class="comment">// loader会用顺序，先解析的放后面</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>npm run build</code>页面会成功展示css</p>
+<p>同样道理可以配置解析<code>less</code>，<code>scss</code></p>
+<p>安装<code>less-loader</code>，并进行配置可以就less文件转换为css</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install less-loader -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(png|jpe?g|gif|svg)$/i</span>,</span><br><span class="line">        type: <span class="string">&quot;asset&quot;</span></span><br><span class="line">        <span class="comment">// use: &#123;</span></span><br><span class="line">        <span class="comment">//   loader: &quot;file-loader&quot;,</span></span><br><span class="line">        <span class="comment">//   options: &#123;</span></span><br><span class="line">        <span class="comment">//     outputPath: &quot;img&quot;,</span></span><br><span class="line">        <span class="comment">//     name: &quot;[name]_[hash:8].[ext]&quot;</span></span><br><span class="line">        <span class="comment">//   &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>安装<code>file-loader</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.(png|jpe?g|gif|svg)$/i</span>,</span><br><span class="line">            use: &#123;</span><br><span class="line">              <span class="attr">loader</span>: <span class="string">&quot;file-loader&quot;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打包后的文件名会是乱码，如果要保留名字，同时防止命名冲突，可以进行配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.(png|jpe?g|gif|svg)$/i</span>,</span><br><span class="line">            use: &#123;</span><br><span class="line">              <span class="attr">loader</span>: <span class="string">&quot;file-loader&quot;</span>,</span><br><span class="line">              <span class="attr">options</span>: &#123;</span><br><span class="line">                <span class="attr">outputPath</span>: <span class="string">&quot;img&quot;</span>,	<span class="comment">// outputPath来设置输出的文件夹</span></span><br><span class="line">                <span class="attr">name</span>: <span class="string">&quot;[name]_[hash:8].[ext]&quot;</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>[ext]： 处理文件的扩展名</li>
+<li>[name]：处理文件的名称</li>
+<li>[hash]：文件的内容，使用MD4的散列函数处理，生成的一个128位的hash值（32个十六进制）</li>
+<li>[hash:<length>]：截图hash的长度</length></li>
+</ul>
+<h2 id="Plugin-的简单使用"><a href="#Plugin-的简单使用" class="headerlink" title="Plugin 的简单使用"></a>Plugin 的简单使用</h2><blockquote>
+<p>loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。插件接口功能极其强大，可以用来处理各种各样的任务。</p>
+</blockquote>
+<h3 id="CleanWebpackPlugin"><a href="#CleanWebpackPlugin" class="headerlink" title="CleanWebpackPlugin"></a>CleanWebpackPlugin</h3><p>打包后，自动删除旧的包</p>
+<ol>
+<li>安装插件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install clean-webpack-plugi -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置插件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; CleanWebpackPlugin &#125; = <span class="built_in">require</span>(<span class="string">&quot;clean-webpack-plugin&quot;</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> CleanWebpackPlugin()</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HtmlWebpackPlugin"><a href="#HtmlWebpackPlugin" class="headerlink" title="HtmlWebpackPlugin"></a>HtmlWebpackPlugin</h3><p>因为打包后是没有index.html文件，而进行项目部署必须要对应入口文件<code>index.html</code>，所以也要对<code>index.heml</code>进行打包</p>
+<ol>
+<li>安装插件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install html-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置插件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&quot;html-webpack-plugin&quot;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&quot;webpack案例&quot;</span>,</span><br><span class="line">      <span class="attr">template</span>: <span class="string">&quot;./src/public/index.html&quot;</span>	<span class="comment">// 可以自己添加模板，不用模板，会自动生成最基本的index.html文件</span></span><br><span class="line">    &#125;),</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DefinePlugin"><a href="#DefinePlugin" class="headerlink" title="DefinePlugin"></a>DefinePlugin</h3><p>此插件是webpack内置的，用于允许在编译时创建配置的全局常量</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; DefinePlugin &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> DefinePlugin(&#123;</span><br><span class="line">      <span class="attr">BASE_URL</span>: <span class="string">&#x27;&quot;./&quot;&#x27;</span>,</span><br><span class="line">      <span class="attr">__VUE_OPTIONS_API__</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">__VUE_PROD_DEVTOOLS__</span>: <span class="literal">false</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CopyWebpackPlugin"><a href="#CopyWebpackPlugin" class="headerlink" title="CopyWebpackPlugin"></a>CopyWebpackPlugin</h3><p>可以将需要的文件，复制到dist文件夹中</p>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install copy-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> CopyWebpackPlugin = <span class="built_in">require</span>(<span class="string">&quot;copy-webpack-plugin&quot;</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> CopyWebpackPlugin(&#123;</span><br><span class="line">      <span class="attr">patterns</span>: [</span><br><span class="line">        &#123;	<span class="comment">// to: 设置复制到的位置，默认复制到打包的目录下</span></span><br><span class="line">          <span class="attr">from</span>: <span class="string">&quot;./src/public&quot;</span>,	<span class="comment">// 设置从哪一个源开始复制</span></span><br><span class="line">          <span class="attr">globOptions</span>: &#123;</span><br><span class="line">            <span class="attr">ignore</span>: [	<span class="comment">// 需要忽略的文件</span></span><br><span class="line">              <span class="string">&#x27;**/index.html&#x27;</span></span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;),</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h2><blockquote>
+<p>解决语法转换、源代码转换。主要用于旧浏览器或者环境中将ECMAScript 2015+代码转换为向后兼容版本的 JavaScript</p>
+</blockquote>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install @babel/cli #babel的核心代码</span><br><span class="line">npm install @babel/plugin-transfor-arrow-functions -D # 箭头函数转换的插件</span><br><span class="line">npm install @babel/plugin-transform-block-scoping -D # 用于const，let转为var</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npx babel src --out-dir dist --plugins=@babel/plugin-transform-block-scoping,@babel/plugin-transform-arrow-functions</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>src：是源文件的目录</li>
+<li>–out-dir：指定要输出的文件夹dist</li>
+</ul>
+<h3 id="预设preset"><a href="#预设preset" class="headerlink" title="预设preset"></a>预设preset</h3><ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install @babel/preset-env -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npx babel src --out-dir dist --presets=@babel/preset-env</span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-loader"><a href="#babel-loader" class="headerlink" title="babel-loader"></a>babel-loader</h3><p>搭配在webpack中使用</p>
+<ol>
+<li>安装依赖</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install babel-loader @babel/core</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">     </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        use: &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&quot;babel-loader&quot;</span>,</span><br><span class="line">          <span class="attr">options</span>: &#123;</span><br><span class="line">             <span class="attr">plugins</span>: [	<span class="comment">//指定使用的插件</span></span><br><span class="line">               <span class="string">&quot;@babel/plugin-transform-arrow-functions&quot;</span>,</span><br><span class="line">               <span class="string">&quot;@babel/plugin-transform-block-scoping&quot;</span></span><br><span class="line">             ]</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个个配置babel的插件显然不合理，我们可以使用babel-preset，webpack会根据我们的预设来加载对应的插件列表，并且将其传递给babel。</p>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install @babel/preset-env</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//webpack.config.js</span></span><br><span class="line"><span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        use: &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&quot;babel-loader&quot;</span>,</span><br><span class="line">          <span class="attr">options</span>: &#123;</span><br><span class="line">            <span class="attr">presets</span>: [</span><br><span class="line">              <span class="string">&quot;@babel/preset-env&quot;</span></span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>babel可以放在独立的配置文件</p>
+<p>在根目录新建<code>.babel.config.json</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">presets</span>: [</span><br><span class="line">    [<span class="string">&quot;@babel/preset-env&quot;</span>]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h2><blockquote>
+<p>用来处理.vue文件</p>
+</blockquote>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install vue-loader -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">test</span>: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">  loader: <span class="string">&quot;vue-loader&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>还需要添加@vue/compiler-sfc来对template进行解析</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install @vue/compiler-sfc -D</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; VueLoaderPlugin &#125; =<span class="built_in">require</span>(<span class="string">&quot;vue-loader/dist/index&quot;</span>);</span><br><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> VueLoaderPlugin()</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地服务器"><a href="#本地服务器" class="headerlink" title="本地服务器"></a>本地服务器</h2><blockquote>
+<p>当文件发生变化时，可以自动的完成编译 和展示</p>
+</blockquote>
+<h3 id="webpack-watch-mode"><a href="#webpack-watch-mode" class="headerlink" title="webpack watch mode"></a>webpack watch mode</h3><ul>
+<li>可以在<code>webpack.config.js</code>中加入<code>watch:true</code></li>
+<li>或者在<code>package.json</code>文件中加入脚本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;watch&quot;: &quot;webpack --watch&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="webpack-dev-serve"><a href="#webpack-dev-serve" class="headerlink" title="webpack-dev-serve"></a>webpack-dev-serve</h3><blockquote>
+<p>用于实时重新加载</p>
+</blockquote>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install webpack-dev-serve -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">  <span class="attr">hot</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="Proxy配置选项可以解决跨域访问问题"><a href="#Proxy配置选项可以解决跨域访问问题" class="headerlink" title="Proxy配置选项可以解决跨域访问问题"></a>Proxy配置选项可以解决跨域访问问题</h2><p>请求先发送到一个代理服务器，代理服务器和API服务器没有跨域的问题，就可以解决我们的跨域问题了</p>
+<p>设置选项</p>
+<ul>
+<li>target：表示的是代理到的目标地址，比如 /api/moment会被代理到 <a href="http://localhost:8888/api/moment">http://localhost:8888/api/moment</a></li>
+<li>pathRewrite：默认情况下，我们的 /api 也会被写入到URL中，如果希望删除，可以使用pathRewrite</li>
+<li>secure：默认情况下不接收转发到https的服务器上，如果希望支持，可以设置为false</li>
+</ul>
+<h2 id="resolve模块解析"><a href="#resolve模块解析" class="headerlink" title="resolve模块解析"></a>resolve模块解析</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  <span class="attr">extensions</span>: [<span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.json&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&quot;.ts&quot;</span>, <span class="string">&quot;.vue&quot;</span>],	<span class="comment">//自动添加扩展名</span></span><br><span class="line">  <span class="attr">alias</span>: &#123;	<span class="comment">// 起别名</span></span><br><span class="line">    <span class="string">&quot;@&quot;</span>: path.resolve(__dirname, <span class="string">&quot;./src&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>事件简介</title>
     <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
@@ -1621,187 +2131,6 @@
       </categories>
       <tags>
         <tag>浏览器事件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>this和对象原型</title>
-    <url>/2022/03/22/this%E5%92%8C%E5%AF%B9%E8%B1%A1%E5%8E%9F%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="关于this"><a href="#关于this" class="headerlink" title="关于this"></a>关于this</h2><blockquote>
-<p>使用this的原因：this提供了一种更优雅的方式来隐式“传递”一个对象引用，因此可以将API设计得更加简洁并且易于复用</p>
-</blockquote>
-<ul>
-<li>this实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用</li>
-<li>当一个函数被调用时，会创建一个活动记录（有时候也称为执行上下文）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。this就是记录的其中一个属性，会在函数执行的过程中用到。</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="this解析"><a href="#this解析" class="headerlink" title="this解析"></a>this解析</h2><h3 id="this绑定规则"><a href="#this绑定规则" class="headerlink" title="this绑定规则"></a>this绑定规则</h3><h4 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h4><ul>
-<li>独立函数调用。可以把这条规则看作是无法应用其他规则时的默认规则</li>
-<li>如果使用严格模式，那么全局对象将无法使用默认绑定，因此this会绑定到undefined</li>
-</ul>
-<h4 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h4><ul>
-<li>当函数引用有上下文对象时，隐式绑定规则会把函数调用中的this绑定到这个上下文对象</li>
-</ul>
-<h4 id="显示绑定"><a href="#显示绑定" class="headerlink" title="显示绑定"></a>显示绑定</h4><ul>
-<li>call</li>
-<li>apply</li>
-<li>bind</li>
-</ul>
-<h4 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h4><ul>
-<li>在内存中创建一个新对象</li>
-<li>这个新对象内部的<code>[[Prototype]]</code>特性被赋值为构造函数的<code>prototype</code>属性</li>
-<li>构造函数内部的this被赋值为这个新对象（即this指向新对象）</li>
-<li>执行构造函数内部的代码（给新对象添加属性）。</li>
-<li>如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的新对象。</li>
-</ul>
-<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><ol>
-<li>函数是否在new中调用（new绑定）？如果是的话this绑定的是新创建的对象</li>
-<li>是否通过call、apply（显式绑定）或者硬绑定调用</li>
-<li>是否在某个上下文对象中调用（隐式绑定）</li>
-<li>都不是的话，使用默认绑定</li>
-</ol>
-<h3 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h3><p>把null或者undefined作为this的绑定对象传入call、apply或者bind，这些值在调用时会被忽略，实际应用的是默认绑定规则</p>
-<h3 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h3><ul>
-<li>箭头函数不使用this的四种标准规则，而是根据当前的词法作用域来决定this，具体来说，箭头函数会继承外层函数调用的this绑定（无论this绑定到什么）。</li>
-<li>箭头函数的绑定无法被修改</li>
-</ul>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>声明式和构造式</p>
-<ul>
-<li>唯一的区别是，在文字声明中你可以添加多个 键 / 值对，但是在构造形式中你必须逐个添加属性</li>
-</ul>
-<h3 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h3><p>在引擎内部，这些值的存储方式是多种多样的，一般并不会存 在对象容器内部。存储在对象容器内部的是这些属性的名称，它们就像指针（从技术角度 来说就是引用）一样，指向这些值真正的存储位置</p>
-<ul>
-<li><code>.</code> 操作符<ul>
-<li>通 常被称为“属性访问”</li>
-</ul>
-</li>
-<li><code>[]</code> 操作符<ul>
-<li>通常被称为“键访问”</li>
-</ul>
-</li>
-</ul>
-<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组期望的是数值下标，不过它并不限制值的类型。如果添加了命名属性（非数值下标），数组的 length 值并不会发 生变化</p>
-<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><ul>
-<li>浅复制<ul>
-<li>Object.assign() 方法的第一个参数是目标对象，之后还可以跟一个 或多个源对象。它会遍历一个或多个源对象的所有可枚举 的自有键，并把它们复制（使用 = 操作符赋值）到目标对象，最 后返回目标对象</li>
-</ul>
-</li>
-<li>深复制</li>
-</ul>
-<h4 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h4><ul>
-<li>value</li>
-<li>writable</li>
-<li>enumerable</li>
-<li>configurable</li>
-</ul>
-<h4 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h4><ul>
-<li>对象常量<ul>
-<li>writable:false</li>
-<li>configurable: false</li>
-</ul>
-</li>
-<li>禁止扩展<ul>
-<li>Object.preventExtensions()</li>
-</ul>
-</li>
-<li>密封<ul>
-<li>Object.seal(..) 会创建一个“密封”的对象，这个方法实际上会在一个现有对象上调用 Object.preventExtensions(..) 并把所有现有属性标记为 configurable:false</li>
-</ul>
-</li>
-<li>冻结<ul>
-<li>Object.freeze(..) 会创建一个冻结对象，这个方法实际上会在一个现有对象上调用 Object.seal(..) 并把所有“数据访问”属性标记为 writable:false，这样就无法修改它们 的值</li>
-</ul>
-</li>
-</ul>
-<h4 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h4><ul>
-<li>in 操作符会检查属性是否在对象及其 [[Prototype]] 原型链中</li>
-<li>hasOwnProperty(..) 只会检查属性是否在 myObject 对象中，不会检查 [[Prototype]] 链</li>
-</ul>
-<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><ul>
-<li>forEach() 会遍历数组中的所有值并忽略回调函数的返回值</li>
-<li>every() 会一直运行直到 122 ｜ 第 3 章 回调函数返回 false</li>
-<li>some() 会一直运行直到回调函数返回 true</li>
-<li>for..of 循环首先会向被访问对象请求一个迭代器对象，然后通过调用迭代器对象的 next() 方法来遍历所有返回值</li>
-</ul>
-<p>ES6 中的符号 Symbol.iterator 来获取对象的 @@iterator 内部属 性，但是 @@iterator 本身并不是一个迭代 器对象，而是一个返回迭代器对象的函数</p>
-<h2 id="混合对象“类”"><a href="#混合对象“类”" class="headerlink" title="混合对象“类”"></a>混合对象“类”</h2>]]></content>
-      <categories>
-        <category>你不知道的Javascript</category>
-      </categories>
-      <tags>
-        <tag>this</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是Javascript</title>
-    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
-    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
-<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
-</blockquote>
-<p>最早有两个版本的Javascript</p>
-<ol>
-<li>网景的Javascript</li>
-<li>微软IE的JScript</li>
-</ol>
-<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
-<span id="more"></span>
-
-<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
-<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
-<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
-</blockquote>
-<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
-<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
-<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
-<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
-<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
-<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
-<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
-<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
-<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
-<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
-</ul>
-<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
-<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
-</blockquote>
-<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
-<p>DOM三个Level</p>
-<ol>
-<li>Level1目标是映射文档结构</li>
-<li>Level2新增模块<ul>
-<li>DOM视图</li>
-<li>DOM事件</li>
-<li>DOM样式</li>
-<li>DOM遍历和范围</li>
-</ul>
-</li>
-<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
-</ol>
-<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
-<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
-</blockquote>
-<ul>
-<li>弹出新浏览器窗口的能力</li>
-<li>移动、缩放和关闭浏览器窗口的能力</li>
-<li>navigator对象，提供关于浏览器的详尽信息</li>
-<li>location对象，提供浏览器加载页面的详尽信息</li>
-<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
-<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
-<li>对cookie的支持</li>
-<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
-</ul>
-<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
-<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
-<ul>
-<li><code>JavaScript</code>：指语言及其实现</li>
-<li><code>ECMAScript</code>：指语言标准及语言版本</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -2171,6 +2500,164 @@
       </tags>
   </entry>
   <entry>
+    <title>什么是Javascript</title>
+    <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
+    <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
+<p> 最开始是为了解决验证简单的表单需要大量与服务器的往返进行通信，由客户端处理输入验证</p>
+</blockquote>
+<p>最早有两个版本的Javascript</p>
+<ol>
+<li>网景的Javascript</li>
+<li>微软IE的JScript</li>
+</ol>
+<p>由于有两个版本的并存，急需要对Javascript进行规范其语法或特性标准，所以多家厂商联合，发布了<code>ECMA-262</code>，也就是<code>ECMAScript</code>这个脚本语法标准</p>
+<span id="more"></span>
+
+<h2 id="Javascript是什么"><a href="#Javascript是什么" class="headerlink" title="Javascript是什么"></a>Javascript是什么</h2><p>包含三个部分</p>
+<h3 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h3><blockquote>
+<p><code>ECMAScript</code>是<code>ECMA-262</code>定义的语言，并不局限在Web浏览器</p>
+</blockquote>
+<p>Web浏览器、NodeJs都只是<code>ECMAScript</code>实现的一种宿主环境。在基本层面上，<code>ECMA-262</code>定义了这门语言的语法、类型、语句、关键字、保留字、操作符、全局对象。</p>
+<h4 id="ECMAScript的主要版本更新"><a href="#ECMAScript的主要版本更新" class="headerlink" title="ECMAScript的主要版本更新"></a><code>ECMAScript</code>的主要版本更新</h4><ul>
+<li>第一版与网景的Javascript1.1基本相同，删除了所有浏览器特定的代码</li>
+<li>第三版更新了字符串处理、错误定义、数值定义，增加正则表达式、新的控制语句、<code>try/catch</code>异常处理的支持</li>
+<li>第四版修改颇多，几乎定义了一个新的语言废弃</li>
+<li>第五版就是3.1版，增加原生的解析和序列化JSON数据的JSON对象、方便基乘和高级属性定义的方法</li>
+<li>第六版，俗称ES6，正式支持类、模块、迭代器、生成器、箭头函数、期约、反射、代理和众多新的数据类型</li>
+<li>第八版，增加异步函数(<code>async/await</code>)，<code>Object.values()/Object.entries()/Object.getOwnPropertyDescriptors()</code>和字符串填充方法，明确对象字面量最后的逗号</li>
+<li>第九版，异步迭代、剩余、扩展属性，新的正则表达式特性、<code>Promisefinally()</code>，模板字面量修订</li>
+<li>第十版，<code>Array.prototype.flat()/flatMap()、String.prototype.trimStart()/trimEnd()、Object.fromEntries()</code>方法，以及<code>Symbol.prototype.description</code>属性，定义<code>Function.prototype.toString()</code>返回值，并固定<code>Array.prototype.sort()</code>的顺序，解决JSON字符串兼容的问题。定义catch子句的可选绑定。</li>
+</ul>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><blockquote>
+<p>使用<code>ECMAScript</code>的核心类型和语法，提供与环境的额外功能，是一个应用编程接口（API），用于在HTML中使用扩展的XML</p>
+</blockquote>
+<p>DOM通过创建表示文档的树，通过DOMAPI进行增删查改节点，可以做到不刷新页面而修改页面外观和内容。</p>
+<p>DOM三个Level</p>
+<ol>
+<li>Level1目标是映射文档结构</li>
+<li>Level2新增模块<ul>
+<li>DOM视图</li>
+<li>DOM事件</li>
+<li>DOM样式</li>
+<li>DOM遍历和范围</li>
+</ul>
+</li>
+<li>Level3增加了以统一的方式加载和保存文档的方法（包含在一个叫DOMLoadandSave的新模块中），还有验证文档的方法（DOMValidation）。</li>
+</ol>
+<h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h3><blockquote>
+<p>用于支持访问和操作浏览器窗口，操控浏览器显示页面之外的部分，主要针对浏览器窗口和子窗口</p>
+</blockquote>
+<ul>
+<li>弹出新浏览器窗口的能力</li>
+<li>移动、缩放和关闭浏览器窗口的能力</li>
+<li>navigator对象，提供关于浏览器的详尽信息</li>
+<li>location对象，提供浏览器加载页面的详尽信息</li>
+<li>screen对象，提供关于用户屏幕分辨率的详尽信息</li>
+<li>performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息</li>
+<li>对cookie的支持</li>
+<li>其他自定义对象，如XMLHttpRequest和IE的ActiveXObject</li>
+</ul>
+<h2 id="Javascript与ECMASCript的关系"><a href="#Javascript与ECMASCript的关系" class="headerlink" title="Javascript与ECMASCript的关系"></a>Javascript与ECMASCript的关系</h2><p><code>ECMAScript</code>只是对<code>ECMA-262</code>实现规范描述的所有方面的一门语言的称呼，而Javascript实现了<code>ECMAScript</code>，Javascript是包含<code>ECMAScript</code></p>
+<p>原则上<code>JavaScript</code>与<code>ECMAScript</code>指的是同一个东西，但有时也会加以区分</p>
+<ul>
+<li><code>JavaScript</code>：指语言及其实现</li>
+<li><code>ECMAScript</code>：指语言标准及语言版本</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>包管理工具</title>
+    <url>/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h2 id="包管理工具npm"><a href="#包管理工具npm" class="headerlink" title="包管理工具npm"></a>包管理工具npm</h2><ul>
+<li>发布自己的包其实是发布到registry上面的</li>
+<li>安装一个包时其实是从registry上面下载的包；</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="配置文件属性"><a href="#配置文件属性" class="headerlink" title="配置文件属性"></a>配置文件属性</h3><ul>
+<li>name</li>
+<li>version</li>
+<li>description</li>
+<li>author</li>
+<li>license</li>
+<li>private<ul>
+<li>记录当前的项目是否是私有的，当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
+</ul>
+</li>
+<li>main<ul>
+<li>设置程序的入口</li>
+<li>这个入口和webpack打包的入口并不冲突</li>
+</ul>
+</li>
+<li>script<ul>
+<li>配置一些脚本命令，以键值对的形式存在</li>
+</ul>
+</li>
+<li>dependencies<ul>
+<li>指定无论开发环境还是生成环境都需要依赖的包</li>
+<li>默认install不加参数，都是生产开发环境都需要依赖的包</li>
+</ul>
+</li>
+<li>devDependencies<ul>
+<li>只在开发环境依赖的包</li>
+<li><code>--save-dev</code>或<code>-D</code></li>
+</ul>
+</li>
+<li>版本<ul>
+<li><code>^x.y.z</code>：表示x是保持不变的，y和z永远安装最新的版<code>~x.y.z</code>：表示x和y保持不变的，z永远安装最新的版本</li>
+</ul>
+</li>
+<li>engines属性<ul>
+<li>用于指定Node和NPM的版本号</li>
+</ul>
+</li>
+<li>browserslist属性<ul>
+<li>用于配置打包后的JavaScript浏览器的兼容情况</li>
+</ul>
+</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>全局安装<code>npm install -g xxx</code></li>
+<li>局部安装<code>npm install xxx</code></li>
+</ul>
+<p>全局安装了之后并不能让我们在所有的项目中使用所安装的库，只是命令能全局使用，如<code>yarn</code>全局安装。</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p><img src="/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/eeda32417effc890010a63994ed5a77.png" alt="安装过程"></p>
+<h2 id="npm命令"><a href="#npm命令" class="headerlink" title="npm命令"></a>npm命令</h2><ul>
+<li><code>npm uninstall package</code></li>
+<li><code>npm uninstall package --save-dev</code></li>
+<li><code>npm rebuild</code><ul>
+<li>强制重新build</li>
+</ul>
+</li>
+<li><code>npm cache clean</code><ul>
+<li>清除缓存</li>
+</ul>
+</li>
+<li><code>npm config get registry</code><ul>
+<li>查看npm镜像</li>
+</ul>
+</li>
+<li><code>npm config set registry 地址</code><ul>
+<li>修改npm镜像地址</li>
+</ul>
+</li>
+</ul>
+<h2 id="npx工具"><a href="#npx工具" class="headerlink" title="npx工具"></a>npx工具</h2><p>常见的是使用它来调用项目中的某个模块的指令，npx它会到当前目录的node_modules/.bin目录下查找对应的命令</p>
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>函数</title>
     <url>/2022/01/11/%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<h2 id="函数表达式、函数声明及箭头函数"><a href="#函数表达式、函数声明及箭头函数" class="headerlink" title="函数表达式、函数声明及箭头函数"></a>函数表达式、函数声明及箭头函数</h2><ol>
@@ -2526,92 +3013,6 @@
       </categories>
       <tags>
         <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>包管理工具</title>
-    <url>/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<h2 id="包管理工具npm"><a href="#包管理工具npm" class="headerlink" title="包管理工具npm"></a>包管理工具npm</h2><ul>
-<li>发布自己的包其实是发布到registry上面的</li>
-<li>安装一个包时其实是从registry上面下载的包；</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="配置文件属性"><a href="#配置文件属性" class="headerlink" title="配置文件属性"></a>配置文件属性</h3><ul>
-<li>name</li>
-<li>version</li>
-<li>description</li>
-<li>author</li>
-<li>license</li>
-<li>private<ul>
-<li>记录当前的项目是否是私有的，当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
-</ul>
-</li>
-<li>main<ul>
-<li>设置程序的入口</li>
-<li>这个入口和webpack打包的入口并不冲突</li>
-</ul>
-</li>
-<li>script<ul>
-<li>配置一些脚本命令，以键值对的形式存在</li>
-</ul>
-</li>
-<li>dependencies<ul>
-<li>指定无论开发环境还是生成环境都需要依赖的包</li>
-<li>默认install不加参数，都是生产开发环境都需要依赖的包</li>
-</ul>
-</li>
-<li>devDependencies<ul>
-<li>只在开发环境依赖的包</li>
-<li><code>--save-dev</code>或<code>-D</code></li>
-</ul>
-</li>
-<li>版本<ul>
-<li><code>^x.y.z</code>：表示x是保持不变的，y和z永远安装最新的版<code>~x.y.z</code>：表示x和y保持不变的，z永远安装最新的版本</li>
-</ul>
-</li>
-<li>engines属性<ul>
-<li>用于指定Node和NPM的版本号</li>
-</ul>
-</li>
-<li>browserslist属性<ul>
-<li>用于配置打包后的JavaScript浏览器的兼容情况</li>
-</ul>
-</li>
-</ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li>全局安装<code>npm install -g xxx</code></li>
-<li>局部安装<code>npm install xxx</code></li>
-</ul>
-<p>全局安装了之后并不能让我们在所有的项目中使用所安装的库，只是命令能全局使用，如<code>yarn</code>全局安装。</p>
-<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><p><img src="/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/eeda32417effc890010a63994ed5a77.png" alt="安装过程"></p>
-<h2 id="npm命令"><a href="#npm命令" class="headerlink" title="npm命令"></a>npm命令</h2><ul>
-<li><code>npm uninstall package</code></li>
-<li><code>npm uninstall package --save-dev</code></li>
-<li><code>npm rebuild</code><ul>
-<li>强制重新build</li>
-</ul>
-</li>
-<li><code>npm cache clean</code><ul>
-<li>清除缓存</li>
-</ul>
-</li>
-<li><code>npm config get registry</code><ul>
-<li>查看npm镜像</li>
-</ul>
-</li>
-<li><code>npm config set registry 地址</code><ul>
-<li>修改npm镜像地址</li>
-</ul>
-</li>
-</ul>
-<h2 id="npx工具"><a href="#npx工具" class="headerlink" title="npx工具"></a>npx工具</h2><p>常见的是使用它来调用项目中的某个模块的指令，npx它会到当前目录的node_modules/.bin目录下查找对应的命令</p>
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
@@ -3230,12 +3631,12 @@
 </ul>
 </li>
 <li><p>执行以下命令，在本地创建备份仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">cd</span> blog</span><br><span class="line">$ git init</span><br><span class="line">已初始化空的 Git 仓库于 blog/.git/</span><br><span class="line"></span><br><span class="line">$ git submodule add https://github.com/theme-next/hexo-theme-next.git themes/next</span><br><span class="line">添加位于 <span class="string">&#x27;themes/next&#x27;</span> 的现存仓库到索引</span><br><span class="line"></span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">&quot;init blog backup&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将备份内容 push 到远程仓库的备份分支 <code>hexo</code> 上：</p>
 </li>
-<li><p>```bash<br> cd blog<br>$ git init<br>已初始化空的 Git 仓库于 blog/.git/</p>
-<p>$ git submodule add <a href="https://github.com/theme-next/hexo-theme-next.git">https://github.com/theme-next/hexo-theme-next.git</a> themes/next<br>添加位于 ‘themes/next’ 的现存仓库到索引</p>
-<p>$ git add .<br>$ git commit -m “init blog backup”</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 将备份内容 push 到远程仓库的备份分支 `hexo` 上：</span><br><span class="line"></span><br><span class="line">- ```bash</span><br><span class="line">   git branch -m master hexo</span><br><span class="line">  $ git remote add origin https://github.com/Mupceet/mupceet.github.io.git</span><br><span class="line">  $ git push -u origin hexo:hexo</span><br></pre></td></tr></table></figure></li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> git branch -m master hexo</span><br><span class="line">$ git remote add origin https://github.com/Mupceet/mupceet.github.io.git</span><br><span class="line">$ git push -u origin hexo:hexo</span><br></pre></td></tr></table></figure>
+
 <p><a href="https://mupceet.com/2019/09/backup-hexo-blog">参考链接</a></p>
 <h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
 <li><code>hexo init [folder]</code> <ul>
@@ -3516,511 +3917,6 @@
       </categories>
       <tags>
         <tag>执行上下文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2022日常</title>
-    <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2>]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>语言基础</title>
-    <url>/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
-<li><p>区分大小写</p>
-</li>
-<li><p>标识符</p>
-<ul>
-<li>首字符为字母、下划线、美元符号</li>
-<li>建议使用驼峰大小写</li>
-<li>关键字、保留字、true、false、null不能为标识符</li>
-</ul>
-</li>
-<li><p>注释</p>
-<ul>
-<li>单行注释<code>//</code></li>
-<li>块注释<code>/**/</code></li>
-</ul>
-</li>
-<li><p>严格模式</p>
-<ul>
-<li>加一行<code>&quot;use strict&quot;</code></li>
-<li>是一个预处理指令</li>
-</ul>
-</li>
-<li><p>语句</p>
-<ul>
-<li><p>可以不分号结束，由解析器决定结尾，但建议都手动自己加分号</p>
-</li>
-<li><p>大括号里是代码块</p>
-<span id="more"></span></li>
-</ul>
-</li>
-<li><p>变量</p>
-<ul>
-<li><p><code>var</code></p>
-<ul>
-<li>函数级作用域</li>
-<li>作用域提升</li>
-<li>重复声明不报错</li>
-<li>全局声明的变量成为window对象属性</li>
-</ul>
-</li>
-<li><p><code>let</code></p>
-<ul>
-<li><p>块级作用域</p>
-</li>
-<li><p>没有提升，有暂时死区TDZ</p>
-<ul>
-<li><p>当程序流程进入新的作用域（module、function、block）进行实例化时，在此作用域中，用let、const声明的变量会先在作用域中被创建，但此时还未进行词法绑定，所以还不能被访问，此时访问会抛出错误。在这运行流程一进入作用域创建变量，到变量开始可被访问之间的一段时间，就称之为TDZ(暂时死区)。</p>
-</li>
-<li><pre><code class="javascript">let x = &#39;outer value&#39;
-
-function func () &#123;
-  // 这里会产生 TDZ for x
-  console.log(x) // TDZ期间访问，产生ReferenceError错误
-  let x = &#39;inner value&#39; // 对x的声明语句，这里结束 TDZ for x
-&#125;
-
-func()
-</code></pre>
-</li>
-</ul>
-</li>
-<li><p>不能重复声明</p>
-</li>
-<li><p>混用<code>var</code>和<code>let</code>，重复声明会报错</p>
-</li>
-<li><p>全局声明不是window对象的属性</p>
-</li>
-</ul>
-</li>
-<li><p><code>const</code></p>
-<ul>
-<li>声明同时必须初始化</li>
-<li>初始化后不能修改</li>
-<li>不能修改仅限于常量的引用<ul>
-<li>想让整个对象都不能修改，可以使用<code>Object.freeze()</code></li>
-</ul>
-</li>
-<li>不能用于声明会自增的迭代变量</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>六种简单数据类型、一种复杂数据类型（Object）。可以使用<code>typeof</code>来确定任意变量的数据类型，它返回一个字符串</p>
-<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用<code>var</code>或<code>let</code>声明了变量但没有初始化时，就相当于给变量赋予了<code>undefined</code>值。在对<strong>未初始化</strong>的变量调用<code>typeof</code>时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时，返回的结果还是<code>&quot;undefined&quot;</code></p>
-<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null</code>值表示一个空对象指针，这也是给<code>typeof</code>传一个<code>null</code>会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用<code>null</code>来填充该变量</p>
-<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a><code>Boolean</code>类型</h3><p>两个字面量true、false</p>
-<p>要将一个其他类型的值转换为布尔值，可以调用特定的<code>Boolean()</code>转型函数，<code>Boolean()</code>转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。</p>
-<p><code>NaN</code>返回<code>false</code></p>
-<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a><code>Number</code>类型</h3><ul>
-<li>Number类型使用IEEE754格式表示整数和浮点值。</li>
-<li>整数也可以用八进制或十六进制字面量表示。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数</li>
-<li>正零和负零在所有情况下都被认为是等同的</li>
-</ul>
-<ol>
-<li><p>浮点数</p>
-<ul>
-<li>数值中必须包含小数点，而且小数点后面必须至少有一个数字，没有数字或只有0，则会变成整数</li>
-<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母e，再加上一个要乘的10的多少次幂</li>
-<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2==0.3</code>是false</li>
-</ul>
-</li>
-<li><p>值的范围</p>
-<ul>
-<li>最小值<ul>
-<li><code>Number.MIN_VALUE</code></li>
-<li><code>-Infinity</code></li>
-<li><code>Number.POSITIVE_INFINITY</code></li>
-</ul>
-</li>
-<li>最大值<ul>
-<li><code>Number.MAX_VALUE</code></li>
-<li><code>Infinity</code></li>
-<li><code>Number.NEGATIVE_INFINITY</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>NaN</code></p>
-<blockquote>
-<p>不是数值</p>
-</blockquote>
-<ul>
-<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN</code>不等于包括<code>NaN</code>在内的任何值</li>
-<li><code>isNaN()</code>函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。<ol>
-<li>首先会调用对象的<code>valueOf()</code>方法，然后再确定返回的值是否可以转换为数值</li>
-<li>如果不能，再调用<code>toString()</code>方法，并测试其返回值</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>数值转换</p>
-<ol>
-<li><code>Number()</code><ul>
-<li>布尔：0、1</li>
-<li>数值：返回</li>
-<li><code>null</code>：0</li>
-<li><code>undefiner</code>：<code>NaN</code></li>
-<li>字符串<ul>
-<li>正负号+数字字符，转换回十进制数值</li>
-<li>字符串前含有十六进制格式（<code>0xf</code>），返回这个十六进制对应的十进制</li>
-<li>空字符串：0</li>
-<li>其他字符情况：<code>NaN</code></li>
-</ul>
-</li>
-<li>对象<ul>
-<li>调用<code>valueOf()</code>方法，再按上述规则转换，如果转换为<code>NaN</code>，则调用<code>toString()</code>方法，再按字符串规则转换</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>parseInt()</code><ul>
-<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回NaN</li>
-<li>如果是，则继续依次检测每个字符，直到字符串末尾，或碰到非数值字符</li>
-<li>字符串以”0x”开头，就会被解释为十六进制整数</li>
-<li>以”0”开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
-<li>parseInt()也接收第二个参数，用于指定底数（进制数）。</li>
-</ul>
-</li>
-<li><code>parseFloat()</code><ul>
-<li>与<code>parseInt()</code>函数相似，从位置0开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
-<li>始终忽略字符串开头的零</li>
-<li>十六进制数值始终会返回0。因为parseFloat()只解析十进制值，因此不能指定底数</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a><code>String</code>类型</h3><p>双引号、单引号、反引号</p>
-<ul>
-<li>以某种引号作为字符串开头，必须仍然以该种引号作为字符串结尾。</li>
-<li>字符串的长度可以通过其<code>length</code>属性获取</li>
-<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
-<li>字符串值也有<code>toString()</code>方法，该方法只是简单地返回自身的一个副本，<code>null</code>和<code>undefined</code>值没有<code>toString()</code>方法</li>
-<li>模板字面量保留反引号内部的空格，可以跨行定义字符串</li>
-</ul>
-<p>字符串插值</p>
-<ul>
-<li>模板字面量不是字符串，而是一种特殊的JavaScript句法表达式，只不过求值后得到的是字符串</li>
-<li>所有插入的值都会使用<code>toString()</code>强制转型为字符串，而且任何JavaScript表达式都可以用于插值。嵌套的模板字符串无须转义</li>
-</ul>
-<p>标签函数</p>
-<ul>
-<li>会接收被插值记号分隔后的模板和对每个表达式求值的结果。</li>
-<li>接收到的参数依次是原始字符串数组和对每个表达式求值的结果。</li>
-</ul>
-<p>原始字符串</p>
-<ul>
-<li>可以直接获取原始的模板字面量内容（如换行符或Unicode字符），而不是被转换后的字符表示</li>
-<li>默认的<code>String.raw</code>标签函数</li>
-</ul>
-<h3 id="Symbol类型"><a href="#Symbol类型" class="headerlink" title="Symbol类型"></a><code>Symbol</code>类型</h3><blockquote>
-<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非字符串形式的对象属性。</p>
-</blockquote>
-<ul>
-<li><p>使用<code>Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
-</li>
-<li><p><code>Symbol()</code>函数不能与new关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
-<ul>
-<li>确实想使用符号包装对象，可以借用Object()函数</li>
-</ul>
-</li>
-<li><p>全局符号注册表</p>
-<ul>
-<li><blockquote>
-<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册表中创建并重用符号。</p>
-</blockquote>
-</li>
-<li><p>方法：<code>Symbol.for()</code></p>
-<ul>
-<li>都执行幂等操作</li>
-<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
-</ul>
-</li>
-<li><p>全局注册表中的符号必须使用字符串键来创建，所以参数都会转换成字符串</p>
-</li>
-<li><p><code>Symbol.keyFor()</code>来查询全局注册表</p>
-<ul>
-<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回<code>undefined</code>。</li>
-<li>如果传给<code>Symbol.keyFor()</code>的不是符号，则该方法抛出<code>TypeError</code></li>
-</ul>
-</li>
-<li><p>凡是可以使用字符串或数值作为属性的地方，都可以使用符号</p>
-</li>
-<li><p><code>Object.getOwnPropertyNames()</code>返回对象实例的常规属性数组</p>
-</li>
-<li><p><code>Object.getOwnPropertySymbols()</code>返回对象实例的符号属性数组</p>
-</li>
-<li><p><code>Object.getOwnPropertyDescriptors()</code>会返回同时包含常规和符号属性描述符的对象</p>
-</li>
-<li><p><code>Reflect.ownKeys()</code>会返回两种类型的键</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="常用内置符号"><a href="#常用内置符号" class="headerlink" title="常用内置符号"></a>常用内置符号</h4><ol>
-<li><code>Symbol.asyncIterator</code><ul>
-<li>返回对象默认的<code>AsyncIterator</code>。由<code>for-await-of</code>语句使用</li>
-<li>循环时，它们会调用以<code>Symbol.asyncIterator</code>为键的函数，并期望这个函数会返回一个实现迭代器API的对象</li>
-</ul>
-</li>
-<li><code>Symbol.hasInstance</code><ul>
-<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由<code>instanceof</code>操作符使用</li>
-<li>instanceof操作符可以用来确定一个对象实例的原型链上是否有原型</li>
-<li>这个属性定义在Function的原型上</li>
-</ul>
-</li>
-<li><code>Symbol.isConcatSpreadable</code><ol>
-<li>数组对象<ul>
-<li>默认：打平到已有数组</li>
-<li>true：打平到已有数组</li>
-<li>false：将整个数组对象追加到数组末尾</li>
-</ul>
-</li>
-<li>类数组对象<ul>
-<li>默认：将对象追加到数组末尾</li>
-<li>true：打平到已有数组</li>
-<li>false：将对象追加到数组末尾</li>
-</ul>
-</li>
-<li>不是数组，也不是类数组<ul>
-<li>默认：将对象追加到数组末尾</li>
-<li>true：忽略</li>
-<li>false：将对象追加到数组末尾</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><code>Symbol.iterator</code><ul>
-<li>该方法返回对象默认的迭代器。由<code>for-of</code>语句使用</li>
-</ul>
-</li>
-<li><code>Symbol.match</code><ul>
-<li>用正则表达式去匹配字符串。由<code>String.prototype.match()</code>方法使用</li>
-</ul>
-</li>
-<li><code>Symbol.replace</code><ul>
-<li>替换一个字符串中匹配的子串。由<code>String.prototype.replace()</code>方法使用</li>
-</ul>
-</li>
-<li><code>Symbol.search</code><ul>
-<li>返回字符串中匹配正则表达式的索引。由<code>String.prototype.search()</code>方法使用</li>
-</ul>
-</li>
-<li><code>Symbol.species</code><ul>
-<li>作为创建派生对象的构造函数</li>
-<li>用Symbol.species定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
-</ul>
-</li>
-<li><code>Symbol.split</code><ul>
-<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code>String.prototype.split()</code>方法使用</li>
-</ul>
-</li>
-<li><code>Symbol.toPrimitive</code><ul>
-<li>该方法将对象转换为相应的原始值。由<code>ToPrimitive</code>抽象操作使用</li>
-</ul>
-</li>
-<li><code>Symbol.toStringTag</code><ul>
-<li>该字符串用于创建对象的默认字符串描述。由内置方法<code>Object.prototype.toString()</code>使用</li>
-<li>通过<code>toString()</code>方法获取对象标识时，会检索由<code>Symbol.toStringTag</code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
-</ul>
-</li>
-</ol>
-<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a><code>Object</code>类型</h3><blockquote>
-<p>就是一组数据和功能的集合，通过new操作符后跟对象类型的名称来创建</p>
-</blockquote>
-<ul>
-<li><code>constructor</code><ul>
-<li>创建当前对象的函数</li>
-</ul>
-</li>
-<li><code>hasOwnProperty(propertyName)</code><ul>
-<li>用于判断当前对象实例上是否存在给定的属性</li>
-</ul>
-</li>
-<li><code>isPrototypeOf(Object)</code><ul>
-<li>判断当前对象是否为另一个对象的原型</li>
-</ul>
-</li>
-<li><code>propertyIsEnumerable(propertyName)</code><ul>
-<li>判断给定的属性是否可以使用<code>for-in</code>语句枚举</li>
-</ul>
-</li>
-<li><code>toLocaleString()</code><ul>
-<li>返回对象的字符串表示，该字符串反映对象所在的本地化执行环境</li>
-</ul>
-</li>
-<li><code>toString()</code><ul>
-<li>返回对象的字符串表示</li>
-</ul>
-</li>
-<li><code>valueOf()</code><ul>
-<li>返回对象对应的字符串、数值或布尔值表示。通常与<code>toString()</code>的返回值相同。</li>
-</ul>
-</li>
-</ul>
-<h2 id="流控制语句"><a href="#流控制语句" class="headerlink" title="流控制语句"></a>流控制语句</h2><ul>
-<li><code>if</code></li>
-<li><code>do-while</code></li>
-<li><code>while</code></li>
-<li><code>for</code></li>
-<li><code>for-in</code><ul>
-<li>用于枚举对象中的非符号键属性</li>
-</ul>
-</li>
-<li><code>for-of</code><ul>
-<li>用于遍历可迭代对象的元素</li>
-</ul>
-</li>
-<li>标签语句<ul>
-<li>主要用于嵌套循环</li>
-<li>和c++的goto差不多</li>
-</ul>
-</li>
-<li><code>break、continue</code></li>
-<li><code>switch</code></li>
-</ul>
-<h2 id="理解函数"><a href="#理解函数" class="headerlink" title="理解函数"></a>理解函数</h2><ul>
-<li>function关键字声明，后跟一组参数，然后是函数体</li>
-<li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
-<li>不需要指定是否返回值。任何函数在任何时间都可以使用return语句来返回函数的值，用法是后跟要返回的值</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>迭代器与生成器</title>
-    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
-<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
-<p>在无迭代器时，迭代有两个缺点</p>
-<ul>
-<li>迭代之前需要事先知道如何使用数据结构</li>
-<li>遍历顺序并不是数据结构固有的</li>
-</ul>
-<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
-<span id="more"></span>
-
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
-<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
-<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
-</blockquote>
-<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
-<p>可迭代对象</p>
-<ul>
-<li>包含元素有限</li>
-<li>具有无歧义的遍历顺序</li>
-</ul>
-<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
-<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
-<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
-<ul>
-<li>支持迭代的自我识别能力</li>
-<li>创建实现<code>Iterator</code>接口的对象的能力</li>
-</ul>
-<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
-<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
-<ul>
-<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
-<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
-<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
-<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
-</ul>
-<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
-<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
-<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
-<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
-<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
-<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
-<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
-<p>可能情形：</p>
-<ol>
-<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
-<li>解构操作并未消费所有值</li>
-</ol>
-<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
-<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
-<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
-</blockquote>
-<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
-<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
-<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
-<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
-<p>生成器函数</p>
-<ul>
-<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
-<li>初次调用生成器函数并不会打印日志</li>
-</ul>
-</li>
-<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
-<li><code>g===g[Symbol.iterator]()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
-<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
-</blockquote>
-<p>yield关键字</p>
-<ul>
-<li>有点像函数的中间返回语句<ul>
-<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
-<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
-</ul>
-</li>
-<li>只能在生成器函数内部使用</li>
-<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
-<li>可以作为函数的中间参数使用<ul>
-<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
-<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
-</ul>
-</li>
-<li><code>yield</code>关键字可以同时用于输入和输出</li>
-<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
-<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
-</ul>
-</li>
-</ul>
-<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
-<p>生成器对象作为可迭代对象</p>
-<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
-<ol>
-<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
-<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
-<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
-<li>错误处理会跳过对应的<code>yield</code></li>
-<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
-</ul>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -4406,6 +4302,549 @@ console.log(arr.includes(NaN))//true
 </li>
 <li>对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>语言基础</title>
+    <url>/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li><p>区分大小写</p>
+</li>
+<li><p>标识符</p>
+<ul>
+<li>首字符为字母、下划线、美元符号</li>
+<li>建议使用驼峰大小写</li>
+<li>关键字、保留字、true、false、null不能为标识符</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li>单行注释<code>//</code></li>
+<li>块注释<code>/**/</code></li>
+</ul>
+</li>
+<li><p>严格模式</p>
+<ul>
+<li>加一行<code>&quot;use strict&quot;</code></li>
+<li>是一个预处理指令</li>
+</ul>
+</li>
+<li><p>语句</p>
+<ul>
+<li><p>可以不分号结束，由解析器决定结尾，但建议都手动自己加分号</p>
+</li>
+<li><p>大括号里是代码块</p>
+<span id="more"></span></li>
+</ul>
+</li>
+<li><p>变量</p>
+<ul>
+<li><p><code>var</code></p>
+<ul>
+<li>函数级作用域</li>
+<li>作用域提升</li>
+<li>重复声明不报错</li>
+<li>全局声明的变量成为window对象属性</li>
+</ul>
+</li>
+<li><p><code>let</code></p>
+<ul>
+<li><p>块级作用域</p>
+</li>
+<li><p>没有提升，有暂时死区TDZ</p>
+<ul>
+<li><p>当程序流程进入新的作用域（module、function、block）进行实例化时，在此作用域中，用let、const声明的变量会先在作用域中被创建，但此时还未进行词法绑定，所以还不能被访问，此时访问会抛出错误。在这运行流程一进入作用域创建变量，到变量开始可被访问之间的一段时间，就称之为TDZ(暂时死区)。</p>
+</li>
+<li><pre><code class="javascript">let x = &#39;outer value&#39;
+
+function func () &#123;
+  // 这里会产生 TDZ for x
+  console.log(x) // TDZ期间访问，产生ReferenceError错误
+  let x = &#39;inner value&#39; // 对x的声明语句，这里结束 TDZ for x
+&#125;
+
+func()
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>不能重复声明</p>
+</li>
+<li><p>混用<code>var</code>和<code>let</code>，重复声明会报错</p>
+</li>
+<li><p>全局声明不是window对象的属性</p>
+</li>
+</ul>
+</li>
+<li><p><code>const</code></p>
+<ul>
+<li>声明同时必须初始化</li>
+<li>初始化后不能修改</li>
+<li>不能修改仅限于常量的引用<ul>
+<li>想让整个对象都不能修改，可以使用<code>Object.freeze()</code></li>
+</ul>
+</li>
+<li>不能用于声明会自增的迭代变量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>六种简单数据类型、一种复杂数据类型（Object）。可以使用<code>typeof</code>来确定任意变量的数据类型，它返回一个字符串</p>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a><code>Undefined</code>类型</h3><p>当使用<code>var</code>或<code>let</code>声明了变量但没有初始化时，就相当于给变量赋予了<code>undefined</code>值。在对<strong>未初始化</strong>的变量调用<code>typeof</code>时，返回的结果是<code>&quot;undefined&quot;</code>，但对<strong>未声明</strong>的变量调用它时，返回的结果还是<code>&quot;undefined&quot;</code></p>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a><code>Null</code>类型</h3><p><code>null</code>值表示一个空对象指针，这也是给<code>typeof</code>传一个<code>null</code>会返回<code>&quot;object&quot;</code>的原因。任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用<code>null</code>来填充该变量</p>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a><code>Boolean</code>类型</h3><p>两个字面量true、false</p>
+<p>要将一个其他类型的值转换为布尔值，可以调用特定的<code>Boolean()</code>转型函数，<code>Boolean()</code>转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。</p>
+<p><code>NaN</code>返回<code>false</code></p>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a><code>Number</code>类型</h3><ul>
+<li>Number类型使用IEEE754格式表示整数和浮点值。</li>
+<li>整数也可以用八进制或十六进制字面量表示。如果字面量中包含的数字超出了应有的范围，就会忽略前缀的零，后面的数字序列会被当成十进制数</li>
+<li>正零和负零在所有情况下都被认为是等同的</li>
+</ul>
+<ol>
+<li><p>浮点数</p>
+<ul>
+<li>数值中必须包含小数点，而且小数点后面必须至少有一个数字，没有数字或只有0，则会变成整数</li>
+<li>科学计数法，数值（整数或浮点数）后跟一个大写或小写的字母e，再加上一个要乘的10的多少次幂</li>
+<li>精度最高达17位小数，算术计算有时会出现偏差，典型例子：<code>0.1+0.2==0.3</code>是false</li>
+</ul>
+</li>
+<li><p>值的范围</p>
+<ul>
+<li>最小值<ul>
+<li><code>Number.MIN_VALUE</code></li>
+<li><code>-Infinity</code></li>
+<li><code>Number.POSITIVE_INFINITY</code></li>
+</ul>
+</li>
+<li>最大值<ul>
+<li><code>Number.MAX_VALUE</code></li>
+<li><code>Infinity</code></li>
+<li><code>Number.NEGATIVE_INFINITY</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>NaN</code></p>
+<blockquote>
+<p>不是数值</p>
+</blockquote>
+<ul>
+<li>0、+0、-0相除会返回<code>NaN</code>，任何涉及<code>NaN</code>的操作均返回<code>NaN</code>，<code>NaN</code>不等于包括<code>NaN</code>在内的任何值</li>
+<li><code>isNaN()</code>函数。该函数接收一个参数，可以是任意数据类型，然后判断这个参数是否“不是数值”。<ol>
+<li>首先会调用对象的<code>valueOf()</code>方法，然后再确定返回的值是否可以转换为数值</li>
+<li>如果不能，再调用<code>toString()</code>方法，并测试其返回值</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>数值转换</p>
+<ol>
+<li><code>Number()</code><ul>
+<li>布尔：0、1</li>
+<li>数值：返回</li>
+<li><code>null</code>：0</li>
+<li><code>undefiner</code>：<code>NaN</code></li>
+<li>字符串<ul>
+<li>正负号+数字字符，转换回十进制数值</li>
+<li>字符串前含有十六进制格式（<code>0xf</code>），返回这个十六进制对应的十进制</li>
+<li>空字符串：0</li>
+<li>其他字符情况：<code>NaN</code></li>
+</ul>
+</li>
+<li>对象<ul>
+<li>调用<code>valueOf()</code>方法，再按上述规则转换，如果转换为<code>NaN</code>，则调用<code>toString()</code>方法，再按字符串规则转换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>parseInt()</code><ul>
+<li>如果第一个字符不是数值字符、加号或减号，parseInt()立即返回NaN</li>
+<li>如果是，则继续依次检测每个字符，直到字符串末尾，或碰到非数值字符</li>
+<li>字符串以”0x”开头，就会被解释为十六进制整数</li>
+<li>以”0”开头，且紧跟着数值字符，在非严格模式下会被某些实现解释为八进制整数。</li>
+<li>parseInt()也接收第二个参数，用于指定底数（进制数）。</li>
+</ul>
+</li>
+<li><code>parseFloat()</code><ul>
+<li>与<code>parseInt()</code>函数相似，从位置0开始检测每个字符。同样，它也是解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</li>
+<li>始终忽略字符串开头的零</li>
+<li>十六进制数值始终会返回0。因为parseFloat()只解析十进制值，因此不能指定底数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a><code>String</code>类型</h3><p>双引号、单引号、反引号</p>
+<ul>
+<li>以某种引号作为字符串开头，必须仍然以该种引号作为字符串结尾。</li>
+<li>字符串的长度可以通过其<code>length</code>属性获取</li>
+<li>字符串是不可变的（immutable），意思是一旦创建，它们的值就不能变了。要修改某个变量中的字符串值，必须先销毁原始的字符串，然后将包含新值的另一个字符串保存到该变量</li>
+<li>字符串值也有<code>toString()</code>方法，该方法只是简单地返回自身的一个副本，<code>null</code>和<code>undefined</code>值没有<code>toString()</code>方法</li>
+<li>模板字面量保留反引号内部的空格，可以跨行定义字符串</li>
+</ul>
+<p>字符串插值</p>
+<ul>
+<li>模板字面量不是字符串，而是一种特殊的JavaScript句法表达式，只不过求值后得到的是字符串</li>
+<li>所有插入的值都会使用<code>toString()</code>强制转型为字符串，而且任何JavaScript表达式都可以用于插值。嵌套的模板字符串无须转义</li>
+</ul>
+<p>标签函数</p>
+<ul>
+<li>会接收被插值记号分隔后的模板和对每个表达式求值的结果。</li>
+<li>接收到的参数依次是原始字符串数组和对每个表达式求值的结果。</li>
+</ul>
+<p>原始字符串</p>
+<ul>
+<li>可以直接获取原始的模板字面量内容（如换行符或Unicode字符），而不是被转换后的字符表示</li>
+<li>默认的<code>String.raw</code>标签函数</li>
+</ul>
+<h3 id="Symbol类型"><a href="#Symbol类型" class="headerlink" title="Symbol类型"></a><code>Symbol</code>类型</h3><blockquote>
+<p>符号实例是唯一、不可变的，<strong>用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险</strong>。符号就是用来创建唯一记号，进而用作非字符串形式的对象属性。</p>
+</blockquote>
+<ul>
+<li><p>使用<code>Symbol()</code>函数初始化，可以传入一个字符串参数作为对符号的描述，字符串参数与符号定义或标识完全无关</p>
+</li>
+<li><p><code>Symbol()</code>函数不能与new关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
+<ul>
+<li>确实想使用符号包装对象，可以借用Object()函数</li>
+</ul>
+</li>
+<li><p>全局符号注册表</p>
+<ul>
+<li><blockquote>
+<p>如果运行时的不同部分需要共享和重用符号实例，那么可以用一个字符串作为键，在全局符号注册表中创建并重用符号。</p>
+</blockquote>
+</li>
+<li><p>方法：<code>Symbol.for()</code></p>
+<ul>
+<li>都执行幂等操作</li>
+<li>检查全局运行时注册表，发现不存在对应的符号，于是就会生成一个新符号实例并添加到注册表中。后续使用相同字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，然后就会返回该符号实例。</li>
+</ul>
+</li>
+<li><p>全局注册表中的符号必须使用字符串键来创建，所以参数都会转换成字符串</p>
+</li>
+<li><p><code>Symbol.keyFor()</code>来查询全局注册表</p>
+<ul>
+<li>接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回<code>undefined</code>。</li>
+<li>如果传给<code>Symbol.keyFor()</code>的不是符号，则该方法抛出<code>TypeError</code></li>
+</ul>
+</li>
+<li><p>凡是可以使用字符串或数值作为属性的地方，都可以使用符号</p>
+</li>
+<li><p><code>Object.getOwnPropertyNames()</code>返回对象实例的常规属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertySymbols()</code>返回对象实例的符号属性数组</p>
+</li>
+<li><p><code>Object.getOwnPropertyDescriptors()</code>会返回同时包含常规和符号属性描述符的对象</p>
+</li>
+<li><p><code>Reflect.ownKeys()</code>会返回两种类型的键</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="常用内置符号"><a href="#常用内置符号" class="headerlink" title="常用内置符号"></a>常用内置符号</h4><ol>
+<li><code>Symbol.asyncIterator</code><ul>
+<li>返回对象默认的<code>AsyncIterator</code>。由<code>for-await-of</code>语句使用</li>
+<li>循环时，它们会调用以<code>Symbol.asyncIterator</code>为键的函数，并期望这个函数会返回一个实现迭代器API的对象</li>
+</ul>
+</li>
+<li><code>Symbol.hasInstance</code><ul>
+<li>该方法决定一个构造器对象是否认可一个对象是它的实例。由<code>instanceof</code>操作符使用</li>
+<li>instanceof操作符可以用来确定一个对象实例的原型链上是否有原型</li>
+<li>这个属性定义在Function的原型上</li>
+</ul>
+</li>
+<li><code>Symbol.isConcatSpreadable</code><ol>
+<li>数组对象<ul>
+<li>默认：打平到已有数组</li>
+<li>true：打平到已有数组</li>
+<li>false：将整个数组对象追加到数组末尾</li>
+</ul>
+</li>
+<li>类数组对象<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：打平到已有数组</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+<li>不是数组，也不是类数组<ul>
+<li>默认：将对象追加到数组末尾</li>
+<li>true：忽略</li>
+<li>false：将对象追加到数组末尾</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><code>Symbol.iterator</code><ul>
+<li>该方法返回对象默认的迭代器。由<code>for-of</code>语句使用</li>
+</ul>
+</li>
+<li><code>Symbol.match</code><ul>
+<li>用正则表达式去匹配字符串。由<code>String.prototype.match()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.replace</code><ul>
+<li>替换一个字符串中匹配的子串。由<code>String.prototype.replace()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.search</code><ul>
+<li>返回字符串中匹配正则表达式的索引。由<code>String.prototype.search()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.species</code><ul>
+<li>作为创建派生对象的构造函数</li>
+<li>用Symbol.species定义静态的获取器（getter）方法，可以覆盖新创建实例的原型定义</li>
+</ul>
+</li>
+<li><code>Symbol.split</code><ul>
+<li>该方法在匹配正则表达式的索引位置拆分字符串。由<code>String.prototype.split()</code>方法使用</li>
+</ul>
+</li>
+<li><code>Symbol.toPrimitive</code><ul>
+<li>该方法将对象转换为相应的原始值。由<code>ToPrimitive</code>抽象操作使用</li>
+</ul>
+</li>
+<li><code>Symbol.toStringTag</code><ul>
+<li>该字符串用于创建对象的默认字符串描述。由内置方法<code>Object.prototype.toString()</code>使用</li>
+<li>通过<code>toString()</code>方法获取对象标识时，会检索由<code>Symbol.toStringTag</code>指定的实例标识符，默认为<code>&quot;Object&quot;</code>。内置类型已经指定了这个值，但自定义类实例还需要明确定义</li>
+</ul>
+</li>
+</ol>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a><code>Object</code>类型</h3><blockquote>
+<p>就是一组数据和功能的集合，通过new操作符后跟对象类型的名称来创建</p>
+</blockquote>
+<ul>
+<li><code>constructor</code><ul>
+<li>创建当前对象的函数</li>
+</ul>
+</li>
+<li><code>hasOwnProperty(propertyName)</code><ul>
+<li>用于判断当前对象实例上是否存在给定的属性</li>
+</ul>
+</li>
+<li><code>isPrototypeOf(Object)</code><ul>
+<li>判断当前对象是否为另一个对象的原型</li>
+</ul>
+</li>
+<li><code>propertyIsEnumerable(propertyName)</code><ul>
+<li>判断给定的属性是否可以使用<code>for-in</code>语句枚举</li>
+</ul>
+</li>
+<li><code>toLocaleString()</code><ul>
+<li>返回对象的字符串表示，该字符串反映对象所在的本地化执行环境</li>
+</ul>
+</li>
+<li><code>toString()</code><ul>
+<li>返回对象的字符串表示</li>
+</ul>
+</li>
+<li><code>valueOf()</code><ul>
+<li>返回对象对应的字符串、数值或布尔值表示。通常与<code>toString()</code>的返回值相同。</li>
+</ul>
+</li>
+</ul>
+<h2 id="流控制语句"><a href="#流控制语句" class="headerlink" title="流控制语句"></a>流控制语句</h2><ul>
+<li><code>if</code></li>
+<li><code>do-while</code></li>
+<li><code>while</code></li>
+<li><code>for</code></li>
+<li><code>for-in</code><ul>
+<li>用于枚举对象中的非符号键属性</li>
+</ul>
+</li>
+<li><code>for-of</code><ul>
+<li>用于遍历可迭代对象的元素</li>
+</ul>
+</li>
+<li>标签语句<ul>
+<li>主要用于嵌套循环</li>
+<li>和c++的goto差不多</li>
+</ul>
+</li>
+<li><code>break、continue</code></li>
+<li><code>switch</code></li>
+</ul>
+<h2 id="理解函数"><a href="#理解函数" class="headerlink" title="理解函数"></a>理解函数</h2><ul>
+<li>function关键字声明，后跟一组参数，然后是函数体</li>
+<li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
+<li>不需要指定是否返回值。任何函数在任何时间都可以使用return语句来返回函数的值，用法是后跟要返回的值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录</title>
+    <url>/2022/01/07/%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="2022-01"><a href="#2022-01" class="headerlink" title="2022-01"></a>2022-01</h2><h3 id="2022-01-07"><a href="#2022-01-07" class="headerlink" title="2022-01-07"></a>2022-01-07</h3><p>以为新买的手表坏了，显示2021，拿起来才发现原来是20:21，本想顺手拍个照记录一下时间，按下快门，照片里却变成了20:22。<code>1:17</code></p>
+<h3 id="2022-01-08"><a href="#2022-01-08" class="headerlink" title="2022-01-08"></a>2022-01-08</h3><p>走在街上谈论到某些事情时候，突然想到王小波在书引用到弗洛伊德的一些话，当人处于一个痛苦的环境下，并且无法改变这种痛苦，那么人就会把这种痛苦看作一种是快乐，去享受着。没去确认语句的具体细节，但大概是这个意思。<code>00:48</code></p>
+<span id="more"></span>
+
+<h3 id="2022-01-09"><a href="#2022-01-09" class="headerlink" title="2022-01-09"></a>2022-01-09</h3><p>放纵了一天，明天好好干<code>00:38</code></p>
+<h3 id="2022-01-10"><a href="#2022-01-10" class="headerlink" title="2022-01-10"></a>2022-01-10</h3><p>八合里吃牛，燥热。还有50天？猛干<code>2:18</code></p>
+<h3 id="2022-01-11"><a href="#2022-01-11" class="headerlink" title="2022-01-11"></a>2022-01-11</h3><p>讲少点qnhhfd词汇<code>00:29</code></p>
+<h3 id="2022-01-12"><a href="#2022-01-12" class="headerlink" title="2022-01-12"></a>2022-01-12</h3><p>被梦境缠绕<code>00:07</code></p>
+<h3 id="2022-01-13"><a href="#2022-01-13" class="headerlink" title="2022-01-13"></a>2022-01-13</h3><p>洗澡成为了一项唯一的娱乐活动，一天洗三次= =。天气也太冷了吧<code>00:31</code></p>
+<h3 id="2022-01-14"><a href="#2022-01-14" class="headerlink" title="2022-01-14"></a>2022-01-14</h3><p>coding【bam:O’Fama】<code>01:35</code></p>
+<h3 id="2022-01-15"><a href="#2022-01-15" class="headerlink" title="2022-01-15"></a>2022-01-15</h3><p>给点耐心给自己<code>00:54</code></p>
+<h3 id="2022-01-16"><a href="#2022-01-16" class="headerlink" title="2022-01-16"></a>2022-01-16</h3><p>这学期最后一次篮球，也是崴脚之后第一次打。心情愉悦，能和熟悉的，半熟悉的朋友，边吹水边打:)<code>01:42</code></p>
+<h3 id="2022-01-17"><a href="#2022-01-17" class="headerlink" title="2022-01-17"></a>2022-01-17</h3><p>7人女仆桌游馆，尬玩尬玩=.=，还回想起以前中学，跟着朋友被第一次带去女仆咖啡厅，好蛇皮←_←今天回个家吃饭，原本想复诊牙科，结果周一到周四都被约满了，只能祈祷下周能提前约到，不然大概率只能年后再看了。<code>00:08</code></p>
+<h3 id="2022-01-18"><a href="#2022-01-18" class="headerlink" title="2022-01-18"></a>2022-01-18</h3><p>虽然只看了剪辑，lgd和rng的比赛还是精彩呀。毕设被追的有点紧，简单写了点页面，要找点时间把后端给写了<code>02:23</code></p>
+<h3 id="2022-01-19"><a href="#2022-01-19" class="headerlink" title="2022-01-19"></a>2022-01-19</h3><p>毕设会议取消<code>02:13</code></p>
+<h3 id="2022-01-20"><a href="#2022-01-20" class="headerlink" title="2022-01-20"></a>2022-01-20</h3><p>透支<code>03:00</code></p>
+<h3 id="2022-01-21"><a href="#2022-01-21" class="headerlink" title="2022-01-21"></a>2022-01-21</h3><p>高中、天台、四人，一年一次烧烤<code>02:58</code></p>
+<h3 id="2022-01-22"><a href="#2022-01-22" class="headerlink" title="2022-01-22"></a>2022-01-22</h3><p>听了以前的歌，突然追星twins，看了下以前她们的视频</p>
+<h3 id="2022-01-23"><a href="#2022-01-23" class="headerlink" title="2022-01-23"></a>2022-01-23</h3><h3 id="2022-01-24"><a href="#2022-01-24" class="headerlink" title="2022-01-24"></a>2022-01-24</h3><p>每次复诊牙科，医生都要说，笑一下看看，我(⊙_⊙)？，不过好消息是年后可能可以拆牙套了</p>
+<h3 id="2022-01-25"><a href="#2022-01-25" class="headerlink" title="2022-01-25"></a>2022-01-25</h3><p>好后悔去通宵喝酒了，感觉生命要烧玩了，本来早上要去家教，想想还是推到下午，不然脑要炸了</p>
+<h3 id="2022-01-26"><a href="#2022-01-26" class="headerlink" title="2022-01-26"></a>2022-01-26</h3><p>twins</p>
+<h3 id="2022-01-27"><a href="#2022-01-27" class="headerlink" title="2022-01-27"></a>2022-01-27</h3><p>回味以前的音乐。眼红馆<code>01:13</code></p>
+<h3 id="2022-06-27"><a href="#2022-06-27" class="headerlink" title="2022-06-27"></a>2022-06-27</h3><p>开始收拾东西了，回忆起不少以前的事情，旧校会的留言明信片，系建的可乐和照片，夜跑灯光节，没想到放到现在，灯还在亮，还有进大学前买的欧莱雅，现在还没拆封，服了自己。成都旅游捐款送的大熊猫，大一军训的人名牌，iscnu的徽章，还有一堆组电脑留下的线。还找到了初中时用的手机。现在宿舍只剩自己一人了，略显伤感。对未来琢磨不透，应该叫迷茫？但又想起bintou说的一句话，迷茫个屁，你就是怂（大概意思吧，原句我都忘了。没有使尽全力，怕这怕那，就会迷茫。迈开脚步冲就完了。但冲去哪呢？当然是雅思5.5阿，不然入不了职了。</p>
+<p>希望每次都能推荐一下歌，并说一下理由。</p>
+<p>今晚荐歌：森林（Mr.布志纶）</p>
+<p>理由：太懒，不知道，不写了。</p>
+<p><code>01:46</code></p>
+<h3 id="2022-07-01"><a href="#2022-07-01" class="headerlink" title="2022-07-01"></a>2022-07-01</h3><p>回了两天家去找房，没找到合适的，昨天回来学校，最后的一点学校生涯啦。今晚和csy小聊一下天，互相了解了一下各自的情况，原来也是同行，不过好像之前说过，但我没记得太清。我的下家未定，不知怎么办，看明天情况如何。</p>
+<p>今晚荐歌：明年今日（陈奕迅，DUO live）</p>
+<p>毕业总感觉有点伤感，明年不知道又会是怎样</p>
+<p><code>01:53</code></p>
+<h3 id="2022-07-02"><a href="#2022-07-02" class="headerlink" title="2022-07-02"></a>2022-07-02</h3><p>毕业咯，回到家中了，今晚收拾略显狼狈，不过还好有隔壁宿舍帮忙，而且也把车搞进来了，所以搬东西还算轻松。</p>
+<p>今晚荐歌：给十年后的我（薛凯琪，live）</p>
+<p>不知道十年后我变成怎么样。</p>
+<h3 id="2022-07-03"><a href="#2022-07-03" class="headerlink" title="2022-07-03"></a>2022-07-03</h3><p>回家待的第一天，今天刮台风，下大雨。不知道为什么，饭点前都好饿。<code>00:19</code></p>
+<h3 id="2022-07-04"><a href="#2022-07-04" class="headerlink" title="2022-07-04"></a>2022-07-04</h3><p>学习进度停滞，未确定好学习路线</p>
+<h3 id="2022-07-05"><a href="#2022-07-05" class="headerlink" title="2022-07-05"></a>2022-07-05</h3><p>买了mac mini 16 + 256，加一块9百多块的4k屏幕，期待用一下ios的系统。今天虚度了一天，得追回来。<code>00:37</code></p>
+<h3 id="2022-07-06"><a href="#2022-07-06" class="headerlink" title="2022-07-06"></a>2022-07-06</h3><p>看了一下午的店（玩了一下午手机）。<code>00:18</code></p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>迭代器与生成器</title>
+    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
+<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
+<p>在无迭代器时，迭代有两个缺点</p>
+<ul>
+<li>迭代之前需要事先知道如何使用数据结构</li>
+<li>遍历顺序并不是数据结构固有的</li>
+</ul>
+<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
+<span id="more"></span>
+
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
+<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
+</blockquote>
+<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
+<p>可迭代对象</p>
+<ul>
+<li>包含元素有限</li>
+<li>具有无歧义的遍历顺序</li>
+</ul>
+<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
+<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
+<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
+<ul>
+<li>支持迭代的自我识别能力</li>
+<li>创建实现<code>Iterator</code>接口的对象的能力</li>
+</ul>
+<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
+<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
+<ul>
+<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
+<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
+<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
+<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
+</ul>
+<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
+<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
+<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
+<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
+<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
+<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
+<p>可能情形：</p>
+<ol>
+<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
+<li>解构操作并未消费所有值</li>
+</ol>
+<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
+<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
+<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
+</blockquote>
+<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
+<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
+<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
+<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
+<p>生成器函数</p>
+<ul>
+<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
+<li>初次调用生成器函数并不会打印日志</li>
+</ul>
+</li>
+<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
+<li><code>g===g[Symbol.iterator]()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
+<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
+</blockquote>
+<p>yield关键字</p>
+<ul>
+<li>有点像函数的中间返回语句<ul>
+<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
+<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
+</ul>
+</li>
+<li>只能在生成器函数内部使用</li>
+<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
+<li>可以作为函数的中间参数使用<ul>
+<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
+<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
+</ul>
+</li>
+<li><code>yield</code>关键字可以同时用于输入和输出</li>
+<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
+<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
+</ul>
+</li>
+</ul>
+<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
+<p>生成器对象作为可迭代对象</p>
+<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
+<ol>
+<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
+<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
+<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
+<li>错误处理会跳过对应的<code>yield</code></li>
+<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -5219,81 +5658,6 @@ console.log(arr.includes(NaN))//true
       </categories>
       <tags>
         <tag>HTTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>express简单使用</title>
-    <url>/2022/03/31/express%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li>脚手架<ul>
-<li><code>npm install -g express-generator</code></li>
-<li><code>express express-demo</code></li>
-<li><code>npm install</code></li>
-<li><code>node bin/www</code></li>
-</ul>
-</li>
-<li>从零搭建<ul>
-<li><code>npm init -y</code></li>
-<li><code>npm install express</code></li>
-</ul>
-</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// express其实是一个函数: createApplication</span></span><br><span class="line"><span class="comment">// 返回app</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听路径</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;Hello Express&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启监听</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;express初体验服务器启动成功~&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><blockquote>
-<p>中间件函数能够访问请求对象 (<code>req</code>)、响应对象 (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数</p>
-</blockquote>
-<p>中间件函数可以执行以下任务：</p>
-<ul>
-<li>执行任何代码。</li>
-<li>对请求和响应对象进行更改。</li>
-<li>结束请求/响应循环。</li>
-<li>调用堆栈中的下一个中间件函数。</li>
-</ul>
-<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
-<h3 id="普通中间件"><a href="#普通中间件" class="headerlink" title="普通中间件"></a>普通中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// use注册一个中间件(回调函数)</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;注册了一个普通的中间件~&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="路径中间件"><a href="#路径中间件" class="headerlink" title="路径中间件"></a>路径中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路径匹配的中间件</span></span><br><span class="line">app.use(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home middleware 01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="路径和方法中间件"><a href="#路径和方法中间件" class="headerlink" title="路径和方法中间件"></a>路径和方法中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="连续注册中间件"><a href="#连续注册中间件" class="headerlink" title="连续注册中间件"></a>连续注册中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&quot;/home&quot;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 02&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 03&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 04&quot;</span>);</span><br><span class="line">  res.end(<span class="string">&quot;home page&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用中间件-body解析"><a href="#应用中间件-body解析" class="headerlink" title="应用中间件 body解析"></a>应用中间件 body解析</h2><h3 id="手动解析"><a href="#手动解析" class="headerlink" title="手动解析"></a>手动解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 手动解析</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">    req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> info = <span class="built_in">JSON</span>.parse(data.toString());</span><br><span class="line">      req.body = info;</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    req.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="内置解析"><a href="#内置解析" class="headerlink" title="内置解析"></a>内置解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// express内置解析</span></span><br><span class="line">app.use(express.json())</span><br></pre></td></tr></table></figure>
-
-<h3 id="urlencoded解析"><a href="#urlencoded解析" class="headerlink" title="urlencoded解析"></a>urlencoded解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extended</span></span><br><span class="line"><span class="comment">// true: 那么对urlencoded进行解析时, 它使用的是第三方库: qs</span></span><br><span class="line"><span class="comment">// false: 那么对urlencoded进行解析时, 它使用的是Node内置模块: querystring</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">true</span>&#125;));</span><br></pre></td></tr></table></figure>
-
-<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">&#x27;./uploads/&#x27;</span>);		<span class="comment">//把文件放置的位置</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件命名</span></span><br><span class="line">    cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + path.extname(file.originalname));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">  <span class="comment">// dest: &#x27;./uploads/&#x27;</span></span><br><span class="line">  storage</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/login&#x27;</span>, upload.any(), <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.end(<span class="string">&quot;用户登录成功~&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="form-data解析"><a href="#form-data解析" class="headerlink" title="form-data解析"></a>form-data解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = multer();</span><br><span class="line">app.use(upload.any());</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询参数params和query"><a href="#查询参数params和query" class="headerlink" title="查询参数params和query"></a>查询参数params和query</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">req.params</span><br><span class="line"></span><br><span class="line">req.query</span><br></pre></td></tr></table></figure>
-
-<h2 id="响应数据"><a href="#响应数据" class="headerlink" title="响应数据"></a>响应数据</h2><ul>
-<li>end</li>
-<li>json<ul>
-<li>可以传入很多的类型：object、array、string、boolean、number、null等，它们会被转换成json格式返回</li>
-</ul>
-</li>
-<li>status</li>
-</ul>
-<h2 id="express路由"><a href="#express路由" class="headerlink" title="express路由"></a>express路由</h2><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在userRoute.js文件中，编写关于user的中间件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建可安装的模块化路由处理程序</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.json(<span class="string">`<span class="subst">$&#123;req.params.id&#125;</span>用户的信息`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在app.js文件中引入user路由</span></span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routers/users&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里指定路径，userRoute.js中就可以省略/user</span></span><br><span class="line">app.use(<span class="string">&quot;/users&quot;</span>, userRouter);</span><br></pre></td></tr></table></figure>
-
-<h2 id="静态服务器"><a href="#静态服务器" class="headerlink" title="静态服务器"></a>静态服务器</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./build&#x27;</span>));</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>express</tag>
       </tags>
   </entry>
 </search>
