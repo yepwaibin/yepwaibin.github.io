@@ -29,14 +29,14 @@
 <meta property="og:site_name" content="Sky&#39;s Blog">
 <meta property="og:description" content="事件循环理解成我们编写的JavaScript和浏览器或者Node之间的一个桥梁  浏览器的事件循环是一个我们编写的JavaScript代码和浏览器API调用(setTimeout&#x2F;AJAX&#x2F;监听事件等)的一个桥梁,桥梁之间他们通过回调函数进行沟通 Node的事件循环是一个我们编写的JavaScript代码和系统调用（filesystem、network等）之间的一个桥梁,桥梁之间他们通过回调函数">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yepwaibin.github.io/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png">
-<meta property="og:image" content="https://yepwaibin.github.io/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png">
+<meta property="og:image" content="https://yepwaibin.github.io/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png">
+<meta property="og:image" content="https://yepwaibin.github.io/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png">
 <meta property="article:published_time" content="2022-03-27T10:56:36.000Z">
-<meta property="article:modified_time" content="2022-03-27T11:51:00.950Z">
+<meta property="article:modified_time" content="2022-07-09T05:52:24.393Z">
 <meta property="article:author" content="Sky">
 <meta property="article:tag" content="事件循环">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yepwaibin.github.io/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png">
+<meta name="twitter:image" content="https://yepwaibin.github.io/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png">
 
 
 <link rel="canonical" href="https://yepwaibin.github.io/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
@@ -241,9 +241,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-03-27 18:56:36 / Modified: 19:51:00" itemprop="dateCreated datePublished" datetime="2022-03-27T18:56:36+08:00">2022-03-27</time>
+      <time title="Created: 2022-03-27 18:56:36" itemprop="dateCreated datePublished" datetime="2022-03-27T18:56:36+08:00">2022-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-09 13:52:24" itemprop="dateModified" datetime="2022-07-09T13:52:24+08:00">2022-07-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -316,7 +322,8 @@
 <li><strong>EventLoop</strong>不停地检查主线程的调用栈与回调队列，当调用栈空时，就把微任务消息队列中的第一个任务推入栈中执行，执行完成后，再取第二个微任务，<strong>直到微任务消息队列为空</strong>；然后<br>去宏任务消息队列中取第一个宏任务推入栈中执行，当该宏任务执行完成后，在下一个宏任务执行前，再依次取出微任务消息队列中的所有微任务入栈执行。</li>
 <li>上述过程不断循环，每当微任务队列清空，可作为本轮事件循环的结束。</li>
 </ol>
-<h2 id="Node架构分析"><a href="#Node架构分析" class="headerlink" title="Node架构分析"></a>Node架构分析</h2><p><img src="/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png" alt="架构图"></p>
+<h2 id="Node架构分析"><a href="#Node架构分析" class="headerlink" title="Node架构分析"></a>Node架构分析</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png" class title="架构图">
+
 <ul>
 <li>libuv中主要维护了一个EventLoop和workerthreads（线程池）<ul>
 <li>线程池会负责所有相关的操作，并且会通过轮训等方式等待结果</li>
@@ -330,7 +337,8 @@
 <li>阻塞式调用：调用结果返回之前，当前线程处于阻塞态（阻塞态CPU是不会分配时间片的），调用线程只有在得到调用结果之后才会继续执行</li>
 <li>非阻塞式调用：调用执行之后，当前线程不会停止执行，只需要过一段时间来检查一下有没有结果返回即可</li>
 </ul>
-<h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><p><img src="/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png" alt="事件循环阶段"></p>
+<h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png" class title="事件循环阶段">
+
 <ol>
 <li>定时器（Timers）：本阶段执行已经被setTimeout()和setInterval()的调度回调函数</li>
 <li>待定回调（PendingCallback）：对某些系统操作（如TCP错误类型）执行回调，比如TCP连接时接收到ECONNREFUSED</li>
