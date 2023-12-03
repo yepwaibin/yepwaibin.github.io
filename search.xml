@@ -1,93 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HTML中的Javascript</title>
-    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
-    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
-<li><p>async</p>
-</li>
-<li><p>crossorigin</p>
-<blockquote>
-<p>配置相关CORS设置</p>
-</blockquote>
+    <title>Document</title>
+    <url>/2022/01/22/Document/</url>
+    <content><![CDATA[<h2 id="浏览器环境和规格"><a href="#浏览器环境和规格" class="headerlink" title="浏览器环境和规格"></a>浏览器环境和规格</h2><p>在浏览器中，window有两种角色</p>
 <ul>
-<li>anonymous</li>
-<li>use-credentials</li>
+<li>Javascript代码的全局对象</li>
+<li>代表浏览器窗口，并提供控制它的方法</li>
 </ul>
-</li>
-<li><p>defer</p>
-</li>
-<li><p>intergrity</p>
-<blockquote>
-<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
-</blockquote>
-</li>
-<li><p>src</p>
-<ul>
-<li>会忽略行内脚本</li>
-<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
-</ul>
-</li>
-<li><p>type</p>
-<ul>
-<li><code>text/javascript</code></li>
-<li><code>module</code><ul>
-<li>会被当成ES6模块</li>
-<li>脚本加载解析过程与defer相同</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>document 对象是页面的主要“入口点”。我们可以使用它来更改或创建页面上的任何内容。</p>
 <span id="more"></span>
 
-<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
-<li><p>行内脚本</p>
-<p>下载和执行会阻塞<code>HTML</code>的解析</p>
-</li>
-<li><p>外部脚本</p>
+<h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>每个树的节点都是一个对象，一共12种，通常用到4种</p>
 <ul>
-<li>不加<code>async</code>和<code>defer</code><ul>
-<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
+<li>document——DOM的入口点</li>
+<li>元素节点——HTML标签，并形成文档结构</li>
+<li>文本节点</li>
+<li>注释</li>
+</ul>
+<h2 id="遍历DOM"><a href="#遍历DOM" class="headerlink" title="遍历DOM"></a>遍历DOM</h2><h3 id="对象间链接"><a href="#对象间链接" class="headerlink" title="对象间链接"></a>对象间链接</h3><blockquote>
+<p>对所有节点，是包含元素节点，文本节点，注释等</p>
+</blockquote>
+<p><img src="/.io//fd565c1de6fcacaa600a120b4d23797.png" alt="fd565c1de6fcacaa600a120b4d23797"></p>
+<p>顶层树节点可以直接获取</p>
+<ul>
+<li><code>document.documentElement</code>——<code>&lt;html&gt;</code></li>
+<li><code>document.body</code></li>
+<li><code>document.head</code></li>
+</ul>
+<p>两个术语</p>
+<ul>
+<li>子节点——直系的子元素<ul>
+<li>childNodes列出<strong>所有</strong>子节点，<strong>包括文本节点</strong><ul>
+<li>返回的不是数组，而是集合，一个类数组的可迭代对象，可以用Array.from方法用它来创建一个”真“数组，使得能使用数组的方法</li>
+<li>DOM集合是只读的，</li>
+<li>是实时的——例如先取得<code>elem.childNodes</code>的引用，而后修改DOM，那么节点的更新会自动出现在集合中</li>
 </ul>
 </li>
-<li><code>defer</code><ul>
-<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+<li>firstChild访问第一个子元素</li>
+<li>lastChild访问最后一个子元素</li>
 </ul>
 </li>
-<li><code>async</code><ul>
-<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
-<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
+<li>子孙元素——嵌套在给定元素中所有的元素</li>
+</ul>
+<p>兄弟节点</p>
+<ul>
+<li>nextSibling下一个兄弟节点</li>
+<li>previousSibling上一个兄弟节点</li>
+</ul>
+<p>父节点</p>
+<ul>
+<li>parentNode</li>
+</ul>
+<h3 id="元素节点导航链接"><a href="#元素节点导航链接" class="headerlink" title="元素节点导航链接"></a>元素节点导航链接</h3><p><img src="/.io//595929645f562545efc0a04edc7fe05.png" alt="595929645f562545efc0a04edc7fe05"></p>
+<ul>
+<li>children——元素节点的子代的节点</li>
+<li>firstElementChild</li>
+<li>lastElementChild</li>
+<li>previousElementSibling</li>
+<li>nextElementSibling</li>
+<li>parentElement</li>
+</ul>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
+<li>table.rows——<code>&lt;tr&gt;</code>元素的<strong>集合</strong><ul>
+<li>tr.cells<ul>
+<li>给定<code>&lt;tr&gt;</code>中的<code>&lt;td&gt;</code>和<code>&lt;th&gt;</code>单元格的集合</li>
+</ul>
+</li>
+<li>tr.sectionRowIndex<ul>
+<li>给定的<code>&lt;tr&gt;</code>在封闭的<code>&lt;thead&gt;/&lt;tbody&gt;/&lt;tfoot&gt;</code>中的位置（索引）。</li>
+</ul>
+</li>
+<li>tr.rowIndex<ul>
+<li>整个表格<code>&lt;tr&gt;</code>的编号</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>动态加载脚本</p>
-<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
+<li>table.caption</li>
+<li>table.tHead</li>
+<li>table.tFoot</li>
+<li>table.tBodies——<code>&lt;tbody&gt;</code>元素的集合</li>
+<li><code>&lt;td&gt;</code>和<code>&lt;th&gt;</code><ul>
+<li>td.cellIndex在封闭的<code>&lt;tr&gt;</code>中单元格的编号</li>
+</ul>
+</li>
+</ul>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ol>
+<li>getElement*<ul>
+<li>document.getElementById(id)</li>
+</ul>
+</li>
+<li>querySelector*<ul>
+<li>elem.querySelectorAll(CSS)<ul>
+<li>返回 elem 中与给定 CSS 选择器匹配的<strong>所有</strong>元素</li>
+<li>静态集合，像固定的数组</li>
+</ul>
+</li>
+<li>elem.querySelector(CSS)<ul>
+<li>返回给定 CSS 选择器的<strong>第一个</strong>元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>elem.matches(CSS)<ul>
+<li>检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false</li>
+</ul>
+</li>
+<li>elem.closest(CSS)<ul>
+<li>查找与 CSS 选择器匹配的<strong>最近的祖先</strong></li>
+</ul>
+</li>
+<li>“getElementsBy*”方法，返回的都是<strong>实时的集合</strong>，始终反映的是文档的当前状态<ul>
+<li>elem.getElementsByTagName(tag)</li>
+<li>elem.getElementsByClassName(className)</li>
+<li>document.getElementsByName(name)</li>
+</ul>
+</li>
+<li>elemA.contains(elemB)<ul>
+<li>elemB 在 elemA 内或者 elemA==elemB就返回true</li>
+</ul>
 </li>
 </ol>
-<p>建议都使用外部脚本，原因：</p>
-<ul>
-<li>可维护性</li>
-<li>缓存<ul>
-<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
+<h2 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h2><ul>
+<li>innerHTML<ul>
+<li>仅对元素节点有效<ul>
+<li>文本节点、注释节点用<code>data</code>属性获取内容</li>
+</ul>
+</li>
+<li>+= 是会重写，先抹除原先内容，再把原先内容和附加内容结合，赋值过去<ul>
+<li>因此所有的图片和其他资源都将重写加载</li>
 </ul>
 </li>
 </ul>
-<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
-<ol>
-<li>混杂模式</li>
-<li>标准模式</li>
-<li>准标准模式</li>
+</li>
+<li>outerHTML<ul>
+<li>写入 outerHTML 不会改变元素。而是在 DOM 中替换它<ul>
+<li>写入后，DOM会显示新写入的，但打印出来却是旧的值</li>
+</ul>
+</li>
+<li>outerHTML 赋值不会修改 DOM 元素，而是将其从 DOM 中删除并在其位置插入新的 HTML。</li>
+</ul>
+</li>
+<li>textContent<ul>
+<li>只返回文本，就像所有<code>tag</code>都被剪掉了一样</li>
+<li>写入比innerHTML安全一些，因为，innerHTML写入的内容会作为html插入，而textContent只当成文本插入</li>
+</ul>
+</li>
+<li>hidden<ul>
+<li>设置为true与CSS中，<code>display: none</code>做着相同的事情</li>
+</ul>
+</li>
+</ul>
+<p>大多数标准 HTML 特性（attribute）都具有相应的 DOM 属性。</p>
+<h2 id="特性-写在-HTML-中的内容-和属性-DOM-对象中的内容"><a href="#特性-写在-HTML-中的内容-和属性-DOM-对象中的内容" class="headerlink" title="特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)"></a>特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)</h2><blockquote>
+<p>当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）</p>
+<p>但特性—属性映射并不是一一对应的</p>
+</blockquote>
+<h3 id="DOM属性"><a href="#DOM属性" class="headerlink" title="DOM属性"></a>DOM属性</h3><p>DOM节点是常规的Javascript的对象</p>
+<ul>
+<li>大小写敏感</li>
+<li>可以设多种值</li>
+</ul>
+<h2 id="HTML特性"><a href="#HTML特性" class="headerlink" title="HTML特性"></a>HTML特性</h2><ul>
+<li>当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别<strong>标准的</strong>特性并以此创建 DOM 属性。而<strong>非标准的</strong>就没有相对应的 DOM 属性，会变成了<code>undefined</code></li>
+<li>大小写不敏感</li>
+<li>值总是字符串类型</li>
+</ul>
+<p>所有特性（标准的非标准的）都可以通过使用以下方法进行访问：</p>
+<ul>
+<li>elem.hasAttribute(name) — 检查特性是否存在</li>
+<li>elem.getAttribute(name) — 获取这个特性值</li>
+<li>elem.setAttribute(name, value) — 设置这个特性值</li>
+<li>elem.removeAttribute(name) — 移除这个特性。</li>
+</ul>
+<h3 id="属性-特性同步"><a href="#属性-特性同步" class="headerlink" title="属性-特性同步"></a>属性-特性同步</h3><p>当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然</p>
+<ul>
+<li>例外：如<code>input.value</code>只能从特性同步到属性</li>
+</ul>
+<h3 id="非标准特性dataset"><a href="#非标准特性dataset" class="headerlink" title="非标准特性dataset"></a>非标准特性dataset</h3><blockquote>
+<p>非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素</p>
+</blockquote>
+<p>为了避免冲突，所有以 <code>data-</code> 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。</p>
+<p>用法：</p>
+<ul>
+<li>如果一个 elem 有一个名为 <code>data-about</code> 的特性，那么可以通过 <code>elem.dataset.about</code> 取到它</li>
+<li>多词特性可以以驼峰式进行调用</li>
+</ul>
+<h2 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h2><h3 id="创建一个元素"><a href="#创建一个元素" class="headerlink" title="创建一个元素"></a>创建一个元素</h3><ul>
+<li><code>document.createElement(tag)</code><ul>
+<li>元素节点</li>
+</ul>
+</li>
+<li><code>document.createTextNode(text)</code><ul>
+<li>文本节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><ul>
+<li>className</li>
+</ul>
+<h3 id="填充消息"><a href="#填充消息" class="headerlink" title="填充消息"></a>填充消息</h3><ul>
+<li>innerHTML</li>
+</ul>
+<h3 id="插入方法"><a href="#插入方法" class="headerlink" title="插入方法"></a>插入方法</h3><p>字符串被以一种安全的方式插入到页面中，就像 <code>elem.textContent </code>所做的一样——不会被当成html插入，只当成文本</p>
+<ul>
+<li>node.append(nodes or strings)<ul>
+<li>在 node <strong>末尾</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.prepend()<ul>
+<li>在node<strong>开头</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.before()<ul>
+<li>在node<strong>前面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.after()<ul>
+<li>在node<strong>后面</strong>插入节点或字符串</li>
+</ul>
+</li>
+<li>node.replaceWIth()<ul>
+<li>将node替换给定的节点或字符串</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>elem.insertAdjacentHTML(where, html) </p>
+<ul>
+<li>内容作为 HTML 代码插入，如同innerHTML</li>
+<li>where如下面的值</li>
+</ul>
+<p><img src="/.io//image-20220313160632338.png" alt="image-20220313160632338"></p>
+</li>
+</ul>
+<h3 id="节点移除"><a href="#节点移除" class="headerlink" title="节点移除"></a>节点移除</h3><ul>
+<li>node.remove()</li>
+</ul>
+<h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul>
+<li>cloneNode(true/false)<ul>
+<li>true为深克隆，具有所有特性 （attribute）和子元素</li>
+<li>false，则不克隆子元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="DocumentFragment"><a href="#DocumentFragment" class="headerlink" title="DocumentFragment"></a>DocumentFragment</h3><p>可以理解为容器</p>
+<h2 id="样式和类"><a href="#样式和类" class="headerlink" title="样式和类"></a>样式和类</h2><h3 id="className"><a href="#className" class="headerlink" title="className"></a>className</h3><p>它将替换类中的整个字符串</p>
+<h3 id="classList"><a href="#classList" class="headerlink" title="classList"></a>classList</h3><p>可迭代</p>
+<p>方法</p>
+<ul>
+<li>add()<ul>
+<li>添加一个类</li>
+</ul>
+</li>
+<li>remove()<ul>
+<li>移除一个类</li>
+</ul>
+</li>
+<li>toggle()<ul>
+<li>如果类不存在就添加类，存在就移除它</li>
+</ul>
+</li>
+</ul>
+<h3 id="重置样式属性"><a href="#重置样式属性" class="headerlink" title="重置样式属性"></a>重置样式属性</h3><p>设为空字符</p>
+<p><code>elem.style.* = &quot;&quot;</code></p>
+<p>使用 style.* 来对各个样式属性进行赋值时，需要有单位，且不能一下子设置所有属性，因为 div.style 是一个对象，并且它是只读的，设置完整属性可用<code>style.cssText</code></p>
+<h3 id="计算样式getComputedStyle"><a href="#计算样式getComputedStyle" class="headerlink" title="计算样式getComputedStyle"></a>计算样式getComputedStyle</h3><p><code>getComputedStyle(element, [pseudo])</code></p>
+<ul>
+<li>element <ul>
+<li>需要被读取样式值的元素</li>
+</ul>
+</li>
+<li>pseudo <ul>
+<li>伪元素（如果需要），例如 ::before 。空字符串或无参数则意味着元素本身。</li>
+</ul>
+</li>
+</ul>
+<h2 id="元素大小和滚动"><a href="#元素大小和滚动" class="headerlink" title="元素大小和滚动"></a>元素大小和滚动</h2><p>几何属性，这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”</p>
+<p><img src="/.io//image-20220313164146836.png" alt="image-20220313164146836"></p>
+<ul>
+<li>offsetParent 是最接近的祖先<ul>
+<li>最近祖先为下列之一<ul>
+<li>CSS 定位的（ position 为 absolute ， relative 或 fixed ）</li>
+<li>或<code>&lt;td&gt;,&lt;th&gt;,&lt;table&gt;</code></li>
+<li>或<code>&lt;body&gt;</code></li>
+</ul>
+</li>
+<li>值有可能为null<ul>
+<li>未显示的元素（ display:none 或者不在文档中）</li>
+<li>对于<code>&lt;body&gt;,&lt;html&gt;</code></li>
+<li>对于带有position：fixed元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性 offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标</li>
+<li>offsetWidth/offsetHeight 是完整边框<ul>
+<li>content width/height + 2个padding width/height + 2个margin width/height</li>
+</ul>
+</li>
+<li>对于未显示的元素，几何属性为 0/null<ul>
+<li>用几何属性来检查一个元素是否被隐藏</li>
+</ul>
+</li>
+<li>clientTop<ul>
+<li>上边框宽度</li>
+</ul>
+</li>
+<li>clientLeft<ul>
+<li>左边框宽度</li>
+</ul>
+</li>
+<li>clientWidth/clientHeight<ul>
+<li>元素边框内区域的大小——content width/height + 2个 padding width/height</li>
+</ul>
+</li>
+<li>scrollWidth/scrollHeight<ul>
+<li>就像 clientWidth/clientHeight ，但它们还包括滚动出（隐藏）的部分</li>
+</ul>
+</li>
+<li>scrollLeft/scrollTop<ul>
+<li>是元素的隐藏、滚动部分的 width/height</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用几何属性的原因"><a href="#使用几何属性的原因" class="headerlink" title="使用几何属性的原因"></a>使用几何属性的原因</h3><ol>
+<li>首先，CSS width/height 取决于另一个属性： box-sizing ，它定义了“什么是” CSS 宽度和高度。出于 CSS 的目的而对 box-sizing 进行的更改可能会破坏 此类 JavaScript 操作。</li>
+<li>其次，CSS 的 width/height 可能是 auto ，例如内联（inline）元素。但在 JavaScript 中，我们需要 一个确切的 px 大小，以便我们在计算中使用它。</li>
 </ol>
-<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
-<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
+<h2 id="Window大小和滚动"><a href="#Window大小和滚动" class="headerlink" title="Window大小和滚动"></a>Window大小和滚动</h2><p>使用 document.documentElement 的 clientWidth/clientHeight返回文档可见部分，这个值不包括滚动条。</p>
+<h3 id="获得当前滚动"><a href="#获得当前滚动" class="headerlink" title="获得当前滚动"></a>获得当前滚动</h3><ul>
+<li>scrollLeft/scrollTop </li>
+</ul>
+<h3 id="调整滚动位置"><a href="#调整滚动位置" class="headerlink" title="调整滚动位置"></a>调整滚动位置</h3><ul>
+<li>方法 scrollBy(x,y) 将页面滚动至 相对于当前位置的 (x, y) 位置</li>
+<li>方法 scrollTo(pageX,pageY) 将页面滚动至绝对坐标，使得可见部分的左上角具有相对于文档左上角的坐标 (pageX, pageY) 。就像设置了 scrollLeft/scrollTop 一样。</li>
+</ul>
+<h3 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h3><p>设置overflow：hidden</p>
+<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><h3 id="元素坐标-getBoundingClinetRect"><a href="#元素坐标-getBoundingClinetRect" class="headerlink" title="元素坐标 getBoundingClinetRect()"></a>元素坐标 getBoundingClinetRect()</h3><p><img src="/.io//image-20220313171141878.png" alt="image-20220313171141878"></p>
+<p>页面上的任何点都有坐标：</p>
+<ul>
+<li>相对于窗口的坐标 — elem.getBoundingClientRect() 。</li>
+<li>相对于文档的坐标 — elem.getBoundingClientRect() 加上当前页面滚动。</li>
+</ul>
 ]]></content>
       <categories>
-        <category>Javascript高级程序设计</category>
+        <category>现代Javascript教程</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
+        <tag>浏览器</tag>
       </tags>
   </entry>
   <entry>
@@ -700,355 +962,275 @@
       </tags>
   </entry>
   <entry>
-    <title>Document</title>
-    <url>/2022/01/22/Document/</url>
-    <content><![CDATA[<h2 id="浏览器环境和规格"><a href="#浏览器环境和规格" class="headerlink" title="浏览器环境和规格"></a>浏览器环境和规格</h2><p>在浏览器中，window有两种角色</p>
+    <title>HTML中的Javascript</title>
+    <url>/2022/01/06/HTML%E4%B8%AD%E7%9A%84Javascript/</url>
+    <content><![CDATA[<h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;</code>元素</h2><ul>
+<li><p>async</p>
+</li>
+<li><p>crossorigin</p>
+<blockquote>
+<p>配置相关CORS设置</p>
+</blockquote>
 <ul>
-<li>Javascript代码的全局对象</li>
-<li>代表浏览器窗口，并提供控制它的方法</li>
+<li>anonymous</li>
+<li>use-credentials</li>
 </ul>
-<p>document 对象是页面的主要“入口点”。我们可以使用它来更改或创建页面上的任何内容。</p>
+</li>
+<li><p>defer</p>
+</li>
+<li><p>intergrity</p>
+<blockquote>
+<p>允许比对接收到的资源和指定的加密签名以验证子资源完整性，如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行，用于确保内容分发网络（CDN，ContentDeliveryNetwork）不会提供恶意内容</p>
+</blockquote>
+</li>
+<li><p>src</p>
+<ul>
+<li>会忽略行内脚本</li>
+<li>不会受浏览器的同源策略限制，但返回并被执行的JavaScript则受限制</li>
+</ul>
+</li>
+<li><p>type</p>
+<ul>
+<li><code>text/javascript</code></li>
+<li><code>module</code><ul>
+<li>会被当成ES6模块</li>
+<li>脚本加载解析过程与defer相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <span id="more"></span>
 
-<h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>每个树的节点都是一个对象，一共12种，通常用到4种</p>
+<h2 id="行内脚本与外部脚本的比较"><a href="#行内脚本与外部脚本的比较" class="headerlink" title="行内脚本与外部脚本的比较"></a>行内脚本与外部脚本的比较</h2><ol>
+<li><p>行内脚本</p>
+<p>下载和执行会阻塞<code>HTML</code>的解析</p>
+</li>
+<li><p>外部脚本</p>
 <ul>
-<li>document——DOM的入口点</li>
-<li>元素节点——HTML标签，并形成文档结构</li>
-<li>文本节点</li>
-<li>注释</li>
+<li>不加<code>async</code>和<code>defer</code><ul>
+<li>与行内脚本一样，下载和执行会阻塞HTML的解析</li>
 </ul>
-<h2 id="遍历DOM"><a href="#遍历DOM" class="headerlink" title="遍历DOM"></a>遍历DOM</h2><h3 id="对象间链接"><a href="#对象间链接" class="headerlink" title="对象间链接"></a>对象间链接</h3><blockquote>
-<p>对所有节点，是包含元素节点，文本节点，注释等</p>
-</blockquote>
-<p><img src="/.io//fd565c1de6fcacaa600a120b4d23797.png" alt="fd565c1de6fcacaa600a120b4d23797"></p>
-<p>顶层树节点可以直接获取</p>
+</li>
+<li><code>defer</code><ul>
+<li>下载不会阻塞，执行放在最后，执行会有先后顺序，且会在<code>DOMContentLoaded</code>事件之前执行</li>
+</ul>
+</li>
+<li><code>async</code><ul>
+<li>下载不会阻塞，下载完后会马上执行，且执行并不保证能按照它们出现的次序执行</li>
+<li>异步脚本保证会在页面的<code>load</code>事件前执行，但可能会在<code>DOMContentLoaded</code>之前或之后</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>动态加载脚本</p>
+<p>通过<code>document.createElement</code>动态加载，会异步加载，相当于添加<code>async</code>属性</p>
+</li>
+</ol>
+<p>建议都使用外部脚本，原因：</p>
 <ul>
-<li><code>document.documentElement</code>——<code>&lt;html&gt;</code></li>
-<li><code>document.body</code></li>
-<li><code>document.head</code></li>
+<li>可维护性</li>
+<li>缓存<ul>
+<li>浏览器会根据特定的设置缓存所有外部链接的JavaScript文件，如果两个页面都用到同一个文件，则该文件只需下载一次。</li>
 </ul>
-<p>两个术语</p>
+</li>
+</ul>
+<h2 id="文档模式对Javascript有什么影响"><a href="#文档模式对Javascript有什么影响" class="headerlink" title="文档模式对Javascript有什么影响"></a>文档模式对Javascript有什么影响</h2><p>可以使用<code>doctype</code>切换文档模式，共有三种文档模块</p>
+<ol>
+<li>混杂模式</li>
+<li>标准模式</li>
+<li>准标准模式</li>
+</ol>
+<p>前两种主要区别体现在通过CSS渲染的内容方面，后两种主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。</p>
+<h2 id="确保Javascript不可用时的用户体验"><a href="#确保Javascript不可用时的用户体验" class="headerlink" title="确保Javascript不可用时的用户体验"></a>确保Javascript不可用时的用户体验</h2><p>使用<code>&lt;noscript&gt;</code>元素，在JavaScript被禁用或不支持时，元素里面的内容会呈现出来。<code>&lt;noscript&gt;</code>元素可以包含任何可以出现在<code>&lt;body&gt;</code>中的HTML元素。</p>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React</title>
+    <url>/2022/01/21/React/</url>
+    <content><![CDATA[<h2 id="历史和应用"><a href="#历史和应用" class="headerlink" title="历史和应用"></a>历史和应用</h2><ul>
+<li>一个东西的出现，往往是因为在某个历史阶段人们产生了某些需求</li>
+<li>新的东西出现肯定是因为之前的东西不好用</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="React的原型：FaxJS"><a href="#React的原型：FaxJS" class="headerlink" title="React的原型：FaxJS"></a>React的原型：FaxJS</h3><ul>
+<li>客户端或服务端渲染</li>
+<li>响应式<ul>
+<li>状态更新-&gt;UI更新</li>
+</ul>
+</li>
+<li>性能好</li>
+<li>结构化</li>
+</ul>
+<p><a href="https://www.youtube.com/watch?v=GW0rj4sNH2w">Tom Occhino and Jordan Walke: JS Apps at Facebook</a></p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>例子：苹果官网手机价格变化</p>
+<h3 id="UI编程痛点"><a href="#UI编程痛点" class="headerlink" title="UI编程痛点"></a>UI编程痛点</h3><ul>
+<li>状态更新，UI不会自动更新，需要手动调用DOM进行更新<ul>
+<li>需改良：状态更新，UI自动更新</li>
+</ul>
+</li>
+<li>欠缺基本的代码层面的封装和隔离，代码层面没有组件化<ul>
+<li>需改良：前端代码组件化，可复用，可封装</li>
+</ul>
+</li>
+<li>UI之间的数据依赖关系需要手动维护，如果依赖链路长，则会遇到回调地狱<ul>
+<li>需改良：状态之间互相依赖关系，只需声明即可</li>
+</ul>
+</li>
+</ul>
+<p>例子：火警，烧水</p>
+<h3 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h3><ol>
+<li>事件</li>
+<li>执行既定的回调</li>
+<li>状态变更</li>
+<li>UI更新</li>
+</ol>
+<p>回到苹果官网例子，对页面进行组件化划分</p>
 <ul>
-<li>子节点——直系的子元素<ul>
-<li>childNodes列出<strong>所有</strong>子节点，<strong>包括文本节点</strong><ul>
-<li>返回的不是数组，而是集合，一个类数组的可迭代对象，可以用Array.from方法用它来创建一个”真“数组，使得能使用数组的方法</li>
-<li>DOM集合是只读的，</li>
-<li>是实时的——例如先取得<code>elem.childNodes</code>的引用，而后修改DOM，那么节点的更新会自动出现在集合中</li>
+<li>组件是 组件的组合/原子组件</li>
+<li>组件内拥有状态，外部不可见</li>
+<li>父组件可将状态传入组件内部</li>
+</ul>
+<h3 id="状态归属问题"><a href="#状态归属问题" class="headerlink" title="状态归属问题"></a>状态归属问题</h3><ul>
+<li>确定“数据”应该放在哪个组件里保存</li>
+<li>状态归属于两个节点向上寻找到最近的祖宗节点<ul>
+<li>又会带来一个问题，数据有时经常性放在很上层的组件上，这会失去了组件复用的初衷</li>
+<li>子组件如何触发改变上层组件数据的事件？<ul>
+<li>通过上层组件传递函数到子组件，子组件再调用此函数</li>
 </ul>
 </li>
-<li>firstChild访问第一个子元素</li>
-<li>lastChild访问最后一个子元素</li>
 </ul>
 </li>
-<li>子孙元素——嵌套在给定元素中所有的元素</li>
 </ul>
-<p>兄弟节点</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
+<li>React是单向数据流还是双向数据流<ul>
+<li>是单向数据流</li>
+<li>父组件能把状态传给子组件，而子组件并不能把状态网上传给父组件，只是单纯的执行了父组件传下来的函数，从而能改变了父组件的状态</li>
+</ul>
+</li>
+<li>如何解决状态不合理上升的问题</li>
+<li>组件的状态改变后，如何更新DOM</li>
+</ol>
+<p>状态应是局部性</p>
+<h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><ol>
+<li>组件声明了状态和UI的映射</li>
+<li>组件有Props/State两种状态<ul>
+<li>内部拥有私有状态State</li>
+<li>外部能接受Props状态，提供复用性</li>
+<li>根据当前State/Props返回一个UI</li>
+</ul>
+</li>
+<li>“组件”可由其他组件拼接而成</li>
+</ol>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
+<li><p>组件挂载时</p>
 <ul>
-<li>nextSibling下一个兄弟节点</li>
-<li>previousSibling上一个兄弟节点</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#constructor"><strong><code>constructor()</code></strong></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></p>
+</li>
+<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidmount"><strong><code>componentDidMount()</code></strong></a></p>
+</li>
 </ul>
-<p>父节点</p>
+</li>
+<li><p>组件更新时</p>
 <ul>
-<li>parentNode</li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate"><strong><code>componentDidUpdate()</code></strong></a></li>
 </ul>
-<h3 id="元素节点导航链接"><a href="#元素节点导航链接" class="headerlink" title="元素节点导航链接"></a>元素节点导航链接</h3><p><img src="/.io//595929645f562545efc0a04edc7fe05.png" alt="595929645f562545efc0a04edc7fe05"></p>
+</li>
+<li><p>组件卸载时</p>
 <ul>
-<li>children——元素节点的子代的节点</li>
-<li>firstElementChild</li>
-<li>lastElementChild</li>
-<li>previousElementSibling</li>
-<li>nextElementSibling</li>
-<li>parentElement</li>
-</ul>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><ul>
-<li>table.rows——<code>&lt;tr&gt;</code>元素的<strong>集合</strong><ul>
-<li>tr.cells<ul>
-<li>给定<code>&lt;tr&gt;</code>中的<code>&lt;td&gt;</code>和<code>&lt;th&gt;</code>单元格的集合</li>
-</ul>
-</li>
-<li>tr.sectionRowIndex<ul>
-<li>给定的<code>&lt;tr&gt;</code>在封闭的<code>&lt;thead&gt;/&lt;tbody&gt;/&lt;tfoot&gt;</code>中的位置（索引）。</li>
-</ul>
-</li>
-<li>tr.rowIndex<ul>
-<li>整个表格<code>&lt;tr&gt;</code>的编号</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>table.caption</li>
-<li>table.tHead</li>
-<li>table.tFoot</li>
-<li>table.tBodies——<code>&lt;tbody&gt;</code>元素的集合</li>
-<li><code>&lt;td&gt;</code>和<code>&lt;th&gt;</code><ul>
-<li>td.cellIndex在封闭的<code>&lt;tr&gt;</code>中单元格的编号</li>
-</ul>
-</li>
-</ul>
-<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><ol>
-<li>getElement*<ul>
-<li>document.getElementById(id)</li>
-</ul>
-</li>
-<li>querySelector*<ul>
-<li>elem.querySelectorAll(CSS)<ul>
-<li>返回 elem 中与给定 CSS 选择器匹配的<strong>所有</strong>元素</li>
-<li>静态集合，像固定的数组</li>
-</ul>
-</li>
-<li>elem.querySelector(CSS)<ul>
-<li>返回给定 CSS 选择器的<strong>第一个</strong>元素</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>elem.matches(CSS)<ul>
-<li>检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false</li>
-</ul>
-</li>
-<li>elem.closest(CSS)<ul>
-<li>查找与 CSS 选择器匹配的<strong>最近的祖先</strong></li>
-</ul>
-</li>
-<li>“getElementsBy*”方法，返回的都是<strong>实时的集合</strong>，始终反映的是文档的当前状态<ul>
-<li>elem.getElementsByTagName(tag)</li>
-<li>elem.getElementsByClassName(className)</li>
-<li>document.getElementsByName(name)</li>
-</ul>
-</li>
-<li>elemA.contains(elemB)<ul>
-<li>elemB 在 elemA 内或者 elemA==elemB就返回true</li>
+<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount"><strong><code>componentWillUnmount()</code></strong></a></li>
 </ul>
 </li>
 </ol>
-<h2 id="节点属性"><a href="#节点属性" class="headerlink" title="节点属性"></a>节点属性</h2><ul>
-<li>innerHTML<ul>
-<li>仅对元素节点有效<ul>
-<li>文本节点、注释节点用<code>data</code>属性获取内容</li>
-</ul>
-</li>
-<li>+= 是会重写，先抹除原先内容，再把原先内容和附加内容结合，赋值过去<ul>
-<li>因此所有的图片和其他资源都将重写加载</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>outerHTML<ul>
-<li>写入 outerHTML 不会改变元素。而是在 DOM 中替换它<ul>
-<li>写入后，DOM会显示新写入的，但打印出来却是旧的值</li>
-</ul>
-</li>
-<li>outerHTML 赋值不会修改 DOM 元素，而是将其从 DOM 中删除并在其位置插入新的 HTML。</li>
-</ul>
-</li>
-<li>textContent<ul>
-<li>只返回文本，就像所有<code>tag</code>都被剪掉了一样</li>
-<li>写入比innerHTML安全一些，因为，innerHTML写入的内容会作为html插入，而textContent只当成文本插入</li>
-</ul>
-</li>
-<li>hidden<ul>
-<li>设置为true与CSS中，<code>display: none</code>做着相同的事情</li>
-</ul>
-</li>
-</ul>
-<p>大多数标准 HTML 特性（attribute）都具有相应的 DOM 属性。</p>
-<h2 id="特性-写在-HTML-中的内容-和属性-DOM-对象中的内容"><a href="#特性-写在-HTML-中的内容-和属性-DOM-对象中的内容" class="headerlink" title="特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)"></a>特性(写在 HTML 中的内容)和属性( DOM 对象中的内容)</h2><blockquote>
-<p>当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）</p>
-<p>但特性—属性映射并不是一一对应的</p>
-</blockquote>
-<h3 id="DOM属性"><a href="#DOM属性" class="headerlink" title="DOM属性"></a>DOM属性</h3><p>DOM节点是常规的Javascript的对象</p>
+<h2 id="hooks写法"><a href="#hooks写法" class="headerlink" title="hooks写法"></a>hooks写法</h2><p>副作用</p>
 <ul>
-<li>大小写敏感</li>
-<li>可以设多种值</li>
+<li>改变了外部的东西</li>
 </ul>
-<h2 id="HTML特性"><a href="#HTML特性" class="headerlink" title="HTML特性"></a>HTML特性</h2><ul>
-<li>当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别<strong>标准的</strong>特性并以此创建 DOM 属性。而<strong>非标准的</strong>就没有相对应的 DOM 属性，会变成了<code>undefined</code></li>
-<li>大小写不敏感</li>
-<li>值总是字符串类型</li>
-</ul>
-<p>所有特性（标准的非标准的）都可以通过使用以下方法进行访问：</p>
-<ul>
-<li>elem.hasAttribute(name) — 检查特性是否存在</li>
-<li>elem.getAttribute(name) — 获取这个特性值</li>
-<li>elem.setAttribute(name, value) — 设置这个特性值</li>
-<li>elem.removeAttribute(name) — 移除这个特性。</li>
-</ul>
-<h3 id="属性-特性同步"><a href="#属性-特性同步" class="headerlink" title="属性-特性同步"></a>属性-特性同步</h3><p>当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然</p>
-<ul>
-<li>例外：如<code>input.value</code>只能从特性同步到属性</li>
-</ul>
-<h3 id="非标准特性dataset"><a href="#非标准特性dataset" class="headerlink" title="非标准特性dataset"></a>非标准特性dataset</h3><blockquote>
-<p>非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素</p>
-</blockquote>
-<p>为了避免冲突，所有以 <code>data-</code> 开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。</p>
-<p>用法：</p>
-<ul>
-<li>如果一个 elem 有一个名为 <code>data-about</code> 的特性，那么可以通过 <code>elem.dataset.about</code> 取到它</li>
-<li>多词特性可以以驼峰式进行调用</li>
-</ul>
-<h2 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h2><h3 id="创建一个元素"><a href="#创建一个元素" class="headerlink" title="创建一个元素"></a>创建一个元素</h3><ul>
-<li><code>document.createElement(tag)</code><ul>
-<li>元素节点</li>
-</ul>
-</li>
-<li><code>document.createTextNode(text)</code><ul>
-<li>文本节点</li>
-</ul>
-</li>
-</ul>
-<h3 id="添加类"><a href="#添加类" class="headerlink" title="添加类"></a>添加类</h3><ul>
-<li>className</li>
-</ul>
-<h3 id="填充消息"><a href="#填充消息" class="headerlink" title="填充消息"></a>填充消息</h3><ul>
-<li>innerHTML</li>
-</ul>
-<h3 id="插入方法"><a href="#插入方法" class="headerlink" title="插入方法"></a>插入方法</h3><p>字符串被以一种安全的方式插入到页面中，就像 <code>elem.textContent </code>所做的一样——不会被当成html插入，只当成文本</p>
-<ul>
-<li>node.append(nodes or strings)<ul>
-<li>在 node <strong>末尾</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.prepend()<ul>
-<li>在node<strong>开头</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.before()<ul>
-<li>在node<strong>前面</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.after()<ul>
-<li>在node<strong>后面</strong>插入节点或字符串</li>
-</ul>
-</li>
-<li>node.replaceWIth()<ul>
-<li>将node替换给定的节点或字符串</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>elem.insertAdjacentHTML(where, html) </p>
-<ul>
-<li>内容作为 HTML 代码插入，如同innerHTML</li>
-<li>where如下面的值</li>
-</ul>
-<p><img src="/.io//image-20220313160632338.png" alt="image-20220313160632338"></p>
-</li>
-</ul>
-<h3 id="节点移除"><a href="#节点移除" class="headerlink" title="节点移除"></a>节点移除</h3><ul>
-<li>node.remove()</li>
-</ul>
-<h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul>
-<li>cloneNode(true/false)<ul>
-<li>true为深克隆，具有所有特性 （attribute）和子元素</li>
-<li>false，则不克隆子元素</li>
-</ul>
-</li>
-</ul>
-<h3 id="DocumentFragment"><a href="#DocumentFragment" class="headerlink" title="DocumentFragment"></a>DocumentFragment</h3><p>可以理解为容器</p>
-<h2 id="样式和类"><a href="#样式和类" class="headerlink" title="样式和类"></a>样式和类</h2><h3 id="className"><a href="#className" class="headerlink" title="className"></a>className</h3><p>它将替换类中的整个字符串</p>
-<h3 id="classList"><a href="#classList" class="headerlink" title="classList"></a>classList</h3><p>可迭代</p>
-<p>方法</p>
-<ul>
-<li>add()<ul>
-<li>添加一个类</li>
-</ul>
-</li>
-<li>remove()<ul>
-<li>移除一个类</li>
-</ul>
-</li>
-<li>toggle()<ul>
-<li>如果类不存在就添加类，存在就移除它</li>
-</ul>
-</li>
-</ul>
-<h3 id="重置样式属性"><a href="#重置样式属性" class="headerlink" title="重置样式属性"></a>重置样式属性</h3><p>设为空字符</p>
-<p><code>elem.style.* = &quot;&quot;</code></p>
-<p>使用 style.* 来对各个样式属性进行赋值时，需要有单位，且不能一下子设置所有属性，因为 div.style 是一个对象，并且它是只读的，设置完整属性可用<code>style.cssText</code></p>
-<h3 id="计算样式getComputedStyle"><a href="#计算样式getComputedStyle" class="headerlink" title="计算样式getComputedStyle"></a>计算样式getComputedStyle</h3><p><code>getComputedStyle(element, [pseudo])</code></p>
-<ul>
-<li>element <ul>
-<li>需要被读取样式值的元素</li>
-</ul>
-</li>
-<li>pseudo <ul>
-<li>伪元素（如果需要），例如 ::before 。空字符串或无参数则意味着元素本身。</li>
-</ul>
-</li>
-</ul>
-<h2 id="元素大小和滚动"><a href="#元素大小和滚动" class="headerlink" title="元素大小和滚动"></a>元素大小和滚动</h2><p>几何属性，这些属性的值在技术上讲是数字，但这些数字其实是“像素（pixel）”</p>
-<p><img src="/.io//image-20220313164146836.png" alt="image-20220313164146836"></p>
-<ul>
-<li>offsetParent 是最接近的祖先<ul>
-<li>最近祖先为下列之一<ul>
-<li>CSS 定位的（ position 为 absolute ， relative 或 fixed ）</li>
-<li>或<code>&lt;td&gt;,&lt;th&gt;,&lt;table&gt;</code></li>
-<li>或<code>&lt;body&gt;</code></li>
-</ul>
-</li>
-<li>值有可能为null<ul>
-<li>未显示的元素（ display:none 或者不在文档中）</li>
-<li>对于<code>&lt;body&gt;,&lt;html&gt;</code></li>
-<li>对于带有position：fixed元素</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>属性 offsetLeft/offsetTop 提供相对于 offsetParent 左上角的 x/y 坐标</li>
-<li>offsetWidth/offsetHeight 是完整边框<ul>
-<li>content width/height + 2个padding width/height + 2个margin width/height</li>
-</ul>
-</li>
-<li>对于未显示的元素，几何属性为 0/null<ul>
-<li>用几何属性来检查一个元素是否被隐藏</li>
-</ul>
-</li>
-<li>clientTop<ul>
-<li>上边框宽度</li>
-</ul>
-</li>
-<li>clientLeft<ul>
-<li>左边框宽度</li>
-</ul>
-</li>
-<li>clientWidth/clientHeight<ul>
-<li>元素边框内区域的大小——content width/height + 2个 padding width/height</li>
-</ul>
-</li>
-<li>scrollWidth/scrollHeight<ul>
-<li>就像 clientWidth/clientHeight ，但它们还包括滚动出（隐藏）的部分</li>
-</ul>
-</li>
-<li>scrollLeft/scrollTop<ul>
-<li>是元素的隐藏、滚动部分的 width/height</li>
-</ul>
-</li>
-</ul>
-<h3 id="使用几何属性的原因"><a href="#使用几何属性的原因" class="headerlink" title="使用几何属性的原因"></a>使用几何属性的原因</h3><ol>
-<li>首先，CSS width/height 取决于另一个属性： box-sizing ，它定义了“什么是” CSS 宽度和高度。出于 CSS 的目的而对 box-sizing 进行的更改可能会破坏 此类 JavaScript 操作。</li>
-<li>其次，CSS 的 width/height 可能是 auto ，例如内联（inline）元素。但在 JavaScript 中，我们需要 一个确切的 px 大小，以便我们在计算中使用它。</li>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现时存在的三个问题"><a href="#实现时存在的三个问题" class="headerlink" title="实现时存在的三个问题"></a>实现时存在的三个问题</h3><ol>
+<li>JSX不符合JS标准</li>
+<li>返回的JSX发生改变时如何更新DOM</li>
+<li>State/Props更新时，要重新触发render函数（render函数就是组件函数）</li>
 </ol>
-<h2 id="Window大小和滚动"><a href="#Window大小和滚动" class="headerlink" title="Window大小和滚动"></a>Window大小和滚动</h2><p>使用 document.documentElement 的 clientWidth/clientHeight返回文档可见部分，这个值不包括滚动条。</p>
-<h3 id="获得当前滚动"><a href="#获得当前滚动" class="headerlink" title="获得当前滚动"></a>获得当前滚动</h3><ul>
-<li>scrollLeft/scrollTop </li>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
+<li>转义JSX</li>
+<li>使用虚拟DOM<ul>
+<li>虚拟DOM是一种用于和真实DOM同步，而在JS内存中维护的一个对象，它具有和DOM类似的树状结构，并和DOM可以建立一一对应的关系</li>
+<li>真实的DOM不是JS内存中的对象，而是浏览器维护的一个状态</li>
 </ul>
-<h3 id="调整滚动位置"><a href="#调整滚动位置" class="headerlink" title="调整滚动位置"></a>调整滚动位置</h3><ul>
-<li>方法 scrollBy(x,y) 将页面滚动至 相对于当前位置的 (x, y) 位置</li>
-<li>方法 scrollTo(pageX,pageY) 将页面滚动至绝对坐标，使得可见部分的左上角具有相对于文档左上角的坐标 (pageX, pageY) 。就像设置了 scrollLeft/scrollTop 一样。</li>
+</li>
+<li>diff算法更新DOM<ul>
+<li>我们只能通过DOM接口去修改DOM，而不能直接去修改DOM。但是我们可以声明一个变量，和真实DOM有类似结构的变量，每次更新的时候，都生成一个新的虚拟DOM，再使用diff算法去对比新旧虚拟DOM，再去修改真实DOM</li>
 </ul>
-<h3 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h3><p>设置overflow：hidden</p>
-<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><h3 id="元素坐标-getBoundingClinetRect"><a href="#元素坐标-getBoundingClinetRect" class="headerlink" title="元素坐标 getBoundingClinetRect()"></a>元素坐标 getBoundingClinetRect()</h3><p><img src="/.io//image-20220313171141878.png" alt="image-20220313171141878"></p>
-<p>页面上的任何点都有坐标：</p>
+</li>
+</ol>
+<p>插入一个问题：既然所有前端框架都是声明式的，那为什么不把声明式直接植入到浏览器中，自带声明式，这样就不用框架了。</p>
 <ul>
-<li>相对于窗口的坐标 — elem.getBoundingClientRect() 。</li>
-<li>相对于文档的坐标 — elem.getBoundingClientRect() 加上当前页面滚动。</li>
+<li>因为，浏览器自己作为应用平台，不能只提供更高层的东西，因为这样会把浏览器的自由度变得更低了。</li>
+</ul>
+<h3 id="diff算法核心"><a href="#diff算法核心" class="headerlink" title="diff算法核心"></a>diff算法核心</h3><ol>
+<li>不同类型的元素-&gt;替换</li>
+<li>同类型的DOM元素-&gt;更新</li>
+<li>同类型的组件元素-&gt;递归</li>
+</ol>
+<p>更新次数少与计算速度快的抉择</p>
+<p>用层次遍历，每个节点只遍历一次，时间复杂度<code>O(n^3)</code>降到<code>O(n)</code></p>
+<p>出现一个问题：但父组件的状态发生改变，子组件和嵌套的子组件都要去递归的发生改变，其实这样很耗费性能，所以要考虑如何去优化。</p>
+<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><ul>
+<li>指令式编程<ul>
+<li>一步步写清楚</li>
+</ul>
+</li>
+<li>声明式编程<ul>
+<li>只需说明你的目的</li>
+</ul>
+</li>
+<li>响应式编程<ul>
+<li>是声明式编程的一个类别</li>
+<li>不仅像声明式编程一样，还可以自动更新UI</li>
+</ul>
+</li>
+</ul>
+<h2 id="状态管理库"><a href="#状态管理库" class="headerlink" title="状态管理库"></a>状态管理库</h2><blockquote>
+<p>将状态抽离的UI外部进行统一管理</p>
+</blockquote>
+<p>问题：假如所有数据都放到外部的Store中，那么会与外部store发生强耦合，可复用性就变差。所以要如何选择哪些状态放到Store，哪些状态只放在自身组件中。</p>
+<p>可以把Store看成这样：这个store是多个组件（把这多个组件看成一个大的整体组件）内部的一个state</p>
+<h3 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h3><p>当前状态，收到外部事件，前一道下一个状态</p>
+<h2 id="应用级框架科普"><a href="#应用级框架科普" class="headerlink" title="应用级框架科普"></a>应用级框架科普</h2><ul>
+<li>next<ul>
+<li>了解一间公司vercel</li>
+</ul>
+</li>
+<li>modernJs<ul>
+<li>字节的全栈开发框架</li>
+</ul>
+</li>
+<li>Blitz<ul>
+<li>无API思想的全栈开发框架</li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
-        <category>现代Javascript教程</category>
+        <category>青训营</category>
       </categories>
       <tags>
-        <tag>浏览器</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1268,263 +1450,6 @@
       </tags>
   </entry>
   <entry>
-    <title>express简单使用</title>
-    <url>/2022/03/31/express%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
-<li>脚手架<ul>
-<li><code>npm install -g express-generator</code></li>
-<li><code>express express-demo</code></li>
-<li><code>npm install</code></li>
-<li><code>node bin/www</code></li>
-</ul>
-</li>
-<li>从零搭建<ul>
-<li><code>npm init -y</code></li>
-<li><code>npm install express</code></li>
-</ul>
-</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// express其实是一个函数: createApplication</span></span><br><span class="line"><span class="comment">// 返回app</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听路径</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;Hello Express&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启监听</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;express初体验服务器启动成功~&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><blockquote>
-<p>中间件函数能够访问请求对象 (<code>req</code>)、响应对象 (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数</p>
-</blockquote>
-<p>中间件函数可以执行以下任务：</p>
-<ul>
-<li>执行任何代码。</li>
-<li>对请求和响应对象进行更改。</li>
-<li>结束请求/响应循环。</li>
-<li>调用堆栈中的下一个中间件函数。</li>
-</ul>
-<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
-<h3 id="普通中间件"><a href="#普通中间件" class="headerlink" title="普通中间件"></a>普通中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// use注册一个中间件(回调函数)</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;注册了一个普通的中间件~&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="路径中间件"><a href="#路径中间件" class="headerlink" title="路径中间件"></a>路径中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路径匹配的中间件</span></span><br><span class="line">app.use(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home middleware 01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="路径和方法中间件"><a href="#路径和方法中间件" class="headerlink" title="路径和方法中间件"></a>路径和方法中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="连续注册中间件"><a href="#连续注册中间件" class="headerlink" title="连续注册中间件"></a>连续注册中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&quot;/home&quot;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 02&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 03&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 04&quot;</span>);</span><br><span class="line">  res.end(<span class="string">&quot;home page&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用中间件-body解析"><a href="#应用中间件-body解析" class="headerlink" title="应用中间件 body解析"></a>应用中间件 body解析</h2><h3 id="手动解析"><a href="#手动解析" class="headerlink" title="手动解析"></a>手动解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 手动解析</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">    req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> info = <span class="built_in">JSON</span>.parse(data.toString());</span><br><span class="line">      req.body = info;</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    req.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="内置解析"><a href="#内置解析" class="headerlink" title="内置解析"></a>内置解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// express内置解析</span></span><br><span class="line">app.use(express.json())</span><br></pre></td></tr></table></figure>
-
-<h3 id="urlencoded解析"><a href="#urlencoded解析" class="headerlink" title="urlencoded解析"></a>urlencoded解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extended</span></span><br><span class="line"><span class="comment">// true: 那么对urlencoded进行解析时, 它使用的是第三方库: qs</span></span><br><span class="line"><span class="comment">// false: 那么对urlencoded进行解析时, 它使用的是Node内置模块: querystring</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">true</span>&#125;));</span><br></pre></td></tr></table></figure>
-
-<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">&#x27;./uploads/&#x27;</span>);		<span class="comment">//把文件放置的位置</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件命名</span></span><br><span class="line">    cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + path.extname(file.originalname));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">  <span class="comment">// dest: &#x27;./uploads/&#x27;</span></span><br><span class="line">  storage</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/login&#x27;</span>, upload.any(), <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.end(<span class="string">&quot;用户登录成功~&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="form-data解析"><a href="#form-data解析" class="headerlink" title="form-data解析"></a>form-data解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = multer();</span><br><span class="line">app.use(upload.any());</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询参数params和query"><a href="#查询参数params和query" class="headerlink" title="查询参数params和query"></a>查询参数params和query</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">req.params</span><br><span class="line"></span><br><span class="line">req.query</span><br></pre></td></tr></table></figure>
-
-<h2 id="响应数据"><a href="#响应数据" class="headerlink" title="响应数据"></a>响应数据</h2><ul>
-<li>end</li>
-<li>json<ul>
-<li>可以传入很多的类型：object、array、string、boolean、number、null等，它们会被转换成json格式返回</li>
-</ul>
-</li>
-<li>status</li>
-</ul>
-<h2 id="express路由"><a href="#express路由" class="headerlink" title="express路由"></a>express路由</h2><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在userRoute.js文件中，编写关于user的中间件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建可安装的模块化路由处理程序</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.json(<span class="string">`<span class="subst">$&#123;req.params.id&#125;</span>用户的信息`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在app.js文件中引入user路由</span></span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routers/users&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里指定路径，userRoute.js中就可以省略/user</span></span><br><span class="line">app.use(<span class="string">&quot;/users&quot;</span>, userRouter);</span><br></pre></td></tr></table></figure>
-
-<h2 id="静态服务器"><a href="#静态服务器" class="headerlink" title="静态服务器"></a>静态服务器</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./build&#x27;</span>));</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>express</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React</title>
-    <url>/2022/01/21/React/</url>
-    <content><![CDATA[<h2 id="历史和应用"><a href="#历史和应用" class="headerlink" title="历史和应用"></a>历史和应用</h2><ul>
-<li>一个东西的出现，往往是因为在某个历史阶段人们产生了某些需求</li>
-<li>新的东西出现肯定是因为之前的东西不好用</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="React的原型：FaxJS"><a href="#React的原型：FaxJS" class="headerlink" title="React的原型：FaxJS"></a>React的原型：FaxJS</h3><ul>
-<li>客户端或服务端渲染</li>
-<li>响应式<ul>
-<li>状态更新-&gt;UI更新</li>
-</ul>
-</li>
-<li>性能好</li>
-<li>结构化</li>
-</ul>
-<p><a href="https://www.youtube.com/watch?v=GW0rj4sNH2w">Tom Occhino and Jordan Walke: JS Apps at Facebook</a></p>
-<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>例子：苹果官网手机价格变化</p>
-<h3 id="UI编程痛点"><a href="#UI编程痛点" class="headerlink" title="UI编程痛点"></a>UI编程痛点</h3><ul>
-<li>状态更新，UI不会自动更新，需要手动调用DOM进行更新<ul>
-<li>需改良：状态更新，UI自动更新</li>
-</ul>
-</li>
-<li>欠缺基本的代码层面的封装和隔离，代码层面没有组件化<ul>
-<li>需改良：前端代码组件化，可复用，可封装</li>
-</ul>
-</li>
-<li>UI之间的数据依赖关系需要手动维护，如果依赖链路长，则会遇到回调地狱<ul>
-<li>需改良：状态之间互相依赖关系，只需声明即可</li>
-</ul>
-</li>
-</ul>
-<p>例子：火警，烧水</p>
-<h3 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h3><ol>
-<li>事件</li>
-<li>执行既定的回调</li>
-<li>状态变更</li>
-<li>UI更新</li>
-</ol>
-<p>回到苹果官网例子，对页面进行组件化划分</p>
-<ul>
-<li>组件是 组件的组合/原子组件</li>
-<li>组件内拥有状态，外部不可见</li>
-<li>父组件可将状态传入组件内部</li>
-</ul>
-<h3 id="状态归属问题"><a href="#状态归属问题" class="headerlink" title="状态归属问题"></a>状态归属问题</h3><ul>
-<li>确定“数据”应该放在哪个组件里保存</li>
-<li>状态归属于两个节点向上寻找到最近的祖宗节点<ul>
-<li>又会带来一个问题，数据有时经常性放在很上层的组件上，这会失去了组件复用的初衷</li>
-<li>子组件如何触发改变上层组件数据的事件？<ul>
-<li>通过上层组件传递函数到子组件，子组件再调用此函数</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ol>
-<li>React是单向数据流还是双向数据流<ul>
-<li>是单向数据流</li>
-<li>父组件能把状态传给子组件，而子组件并不能把状态网上传给父组件，只是单纯的执行了父组件传下来的函数，从而能改变了父组件的状态</li>
-</ul>
-</li>
-<li>如何解决状态不合理上升的问题</li>
-<li>组件的状态改变后，如何更新DOM</li>
-</ol>
-<p>状态应是局部性</p>
-<h3 id="组件设计"><a href="#组件设计" class="headerlink" title="组件设计"></a>组件设计</h3><ol>
-<li>组件声明了状态和UI的映射</li>
-<li>组件有Props/State两种状态<ul>
-<li>内部拥有私有状态State</li>
-<li>外部能接受Props状态，提供复用性</li>
-<li>根据当前State/Props返回一个UI</li>
-</ul>
-</li>
-<li>“组件”可由其他组件拼接而成</li>
-</ol>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
-<li><p>组件挂载时</p>
-<ul>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#constructor"><strong><code>constructor()</code></strong></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></p>
-</li>
-<li><p><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidmount"><strong><code>componentDidMount()</code></strong></a></p>
-</li>
-</ul>
-</li>
-<li><p>组件更新时</p>
-<ul>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops"><code>static getDerivedStateFromProps()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#render"><strong><code>render()</code></strong></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate"><code>getSnapshotBeforeUpdate()</code></a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate"><strong><code>componentDidUpdate()</code></strong></a></li>
-</ul>
-</li>
-<li><p>组件卸载时</p>
-<ul>
-<li><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount"><strong><code>componentWillUnmount()</code></strong></a></li>
-</ul>
-</li>
-</ol>
-<h2 id="hooks写法"><a href="#hooks写法" class="headerlink" title="hooks写法"></a>hooks写法</h2><p>副作用</p>
-<ul>
-<li>改变了外部的东西</li>
-</ul>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="实现时存在的三个问题"><a href="#实现时存在的三个问题" class="headerlink" title="实现时存在的三个问题"></a>实现时存在的三个问题</h3><ol>
-<li>JSX不符合JS标准</li>
-<li>返回的JSX发生改变时如何更新DOM</li>
-<li>State/Props更新时，要重新触发render函数（render函数就是组件函数）</li>
-</ol>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
-<li>转义JSX</li>
-<li>使用虚拟DOM<ul>
-<li>虚拟DOM是一种用于和真实DOM同步，而在JS内存中维护的一个对象，它具有和DOM类似的树状结构，并和DOM可以建立一一对应的关系</li>
-<li>真实的DOM不是JS内存中的对象，而是浏览器维护的一个状态</li>
-</ul>
-</li>
-<li>diff算法更新DOM<ul>
-<li>我们只能通过DOM接口去修改DOM，而不能直接去修改DOM。但是我们可以声明一个变量，和真实DOM有类似结构的变量，每次更新的时候，都生成一个新的虚拟DOM，再使用diff算法去对比新旧虚拟DOM，再去修改真实DOM</li>
-</ul>
-</li>
-</ol>
-<p>插入一个问题：既然所有前端框架都是声明式的，那为什么不把声明式直接植入到浏览器中，自带声明式，这样就不用框架了。</p>
-<ul>
-<li>因为，浏览器自己作为应用平台，不能只提供更高层的东西，因为这样会把浏览器的自由度变得更低了。</li>
-</ul>
-<h3 id="diff算法核心"><a href="#diff算法核心" class="headerlink" title="diff算法核心"></a>diff算法核心</h3><ol>
-<li>不同类型的元素-&gt;替换</li>
-<li>同类型的DOM元素-&gt;更新</li>
-<li>同类型的组件元素-&gt;递归</li>
-</ol>
-<p>更新次数少与计算速度快的抉择</p>
-<p>用层次遍历，每个节点只遍历一次，时间复杂度<code>O(n^3)</code>降到<code>O(n)</code></p>
-<p>出现一个问题：但父组件的状态发生改变，子组件和嵌套的子组件都要去递归的发生改变，其实这样很耗费性能，所以要考虑如何去优化。</p>
-<h3 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h3><ul>
-<li>指令式编程<ul>
-<li>一步步写清楚</li>
-</ul>
-</li>
-<li>声明式编程<ul>
-<li>只需说明你的目的</li>
-</ul>
-</li>
-<li>响应式编程<ul>
-<li>是声明式编程的一个类别</li>
-<li>不仅像声明式编程一样，还可以自动更新UI</li>
-</ul>
-</li>
-</ul>
-<h2 id="状态管理库"><a href="#状态管理库" class="headerlink" title="状态管理库"></a>状态管理库</h2><blockquote>
-<p>将状态抽离的UI外部进行统一管理</p>
-</blockquote>
-<p>问题：假如所有数据都放到外部的Store中，那么会与外部store发生强耦合，可复用性就变差。所以要如何选择哪些状态放到Store，哪些状态只放在自身组件中。</p>
-<p>可以把Store看成这样：这个store是多个组件（把这多个组件看成一个大的整体组件）内部的一个state</p>
-<h3 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h3><p>当前状态，收到外部事件，前一道下一个状态</p>
-<h2 id="应用级框架科普"><a href="#应用级框架科普" class="headerlink" title="应用级框架科普"></a>应用级框架科普</h2><ul>
-<li>next<ul>
-<li>了解一间公司vercel</li>
-</ul>
-</li>
-<li>modernJs<ul>
-<li>字节的全栈开发框架</li>
-</ul>
-</li>
-<li>Blitz<ul>
-<li>无API思想的全栈开发框架</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>青训营</category>
-      </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI事件</title>
     <url>/2022/03/18/UI%E4%BA%8B%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ul>
@@ -1606,6 +1531,119 @@
       </categories>
       <tags>
         <tag>UI事件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>playwirght使用（一）</title>
+    <url>/2023/12/04/playwirght%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="playwright-使用"><a href="#playwright-使用" class="headerlink" title="playwright 使用"></a>playwright 使用</h1><ul>
+<li>电脑 Mac M1</li>
+<li>编辑器Vscode</li>
+<li>python 3.8.12</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li><p>新建项目文件夹</p>
+<p><code>mkdir playwright-python</code></p>
+<p><code>cd playwirght-python</code></p>
+</li>
+<li><p>新建虚拟环境</p>
+<p><code>python -m venv pw-venv</code></p>
+</li>
+<li><p>激活虚拟环境</p>
+<p><code>source pw-venv/bin/activate</code></p>
+</li>
+<li><p>安装playwright</p>
+<p><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pytest-playwright </code></p>
+</li>
+<li><p>安装浏览器</p>
+<p><code>playwright install</code></p>
+</li>
+</ol>
+<h2 id="运行第一个文件"><a href="#运行第一个文件" class="headerlink" title="运行第一个文件"></a>运行第一个文件</h2><p>根目录新建文件<code>test_example.py</code>（需要test_开头，因为运行pytest命令时，会自动执行<code>test_</code>开头的文件）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> Page, expect</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_has_title</span>(<span class="params">page: Page</span>):</span></span><br><span class="line">    page.goto(<span class="string">&quot;https://playwright.dev/&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Expect a title &quot;to contain&quot; a substring.</span></span><br><span class="line">    expect(page).to_have_title(re.<span class="built_in">compile</span>(<span class="string">&quot;Playwright&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_get_started_link</span>(<span class="params">page: Page</span>):</span></span><br><span class="line">    page.goto(<span class="string">&quot;https://playwright.dev/&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Click the get started link.</span></span><br><span class="line">    page.get_by_role(<span class="string">&quot;link&quot;</span>, name=<span class="string">&quot;Get started&quot;</span>).click()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Expects page to have a heading with the name of Installation.</span></span><br><span class="line">    expect(page.get_by_role(<span class="string">&quot;heading&quot;</span>, name=<span class="string">&quot;Installation&quot;</span>)).to_be_visible()</span><br></pre></td></tr></table></figure>
+
+<p>在终端上运行<code>pytest</code>，此语句会执行test文件</p>
+]]></content>
+      <categories>
+        <category>playwright</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>express简单使用</title>
+    <url>/2022/03/31/express%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<li>脚手架<ul>
+<li><code>npm install -g express-generator</code></li>
+<li><code>express express-demo</code></li>
+<li><code>npm install</code></li>
+<li><code>node bin/www</code></li>
+</ul>
+</li>
+<li>从零搭建<ul>
+<li><code>npm init -y</code></li>
+<li><code>npm install express</code></li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// express其实是一个函数: createApplication</span></span><br><span class="line"><span class="comment">// 返回app</span></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听路径</span></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">&quot;Hello Express&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开启监听</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;express初体验服务器启动成功~&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><blockquote>
+<p>中间件函数能够访问请求对象 (<code>req</code>)、响应对象 (<code>res</code>) 以及应用程序的请求/响应循环中的下一个中间件函数</p>
+</blockquote>
+<p>中间件函数可以执行以下任务：</p>
+<ul>
+<li>执行任何代码。</li>
+<li>对请求和响应对象进行更改。</li>
+<li>结束请求/响应循环。</li>
+<li>调用堆栈中的下一个中间件函数。</li>
+</ul>
+<p>如果当前中间件函数没有结束请求/响应循环，那么它必须调用 <code>next()</code>，以将控制权传递给下一个中间件函数。否则，请求将保持挂起状态。</p>
+<h3 id="普通中间件"><a href="#普通中间件" class="headerlink" title="普通中间件"></a>普通中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// use注册一个中间件(回调函数)</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;注册了一个普通的中间件~&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径中间件"><a href="#路径中间件" class="headerlink" title="路径中间件"></a>路径中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 路径匹配的中间件</span></span><br><span class="line">app.use(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home middleware 01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="路径和方法中间件"><a href="#路径和方法中间件" class="headerlink" title="路径和方法中间件"></a>路径和方法中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&#x27;/home&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware01&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="连续注册中间件"><a href="#连续注册中间件" class="headerlink" title="连续注册中间件"></a>连续注册中间件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.get(<span class="string">&quot;/home&quot;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 02&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 03&quot;</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;home path and method middleware 04&quot;</span>);</span><br><span class="line">  res.end(<span class="string">&quot;home page&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用中间件-body解析"><a href="#应用中间件-body解析" class="headerlink" title="应用中间件 body解析"></a>应用中间件 body解析</h2><h3 id="手动解析"><a href="#手动解析" class="headerlink" title="手动解析"></a>手动解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 手动解析</span></span><br><span class="line">app.use(<span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.headers[<span class="string">&quot;content-type&quot;</span>] === <span class="string">&#x27;application/json&#x27;</span>) &#123;</span><br><span class="line">    req.on(<span class="string">&#x27;data&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> info = <span class="built_in">JSON</span>.parse(data.toString());</span><br><span class="line">      req.body = info;</span><br><span class="line">    &#125;)</span><br><span class="line">  </span><br><span class="line">    req.on(<span class="string">&#x27;end&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置解析"><a href="#内置解析" class="headerlink" title="内置解析"></a>内置解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// express内置解析</span></span><br><span class="line">app.use(express.json())</span><br></pre></td></tr></table></figure>
+
+<h3 id="urlencoded解析"><a href="#urlencoded解析" class="headerlink" title="urlencoded解析"></a>urlencoded解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extended</span></span><br><span class="line"><span class="comment">// true: 那么对urlencoded进行解析时, 它使用的是第三方库: qs</span></span><br><span class="line"><span class="comment">// false: 那么对urlencoded进行解析时, 它使用的是Node内置模块: querystring</span></span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>: <span class="literal">true</span>&#125;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> storage = multer.diskStorage(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="string">&#x27;./uploads/&#x27;</span>);		<span class="comment">//把文件放置的位置</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 文件命名</span></span><br><span class="line">    cb(<span class="literal">null</span>, <span class="built_in">Date</span>.now() + path.extname(file.originalname));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">  <span class="comment">// dest: &#x27;./uploads/&#x27;</span></span><br><span class="line">  storage</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">&#x27;/login&#x27;</span>, upload.any(), <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  res.end(<span class="string">&quot;用户登录成功~&quot;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="form-data解析"><a href="#form-data解析" class="headerlink" title="form-data解析"></a>form-data解析</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> upload = multer();</span><br><span class="line">app.use(upload.any());</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询参数params和query"><a href="#查询参数params和query" class="headerlink" title="查询参数params和query"></a>查询参数params和query</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">req.params</span><br><span class="line"></span><br><span class="line">req.query</span><br></pre></td></tr></table></figure>
+
+<h2 id="响应数据"><a href="#响应数据" class="headerlink" title="响应数据"></a>响应数据</h2><ul>
+<li>end</li>
+<li>json<ul>
+<li>可以传入很多的类型：object、array、string、boolean、number、null等，它们会被转换成json格式返回</li>
+</ul>
+</li>
+<li>status</li>
+</ul>
+<h2 id="express路由"><a href="#express路由" class="headerlink" title="express路由"></a>express路由</h2><p>使用 <code>express.Router</code> 类来创建可安装的模块化路由处理程序。<code>Router</code> 实例是完整的中间件和路由系统；因此，常常将其称为“微型应用程序”</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在userRoute.js文件中，编写关于user的中间件</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建可安装的模块化路由处理程序</span></span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">  res.json(<span class="string">`<span class="subst">$&#123;req.params.id&#125;</span>用户的信息`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在app.js文件中引入user路由</span></span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routers/users&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里指定路径，userRoute.js中就可以省略/user</span></span><br><span class="line">app.use(<span class="string">&quot;/users&quot;</span>, userRouter);</span><br></pre></td></tr></table></figure>
+
+<h2 id="静态服务器"><a href="#静态服务器" class="headerlink" title="静态服务器"></a>静态服务器</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">app.use(express.static(<span class="string">&#x27;./build&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>express</tag>
       </tags>
   </entry>
   <entry>
@@ -1715,6 +1753,180 @@
       </categories>
       <tags>
         <tag>this</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>事件简介</title>
+    <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
+<li><p>鼠标</p>
+<ul>
+<li><p><code>click</code></p>
+</li>
+<li><p><code>contextmenu</code></p>
+</li>
+<li><p><code>mouseover/mouseout</code></p>
+</li>
+<li><p><code>mousedown/mouseup</code></p>
+</li>
+<li><p><code>mousemove</code></p>
+</li>
+</ul>
+</li>
+<li><p>键盘</p>
+<ul>
+<li>keydown</li>
+<li>keyup</li>
+</ul>
+</li>
+<li><p>表单</p>
+<ul>
+<li>submit</li>
+<li>focus</li>
+</ul>
+</li>
+<li><p>Document事件</p>
+<ul>
+<li>DOMContentLoaded</li>
+</ul>
+</li>
+<li><p>CSS</p>
+<ul>
+<li>transitionend</li>
+</ul>
+</li>
+</ol>
+<span id="more"></span>
+
+<p>移除一个处理程序——赋值为<code>null</code></p>
+<p>处理程序中的 this 的值是对应的元素。就是处理程序所在的那个元素</p>
+<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p><code>element.addEventListener(event, handler[, options]);</code></p>
+<ul>
+<li>options<ul>
+<li><code>once</code> ：如果为 true ，那么会在被触发后自动删除监听器</li>
+<li><code>capture</code> ：事件处理的阶段，我们稍后将在 冒泡和捕获 一章中介绍。由于历史原因， options 也可以是 false/true ，它与 {capture: false/true} 相同</li>
+<li><code>passive</code> ：如果为 true ，那么处理程序将不会调用 <code>preventDefault() </code><ul>
+<li>用途：passive: true 选项告诉浏览器，处理程序不会取消滚动。然后浏览器立即滚动页面以提供最大程度的流畅体验，并通过某种方式处理事件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="移除处理程序-removeEventListener"><a href="#移除处理程序-removeEventListener" class="headerlink" title="移除处理程序 removeEventListener"></a>移除处理程序 removeEventListener</h3><p>element.removeEventListener(event, handler[, options])</p>
+<ul>
+<li>handler函数要与之前添加事件函数是同一个</li>
+</ul>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>当事件发生时，浏览器会创建一个<code>event</code> 对象，将详细信息放入其中，并将其作为参数传递给处理程序</p>
+<ul>
+<li>event.type<ul>
+<li>事件类型</li>
+</ul>
+</li>
+<li>event.currentTarget<ul>
+<li>与this相同（除非是箭头函数，或this被绑定其他东西）</li>
+</ul>
+</li>
+<li>event.eventPhase<ul>
+<li>当前阶段（capturing=1，target=2，bubbling=3）</li>
+</ul>
+</li>
+</ul>
+<h2 id="冒泡和捕获"><a href="#冒泡和捕获" class="headerlink" title="冒泡和捕获"></a>冒泡和捕获</h2><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><blockquote>
+<p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素上的处理程序，然后一直向上到其他祖先上的处理程序</p>
+</blockquote>
+<p>几乎所有事件都是冒泡，例外：focus事件</p>
+<p>event.target</p>
+<ul>
+<li>父元素上的处理程序始终可以获取事件<strong>实际发生位置</strong>的详细信息</li>
+<li>与this和event.currentTarget不同，它们是“当前”元素</li>
+</ul>
+<h4 id="停止冒泡"><a href="#停止冒泡" class="headerlink" title="停止冒泡"></a>停止冒泡</h4><p>event.stopPropagation</p>
+<ul>
+<li>event.stopPropagation() 停止向上移动，但是当前元素上的其他处理程序都会继续运行。</li>
+<li>event.stopImmediatePropagation() 方法，可以用于停止冒泡，并阻止当前元素上的处理程序运行。使用该方法之后，其他处理程序就不会被执行</li>
+</ul>
+<h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>事件传播三个阶段</p>
+<ol>
+<li>捕获阶段<ul>
+<li>事件（从 Window）向下走近元素</li>
+</ul>
+</li>
+<li>目标阶段<ul>
+<li>事件到达目标元素</li>
+</ul>
+</li>
+<li>冒泡阶段</li>
+</ol>
+<p>事件是默认是冒泡，修改为捕获阶段的操作： capture 选项设置为 true。</p>
+<p>用addEventListener添加事件为捕获时，移除的时候也要标注为捕获，这样才能正确删除处理程序</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><blockquote>
+<p>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个 处理程序 —— 而是将单个处理程序放在它们的共同祖先上。</p>
+<p>事件必须是冒泡</p>
+</blockquote>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
+<li>在容器（container）上放一个处理程序</li>
+<li>在处理程序中 —— 检查源元素 event.target</li>
+<li>如果事件发生在我们感兴趣的元素内，那么处理该事件。</li>
+</ol>
+<p>搭配下列方法，做事件委托</p>
+<ul>
+<li>event.target.closest(selector)<ul>
+<li>返回与 selector 匹配的最近的祖先</li>
+</ul>
+</li>
+<li>selector1.containes(selector2)<ul>
+<li>检查selector2是否在selector1中</li>
+</ul>
+</li>
+</ul>
+<h3 id="“行为”模式"><a href="#“行为”模式" class="headerlink" title="“行为”模式"></a>“行为”模式</h3><blockquote>
+<p>使用事件委托将“行为（behavior）”以 声明方式 添加到具有特殊特性 （attribute）和类的元素中</p>
+</blockquote>
+<p>行为模式分为两个部分</p>
+<ol>
+<li>我们将自定义特性<strong>添加</strong>到描述其行为的元素</li>
+<li>用文档范围级的处理程序追踪事件，如果事件发生在具有特定特性的元素上 —— 则执行行为（action）。</li>
+</ol>
+<h2 id="浏览器默认行为"><a href="#浏览器默认行为" class="headerlink" title="浏览器默认行为"></a>浏览器默认行为</h2><h3 id="阻止浏览器行为方式"><a href="#阻止浏览器行为方式" class="headerlink" title="阻止浏览器行为方式"></a>阻止浏览器行为方式</h3><ul>
+<li>event.preventDefault()</li>
+<li>如果处理程序是使用<code>on&lt;event&gt;</code>，则返回false也有效</li>
+<li>如果默认行为被阻止，则event.defaultPrevented属性为true，否则为false</li>
+</ul>
+<p>event.stopPropagation() 和 event.preventDefault()</p>
+<p>之间毫无相关，一个是阻止冒泡，一个是阻止默认行为</p>
+<h2 id="创建自定义事件"><a href="#创建自定义事件" class="headerlink" title="创建自定义事件"></a>创建自定义事件</h2><h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><ol>
+<li><p><code>new Event(type, [, options])</code></p>
+<ul>
+<li><p>type: 类型</p>
+</li>
+<li><p>options</p>
+<ul>
+<li>bubbles: true/false —— 如果为 true ，那么事件会冒泡</li>
+<li>cancelable: true/false —— 如果为 true ，那么“默认行为”就会被阻止<ul>
+<li>如果 event.preventDefault() 应该有效，则 cancelable: true</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>`new CustomEvent(type, detail)</p>
+</li>
+</ol>
+<h3 id="派发-dispatchEvent-event"><a href="#派发-dispatchEvent-event" class="headerlink" title="派发 dispatchEvent(event)"></a>派发 dispatchEvent(event)</h3><blockquote>
+<p>相当于触发了这个event事件</p>
+</blockquote>
+<h3 id="事件的发生顺序"><a href="#事件的发生顺序" class="headerlink" title="事件的发生顺序"></a>事件的发生顺序</h3><p>事件中的事件是<strong>同步的</strong>，通常事件是在队列中处理的。也就是说：如果浏览器正在处理 onclick ，这时发生了 一个新的事件，例如鼠标移动了，那么它的处理程序会被排入队列，相应的 mousemove 处理程序将在 onclick 事件处理完成后被调用</p>
+<p>但也有例外：一个事件是在另一个事件<strong>中</strong>发起的。例如使用 dispatchEvent 。这类事件将会被立即处理，即在新的事件处理程序被调用之后， 恢复到当前的事件处理程序</p>
+<ul>
+<li>例如点击事件里面的处理程序中又派发了事件，则这类事件将会被立即处理</li>
+</ul>
+]]></content>
+      <categories>
+        <category>现代Javascript教程</category>
+      </categories>
+      <tags>
+        <tag>浏览器事件</tag>
       </tags>
   </entry>
   <entry>
@@ -1961,180 +2173,6 @@
       </tags>
   </entry>
   <entry>
-    <title>事件简介</title>
-    <url>/2022/02/13/%E4%BA%8B%E4%BB%B6%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h2 id="常见浏览器事件"><a href="#常见浏览器事件" class="headerlink" title="常见浏览器事件"></a>常见浏览器事件</h2><ol>
-<li><p>鼠标</p>
-<ul>
-<li><p><code>click</code></p>
-</li>
-<li><p><code>contextmenu</code></p>
-</li>
-<li><p><code>mouseover/mouseout</code></p>
-</li>
-<li><p><code>mousedown/mouseup</code></p>
-</li>
-<li><p><code>mousemove</code></p>
-</li>
-</ul>
-</li>
-<li><p>键盘</p>
-<ul>
-<li>keydown</li>
-<li>keyup</li>
-</ul>
-</li>
-<li><p>表单</p>
-<ul>
-<li>submit</li>
-<li>focus</li>
-</ul>
-</li>
-<li><p>Document事件</p>
-<ul>
-<li>DOMContentLoaded</li>
-</ul>
-</li>
-<li><p>CSS</p>
-<ul>
-<li>transitionend</li>
-</ul>
-</li>
-</ol>
-<span id="more"></span>
-
-<p>移除一个处理程序——赋值为<code>null</code></p>
-<p>处理程序中的 this 的值是对应的元素。就是处理程序所在的那个元素</p>
-<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><p><code>element.addEventListener(event, handler[, options]);</code></p>
-<ul>
-<li>options<ul>
-<li><code>once</code> ：如果为 true ，那么会在被触发后自动删除监听器</li>
-<li><code>capture</code> ：事件处理的阶段，我们稍后将在 冒泡和捕获 一章中介绍。由于历史原因， options 也可以是 false/true ，它与 {capture: false/true} 相同</li>
-<li><code>passive</code> ：如果为 true ，那么处理程序将不会调用 <code>preventDefault() </code><ul>
-<li>用途：passive: true 选项告诉浏览器，处理程序不会取消滚动。然后浏览器立即滚动页面以提供最大程度的流畅体验，并通过某种方式处理事件。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="移除处理程序-removeEventListener"><a href="#移除处理程序-removeEventListener" class="headerlink" title="移除处理程序 removeEventListener"></a>移除处理程序 removeEventListener</h3><p>element.removeEventListener(event, handler[, options])</p>
-<ul>
-<li>handler函数要与之前添加事件函数是同一个</li>
-</ul>
-<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>当事件发生时，浏览器会创建一个<code>event</code> 对象，将详细信息放入其中，并将其作为参数传递给处理程序</p>
-<ul>
-<li>event.type<ul>
-<li>事件类型</li>
-</ul>
-</li>
-<li>event.currentTarget<ul>
-<li>与this相同（除非是箭头函数，或this被绑定其他东西）</li>
-</ul>
-</li>
-<li>event.eventPhase<ul>
-<li>当前阶段（capturing=1，target=2，bubbling=3）</li>
-</ul>
-</li>
-</ul>
-<h2 id="冒泡和捕获"><a href="#冒泡和捕获" class="headerlink" title="冒泡和捕获"></a>冒泡和捕获</h2><h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><blockquote>
-<p>当一个事件发生在一个元素上，它会首先运行在该元素上的处理程序，然后运行其父元素上的处理程序，然后一直向上到其他祖先上的处理程序</p>
-</blockquote>
-<p>几乎所有事件都是冒泡，例外：focus事件</p>
-<p>event.target</p>
-<ul>
-<li>父元素上的处理程序始终可以获取事件<strong>实际发生位置</strong>的详细信息</li>
-<li>与this和event.currentTarget不同，它们是“当前”元素</li>
-</ul>
-<h4 id="停止冒泡"><a href="#停止冒泡" class="headerlink" title="停止冒泡"></a>停止冒泡</h4><p>event.stopPropagation</p>
-<ul>
-<li>event.stopPropagation() 停止向上移动，但是当前元素上的其他处理程序都会继续运行。</li>
-<li>event.stopImmediatePropagation() 方法，可以用于停止冒泡，并阻止当前元素上的处理程序运行。使用该方法之后，其他处理程序就不会被执行</li>
-</ul>
-<h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>事件传播三个阶段</p>
-<ol>
-<li>捕获阶段<ul>
-<li>事件（从 Window）向下走近元素</li>
-</ul>
-</li>
-<li>目标阶段<ul>
-<li>事件到达目标元素</li>
-</ul>
-</li>
-<li>冒泡阶段</li>
-</ol>
-<p>事件是默认是冒泡，修改为捕获阶段的操作： capture 选项设置为 true。</p>
-<p>用addEventListener添加事件为捕获时，移除的时候也要标注为捕获，这样才能正确删除处理程序</p>
-<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><blockquote>
-<p>如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个 处理程序 —— 而是将单个处理程序放在它们的共同祖先上。</p>
-<p>事件必须是冒泡</p>
-</blockquote>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
-<li>在容器（container）上放一个处理程序</li>
-<li>在处理程序中 —— 检查源元素 event.target</li>
-<li>如果事件发生在我们感兴趣的元素内，那么处理该事件。</li>
-</ol>
-<p>搭配下列方法，做事件委托</p>
-<ul>
-<li>event.target.closest(selector)<ul>
-<li>返回与 selector 匹配的最近的祖先</li>
-</ul>
-</li>
-<li>selector1.containes(selector2)<ul>
-<li>检查selector2是否在selector1中</li>
-</ul>
-</li>
-</ul>
-<h3 id="“行为”模式"><a href="#“行为”模式" class="headerlink" title="“行为”模式"></a>“行为”模式</h3><blockquote>
-<p>使用事件委托将“行为（behavior）”以 声明方式 添加到具有特殊特性 （attribute）和类的元素中</p>
-</blockquote>
-<p>行为模式分为两个部分</p>
-<ol>
-<li>我们将自定义特性<strong>添加</strong>到描述其行为的元素</li>
-<li>用文档范围级的处理程序追踪事件，如果事件发生在具有特定特性的元素上 —— 则执行行为（action）。</li>
-</ol>
-<h2 id="浏览器默认行为"><a href="#浏览器默认行为" class="headerlink" title="浏览器默认行为"></a>浏览器默认行为</h2><h3 id="阻止浏览器行为方式"><a href="#阻止浏览器行为方式" class="headerlink" title="阻止浏览器行为方式"></a>阻止浏览器行为方式</h3><ul>
-<li>event.preventDefault()</li>
-<li>如果处理程序是使用<code>on&lt;event&gt;</code>，则返回false也有效</li>
-<li>如果默认行为被阻止，则event.defaultPrevented属性为true，否则为false</li>
-</ul>
-<p>event.stopPropagation() 和 event.preventDefault()</p>
-<p>之间毫无相关，一个是阻止冒泡，一个是阻止默认行为</p>
-<h2 id="创建自定义事件"><a href="#创建自定义事件" class="headerlink" title="创建自定义事件"></a>创建自定义事件</h2><h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><ol>
-<li><p><code>new Event(type, [, options])</code></p>
-<ul>
-<li><p>type: 类型</p>
-</li>
-<li><p>options</p>
-<ul>
-<li>bubbles: true/false —— 如果为 true ，那么事件会冒泡</li>
-<li>cancelable: true/false —— 如果为 true ，那么“默认行为”就会被阻止<ul>
-<li>如果 event.preventDefault() 应该有效，则 cancelable: true</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>`new CustomEvent(type, detail)</p>
-</li>
-</ol>
-<h3 id="派发-dispatchEvent-event"><a href="#派发-dispatchEvent-event" class="headerlink" title="派发 dispatchEvent(event)"></a>派发 dispatchEvent(event)</h3><blockquote>
-<p>相当于触发了这个event事件</p>
-</blockquote>
-<h3 id="事件的发生顺序"><a href="#事件的发生顺序" class="headerlink" title="事件的发生顺序"></a>事件的发生顺序</h3><p>事件中的事件是<strong>同步的</strong>，通常事件是在队列中处理的。也就是说：如果浏览器正在处理 onclick ，这时发生了 一个新的事件，例如鼠标移动了，那么它的处理程序会被排入队列，相应的 mousemove 处理程序将在 onclick 事件处理完成后被调用</p>
-<p>但也有例外：一个事件是在另一个事件<strong>中</strong>发起的。例如使用 dispatchEvent 。这类事件将会被立即处理，即在新的事件处理程序被调用之后， 恢复到当前的事件处理程序</p>
-<ul>
-<li>例如点击事件里面的处理程序中又派发了事件，则这类事件将会被立即处理</li>
-</ul>
-]]></content>
-      <categories>
-        <category>现代Javascript教程</category>
-      </categories>
-      <tags>
-        <tag>浏览器事件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>什么是Javascript</title>
     <url>/2022/01/05/%E4%BB%80%E4%B9%88%E6%98%AFJavascript/</url>
     <content><![CDATA[<h2 id="Javascript历史回顾"><a href="#Javascript历史回顾" class="headerlink" title="Javascript历史回顾"></a>Javascript历史回顾</h2><blockquote>
@@ -2204,6 +2242,166 @@
       </categories>
       <tags>
         <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>作用域和闭包</title>
+    <url>/2022/03/22/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
+<p>设计良好的规则来存储变量，并且之后可以方便找到这些变量，这套规则被称为作用域</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="传统编译语言流程"><a href="#传统编译语言流程" class="headerlink" title="传统编译语言流程"></a>传统编译语言流程</h3><ol>
+<li><p>分词/词法分析</p>
+<p>将由字符组成的字符串分解成（对编程语言来说）有意义的代码块，这些代码块被称为词法单元（token）</p>
+</li>
+<li><p>解析/语法分析</p>
+<p>将词法单元流（数组）转换成一个由元素逐级嵌套所组成的代表了程序语法结构的树。这个树被称为“抽象语法树”</p>
+</li>
+<li><p>代码生成</p>
+<p>将AST转换未可执行代码的过程</p>
+</li>
+</ol>
+<h3 id="三个部分"><a href="#三个部分" class="headerlink" title="三个部分"></a>三个部分</h3><ul>
+<li>引擎<ul>
+<li>从头到尾负责整个JavaScript程序的编译及执行过程</li>
+</ul>
+</li>
+<li>编译器<ul>
+<li>负责语法分析及代码生成</li>
+</ul>
+</li>
+<li>作用域<ul>
+<li>负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限</li>
+</ul>
+</li>
+</ul>
+<p>例子：<code>var a = 2</code></p>
+<ul>
+<li>一个由编译器在编译时处理<ul>
+<li>遇到<code>var a</code>，编译器会询问作用域是否已经有一个该名称的变量存在于同一个作用域的集合中。如果是，编译器会忽略该声明，继续进行编译；否则它会要求作用域在当前作用域的集合中声明一个新的变量，并命名为a</li>
+</ul>
+</li>
+<li>另一个则由引擎在运行时处理<ul>
+<li>遇到<code>a = 2</code>，引擎运行时会首先询问作用域，在当前的作用域集合中是否存在一个叫作a的变量。如果是，引擎就会使用这个变量；如果否，引擎会继续查找该变量</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种查询"><a href="#两种查询" class="headerlink" title="两种查询"></a>两种查询</h3><ul>
+<li>LHS查询<ul>
+<li>如果查找的目的是对变量进行赋值，那么就会使用LHS查询</li>
+<li>赋值操作的目标是谁</li>
+</ul>
+</li>
+<li>RHS查询<ul>
+<li>如果目的是获取变量的值，就会使用RHS查询</li>
+<li>谁是赋值操作的源头</li>
+</ul>
+</li>
+</ul>
+<h3 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h3><blockquote>
+<p>当一个块或函数嵌套在另一个块或函数中时，就发生了作用域的嵌套。因此，在当前作用域中无法找到某个变量时，引擎就会在外层嵌套的作用域中继续查找，直到找到该变量，或抵达最外层的作用域（也就是全局作用域）为止</p>
+</blockquote>
+<p>遍历嵌套作用域链规则</p>
+<p>引擎从当前的执行作用域开始查找变量，如果找不到，就向上一级继续查找。当抵达最外层的全局作用域时，无论找到还是没找到，查找过程都会停止</p>
+<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><blockquote>
+<p>简单地说，词法作用域就是定义在词法阶段的作用域。词法作用域是一套关于引擎如何寻找变量以及会在何处找到变量的规则。词法作用域最重要的特征是它的定义过程发生在代码的<strong>书写阶段</strong>，因此当词法分析器处理代码时会保持作用域不变</p>
+</blockquote>
+<p>作用域查找会在找到第一个匹配的标识符时停止。在多层的嵌套作用域中可以定义同名的标识符，这叫作“遮蔽效应”，但欺骗词法作用域会导致性能下降。</p>
+<ul>
+<li>有些优化依赖于能够根据代码的词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到标识符</li>
+<li>编译的词法分析阶段基本能够知道全部标识符在哪里以及是如何声明的，从而能够预测在执行过程中如何对它们进行查找。</li>
+</ul>
+<h3 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h3><ul>
+<li>eval</li>
+<li>with</li>
+</ul>
+<p>词法作用域和动态作用域主要区别</p>
+<ul>
+<li>词法作用域是在写代码或者说定义时确定的，而动态作用域是在运行时确定的。词法作用域关注函数在何处声明，而动态作用域关注函数从何处调用</li>
+</ul>
+<h2 id="函数作用域和块作用域"><a href="#函数作用域和块作用域" class="headerlink" title="函数作用域和块作用域"></a>函数作用域和块作用域</h2><blockquote>
+<p>作用域包含了一系列的“气泡”，每一个都可以作为容器，其中包含了标识符（变量、函数）的定义。这些气泡互相嵌套并且整齐地排列成蜂窝型，排列的结构是在<strong>写代码时定义的</strong></p>
+<p>函数作用域的含义是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用</p>
+<p>任何声明在某个作用域内的变量，都将附属于这个作用域</p>
+</blockquote>
+<h3 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h3><p>从所写的代码中挑选出一个任意的片段，然后用函数声明对它进行包装，实际的结果就是在这个代码片段的周围创建了一个作用域气泡，这段代码中的任何声明都将绑定在这个新创建的包装函数的作用域中，而不是先前所在的作用域中。换句话说，可以把变量和函数包裹在一个函数的作用域中，然后用这个作用域来“隐藏”它们。</p>
+<p>好处</p>
+<ul>
+<li>最小授权或最小暴露原则</li>
+<li>避免同名标识符之间的冲突</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>函数名污染了所在作用域</li>
+<li>不能够自动运行</li>
+</ul>
+<p>改良</p>
+<ul>
+<li>使用立即执行函数表达式<code>IIFE</code><ul>
+<li>进阶用法：把它们当作函数调用并传递参数进去</li>
+<li>还有一种用途：倒置代码的运行顺序，将需要运行的函数放在第二位，在 IIFE 执行之后当作参数传递进去</li>
+</ul>
+</li>
+</ul>
+<h3 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h3><ul>
+<li>函数表达式可以是匿名的， 而函数声明则不可以省略函数名</li>
+<li>匿名函数在栈追踪中不会显示出有意义的函数名</li>
+<li>匿名函数省略了对于代码可读性 / 可理解性很重要的函数名</li>
+</ul>
+<h3 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h3><ul>
+<li>with</li>
+<li>try/catch</li>
+<li>let<ul>
+<li>可以将变量绑定到所在的任意作用域中</li>
+</ul>
+</li>
+</ul>
+<h2 id="提升"><a href="#提升" class="headerlink" title="提升"></a>提升</h2><p>包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理</p>
+<ul>
+<li>var变量声明，函数声明都会有提升</li>
+<li>重复声明时，函数声明会<strong>覆盖</strong>普通变量声明，并且重复的var声明会<strong>被忽略掉</strong>，但出现在后面的函数声明还是可以覆盖前面的</li>
+</ul>
+<h2 id="作用域闭包"><a href="#作用域闭包" class="headerlink" title="作用域闭包"></a>作用域闭包</h2><blockquote>
+<p>当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log( a );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>bar() 依然持有对该作用域的引用，而这个引用就叫作闭包。这个函数在定义时的词法作用域以外的地方被调用。闭包使得函数可以继续访问定义时的词法作用域。</p>
+<p>无论通过何种手段将内部函数传递到所在的词法作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包</p>
+<p>只要使用回调函数，实际上就是在使用闭包</p>
+<h3 id="循环和闭包"><a href="#循环和闭包" class="headerlink" title="循环和闭包"></a>循环和闭包</h3><p>经典例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">    &#125;, i * <span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果是五次6</p>
+<p>我们试图假设循环中的每个迭代在运行时都会给自己“捕获”一个<code>i</code>的副本。但是根据作用域的工作原理，实际情况是尽管循环中的五个函数是在各个迭代中分别定义的， 但是它们都被封闭在一个共享的全局作用域中，因此<strong>实际上只有一个<code> i</code></strong></p>
+<p>解决方法：</p>
+<p>法一</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( j );</span><br><span class="line">        &#125;, j * <span class="number">1000</span> );</span><br><span class="line">    &#125;)( i );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在迭代内使用 IIFE 会<strong>为每个迭代都生成一个新的作用域</strong>，使得延迟函数的回调可以将新的作用域封闭在每个迭代内部，每个迭代中都会含有一个具有正确值的变量供我们访问。</p>
+<p>法二</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">    &#125;, i * <span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>for 循环头部的 let 声明还会有一个特殊的行为。这个行为指出变量在循环过程中不止被声明一次，<strong>每次迭代都会声明</strong>。随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量</p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>两个必要条件</p>
+<ul>
+<li>必须有外部的封闭函数，该函数必须至少被调用一次</li>
+<li>封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态</li>
+</ul>
+<p>一个具有函数属性的对象本身并不是真正的模块。从方便观察的角度看，一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
+<p>通过在模块实例的内部保留对公共 API 对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法和属性，以及修改它们的值。</p>
+<p>模块文件中的内容会被当作好像包含在作用域闭包中一样来处理，就和前面介绍的函数闭包模块一样</p>
+]]></content>
+      <categories>
+        <category>你不知道的Javascript</category>
+      </categories>
+      <tags>
+        <tag>作用域</tag>
+        <tag>闭包</tag>
       </tags>
   </entry>
   <entry>
@@ -2549,253 +2747,6 @@
       </tags>
   </entry>
   <entry>
-    <title>包管理工具</title>
-    <url>/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<h2 id="包管理工具npm"><a href="#包管理工具npm" class="headerlink" title="包管理工具npm"></a>包管理工具npm</h2><ul>
-<li>发布自己的包其实是发布到registry上面的</li>
-<li>安装一个包时其实是从registry上面下载的包；</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="配置文件属性"><a href="#配置文件属性" class="headerlink" title="配置文件属性"></a>配置文件属性</h3><ul>
-<li>name</li>
-<li>version</li>
-<li>description</li>
-<li>author</li>
-<li>license</li>
-<li>private<ul>
-<li>记录当前的项目是否是私有的，当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
-</ul>
-</li>
-<li>main<ul>
-<li>设置程序的入口</li>
-<li>这个入口和webpack打包的入口并不冲突</li>
-</ul>
-</li>
-<li>script<ul>
-<li>配置一些脚本命令，以键值对的形式存在</li>
-</ul>
-</li>
-<li>dependencies<ul>
-<li>指定无论开发环境还是生成环境都需要依赖的包</li>
-<li>默认install不加参数，都是生产开发环境都需要依赖的包</li>
-</ul>
-</li>
-<li>devDependencies<ul>
-<li>只在开发环境依赖的包</li>
-<li><code>--save-dev</code>或<code>-D</code></li>
-</ul>
-</li>
-<li>版本<ul>
-<li><code>^x.y.z</code>：表示x是保持不变的，y和z永远安装最新的版<code>~x.y.z</code>：表示x和y保持不变的，z永远安装最新的版本</li>
-</ul>
-</li>
-<li>engines属性<ul>
-<li>用于指定Node和NPM的版本号</li>
-</ul>
-</li>
-<li>browserslist属性<ul>
-<li>用于配置打包后的JavaScript浏览器的兼容情况</li>
-</ul>
-</li>
-</ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li>全局安装<code>npm install -g xxx</code></li>
-<li>局部安装<code>npm install xxx</code></li>
-</ul>
-<p>全局安装了之后并不能让我们在所有的项目中使用所安装的库，只是命令能全局使用，如<code>yarn</code>全局安装。</p>
-<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><img src="/.io//03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/eeda32417effc890010a63994ed5a77.png" class title="安装过程">
-
-<h2 id="npm命令"><a href="#npm命令" class="headerlink" title="npm命令"></a>npm命令</h2><ul>
-<li><code>npm uninstall package</code></li>
-<li><code>npm uninstall package --save-dev</code></li>
-<li><code>npm rebuild</code><ul>
-<li>强制重新build</li>
-</ul>
-</li>
-<li><code>npm cache clean</code><ul>
-<li>清除缓存</li>
-</ul>
-</li>
-<li><code>npm config get registry</code><ul>
-<li>查看npm镜像</li>
-</ul>
-</li>
-<li><code>npm config set registry 地址</code><ul>
-<li>修改npm镜像地址</li>
-</ul>
-</li>
-</ul>
-<h2 id="npx工具"><a href="#npx工具" class="headerlink" title="npx工具"></a>npx工具</h2><p>常见的是使用它来调用项目中的某个模块的指令，npx它会到当前目录的node_modules/.bin目录下查找对应的命令</p>
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>作用域和闭包</title>
-    <url>/2022/03/22/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/</url>
-    <content><![CDATA[<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
-<p>设计良好的规则来存储变量，并且之后可以方便找到这些变量，这套规则被称为作用域</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="传统编译语言流程"><a href="#传统编译语言流程" class="headerlink" title="传统编译语言流程"></a>传统编译语言流程</h3><ol>
-<li><p>分词/词法分析</p>
-<p>将由字符组成的字符串分解成（对编程语言来说）有意义的代码块，这些代码块被称为词法单元（token）</p>
-</li>
-<li><p>解析/语法分析</p>
-<p>将词法单元流（数组）转换成一个由元素逐级嵌套所组成的代表了程序语法结构的树。这个树被称为“抽象语法树”</p>
-</li>
-<li><p>代码生成</p>
-<p>将AST转换未可执行代码的过程</p>
-</li>
-</ol>
-<h3 id="三个部分"><a href="#三个部分" class="headerlink" title="三个部分"></a>三个部分</h3><ul>
-<li>引擎<ul>
-<li>从头到尾负责整个JavaScript程序的编译及执行过程</li>
-</ul>
-</li>
-<li>编译器<ul>
-<li>负责语法分析及代码生成</li>
-</ul>
-</li>
-<li>作用域<ul>
-<li>负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套非常严格的规则，确定当前执行的代码对这些标识符的访问权限</li>
-</ul>
-</li>
-</ul>
-<p>例子：<code>var a = 2</code></p>
-<ul>
-<li>一个由编译器在编译时处理<ul>
-<li>遇到<code>var a</code>，编译器会询问作用域是否已经有一个该名称的变量存在于同一个作用域的集合中。如果是，编译器会忽略该声明，继续进行编译；否则它会要求作用域在当前作用域的集合中声明一个新的变量，并命名为a</li>
-</ul>
-</li>
-<li>另一个则由引擎在运行时处理<ul>
-<li>遇到<code>a = 2</code>，引擎运行时会首先询问作用域，在当前的作用域集合中是否存在一个叫作a的变量。如果是，引擎就会使用这个变量；如果否，引擎会继续查找该变量</li>
-</ul>
-</li>
-</ul>
-<h3 id="两种查询"><a href="#两种查询" class="headerlink" title="两种查询"></a>两种查询</h3><ul>
-<li>LHS查询<ul>
-<li>如果查找的目的是对变量进行赋值，那么就会使用LHS查询</li>
-<li>赋值操作的目标是谁</li>
-</ul>
-</li>
-<li>RHS查询<ul>
-<li>如果目的是获取变量的值，就会使用RHS查询</li>
-<li>谁是赋值操作的源头</li>
-</ul>
-</li>
-</ul>
-<h3 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h3><blockquote>
-<p>当一个块或函数嵌套在另一个块或函数中时，就发生了作用域的嵌套。因此，在当前作用域中无法找到某个变量时，引擎就会在外层嵌套的作用域中继续查找，直到找到该变量，或抵达最外层的作用域（也就是全局作用域）为止</p>
-</blockquote>
-<p>遍历嵌套作用域链规则</p>
-<p>引擎从当前的执行作用域开始查找变量，如果找不到，就向上一级继续查找。当抵达最外层的全局作用域时，无论找到还是没找到，查找过程都会停止</p>
-<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><blockquote>
-<p>简单地说，词法作用域就是定义在词法阶段的作用域。词法作用域是一套关于引擎如何寻找变量以及会在何处找到变量的规则。词法作用域最重要的特征是它的定义过程发生在代码的<strong>书写阶段</strong>，因此当词法分析器处理代码时会保持作用域不变</p>
-</blockquote>
-<p>作用域查找会在找到第一个匹配的标识符时停止。在多层的嵌套作用域中可以定义同名的标识符，这叫作“遮蔽效应”，但欺骗词法作用域会导致性能下降。</p>
-<ul>
-<li>有些优化依赖于能够根据代码的词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到标识符</li>
-<li>编译的词法分析阶段基本能够知道全部标识符在哪里以及是如何声明的，从而能够预测在执行过程中如何对它们进行查找。</li>
-</ul>
-<h3 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h3><ul>
-<li>eval</li>
-<li>with</li>
-</ul>
-<p>词法作用域和动态作用域主要区别</p>
-<ul>
-<li>词法作用域是在写代码或者说定义时确定的，而动态作用域是在运行时确定的。词法作用域关注函数在何处声明，而动态作用域关注函数从何处调用</li>
-</ul>
-<h2 id="函数作用域和块作用域"><a href="#函数作用域和块作用域" class="headerlink" title="函数作用域和块作用域"></a>函数作用域和块作用域</h2><blockquote>
-<p>作用域包含了一系列的“气泡”，每一个都可以作为容器，其中包含了标识符（变量、函数）的定义。这些气泡互相嵌套并且整齐地排列成蜂窝型，排列的结构是在<strong>写代码时定义的</strong></p>
-<p>函数作用域的含义是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用</p>
-<p>任何声明在某个作用域内的变量，都将附属于这个作用域</p>
-</blockquote>
-<h3 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h3><p>从所写的代码中挑选出一个任意的片段，然后用函数声明对它进行包装，实际的结果就是在这个代码片段的周围创建了一个作用域气泡，这段代码中的任何声明都将绑定在这个新创建的包装函数的作用域中，而不是先前所在的作用域中。换句话说，可以把变量和函数包裹在一个函数的作用域中，然后用这个作用域来“隐藏”它们。</p>
-<p>好处</p>
-<ul>
-<li>最小授权或最小暴露原则</li>
-<li>避免同名标识符之间的冲突</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>函数名污染了所在作用域</li>
-<li>不能够自动运行</li>
-</ul>
-<p>改良</p>
-<ul>
-<li>使用立即执行函数表达式<code>IIFE</code><ul>
-<li>进阶用法：把它们当作函数调用并传递参数进去</li>
-<li>还有一种用途：倒置代码的运行顺序，将需要运行的函数放在第二位，在 IIFE 执行之后当作参数传递进去</li>
-</ul>
-</li>
-</ul>
-<h3 id="匿名和具名"><a href="#匿名和具名" class="headerlink" title="匿名和具名"></a>匿名和具名</h3><ul>
-<li>函数表达式可以是匿名的， 而函数声明则不可以省略函数名</li>
-<li>匿名函数在栈追踪中不会显示出有意义的函数名</li>
-<li>匿名函数省略了对于代码可读性 / 可理解性很重要的函数名</li>
-</ul>
-<h3 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h3><ul>
-<li>with</li>
-<li>try/catch</li>
-<li>let<ul>
-<li>可以将变量绑定到所在的任意作用域中</li>
-</ul>
-</li>
-</ul>
-<h2 id="提升"><a href="#提升" class="headerlink" title="提升"></a>提升</h2><p>包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理</p>
-<ul>
-<li>var变量声明，函数声明都会有提升</li>
-<li>重复声明时，函数声明会<strong>覆盖</strong>普通变量声明，并且重复的var声明会<strong>被忽略掉</strong>，但出现在后面的函数声明还是可以覆盖前面的</li>
-</ul>
-<h2 id="作用域闭包"><a href="#作用域闭包" class="headerlink" title="作用域闭包"></a>作用域闭包</h2><blockquote>
-<p>当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。</p>
-</blockquote>
-<p>例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log( a );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz(); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>bar() 依然持有对该作用域的引用，而这个引用就叫作闭包。这个函数在定义时的词法作用域以外的地方被调用。闭包使得函数可以继续访问定义时的词法作用域。</p>
-<p>无论通过何种手段将内部函数传递到所在的词法作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包</p>
-<p>只要使用回调函数，实际上就是在使用闭包</p>
-<h3 id="循环和闭包"><a href="#循环和闭包" class="headerlink" title="循环和闭包"></a>循环和闭包</h3><p>经典例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">    &#125;, i * <span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果是五次6</p>
-<p>我们试图假设循环中的每个迭代在运行时都会给自己“捕获”一个<code>i</code>的副本。但是根据作用域的工作原理，实际情况是尽管循环中的五个函数是在各个迭代中分别定义的， 但是它们都被封闭在一个共享的全局作用域中，因此<strong>实际上只有一个<code> i</code></strong></p>
-<p>解决方法：</p>
-<p>法一</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log( j );</span><br><span class="line">        &#125;, j * <span class="number">1000</span> );</span><br><span class="line">    &#125;)( i );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在迭代内使用 IIFE 会<strong>为每个迭代都生成一个新的作用域</strong>，使得延迟函数的回调可以将新的作用域封闭在每个迭代内部，每个迭代中都会含有一个具有正确值的变量供我们访问。</p>
-<p>法二</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">    &#125;, i * <span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>for 循环头部的 let 声明还会有一个特殊的行为。这个行为指出变量在循环过程中不止被声明一次，<strong>每次迭代都会声明</strong>。随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量</p>
-<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>两个必要条件</p>
-<ul>
-<li>必须有外部的封闭函数，该函数必须至少被调用一次</li>
-<li>封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态</li>
-</ul>
-<p>一个具有函数属性的对象本身并不是真正的模块。从方便观察的角度看，一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
-<p>通过在模块实例的内部保留对公共 API 对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法和属性，以及修改它们的值。</p>
-<p>模块文件中的内容会被当作好像包含在作用域闭包中一样来处理，就和前面介绍的函数闭包模块一样</p>
-]]></content>
-      <categories>
-        <category>你不知道的Javascript</category>
-      </categories>
-      <tags>
-        <tag>作用域</tag>
-        <tag>闭包</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>变量、作用域与内存</title>
     <url>/2022/01/06/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<h2 id="通过变量使用原始值与引用值"><a href="#通过变量使用原始值与引用值" class="headerlink" title="通过变量使用原始值与引用值"></a>通过变量使用原始值与引用值</h2><ol>
@@ -3018,93 +2969,90 @@
       </tags>
   </entry>
   <entry>
-    <title>常用内置模块</title>
-    <url>/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/</url>
-    <content><![CDATA[<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><h3 id="获取路径信息"><a href="#获取路径信息" class="headerlink" title="获取路径信息"></a>获取路径信息</h3><ul>
-<li><code>path.dirname()</code>：获取文件的父文件夹</li>
-<li><code>path.basename()</code>：获取文件名；</li>
-<li><code>path.extname()</code>：获取文件扩展名</li>
-<li><code>__dirname</code>：获取父文件夹路径</li>
+    <title>包管理工具</title>
+    <url>/2022/03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h2 id="包管理工具npm"><a href="#包管理工具npm" class="headerlink" title="包管理工具npm"></a>包管理工具npm</h2><ul>
+<li>发布自己的包其实是发布到registry上面的</li>
+<li>安装一个包时其实是从registry上面下载的包；</li>
 </ul>
 <span id="more"></span>
 
-<h3 id="路径拼接"><a href="#路径拼接" class="headerlink" title="路径拼接"></a>路径拼接</h3><ul>
-<li><code>path.join()</code></li>
-<li><code>path.resolve()</code><ul>
-<li>resolve函数会判断我们拼接的路径前面是否有/或../或./</li>
-<li>如果有表示是一个绝对路径，会返回对应的拼接路径</li>
-<li>如果没有，那么会和当前执行文件所在的文件夹进行路径的拼接</li>
+<h3 id="配置文件属性"><a href="#配置文件属性" class="headerlink" title="配置文件属性"></a>配置文件属性</h3><ul>
+<li>name</li>
+<li>version</li>
+<li>description</li>
+<li>author</li>
+<li>license</li>
+<li>private<ul>
+<li>记录当前的项目是否是私有的，当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
+</ul>
+</li>
+<li>main<ul>
+<li>设置程序的入口</li>
+<li>这个入口和webpack打包的入口并不冲突</li>
+</ul>
+</li>
+<li>script<ul>
+<li>配置一些脚本命令，以键值对的形式存在</li>
+</ul>
+</li>
+<li>dependencies<ul>
+<li>指定无论开发环境还是生成环境都需要依赖的包</li>
+<li>默认install不加参数，都是生产开发环境都需要依赖的包</li>
+</ul>
+</li>
+<li>devDependencies<ul>
+<li>只在开发环境依赖的包</li>
+<li><code>--save-dev</code>或<code>-D</code></li>
+</ul>
+</li>
+<li>版本<ul>
+<li><code>^x.y.z</code>：表示x是保持不变的，y和z永远安装最新的版<code>~x.y.z</code>：表示x和y保持不变的，z永远安装最新的版本</li>
+</ul>
+</li>
+<li>engines属性<ul>
+<li>用于指定Node和NPM的版本号</li>
+</ul>
+</li>
+<li>browserslist属性<ul>
+<li>用于配置打包后的JavaScript浏览器的兼容情况</li>
 </ul>
 </li>
 </ul>
-<h2 id="fs"><a href="#fs" class="headerlink" title="fs"></a>fs</h2><p>大多有三种操作方式</p>
-<ul>
-<li>同步操作</li>
-<li>异步回调函数操作</li>
-<li>异步Promise操作</li>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>全局安装<code>npm install -g xxx</code></li>
+<li>局部安装<code>npm install xxx</code></li>
 </ul>
-<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><ul>
-<li><code>fs.statSync(路径)</code></li>
-<li><code>fs.stat(路径，回调函数)</code></li>
-<li><code>fs.promise.stat(路径).then(state=&gt;console.log(state))</code></li>
+<p>全局安装了之后并不能让我们在所有的项目中使用所安装的库，只是命令能全局使用，如<code>yarn</code>全局安装。</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><img src="/.io//03/28/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/eeda32417effc890010a63994ed5a77.png" class title="安装过程">
+
+<h2 id="npm命令"><a href="#npm命令" class="headerlink" title="npm命令"></a>npm命令</h2><ul>
+<li><code>npm uninstall package</code></li>
+<li><code>npm uninstall package --save-dev</code></li>
+<li><code>npm rebuild</code><ul>
+<li>强制重新build</li>
 </ul>
-<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><p>Node.js抽象出操作系统之间的特定差异，并为所有打开的文件分配一个数字型的文件描述符</p>
-<ul>
-<li>fs.open()方法用于分配新的文件描述符，一旦被分配，则文件描述符可用于从文件读取数据、向文件写入数据、或请求关于文件的信息</li>
-<li><code>fs.open(路径，&quot;r&quot;，(err,fd)=&gt;console.log(fd))</code><ul>
-<li><code>fd</code>为文件描述符</li>
+</li>
+<li><code>npm cache clean</code><ul>
+<li>清除缓存</li>
+</ul>
+</li>
+<li><code>npm config get registry</code><ul>
+<li>查看npm镜像</li>
+</ul>
+</li>
+<li><code>npm config set registry 地址</code><ul>
+<li>修改npm镜像地址</li>
 </ul>
 </li>
 </ul>
-<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
-<li><code>fs.readFile(path，[,options], callback)</code>：读取文件的内容</li>
-<li><code>fs.writeFile(file, data[,options], callback)</code>：在文件中写入内容</li>
-</ul>
-<p>options参数</p>
-<ul>
-<li>flag：写入方式<ul>
-<li><code>w</code>打开文件写入，默认值</li>
-<li><code>w+</code>打开文件进行读写，如果不存在则创建文件</li>
-<li><code>r+</code>打开文件进行读写，如果不存在那么抛出异常</li>
-<li><code>r</code>打开文件读取，读取时的默认值</li>
-<li><code>a</code>打开要写入的文件，将流放在文件末尾。如果不存在则创建文件</li>
-<li><code>a+</code>打开文件以进行读写，将流放在文件末尾。如果不存在则创建文件</li>
-</ul>
-</li>
-<li>encoding：字符编码<ul>
-<li>不填写encoding，默认返回的结果是Buffer</li>
-<li><code>utf-8</code>能显示中文</li>
-</ul>
-</li>
-</ul>
-<h3 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h3><ul>
-<li><code>fs.exists()</code>判断文件夹是否存在，<code>fs.isDirectory()</code>判断是否是文件夹</li>
-<li><code>fs.mkdir()</code>或者<code>fs.mkdirSync()</code>创建一个新文件夹</li>
-<li><code>fs.readdir(文件夹路径，(err,files)=&gt;&#123;&#125;)</code></li>
-<li><code>fs.rename(旧文件，新文件，(err)=&gt;&#123;&#125;)</code></li>
-</ul>
-<h2 id="events"><a href="#events" class="headerlink" title="events"></a>events</h2><blockquote>
-<p>发出事件和监听事件都是通过<code>EventEmitter</code>类来完成的，它们都属于<code>events</code>对象。<code>constEventEmitter=require(&#39;events&#39;)</code>，<code>constemitter=newEventEmitter()</code></p>
-</blockquote>
-<ul>
-<li><code>emitter.on(eventName,listener)</code>：监听事件，也可以使用<code>addListener</code></li>
-<li><code>emitter.off(eventName,listener)</code>：移除事件监听，也可以使用<code>removeListener</code></li>
-<li><code>emitter.emit(eventName[,...args])</code>：发出事件，可以携带一些参数</li>
-<li><code>emitter.eventNames()</code>：返回当前EventEmitter对象注册的事件字符串数组</li>
-<li><code>emitter.getMaxListeners()</code>：返回当前EventEmitter对象的最大监听器数量</li>
-<li><code>emitter.listenerCount</code>(事件名称)：返回当前EventEmitter对象某一个事件名称，监听器的个数</li>
-<li><code>emitter.listeners</code>(事件名称)：返回当前EventEmitter对象某个事件监听器上所有的监听器数组</li>
-<li><code>emitter.once(eventName,listener)</code>：事件监听一次</li>
-<li><code>emitter.prependListener()</code>：将监听事件添加到最前面</li>
-<li><code>emitter.prependOnceListener()</code>：将监听事件添加到最前面，但是只监听一次</li>
-<li><code>emitter.removeAllListeners([eventName])</code>：移除所有的监听器</li>
-</ul>
+<h2 id="npx工具"><a href="#npx工具" class="headerlink" title="npx工具"></a>npx工具</h2><p>常见的是使用它来调用项目中的某个模块的指令，npx它会到当前目录的node_modules/.bin目录下查找对应的命令</p>
 ]]></content>
       <categories>
         <category>node</category>
       </categories>
       <tags>
-        <tag>模块</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
@@ -3481,418 +3429,6 @@
       </categories>
       <tags>
         <tag>Javascript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>搭建一个自己的博客</title>
-    <url>/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="Hexo-快速搭建"><a href="#Hexo-快速搭建" class="headerlink" title="Hexo 快速搭建"></a>Hexo 快速搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
-<li>git</li>
-<li>node</li>
-<li>npm</li>
-</ul>
-<span id="more"></span>
-
-<p>命令行里验证有无安装成功</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.24.0.windows.1</span><br><span class="line"></span><br><span class="line">$ node --version</span><br><span class="line">v14.17.5</span><br><span class="line"></span><br><span class="line">$ npm --version</span><br><span class="line">6.14.14</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置SSH-Key"><a href="#配置SSH-Key" class="headerlink" title="配置SSH Key"></a>配置SSH Key</h4><p>如果第一次用git工具，记得配置一下SSH key，为部署本地博客到 Github 做准备。</p>
-<p>如果之前没有创建，则执行以下命令全局配置一下本地账户：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>生成密钥SSK key</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;上面的邮箱&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>回车回车回车，即可生成ssh key。<code>.ssh</code>目录下有两个文件，<code>id_rsa</code>和<code>id_rsa.pub</code>，这两个就是ssh key的密钥对，前一个是私钥，后一个是公钥</p>
-<p>cat获取你的ssh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>复制输出内容</p>
-<p>登录github，settings -&gt; SSH and GPG keys -&gt; New SSH key</p>
-<p>Title随便写</p>
-<p>Key把刚才复制的内容copy到这，就确认完成了。</p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>执行命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli	<span class="comment"># -g 代表着全局安装</span></span><br></pre></td></tr></table></figure>
-
-<p>完成后建立自己的个人博客</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blogName</span><br><span class="line">$ <span class="built_in">cd</span> blogName</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建你的第一篇博文"><a href="#创建你的第一篇博文" class="headerlink" title="创建你的第一篇博文"></a>创建你的第一篇博文</h3><p>新建一篇博文：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="string">&#x27;新年快乐&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>在 <code>/source/_posts</code>文件夹下找到你的博文，使用typora（推荐）打开并编辑。</p>
-<p>保存后运行：</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate <span class="comment"># 生成静态文件，可简写为 hexo g</span></span><br><span class="line"><span class="variable">$ </span>hexo server <span class="comment"># 启动服务器。默认情况下，访问网址为：http://localhost:4000/。可以简写为 hexo s</span></span><br></pre></td></tr></table></figure>
-
-<p>此时已经可以在<code>public</code>文件夹下看到完整的静态文件。<br>在浏览器中输入<code>http://localhost:4000/</code>就可以看到预览效果了。</p>
-<p>以上是本地部署，下面讲博客部署到Github page上</p>
-<h2 id="部署到Github-page"><a href="#部署到Github-page" class="headerlink" title="部署到Github page"></a>部署到Github page</h2><p>登录github，新建仓库，仓库名为<code>username.github.io</code>，<strong>注意：<code>username</code>应该是你github的用户名</strong></p>
-<p>本地和github都完成之后，现在需要把这两者连接在一起</p>
-<ol>
-<li><p>修改配置</p>
-<p>在项目根目录下的<code>_config.yml</code>修改配置参数</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    github: https://github.com/你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
-<li><p>安装部署插件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p><code>hexo-deploy-git </code>插件是通过拷贝 <code>public</code> 文件夹内容到<code>.deploy_git</code>文件夹下，然后提交推送到远程分支上实现了网站文件的部署。</p>
-</li>
-<li><p>启动执行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p> 用浏览器输入，https://你的用户名.github.io，就可以看到你的博客了。</p>
-<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>个人用的是<a href="https://theme-next.js.org/">NexT主题</a></p>
-<p>进入项目根目录，下载NexT主题</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
-
-<p>修改<strong>项目根目录</strong>下的<code>_config.yml</code>的配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<p>注意：<code>_config.yml</code>配置文件有两个，一个在项目根目录，一个在主题目录<code>/themes/next</code>中。</p>
-<h2 id="NexT配置"><a href="#NexT配置" class="headerlink" title="NexT配置"></a>NexT配置</h2><p>以下均在<code>/themes/next</code>文件夹中的<code>_config.yml</code>文件中修改</p>
-<h3 id="修改NexT风格"><a href="#修改NexT风格" class="headerlink" title="修改NexT风格"></a>修改NexT风格</h3><p>NexT主题有四个风格，想要的取消注释</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line">scheme: Mist</span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="暗黑模式"><a href="#暗黑模式" class="headerlink" title="暗黑模式"></a>暗黑模式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Dark Mode</span></span><br><span class="line">darkmode: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="改变网页标签icon"><a href="#改变网页标签icon" class="headerlink" title="改变网页标签icon"></a>改变网页标签icon</h3><p>把你想要用的图片放在<code>/themes/next/source/images</code>中</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.ico</span><br><span class="line">  medium: /images/favicon-32x32-next.ico</span><br></pre></td></tr></table></figure>
-
-<p>插一个提示，可以在<a href="https://www.bitbug.net/">比特虫</a>在线制作icon</p>
-<h3 id="增加或删除博客页面功能"><a href="#增加或删除博客页面功能" class="headerlink" title="增加或删除博客页面功能"></a>增加或删除博客页面功能</h3><p>想用的取消注释，</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="添加标签页面"><a href="#添加标签页面" class="headerlink" title="添加标签页面"></a>添加标签页面</h4><p>在项目根目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/tags</span><br></pre></td></tr></table></figure>
-
-<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">date: 2022-01-04 13:29:07</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h4 id="添加分类页面"><a href="#添加分类页面" class="headerlink" title="添加分类页面"></a>添加分类页面</h4><p>在项目根目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/categories</span><br></pre></td></tr></table></figure>
-
-<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">date: 2022-01-04 13:55:58</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h4 id="添加about页面"><a href="#添加about页面" class="headerlink" title="添加about页面"></a>添加about页面</h4><p>在项目根目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/about</span><br></pre></td></tr></table></figure>
-
-<p>打开<code>index.md</code>文件，里面直接写你的个人介绍。</p>
-<h3 id="调整侧边栏位置"><a href="#调整侧边栏位置" class="headerlink" title="调整侧边栏位置"></a>调整侧边栏位置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  <span class="comment"># Sidebar Position.</span></span><br><span class="line">  <span class="comment">#position: left</span></span><br><span class="line">  position: right</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加侧边栏头像图片"><a href="#添加侧边栏头像图片" class="headerlink" title="添加侧边栏头像图片"></a>添加侧边栏头像图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># 把要展示的图片放在images中</span></span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  rounded: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="启用不蒜子统计"><a href="#启用不蒜子统计" class="headerlink" title="启用不蒜子统计"></a>启用不蒜子统计</h3><p>不蒜子是用于统计文章添加阅读次数</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  total_visitors: <span class="literal">true</span></span><br><span class="line">  total_visitors_icon: fa fa-user</span><br><span class="line">  total_views: <span class="literal">true</span></span><br><span class="line">  total_views_icon: fa fa-eye</span><br><span class="line">  post_views: <span class="literal">true</span></span><br><span class="line">  post_views_icon: fa fa-eye</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加加载进度条"><a href="#添加加载进度条" class="headerlink" title="添加加载进度条"></a>添加加载进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-pace source/lib/pace</span><br></pre></td></tr></table></figure>
-
-<p>修改配置文件 <code>themes/next/_config.yml</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加页面顶部阅读进度条"><a href="#添加页面顶部阅读进度条" class="headerlink" title="添加页面顶部阅读进度条"></a>添加页面顶部阅读进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-reading-progress source/lib/reading_progress</span><br></pre></td></tr></table></figure>
-
-<p>修改配置文件 <code>themes/next/_config.yml</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reading_progress:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  position: top               <span class="comment"># 进度条的位置：top | bottom</span></span><br><span class="line">  color: <span class="string">&quot;#37c6c0&quot;</span>            <span class="comment"># 进度条的颜色</span></span><br><span class="line">  height: 3px                 <span class="comment"># 进度条的大小</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="显示侧栏阅读进度百分比"><a href="#显示侧栏阅读进度百分比" class="headerlink" title="显示侧栏阅读进度百分比"></a>显示侧栏阅读进度百分比</h3><p>修改配置文件 <code>themes/next/_config.yml</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  sidebar: <span class="literal">false</span></span><br><span class="line">  scrollpercent: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="字数与阅读时长统计插件"><a href="#字数与阅读时长统计插件" class="headerlink" title="字数与阅读时长统计插件"></a>字数与阅读时长统计插件</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目根目录</span><br><span class="line">npm install eslint --save</span><br><span class="line">npm install hexo-symbols-count-<span class="built_in">time</span> --save</span><br></pre></td></tr></table></figure>
-
-<p>修改配置文件 <code>themes/next/_config.yml</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  time: <span class="literal">true</span>                   <span class="comment"># 文章阅读时长</span></span><br><span class="line">  symbols: <span class="literal">true</span>                <span class="comment"># 文章字数统计</span></span><br><span class="line">  total_time: <span class="literal">true</span>             <span class="comment"># 站点总阅读时长</span></span><br><span class="line">  total_symbols: <span class="literal">true</span>          <span class="comment"># 站点总字数统计</span></span><br><span class="line">  exclude_codeblock: <span class="literal">true</span>      <span class="comment"># 排除代码字数统计</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h3><p>进入项目根目录，下载插件<code>hexo-generator-searchdb</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install  hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<p>修改主题配置文件，添加<code>search</code>，并修改<code>local_search</code>中的<code>enable</code>，改为<code>true</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Local search</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="首页博文只展示部分文字"><a href="#首页博文只展示部分文字" class="headerlink" title="首页博文只展示部分文字"></a>首页博文只展示部分文字</h3><p>在文章想要分割的位置中添加一行<code>&lt;!--more--&gt;</code></p>
-<h3 id="markdown上使用图片，网页上能正常显示"><a href="#markdown上使用图片，网页上能正常显示" class="headerlink" title="markdown上使用图片，网页上能正常显示"></a>markdown上使用图片，网页上能正常显示</h3><ul>
-<li>修改根目录下的<code>_config.yml</code>文件，把<code>post_asset_folder</code>字段改为<code>true</code><ul>
-<li>改为之后，新建文章时<code>hexo new 文章标题</code>，_posts不仅会出现md文件，而且会出现一个同名的<strong>文件夹</strong>，之后这个文件夹放你要引用的图片</li>
-</ul>
-</li>
-<li>修改typora设置<img src="/.io//01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/5dcd1adfc992651e437559aa46f4476.png" class title="5dcd1adfc992651e437559aa46f4476"><ul>
-<li>以后拖拽图片进文章内之后，图片会自动添加到同名文件夹下面</li>
-</ul>
-</li>
-<li>下载插件<code>npm install hexo-asset-image --save</code></li>
-</ul>
-<p>根据网上的信息，这时候就<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>，按道理就能看到图片了，但结果我的就是不行，图片路径出现了<code>/.io//*******.png</code>，就前面会多出<code>/.io//</code>这个前缀，导致图片不能显示。</p>
-<p><strong>解决方法</strong></p>
-<p>修改一下项目根目录<code>/node_modules/hexo-asset-image/index.js</code>的24行左右，把 <code>link.lastIndexOf(&#39;.&#39;)</code> 修改为 <code>link.lastIndexOf(&#39;/&#39;)</code>就可以了。</p>
-<img src="/.io//01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/750ad85a47d9fa795e13bb8d4bf195e.png" class title="750ad85a47d9fa795e13bb8d4bf195e">
-
-<h2 id="备份数据"><a href="#备份数据" class="headerlink" title="备份数据"></a>备份数据</h2><ul>
-<li><p>修改<code>.gitignore</code>文件，添加<code>package-lock.json</code> 到忽略清单中</p>
-</li>
-<li><p>创建 <code>themes_custom/next</code> 文件夹，将对主题进行的配件修改的文件拷贝一份到这里</p>
-<ul>
-<li>例如<code>_config.yml</code>文件和source文件中的imag</li>
-</ul>
-</li>
-<li><p>执行以下命令，在本地创建备份仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">cd</span> blog</span><br><span class="line">$ git init</span><br><span class="line">已初始化空的 Git 仓库于 blog/.git/</span><br><span class="line"></span><br><span class="line">$ git submodule add https://github.com/theme-next/hexo-theme-next.git themes/next</span><br><span class="line">添加位于 <span class="string">&#x27;themes/next&#x27;</span> 的现存仓库到索引</span><br><span class="line"></span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">&quot;init blog backup&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>将备份内容 push 到远程仓库的备份分支 <code>hexo</code> 上：</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> git branch -m master hexo</span><br><span class="line">$ git remote add origin https://github.com/Mupceet/mupceet.github.io.git</span><br><span class="line">$ git push -u origin hexo:hexo</span><br></pre></td></tr></table></figure>
-
-<h2 id="恢复数据"><a href="#恢复数据" class="headerlink" title="恢复数据"></a>恢复数据</h2><p>新电脑同样需要配置hexo环境</p>
-<ul>
-<li>node</li>
-<li>npm</li>
-<li>git</li>
-</ul>
-<h3 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h3><ul>
-<li><code>git config --global user.name &quot;用户名&quot;</code></li>
-<li><code>git config --global user.email &quot;邮箱地址&quot;</code></li>
-</ul>
-<h3 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh key"></a>配置ssh key</h3><p>开头有写</p>
-<h3 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h3><ul>
-<li>克隆备份内容<ul>
-<li><code>git clone --recursive -b hexo https://github.com/yepwaibin/yepwaibin.github.io.git blog</code></li>
-</ul>
-</li>
-<li>下载npm依赖模块<ul>
-<li><code>cd blog</code></li>
-<li><code>npm install</code></li>
-</ul>
-</li>
-<li>恢复主题配置<ul>
-<li>将 <code>themes_custom</code> 文件夹中对主题的配置的修改恢复到对应的主题文件夹中，这里建议使用对比的方式对其进行修改，而不是直接覆盖，这样就完成了主题的配置。</li>
-</ul>
-</li>
-<li>克隆原博客内容<ul>
-<li><code>cd blog</code></li>
-<li><code>git clone https://github.com/yepwaibin/yepwaibin.github.io.git .deploy_git</code></li>
-</ul>
-</li>
-</ul>
-<p>就完成恢复了，之后正常写作。</p>
-<p><a href="https://mupceet.com/2019/09/backup-hexo-blog">参考链接</a></p>
-<h2 id="隐藏博文"><a href="#隐藏博文" class="headerlink" title="隐藏博文"></a>隐藏博文</h2><p>有时候一些非技术类的博文不想在博客上直接展示，我们可以使用一些技巧，将博文隐藏，只能通过url输入跳转。</p>
-<ol>
-<li><p>安装插件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   npm install hexo-hide-posts --save</span><br><span class="line"></span><br><span class="line">2. 在`_config.yml`文件中修改配置，添加下列配置</span><br><span class="line">   ```bash</span><br><span class="line">   # hexo-hide-posts</span><br><span class="line">   hide_posts:</span><br><span class="line">     enable: true</span><br><span class="line">     # hidden可以改成其他你喜欢的名字</span><br><span class="line">     filter: hidden</span><br><span class="line">     # 指定你想要传递隐藏文章的 generator，比如让所有隐藏文章在存档页面可见</span><br><span class="line">     # 常见的 generators 有：index, tag, category, archive, sitemap, feed, etc.</span><br><span class="line">     public_generators: []</span><br><span class="line">     # 为隐藏的文章添加 noindex meta 标签，阻止搜索引擎收录</span><br><span class="line">     noindex: true</span><br></pre></td></tr></table></figure></li>
-<li><p>在需要的隐藏的博文中，在文章的 <a href="https://hexo.io/docs/front-matter">front-matter</a> 中添加 <code>hidden: true</code> 即可隐藏文章</p>
-</li>
-<li><p>需要访问隐藏的博文时，直接在url上输入完整链接，即可展示文章。</p>
-</li>
-</ol>
-<p><a href="https://github.com/prinsss/hexo-hide-posts/blob/master/README_ZH.md">参考链接</a></p>
-<h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
-<li><code>hexo init [folder]</code> <ul>
-<li>Hexo 默认在目前的文件夹建立网站。</li>
-<li>Git clone <a href="https://github.com/hexojs/hexo-starter">hexo-starter</a> 和 <a href="https://github.com/hexojs/hexo-theme-landscape">hexo-theme-landscape</a> 主题到当前目录或指定目录。</li>
-<li>使用 <a href="https://classic.yarnpkg.com/lang/en/">Yarn 1</a>、<a href="https://pnpm.js.org/">pnpm</a> 或 <a href="https://docs.npmjs.com/cli/install">npm</a> 包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm 默认随 <a href="https://hexo.io/docs/#Install-Node-js">Node.js</a> 安装。</li>
-</ul>
-</li>
-<li><code>hexo new &#39;文章标题&#39;</code><ul>
-<li>新建文件，写的时候自己用typora打开写</li>
-</ul>
-</li>
-<li><code>hexo clean</code><ul>
-<li>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</li>
-<li>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</li>
-</ul>
-</li>
-<li><code>hexo generate</code><ul>
-<li>生成静态文件，可简写为<code>hexo g</code></li>
-</ul>
-</li>
-<li><code>hexo server</code><ul>
-<li>启动服务器。默认情况下，访问网址为：<code>http://localhost:4000/</code>。可以简写为 hexo s</li>
-</ul>
-</li>
-<li><code>hexo deploy</code><ul>
-<li>部署网站，可简写为<code>hexo d</code></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>新年快乐</title>
-    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
-    <content><![CDATA[<p>2022年希望有更好的明天</p>
-]]></content>
-      <categories>
-        <category>随记</category>
-      </categories>
-      <tags>
-        <tag>杂记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>理解事件循环</title>
-    <url>/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
-    <content><![CDATA[<blockquote>
-<p>事件循环理解成我们编写的JavaScript和浏览器或者Node之间的一个桥梁</p>
-<ul>
-<li>浏览器的事件循环是一个我们编写的JavaScript代码和浏览器API调用(setTimeout/AJAX/监听事件等)的一个桥梁,桥梁之间他们通过回调函数进行沟通</li>
-<li>Node的事件循环是一个我们编写的JavaScript代码和系统调用（filesystem、network等）之间的一个桥梁,桥梁之间他们通过回调函数进行沟通的.</li>
-</ul>
-</blockquote>
-<p>JavaScript的代码执行是在一个单独的线程中执行</p>
-<span id="more"></span>
-
-<h2 id="浏览器的事件循环"><a href="#浏览器的事件循环" class="headerlink" title="浏览器的事件循环"></a>浏览器的事件循环</h2><p>三个主要概念</p>
-<ul>
-<li>执行栈</li>
-<li>宏任务队列<ul>
-<li>ajax、setTimeout、setInterval、DOM监听、UIRendering等</li>
-</ul>
-</li>
-<li>微任务队列<ul>
-<li>Promise的then回调、MutationObserverAPI、queueMicrotask()等</li>
-</ul>
-</li>
-</ul>
-<h3 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h3><ol>
-<li><strong>JS引擎</strong>（唯一主线程）按顺序解析代码，遇到函数声明，直接跳过，遇到函数调用，入栈；</li>
-<li>如果是同步函数调用，直接执行得到结果，同步函数弹出栈，继续下一个函数调用；</li>
-<li>如果是异步函数调用，分发给<strong>WebAPI</strong>（多个辅助线程），异步函数弹出栈，继续下一个函数调用；</li>
-<li>WebAPI中，异步函数在相应辅助线程中处理完成后，即异步函数达到触发条件了（比如setTimeout设置的10s后），如果异步函数是宏任务，则入宏任务<strong>消息队列</strong>，如果是微任务，则入微任务消息队列；</li>
-<li><strong>EventLoop</strong>不停地检查主线程的调用栈与回调队列，当调用栈空时，就把微任务消息队列中的第一个任务推入栈中执行，执行完成后，再取第二个微任务，<strong>直到微任务消息队列为空</strong>；然后<br>去宏任务消息队列中取第一个宏任务推入栈中执行，当该宏任务执行完成后，在下一个宏任务执行前，再依次取出微任务消息队列中的所有微任务入栈执行。</li>
-<li>上述过程不断循环，每当微任务队列清空，可作为本轮事件循环的结束。</li>
-</ol>
-<h2 id="Node架构分析"><a href="#Node架构分析" class="headerlink" title="Node架构分析"></a>Node架构分析</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png" class title="架构图">
-
-<ul>
-<li>libuv中主要维护了一个EventLoop和workerthreads（线程池）<ul>
-<li>线程池会负责所有相关的操作，并且会通过轮训等方式等待结果</li>
-<li>当获取到结果时，就可以将对应的回调放到事件循环（某一个事件队列）中</li>
-<li>事件循环就可以负责接管后续的回调工作，告知JavaScript应用程序执行对应的回调函数</li>
-</ul>
-</li>
-<li>EventLoop负责调用系统的一些其他操作：文件的IO、Network、child-processes</li>
-</ul>
-<h2 id="阻塞式调用与非阻塞式调用区别"><a href="#阻塞式调用与非阻塞式调用区别" class="headerlink" title="阻塞式调用与非阻塞式调用区别"></a>阻塞式调用与非阻塞式调用区别</h2><ul>
-<li>阻塞式调用：调用结果返回之前，当前线程处于阻塞态（阻塞态CPU是不会分配时间片的），调用线程只有在得到调用结果之后才会继续执行</li>
-<li>非阻塞式调用：调用执行之后，当前线程不会停止执行，只需要过一段时间来检查一下有没有结果返回即可</li>
-</ul>
-<h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png" class title="事件循环阶段">
-
-<ol>
-<li>定时器（Timers）：本阶段执行已经被setTimeout()和setInterval()的调度回调函数</li>
-<li>待定回调（PendingCallback）：对某些系统操作（如TCP错误类型）执行回调，比如TCP连接时接收到ECONNREFUSED</li>
-<li>idle,prepare：仅系统内部使用</li>
-<li>轮询（Poll）：检索新的I/O事件；执行与I/O相关的回调</li>
-<li>检测：setImmediate()回调函数在这里执行</li>
-<li>关闭的回调函数：一些关闭的回调函数，如：socket.on(‘close’,…)</li>
-</ol>
-<p>Node同样也有宏任务微任务队列</p>
-<ul>
-<li>宏任务：setTimeout、setInterval、IO事件、setImmediate、close事件</li>
-<li>微任务：Promise的then回调、process.nextTick、queueMicrotask</li>
-</ul>
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>事件循环</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>模块化</title>
-    <url>/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
-    <content><![CDATA[<h2 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><ul>
-<li>exports</li>
-<li>module.exports<ul>
-<li>但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是 module</li>
-<li>所以在Node中真正用于导出的其实根本不是exports，而是module.exports</li>
-<li>本质上，这两个导出是一样的</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="引入——require-X"><a href="#引入——require-X" class="headerlink" title="引入——require(X)"></a>引入——require(X)</h3><ul>
-<li>X是一个核心模块<ul>
-<li>直接返回核心模块，并且停止查找</li>
-</ul>
-</li>
-<li>X是以 ./ 或 ../ 或 /（根目录）开头的，将X当做一个文件在对应的目录下查找<ul>
-<li>如果有后缀名，按照后缀名的格式查找对应的文件</li>
-<li>如果没有后缀名，会按照如下顺序<ul>
-<li>直接查找文件X</li>
-<li>查找X.js文件</li>
-<li>查找X.json文件</li>
-<li>查找X.node文件</li>
-</ul>
-</li>
-<li>没有找到对应的文件，将X作为一个目录<ul>
-<li>查找目录下面的index文件</li>
-<li>查找X/index.js文件</li>
-<li>查找X/index.json文件</li>
-<li>查找X/index.node文件</li>
-</ul>
-</li>
-<li>如果没有找到，那么报错：not found</li>
-</ul>
-</li>
-<li>直接是一个X（没有路径），并且X不是一个核心模块</li>
-</ul>
-<h3 id="模块加载过程"><a href="#模块加载过程" class="headerlink" title="模块加载过程"></a>模块加载过程</h3><ul>
-<li>模块在被第一次引入时，模块中的js代码会被运行一次</li>
-<li>模块被多次引入时，会缓存，最终只加载（运行）一次<ul>
-<li>每个模块对象module都有一个属性：loaded</li>
-<li>为false表示还没有加载，为true表示已经加载</li>
-</ul>
-</li>
-<li>如果有循环引入，Node采用的是深度优先算法加载模块</li>
-</ul>
-<h3 id="CommonJs加载过程"><a href="#CommonJs加载过程" class="headerlink" title="CommonJs加载过程"></a>CommonJs加载过程</h3><ul>
-<li>加载js文件的过程是运行时加载的，<strong>并且是同步的</strong></li>
-<li>CommonJS通过module.exports导出的是一个对象，由于指着同一对象，所以一个地方修改了对象属性，其他地方也会被修改</li>
-</ul>
-<h2 id="ES-Modules"><a href="#ES-Modules" class="headerlink" title="ES Modules"></a>ES Modules</h2><ul>
-<li>使用了import和export关键字</li>
-<li>它采用编译期的静态分析，并且也加入了动态引用的方式</li>
-</ul>
-<h3 id="导出——export"><a href="#导出——export" class="headerlink" title="导出——export"></a>导出——export</h3><ul>
-<li>在语句声明的前面直接加上export关键字</li>
-<li>将所有需要导出的标识符，放到export后面的 <code>&#123;&#125;</code>中<ul>
-<li>这里的<code> &#123;&#125;</code>里面不是ES6的对象字面量的增强写法，{}也不是表示一个对象的</li>
-</ul>
-</li>
-<li>导出时给标识符起一个别名</li>
-<li>默认导出——default</li>
-</ul>
-<h3 id="导入——import"><a href="#导入——import" class="headerlink" title="导入——import"></a>导入——import</h3><ul>
-<li><code>import &#123;标识符列表&#125; from &#39;模块&#39;</code><ul>
-<li>这里的{}也不是一个对象，里面只是存放导入的标识符列表内容</li>
-</ul>
-</li>
-<li>导入时给标识符起别名</li>
-<li>通过<code> *</code> 将模块功能放到一个模块功能对象上</li>
-</ul>
-<p>通过import加载一个模块，是不可以在其放到逻辑代码中的，因为ES Module在被JS引擎解析时，就必须知道它的依赖关系。</p>
-<p>假如要动态引入，可以使用import()函数，来动态加载</p>
-<h3 id="export-与-import-结合"><a href="#export-与-import-结合" class="headerlink" title="export 与 import 结合"></a>export 与 import 结合</h3><ul>
-<li><code>export &#123;xxx as yyy&#125; from &#39;./zzz&#39;</code></li>
-</ul>
-<h3 id="ES-Module加载过程"><a href="#ES-Module加载过程" class="headerlink" title="ES Module加载过程"></a>ES Module加载过程</h3><ul>
-<li>加载js文件的过程是<strong>编译（解析）</strong>时加载的，<strong>并且是异步的</strong><ul>
-<li>所以有时候也称ES Module是静态解析的，而不是动态或者运行时解析的</li>
-</ul>
-</li>
-<li>export导出的是变量本身的引用，在导出一个变量时，js引擎会解析这个语法，并且创建<strong>模块环境记录</strong>，模块环境记录会和变量进行绑定，并且这个绑定是实时的，</li>
-<li>在导入的地方，我们是可以<strong>实时</strong>的获取到绑定的最新值的，且在导入的地方<strong>不可以修改变量</strong>，因为它只是被绑定到了这个变量上（其实是一个<strong>常量</strong>）</li>
-</ul>
-]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>模块化</tag>
       </tags>
   </entry>
   <entry>
@@ -4325,6 +3861,345 @@
       </tags>
   </entry>
   <entry>
+    <title>常用内置模块</title>
+    <url>/2022/03/28/%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><h3 id="获取路径信息"><a href="#获取路径信息" class="headerlink" title="获取路径信息"></a>获取路径信息</h3><ul>
+<li><code>path.dirname()</code>：获取文件的父文件夹</li>
+<li><code>path.basename()</code>：获取文件名；</li>
+<li><code>path.extname()</code>：获取文件扩展名</li>
+<li><code>__dirname</code>：获取父文件夹路径</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="路径拼接"><a href="#路径拼接" class="headerlink" title="路径拼接"></a>路径拼接</h3><ul>
+<li><code>path.join()</code></li>
+<li><code>path.resolve()</code><ul>
+<li>resolve函数会判断我们拼接的路径前面是否有/或../或./</li>
+<li>如果有表示是一个绝对路径，会返回对应的拼接路径</li>
+<li>如果没有，那么会和当前执行文件所在的文件夹进行路径的拼接</li>
+</ul>
+</li>
+</ul>
+<h2 id="fs"><a href="#fs" class="headerlink" title="fs"></a>fs</h2><p>大多有三种操作方式</p>
+<ul>
+<li>同步操作</li>
+<li>异步回调函数操作</li>
+<li>异步Promise操作</li>
+</ul>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><ul>
+<li><code>fs.statSync(路径)</code></li>
+<li><code>fs.stat(路径，回调函数)</code></li>
+<li><code>fs.promise.stat(路径).then(state=&gt;console.log(state))</code></li>
+</ul>
+<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><p>Node.js抽象出操作系统之间的特定差异，并为所有打开的文件分配一个数字型的文件描述符</p>
+<ul>
+<li>fs.open()方法用于分配新的文件描述符，一旦被分配，则文件描述符可用于从文件读取数据、向文件写入数据、或请求关于文件的信息</li>
+<li><code>fs.open(路径，&quot;r&quot;，(err,fd)=&gt;console.log(fd))</code><ul>
+<li><code>fd</code>为文件描述符</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
+<li><code>fs.readFile(path，[,options], callback)</code>：读取文件的内容</li>
+<li><code>fs.writeFile(file, data[,options], callback)</code>：在文件中写入内容</li>
+</ul>
+<p>options参数</p>
+<ul>
+<li>flag：写入方式<ul>
+<li><code>w</code>打开文件写入，默认值</li>
+<li><code>w+</code>打开文件进行读写，如果不存在则创建文件</li>
+<li><code>r+</code>打开文件进行读写，如果不存在那么抛出异常</li>
+<li><code>r</code>打开文件读取，读取时的默认值</li>
+<li><code>a</code>打开要写入的文件，将流放在文件末尾。如果不存在则创建文件</li>
+<li><code>a+</code>打开文件以进行读写，将流放在文件末尾。如果不存在则创建文件</li>
+</ul>
+</li>
+<li>encoding：字符编码<ul>
+<li>不填写encoding，默认返回的结果是Buffer</li>
+<li><code>utf-8</code>能显示中文</li>
+</ul>
+</li>
+</ul>
+<h3 id="文件夹操作"><a href="#文件夹操作" class="headerlink" title="文件夹操作"></a>文件夹操作</h3><ul>
+<li><code>fs.exists()</code>判断文件夹是否存在，<code>fs.isDirectory()</code>判断是否是文件夹</li>
+<li><code>fs.mkdir()</code>或者<code>fs.mkdirSync()</code>创建一个新文件夹</li>
+<li><code>fs.readdir(文件夹路径，(err,files)=&gt;&#123;&#125;)</code></li>
+<li><code>fs.rename(旧文件，新文件，(err)=&gt;&#123;&#125;)</code></li>
+</ul>
+<h2 id="events"><a href="#events" class="headerlink" title="events"></a>events</h2><blockquote>
+<p>发出事件和监听事件都是通过<code>EventEmitter</code>类来完成的，它们都属于<code>events</code>对象。<code>constEventEmitter=require(&#39;events&#39;)</code>，<code>constemitter=newEventEmitter()</code></p>
+</blockquote>
+<ul>
+<li><code>emitter.on(eventName,listener)</code>：监听事件，也可以使用<code>addListener</code></li>
+<li><code>emitter.off(eventName,listener)</code>：移除事件监听，也可以使用<code>removeListener</code></li>
+<li><code>emitter.emit(eventName[,...args])</code>：发出事件，可以携带一些参数</li>
+<li><code>emitter.eventNames()</code>：返回当前EventEmitter对象注册的事件字符串数组</li>
+<li><code>emitter.getMaxListeners()</code>：返回当前EventEmitter对象的最大监听器数量</li>
+<li><code>emitter.listenerCount</code>(事件名称)：返回当前EventEmitter对象某一个事件名称，监听器的个数</li>
+<li><code>emitter.listeners</code>(事件名称)：返回当前EventEmitter对象某个事件监听器上所有的监听器数组</li>
+<li><code>emitter.once(eventName,listener)</code>：事件监听一次</li>
+<li><code>emitter.prependListener()</code>：将监听事件添加到最前面</li>
+<li><code>emitter.prependOnceListener()</code>：将监听事件添加到最前面，但是只监听一次</li>
+<li><code>emitter.removeAllListeners([eventName])</code>：移除所有的监听器</li>
+</ul>
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>模块</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新年快乐</title>
+    <url>/2022/01/04/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90/</url>
+    <content><![CDATA[<p>2022年希望有更好的明天</p>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模块化</title>
+    <url>/2022/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h2><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><ul>
+<li>exports</li>
+<li>module.exports<ul>
+<li>但是为了实现模块的导出，Node中使用的是Module的类，每一个模块都是Module的一个实例，也就是 module</li>
+<li>所以在Node中真正用于导出的其实根本不是exports，而是module.exports</li>
+<li>本质上，这两个导出是一样的</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="引入——require-X"><a href="#引入——require-X" class="headerlink" title="引入——require(X)"></a>引入——require(X)</h3><ul>
+<li>X是一个核心模块<ul>
+<li>直接返回核心模块，并且停止查找</li>
+</ul>
+</li>
+<li>X是以 ./ 或 ../ 或 /（根目录）开头的，将X当做一个文件在对应的目录下查找<ul>
+<li>如果有后缀名，按照后缀名的格式查找对应的文件</li>
+<li>如果没有后缀名，会按照如下顺序<ul>
+<li>直接查找文件X</li>
+<li>查找X.js文件</li>
+<li>查找X.json文件</li>
+<li>查找X.node文件</li>
+</ul>
+</li>
+<li>没有找到对应的文件，将X作为一个目录<ul>
+<li>查找目录下面的index文件</li>
+<li>查找X/index.js文件</li>
+<li>查找X/index.json文件</li>
+<li>查找X/index.node文件</li>
+</ul>
+</li>
+<li>如果没有找到，那么报错：not found</li>
+</ul>
+</li>
+<li>直接是一个X（没有路径），并且X不是一个核心模块</li>
+</ul>
+<h3 id="模块加载过程"><a href="#模块加载过程" class="headerlink" title="模块加载过程"></a>模块加载过程</h3><ul>
+<li>模块在被第一次引入时，模块中的js代码会被运行一次</li>
+<li>模块被多次引入时，会缓存，最终只加载（运行）一次<ul>
+<li>每个模块对象module都有一个属性：loaded</li>
+<li>为false表示还没有加载，为true表示已经加载</li>
+</ul>
+</li>
+<li>如果有循环引入，Node采用的是深度优先算法加载模块</li>
+</ul>
+<h3 id="CommonJs加载过程"><a href="#CommonJs加载过程" class="headerlink" title="CommonJs加载过程"></a>CommonJs加载过程</h3><ul>
+<li>加载js文件的过程是运行时加载的，<strong>并且是同步的</strong></li>
+<li>CommonJS通过module.exports导出的是一个对象，由于指着同一对象，所以一个地方修改了对象属性，其他地方也会被修改</li>
+</ul>
+<h2 id="ES-Modules"><a href="#ES-Modules" class="headerlink" title="ES Modules"></a>ES Modules</h2><ul>
+<li>使用了import和export关键字</li>
+<li>它采用编译期的静态分析，并且也加入了动态引用的方式</li>
+</ul>
+<h3 id="导出——export"><a href="#导出——export" class="headerlink" title="导出——export"></a>导出——export</h3><ul>
+<li>在语句声明的前面直接加上export关键字</li>
+<li>将所有需要导出的标识符，放到export后面的 <code>&#123;&#125;</code>中<ul>
+<li>这里的<code> &#123;&#125;</code>里面不是ES6的对象字面量的增强写法，{}也不是表示一个对象的</li>
+</ul>
+</li>
+<li>导出时给标识符起一个别名</li>
+<li>默认导出——default</li>
+</ul>
+<h3 id="导入——import"><a href="#导入——import" class="headerlink" title="导入——import"></a>导入——import</h3><ul>
+<li><code>import &#123;标识符列表&#125; from &#39;模块&#39;</code><ul>
+<li>这里的{}也不是一个对象，里面只是存放导入的标识符列表内容</li>
+</ul>
+</li>
+<li>导入时给标识符起别名</li>
+<li>通过<code> *</code> 将模块功能放到一个模块功能对象上</li>
+</ul>
+<p>通过import加载一个模块，是不可以在其放到逻辑代码中的，因为ES Module在被JS引擎解析时，就必须知道它的依赖关系。</p>
+<p>假如要动态引入，可以使用import()函数，来动态加载</p>
+<h3 id="export-与-import-结合"><a href="#export-与-import-结合" class="headerlink" title="export 与 import 结合"></a>export 与 import 结合</h3><ul>
+<li><code>export &#123;xxx as yyy&#125; from &#39;./zzz&#39;</code></li>
+</ul>
+<h3 id="ES-Module加载过程"><a href="#ES-Module加载过程" class="headerlink" title="ES Module加载过程"></a>ES Module加载过程</h3><ul>
+<li>加载js文件的过程是<strong>编译（解析）</strong>时加载的，<strong>并且是异步的</strong><ul>
+<li>所以有时候也称ES Module是静态解析的，而不是动态或者运行时解析的</li>
+</ul>
+</li>
+<li>export导出的是变量本身的引用，在导出一个变量时，js引擎会解析这个语法，并且创建<strong>模块环境记录</strong>，模块环境记录会和变量进行绑定，并且这个绑定是实时的，</li>
+<li>在导入的地方，我们是可以<strong>实时</strong>的获取到绑定的最新值的，且在导入的地方<strong>不可以修改变量</strong>，因为它只是被绑定到了这个变量上（其实是一个<strong>常量</strong>）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>模块化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理解事件循环</title>
+    <url>/2022/03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<blockquote>
+<p>事件循环理解成我们编写的JavaScript和浏览器或者Node之间的一个桥梁</p>
+<ul>
+<li>浏览器的事件循环是一个我们编写的JavaScript代码和浏览器API调用(setTimeout/AJAX/监听事件等)的一个桥梁,桥梁之间他们通过回调函数进行沟通</li>
+<li>Node的事件循环是一个我们编写的JavaScript代码和系统调用（filesystem、network等）之间的一个桥梁,桥梁之间他们通过回调函数进行沟通的.</li>
+</ul>
+</blockquote>
+<p>JavaScript的代码执行是在一个单独的线程中执行</p>
+<span id="more"></span>
+
+<h2 id="浏览器的事件循环"><a href="#浏览器的事件循环" class="headerlink" title="浏览器的事件循环"></a>浏览器的事件循环</h2><p>三个主要概念</p>
+<ul>
+<li>执行栈</li>
+<li>宏任务队列<ul>
+<li>ajax、setTimeout、setInterval、DOM监听、UIRendering等</li>
+</ul>
+</li>
+<li>微任务队列<ul>
+<li>Promise的then回调、MutationObserverAPI、queueMicrotask()等</li>
+</ul>
+</li>
+</ul>
+<h3 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h3><ol>
+<li><strong>JS引擎</strong>（唯一主线程）按顺序解析代码，遇到函数声明，直接跳过，遇到函数调用，入栈；</li>
+<li>如果是同步函数调用，直接执行得到结果，同步函数弹出栈，继续下一个函数调用；</li>
+<li>如果是异步函数调用，分发给<strong>WebAPI</strong>（多个辅助线程），异步函数弹出栈，继续下一个函数调用；</li>
+<li>WebAPI中，异步函数在相应辅助线程中处理完成后，即异步函数达到触发条件了（比如setTimeout设置的10s后），如果异步函数是宏任务，则入宏任务<strong>消息队列</strong>，如果是微任务，则入微任务消息队列；</li>
+<li><strong>EventLoop</strong>不停地检查主线程的调用栈与回调队列，当调用栈空时，就把微任务消息队列中的第一个任务推入栈中执行，执行完成后，再取第二个微任务，<strong>直到微任务消息队列为空</strong>；然后<br>去宏任务消息队列中取第一个宏任务推入栈中执行，当该宏任务执行完成后，在下一个宏任务执行前，再依次取出微任务消息队列中的所有微任务入栈执行。</li>
+<li>上述过程不断循环，每当微任务队列清空，可作为本轮事件循环的结束。</li>
+</ol>
+<h2 id="Node架构分析"><a href="#Node架构分析" class="headerlink" title="Node架构分析"></a>Node架构分析</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/e1dd87284cba258b09d9016c28cd2ad.png" class title="架构图">
+
+<ul>
+<li>libuv中主要维护了一个EventLoop和workerthreads（线程池）<ul>
+<li>线程池会负责所有相关的操作，并且会通过轮训等方式等待结果</li>
+<li>当获取到结果时，就可以将对应的回调放到事件循环（某一个事件队列）中</li>
+<li>事件循环就可以负责接管后续的回调工作，告知JavaScript应用程序执行对应的回调函数</li>
+</ul>
+</li>
+<li>EventLoop负责调用系统的一些其他操作：文件的IO、Network、child-processes</li>
+</ul>
+<h2 id="阻塞式调用与非阻塞式调用区别"><a href="#阻塞式调用与非阻塞式调用区别" class="headerlink" title="阻塞式调用与非阻塞式调用区别"></a>阻塞式调用与非阻塞式调用区别</h2><ul>
+<li>阻塞式调用：调用结果返回之前，当前线程处于阻塞态（阻塞态CPU是不会分配时间片的），调用线程只有在得到调用结果之后才会继续执行</li>
+<li>非阻塞式调用：调用执行之后，当前线程不会停止执行，只需要过一段时间来检查一下有没有结果返回即可</li>
+</ul>
+<h2 id="Node事件循环"><a href="#Node事件循环" class="headerlink" title="Node事件循环"></a>Node事件循环</h2><img src="/.io//03/27/%E7%90%86%E8%A7%A3%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/709f2fa0e93e6de32c891aabe7df3cc.png" class title="事件循环阶段">
+
+<ol>
+<li>定时器（Timers）：本阶段执行已经被setTimeout()和setInterval()的调度回调函数</li>
+<li>待定回调（PendingCallback）：对某些系统操作（如TCP错误类型）执行回调，比如TCP连接时接收到ECONNREFUSED</li>
+<li>idle,prepare：仅系统内部使用</li>
+<li>轮询（Poll）：检索新的I/O事件；执行与I/O相关的回调</li>
+<li>检测：setImmediate()回调函数在这里执行</li>
+<li>关闭的回调函数：一些关闭的回调函数，如：socket.on(‘close’,…)</li>
+</ol>
+<p>Node同样也有宏任务微任务队列</p>
+<ul>
+<li>宏任务：setTimeout、setInterval、IO事件、setImmediate、close事件</li>
+<li>微任务：Promise的then回调、process.nextTick、queueMicrotask</li>
+</ul>
+]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>事件循环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>理解执行上下文</title>
+    <url>/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
+    <content><![CDATA[<h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
+<ul>
+<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
+<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
+<li><code>Eval </code>函数执行上下文</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
+<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
+<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
+</blockquote>
+<ol>
+<li><p>创建变量对象</p>
+<blockquote>
+<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+</blockquote>
+<ol>
+<li><p>初始化函数的所有形参</p>
+<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为undefined</li>
+</ul>
+</li>
+<li><p>初始化函数声明</p>
+<ul>
+<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li><p>初始变量声明</p>
+<ul>
+<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
+</li>
+<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>建立作用域</p>
+<ol>
+<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
+</ol>
+</li>
+<li><p>确定this指向</p>
+<ul>
+<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
+</ul>
+</li>
+</ol>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
+<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
+<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
+</blockquote>
+<ul>
+<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
+<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深入理解Javascript</category>
+      </categories>
+      <tags>
+        <tag>执行上下文</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>语言基础</title>
     <url>/2022/01/06/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
@@ -4689,6 +4564,127 @@ func()
 <li>通过函数名来调用函数，要传给函数的参数放在括号里</li>
 <li>不需要指定是否返回值。任何函数在任何时间都可以使用return语句来返回函数的值，用法是后跟要返回的值</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Javascript高级程序设计</category>
+      </categories>
+      <tags>
+        <tag>Javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>迭代器与生成器</title>
+    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
+<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
+<p>在无迭代器时，迭代有两个缺点</p>
+<ul>
+<li>迭代之前需要事先知道如何使用数据结构</li>
+<li>遍历顺序并不是数据结构固有的</li>
+</ul>
+<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
+<span id="more"></span>
+
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
+<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
+<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
+</blockquote>
+<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
+<p>可迭代对象</p>
+<ul>
+<li>包含元素有限</li>
+<li>具有无歧义的遍历顺序</li>
+</ul>
+<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
+<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
+<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
+<ul>
+<li>支持迭代的自我识别能力</li>
+<li>创建实现<code>Iterator</code>接口的对象的能力</li>
+</ul>
+<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
+<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
+<ul>
+<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
+<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
+<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
+<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
+</ul>
+<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
+<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
+<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
+<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
+<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
+<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
+<p>可能情形：</p>
+<ol>
+<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
+<li>解构操作并未消费所有值</li>
+</ol>
+<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
+<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
+<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
+</blockquote>
+<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
+<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
+<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
+<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
+<p>生成器函数</p>
+<ul>
+<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
+<li>初次调用生成器函数并不会打印日志</li>
+</ul>
+</li>
+<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
+<li><code>g===g[Symbol.iterator]()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
+<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
+</blockquote>
+<p>yield关键字</p>
+<ul>
+<li>有点像函数的中间返回语句<ul>
+<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
+<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
+</ul>
+</li>
+<li>只能在生成器函数内部使用</li>
+<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
+<li>可以作为函数的中间参数使用<ul>
+<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
+<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
+</ul>
+</li>
+<li><code>yield</code>关键字可以同时用于输入和输出</li>
+<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
+<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
+</ul>
+</li>
+</ul>
+<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
+<p>生成器对象作为可迭代对象</p>
+<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
+<ol>
+<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
+<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
+<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
+<li>错误处理会跳过对应的<code>yield</code></li>
+<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Javascript高级程序设计</category>
@@ -5089,195 +5085,237 @@ console.log(arr.includes(NaN))//true
       </tags>
   </entry>
   <entry>
-    <title>理解执行上下文</title>
-    <url>/2022/03/18/%E7%90%86%E8%A7%A3%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
-    <content><![CDATA[<h2 id="什么是执行上下文"><a href="#什么是执行上下文" class="headerlink" title="什么是执行上下文"></a>什么是执行上下文</h2><p>执行上下文就是当前代码的执行环境，包含三种类型</p>
-<ul>
-<li>全局执行上下文：创建一个全局的window对象（浏览器的情况下），并且设置<code>this</code>的值等于这个全局对象。</li>
-<li>函数执行上下文：每当一个函数被调用时,都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。</li>
-<li><code>Eval </code>函数执行上下文</li>
+    <title>搭建一个自己的博客</title>
+    <url>/2022/01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="Hexo-快速搭建"><a href="#Hexo-快速搭建" class="headerlink" title="Hexo 快速搭建"></a>Hexo 快速搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
+<li>git</li>
+<li>node</li>
+<li>npm</li>
 </ul>
 <span id="more"></span>
 
-<h2 id="执行上下文生命周期"><a href="#执行上下文生命周期" class="headerlink" title="执行上下文生命周期"></a>执行上下文生命周期</h2><p>可以分为三个阶段</p>
-<h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><blockquote>
-<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向。</p>
-</blockquote>
+<p>命令行里验证有无安装成功</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.24.0.windows.1</span><br><span class="line"></span><br><span class="line">$ node --version</span><br><span class="line">v14.17.5</span><br><span class="line"></span><br><span class="line">$ npm --version</span><br><span class="line">6.14.14</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置SSH-Key"><a href="#配置SSH-Key" class="headerlink" title="配置SSH Key"></a>配置SSH Key</h4><p>如果第一次用git工具，记得配置一下SSH key，为部署本地博客到 Github 做准备。</p>
+<p>如果之前没有创建，则执行以下命令全局配置一下本地账户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>生成密钥SSK key</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;上面的邮箱&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>回车回车回车，即可生成ssh key。<code>.ssh</code>目录下有两个文件，<code>id_rsa</code>和<code>id_rsa.pub</code>，这两个就是ssh key的密钥对，前一个是私钥，后一个是公钥</p>
+<p>cat获取你的ssh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>复制输出内容</p>
+<p>登录github，settings -&gt; SSH and GPG keys -&gt; New SSH key</p>
+<p>Title随便写</p>
+<p>Key把刚才复制的内容copy到这，就确认完成了。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli	<span class="comment"># -g 代表着全局安装</span></span><br></pre></td></tr></table></figure>
+
+<p>完成后建立自己的个人博客</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blogName</span><br><span class="line">$ <span class="built_in">cd</span> blogName</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建你的第一篇博文"><a href="#创建你的第一篇博文" class="headerlink" title="创建你的第一篇博文"></a>创建你的第一篇博文</h3><p>新建一篇博文：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="string">&#x27;新年快乐&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>/source/_posts</code>文件夹下找到你的博文，使用typora（推荐）打开并编辑。</p>
+<p>保存后运行：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo generate <span class="comment"># 生成静态文件，可简写为 hexo g</span></span><br><span class="line"><span class="variable">$ </span>hexo server <span class="comment"># 启动服务器。默认情况下，访问网址为：http://localhost:4000/。可以简写为 hexo s</span></span><br></pre></td></tr></table></figure>
+
+<p>此时已经可以在<code>public</code>文件夹下看到完整的静态文件。<br>在浏览器中输入<code>http://localhost:4000/</code>就可以看到预览效果了。</p>
+<p>以上是本地部署，下面讲博客部署到Github page上</p>
+<h2 id="部署到Github-page"><a href="#部署到Github-page" class="headerlink" title="部署到Github page"></a>部署到Github page</h2><p>登录github，新建仓库，仓库名为<code>username.github.io</code>，<strong>注意：<code>username</code>应该是你github的用户名</strong></p>
+<p>本地和github都完成之后，现在需要把这两者连接在一起</p>
 <ol>
-<li><p>创建变量对象</p>
-<blockquote>
-<p><strong>细节：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</strong></p>
-<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
-</blockquote>
+<li><p>修改配置</p>
+<p>在项目根目录下的<code>_config.yml</code>修改配置参数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    github: https://github.com/你的用户名/你的用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>安装部署插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p><code>hexo-deploy-git </code>插件是通过拷贝 <code>public</code> 文件夹内容到<code>.deploy_git</code>文件夹下，然后提交推送到远程分支上实现了网站文件的部署。</p>
+</li>
+<li><p>启动执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p> 用浏览器输入，https://你的用户名.github.io，就可以看到你的博客了。</p>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>个人用的是<a href="https://theme-next.js.org/">NexT主题</a></p>
+<p>进入项目根目录，下载NexT主题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+
+<p>修改<strong>项目根目录</strong>下的<code>_config.yml</code>的配置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>_config.yml</code>配置文件有两个，一个在项目根目录，一个在主题目录<code>/themes/next</code>中。</p>
+<h2 id="NexT配置"><a href="#NexT配置" class="headerlink" title="NexT配置"></a>NexT配置</h2><p>以下均在<code>/themes/next</code>文件夹中的<code>_config.yml</code>文件中修改</p>
+<h3 id="修改NexT风格"><a href="#修改NexT风格" class="headerlink" title="修改NexT风格"></a>修改NexT风格</h3><p>NexT主题有四个风格，想要的取消注释</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line">scheme: Mist</span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="暗黑模式"><a href="#暗黑模式" class="headerlink" title="暗黑模式"></a>暗黑模式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Dark Mode</span></span><br><span class="line">darkmode: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改变网页标签icon"><a href="#改变网页标签icon" class="headerlink" title="改变网页标签icon"></a>改变网页标签icon</h3><p>把你想要用的图片放在<code>/themes/next/source/images</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.ico</span><br><span class="line">  medium: /images/favicon-32x32-next.ico</span><br></pre></td></tr></table></figure>
+
+<p>插一个提示，可以在<a href="https://www.bitbug.net/">比特虫</a>在线制作icon</p>
+<h3 id="增加或删除博客页面功能"><a href="#增加或删除博客页面功能" class="headerlink" title="增加或删除博客页面功能"></a>增加或删除博客页面功能</h3><p>想用的取消注释，</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="添加标签页面"><a href="#添加标签页面" class="headerlink" title="添加标签页面"></a>添加标签页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/tags</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">date: 2022-01-04 13:29:07</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加分类页面"><a href="#添加分类页面" class="headerlink" title="添加分类页面"></a>添加分类页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page categories</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/categories</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，增加一个<code>type</code>字段</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">date: 2022-01-04 13:55:58</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加about页面"><a href="#添加about页面" class="headerlink" title="添加about页面"></a>添加about页面</h4><p>在项目根目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page tags</span><br><span class="line"><span class="built_in">cd</span> ./<span class="built_in">source</span>/about</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>index.md</code>文件，里面直接写你的个人介绍。</p>
+<h3 id="调整侧边栏位置"><a href="#调整侧边栏位置" class="headerlink" title="调整侧边栏位置"></a>调整侧边栏位置</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  <span class="comment"># Sidebar Position.</span></span><br><span class="line">  <span class="comment">#position: left</span></span><br><span class="line">  position: right</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加侧边栏头像图片"><a href="#添加侧边栏头像图片" class="headerlink" title="添加侧边栏头像图片"></a>添加侧边栏头像图片</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Sidebar Avatar</span></span><br><span class="line">avatar:</span><br><span class="line">  <span class="comment"># 把要展示的图片放在images中</span></span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  <span class="comment"># If true, the avatar will be displayed in circle.</span></span><br><span class="line">  rounded: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># If true, the avatar will be rotated with the cursor.</span></span><br><span class="line">  rotated: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="启用不蒜子统计"><a href="#启用不蒜子统计" class="headerlink" title="启用不蒜子统计"></a>启用不蒜子统计</h3><p>不蒜子是用于统计文章添加阅读次数</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  total_visitors: <span class="literal">true</span></span><br><span class="line">  total_visitors_icon: fa fa-user</span><br><span class="line">  total_views: <span class="literal">true</span></span><br><span class="line">  total_views_icon: fa fa-eye</span><br><span class="line">  post_views: <span class="literal">true</span></span><br><span class="line">  post_views_icon: fa fa-eye</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加加载进度条"><a href="#添加加载进度条" class="headerlink" title="添加加载进度条"></a>添加加载进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-pace source/lib/pace</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加页面顶部阅读进度条"><a href="#添加页面顶部阅读进度条" class="headerlink" title="添加页面顶部阅读进度条"></a>添加页面顶部阅读进度条</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd themes/next</span><br><span class="line">git clone https://github.com/theme-next/theme-next-reading-progress source/lib/reading_progress</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reading_progress:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  position: top               <span class="comment"># 进度条的位置：top | bottom</span></span><br><span class="line">  color: <span class="string">&quot;#37c6c0&quot;</span>            <span class="comment"># 进度条的颜色</span></span><br><span class="line">  height: 3px                 <span class="comment"># 进度条的大小</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="显示侧栏阅读进度百分比"><a href="#显示侧栏阅读进度百分比" class="headerlink" title="显示侧栏阅读进度百分比"></a>显示侧栏阅读进度百分比</h3><p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  sidebar: <span class="literal">false</span></span><br><span class="line">  scrollpercent: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字数与阅读时长统计插件"><a href="#字数与阅读时长统计插件" class="headerlink" title="字数与阅读时长统计插件"></a>字数与阅读时长统计插件</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> 项目根目录</span><br><span class="line">npm install eslint --save</span><br><span class="line">npm install hexo-symbols-count-<span class="built_in">time</span> --save</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件 <code>themes/next/_config.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  time: <span class="literal">true</span>                   <span class="comment"># 文章阅读时长</span></span><br><span class="line">  symbols: <span class="literal">true</span>                <span class="comment"># 文章字数统计</span></span><br><span class="line">  total_time: <span class="literal">true</span>             <span class="comment"># 站点总阅读时长</span></span><br><span class="line">  total_symbols: <span class="literal">true</span>          <span class="comment"># 站点总字数统计</span></span><br><span class="line">  exclude_codeblock: <span class="literal">true</span>      <span class="comment"># 排除代码字数统计</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h3><p>进入项目根目录，下载插件<code>hexo-generator-searchdb</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install  hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>修改主题配置文件，添加<code>search</code>，并修改<code>local_search</code>中的<code>enable</code>，改为<code>true</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Local search</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="首页博文只展示部分文字"><a href="#首页博文只展示部分文字" class="headerlink" title="首页博文只展示部分文字"></a>首页博文只展示部分文字</h3><p>在文章想要分割的位置中添加一行<code>&lt;!--more--&gt;</code></p>
+<h3 id="markdown上使用图片，网页上能正常显示"><a href="#markdown上使用图片，网页上能正常显示" class="headerlink" title="markdown上使用图片，网页上能正常显示"></a>markdown上使用图片，网页上能正常显示</h3><ul>
+<li>修改根目录下的<code>_config.yml</code>文件，把<code>post_asset_folder</code>字段改为<code>true</code><ul>
+<li>改为之后，新建文章时<code>hexo new 文章标题</code>，_posts不仅会出现md文件，而且会出现一个同名的<strong>文件夹</strong>，之后这个文件夹放你要引用的图片</li>
+</ul>
+</li>
+<li>修改typora设置<img src="/.io//01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/5dcd1adfc992651e437559aa46f4476.png" class title="5dcd1adfc992651e437559aa46f4476"><ul>
+<li>以后拖拽图片进文章内之后，图片会自动添加到同名文件夹下面</li>
+</ul>
+</li>
+<li>下载插件<code>npm install hexo-asset-image --save</code></li>
+</ul>
+<p>根据网上的信息，这时候就<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>，按道理就能看到图片了，但结果我的就是不行，图片路径出现了<code>/.io//*******.png</code>，就前面会多出<code>/.io//</code>这个前缀，导致图片不能显示。</p>
+<p><strong>解决方法</strong></p>
+<p>修改一下项目根目录<code>/node_modules/hexo-asset-image/index.js</code>的24行左右，把 <code>link.lastIndexOf(&#39;.&#39;)</code> 修改为 <code>link.lastIndexOf(&#39;/&#39;)</code>就可以了。</p>
+<img src="/.io//01/04/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/750ad85a47d9fa795e13bb8d4bf195e.png" class title="750ad85a47d9fa795e13bb8d4bf195e">
+
+<h2 id="备份数据"><a href="#备份数据" class="headerlink" title="备份数据"></a>备份数据</h2><ul>
+<li><p>修改<code>.gitignore</code>文件，添加<code>package-lock.json</code> 到忽略清单中</p>
+</li>
+<li><p>创建 <code>themes_custom/next</code> 文件夹，将对主题进行的配件修改的文件拷贝一份到这里</p>
+<ul>
+<li>例如<code>_config.yml</code>文件和source文件中的imag</li>
+</ul>
+</li>
+<li><p>执行以下命令，在本地创建备份仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> <span class="built_in">cd</span> blog</span><br><span class="line">$ git init</span><br><span class="line">已初始化空的 Git 仓库于 blog/.git/</span><br><span class="line"></span><br><span class="line">$ git submodule add https://github.com/theme-next/hexo-theme-next.git themes/next</span><br><span class="line">添加位于 <span class="string">&#x27;themes/next&#x27;</span> 的现存仓库到索引</span><br><span class="line"></span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m <span class="string">&quot;init blog backup&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将备份内容 push 到远程仓库的备份分支 <code>hexo</code> 上：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> git branch -m master hexo</span><br><span class="line">$ git remote add origin https://github.com/Mupceet/mupceet.github.io.git</span><br><span class="line">$ git push -u origin hexo:hexo</span><br></pre></td></tr></table></figure>
+
+<h2 id="恢复数据"><a href="#恢复数据" class="headerlink" title="恢复数据"></a>恢复数据</h2><p>新电脑同样需要配置hexo环境</p>
+<ul>
+<li>node</li>
+<li>npm</li>
+<li>git</li>
+</ul>
+<h3 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h3><ul>
+<li><code>git config --global user.name &quot;用户名&quot;</code></li>
+<li><code>git config --global user.email &quot;邮箱地址&quot;</code></li>
+</ul>
+<h3 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh key"></a>配置ssh key</h3><p>开头有写</p>
+<h3 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h3><ul>
+<li>克隆备份内容<ul>
+<li><code>git clone --recursive -b hexo https://github.com/yepwaibin/yepwaibin.github.io.git blog</code></li>
+</ul>
+</li>
+<li>下载npm依赖模块<ul>
+<li><code>cd blog</code></li>
+<li><code>npm install</code></li>
+</ul>
+</li>
+<li>恢复主题配置<ul>
+<li>将 <code>themes_custom</code> 文件夹中对主题的配置的修改恢复到对应的主题文件夹中，这里建议使用对比的方式对其进行修改，而不是直接覆盖，这样就完成了主题的配置。</li>
+</ul>
+</li>
+<li>克隆原博客内容<ul>
+<li><code>cd blog</code></li>
+<li><code>git clone https://github.com/yepwaibin/yepwaibin.github.io.git .deploy_git</code></li>
+</ul>
+</li>
+</ul>
+<p>就完成恢复了，之后正常写作。</p>
+<p><a href="https://mupceet.com/2019/09/backup-hexo-blog">参考链接</a></p>
+<h2 id="隐藏博文"><a href="#隐藏博文" class="headerlink" title="隐藏博文"></a>隐藏博文</h2><p>有时候一些非技术类的博文不想在博客上直接展示，我们可以使用一些技巧，将博文隐藏，只能通过url输入跳转。</p>
 <ol>
-<li><p>初始化函数的所有形参</p>
-<ul>
-<li>由名称和对应值组成的一个变量对象的属性被创建</li>
-<li>没有实参，属性值设为undefined</li>
-</ul>
+<li><p>安装插件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   npm install hexo-hide-posts --save</span><br><span class="line"></span><br><span class="line">2. 在`_config.yml`文件中修改配置，添加下列配置</span><br><span class="line">   ```bash</span><br><span class="line">   # hexo-hide-posts</span><br><span class="line">   hide_posts:</span><br><span class="line">     enable: true</span><br><span class="line">     # hidden可以改成其他你喜欢的名字</span><br><span class="line">     filter: hidden</span><br><span class="line">     # 指定你想要传递隐藏文章的 generator，比如让所有隐藏文章在存档页面可见</span><br><span class="line">     # 常见的 generators 有：index, tag, category, archive, sitemap, feed, etc.</span><br><span class="line">     public_generators: []</span><br><span class="line">     # 为隐藏的文章添加 noindex meta 标签，阻止搜索引擎收录</span><br><span class="line">     noindex: true</span><br></pre></td></tr></table></figure></li>
+<li><p>在需要的隐藏的博文中，在文章的 <a href="https://hexo.io/docs/front-matter">front-matter</a> 中添加 <code>hidden: true</code> 即可隐藏文章</p>
 </li>
-<li><p>初始化函数声明</p>
-<ul>
-<li>由名称和对应值（function-object）组成一个变量对象的属性被创建</li>
-<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
-</ul>
-</li>
-<li><p>初始变量声明</p>
-<ul>
-<li><p>由名称和对应值（undefined）组成一个变量对象的属性被创建</p>
-</li>
-<li><p>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</p>
-</li>
-</ul>
+<li><p>需要访问隐藏的博文时，直接在url上输入完整链接，即可展示文章。</p>
 </li>
 </ol>
-</li>
-<li><p>建立作用域</p>
-<ol>
-<li>上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。内部上下文可以通过作用域链访问外部上下文中的一切，但外部上下文无法访问内部上下文中的任何东西。</li>
-</ol>
-</li>
-<li><p>确定this指向</p>
-<ul>
-<li> this的值是在执行的时候才能确认，定义的时候不能确认(箭头函数例外，箭头函数并不绑定this对象，this引用会从上层作用域中找到对应的this)</li>
+<p><a href="https://github.com/prinsss/hexo-hide-posts/blob/master/README_ZH.md">参考链接</a></p>
+<h2 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h2><ul>
+<li><code>hexo init [folder]</code> <ul>
+<li>Hexo 默认在目前的文件夹建立网站。</li>
+<li>Git clone <a href="https://github.com/hexojs/hexo-starter">hexo-starter</a> 和 <a href="https://github.com/hexojs/hexo-theme-landscape">hexo-theme-landscape</a> 主题到当前目录或指定目录。</li>
+<li>使用 <a href="https://classic.yarnpkg.com/lang/en/">Yarn 1</a>、<a href="https://pnpm.js.org/">pnpm</a> 或 <a href="https://docs.npmjs.com/cli/install">npm</a> 包管理器下载依赖（如有已安装多个，则列在前面的优先）。npm 默认随 <a href="https://hexo.io/docs/#Install-Node-js">Node.js</a> 安装。</li>
 </ul>
 </li>
-</ol>
-<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>一步步执行，完成对所有变量的分配，最后执行代码</p>
-<h3 id="回收阶段"><a href="#回收阶段" class="headerlink" title="回收阶段"></a>回收阶段</h3><h2 id="什么是执行上下文栈"><a href="#什么是执行上下文栈" class="headerlink" title="什么是执行上下文栈"></a>什么是执行上下文栈</h2><blockquote>
-<p>用于存储在代码执行期间创建的所有执行上下文，当 JavaScript 引擎首次读取你的脚本时，它会创建一个全局执行上下文并将其推入当前的执行栈。</p>
-</blockquote>
-<ul>
-<li>每当发生一个函数调用，引擎都会为该函数创建一个新的执行上下文并将其推到当前执行栈的顶端，引擎会运行执行上下文在执行栈顶端的函数</li>
-<li>当此函数运行完成后，其对应的执行上下文将会从执行栈中弹出，上下文控制权将移到当前执行栈的下一个执行上下文。</li>
+<li><code>hexo new &#39;文章标题&#39;</code><ul>
+<li>新建文件，写的时候自己用typora打开写</li>
+</ul>
+</li>
+<li><code>hexo clean</code><ul>
+<li>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</li>
+<li>在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</li>
+</ul>
+</li>
+<li><code>hexo generate</code><ul>
+<li>生成静态文件，可简写为<code>hexo g</code></li>
+</ul>
+</li>
+<li><code>hexo server</code><ul>
+<li>启动服务器。默认情况下，访问网址为：<code>http://localhost:4000/</code>。可以简写为 hexo s</li>
+</ul>
+</li>
+<li><code>hexo deploy</code><ul>
+<li>部署网站，可简写为<code>hexo d</code></li>
+</ul>
+</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>深入理解Javascript</category>
-      </categories>
       <tags>
-        <tag>执行上下文</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>迭代器与生成器</title>
-    <url>/2022/01/08/%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8/</url>
-    <content><![CDATA[<h2 id="理解迭代"><a href="#理解迭代" class="headerlink" title="理解迭代"></a>理解迭代</h2><p>在软件开发领域，“迭代”的意思是按照顺序反复多次执行一段程序，通常会有明确的终止条件</p>
-<p>迭代就是循环执行，循环是迭代机制的基础，且迭代会在一个有序集合上进行。</p>
-<p>在无迭代器时，迭代有两个缺点</p>
-<ul>
-<li>迭代之前需要事先知道如何使用数据结构</li>
-<li>遍历顺序并不是数据结构固有的</li>
-</ul>
-<p><code>forEach()</code>方法虽然解决单独记录索引和通过数组对象取得值的问题。不过，没有办法标识迭代何时终止</p>
-<span id="more"></span>
-
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><blockquote>
-<p>开发者无须事先知道如何迭代就能实现迭代操作。</p>
-<p>迭代器模式描述了一个方案，即可以把有些结构称为“可迭代对象”（<code>iterable</code>），因为它们实现了正式的<code>Iterable</code>接口，而且可以通过迭代器<code>Iterator</code>消费</p>
-</blockquote>
-<p>迭代器是一个可以由任意对象实现的接口，支持连续获取对象产出的每一个值。任何实现<code>Iterable</code>接口的对象都有一个<code>Symbol.iterator</code>属性，这个属性引用默认迭代器。默认迭代器就像一个迭代器工厂，也就是一个函数，调用之后会产生一个实现<code>Iterator</code>接口的对象。</p>
-<p>可迭代对象</p>
-<ul>
-<li>包含元素有限</li>
-<li>具有无歧义的遍历顺序</li>
-</ul>
-<p>一个数据结构只要部署了<code>Symbol.iterator</code>属性，就被视为具有<code>iterator</code>接口；调用这个接口，就会返回一个遍历器对象。这样的数据结构才能被称为可迭代对象.</p>
-<p>每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的API。迭代器无须了解与其关联的可迭代对象的结构，只需要知道如何取得连续的值</p>
-<p>实现<code>Iterable</code>接口（可迭代协议）要求同时具备两种能力</p>
-<ul>
-<li>支持迭代的自我识别能力</li>
-<li>创建实现<code>Iterator</code>接口的对象的能力</li>
-</ul>
-<p>这意味着必须暴露一个属性作为“默认迭代器”，而且这个属性必须使用特殊的<code>Symbol.iterator</code>作为键。这个默认迭代器属性必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器.。</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IteratorResult &#123;</span><br><span class="line">  <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">  value: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterator &#123;</span><br><span class="line">  next(): IteratorResult;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> Iterable &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator](): Iterator</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际写代码过程中，不需要显式调用<strong>工厂函数</strong>（<code>xxx[Symbol.iterator]</code>）来生成迭代器。实现可迭代协议的所有类型都会自动兼容接收可迭代对象的任何语言特性，原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器。如果对象原型链上的父类实现了Iterable接口，那这个对象也就实现了这个接口。</p>
-<p>迭代器是一种一次性使用的对象，用于迭代与其关联的可迭代对象。迭代器API使用next()方法在可迭代对象中遍历数据</p>
-<ul>
-<li>成功调用<code>next()</code>，都会返回一个<code>IteratorResult</code>对象<ul>
-<li><code>IteratorResult</code>对象包含两个对象：done和value<ul>
-<li><code>done</code>是一个布尔值，表示是否还可以再次调用<code>next()</code>取得下一个值</li>
-<li><code>value</code>包含可迭代对象的下一个值（<code>done</code>为<code>false</code>），或者<code>undefined</code>（<code>done</code>为<code>true</code>）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>若不调用<code>next()</code>，则无法知道迭代器的当前位置</li>
-</ul>
-<p>迭代器并不知道怎么从可迭代对象中取得下一个值，也不知道可迭代对象有多大。只要迭代器到达<code>done:true</code>状态，后续调用<code>next()</code>就一直返回同样的值了</p>
-<p>每个迭代器都表示对可迭代对象的一次性有序遍历。不同迭代器的实例相互之间没有联系，只会独立地遍历可迭代对象</p>
-<p>迭代器并不与可迭代对象某个时刻的快照绑定，而仅仅是使用游标来记录遍历可迭代对象的历程。如果可迭代对象在迭代期间被修改了，那么迭代器也会反映相应的变化</p>
-<p>迭代器维护着一个指向可迭代对象的引用，因此迭代器会阻止垃圾回收程序回收可迭代对象</p>
-<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>与Iterable接口类似，任何实现Iterator接口的对象都可以作为迭代器使用。</p>
-<p><code>Symbol.iterator</code>属性引用的工厂函数会返回相同的迭代器</p>
-<h3 id="提前终止迭代器"><a href="#提前终止迭代器" class="headerlink" title="提前终止迭代器"></a>提前终止迭代器</h3><p>可选的<code>return()</code>方法用于指定在迭代器<strong>提前关闭</strong>时执行的逻辑。执行迭代的结构在想让迭代器知道它不想遍历到可迭代对象耗尽时，就可以“关闭”迭代器。</p>
-<p>可能情形：</p>
-<ol>
-<li><code>for-of</code>循环通过<code>break</code>、<code>continue</code>、<code>return</code>或<code>throw</code>提前退出</li>
-<li>解构操作并未消费所有值</li>
-</ol>
-<p>如果迭代器没有关闭，则还可以继续从上次离开的地方继续迭代。</p>
-<p>因为<code>return()</code>方法是可选的，所以并非所有迭代器都是可关闭的。要知道某个迭代器是否可关闭，可以测试这个迭代器实例的<code>return</code>属性是不是函数对象。仅仅给一个不可关闭的迭代器增加这个方法并不能让它变成可关闭的。这是因为调用<code>return()</code>不会强制迭代器进入关闭状态。即便如此，<code>return()</code>方法还是会被调用</p>
-<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><blockquote>
-<p>拥有在一个函数块内暂停和恢复代码执行的能力。使用生成器可以自定义迭代器和实现协程</p>
-</blockquote>
-<p>生成器的形式是一个函数，函数名称前面加一个星号<code>（*）</code>表示它是一个生成器。只要是可以定义函数的地方，就可以定义生成器。</p>
-<p>调用生成器函数会产生一个<strong>生成器对象</strong>。生成器对象一开始处于暂停执行（<code>suspended</code>）的状态，生成器对象也实现了<code>Iterator</code>接口，因此具有<code>next()</code>方法。调用这个方法会让生成器开始或恢复执行</p>
-<p>next()方法的返回值类似于迭代器，有一个<code>done</code>属性和一个<code>value</code>属性。函数体为空的生成器函数中间不会停留，调用一次next()就会让生成器到达<code>done:true</code>状态</p>
-<p>value属性是生成器函数的返回值，默认值为<code>undefined</code>，可以通过生成器函数的返回值指定</p>
-<p>生成器函数</p>
-<ul>
-<li>只会在初次调用<code>next()</code>方法后开始执行<ul>
-<li>初次调用生成器函数并不会打印日志</li>
-</ul>
-</li>
-<li>实现了<code>Iterable</code>接口，它们默认的迭代器是自引用的<ul>
-<li><code>g===g[Symbol.iterator]()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="通过yield中断执行"><a href="#通过yield中断执行" class="headerlink" title="通过yield中断执行"></a>通过yield中断执行</h3><blockquote>
-<p>yield关键字可以让生成器停止和开始执行，也是生成器最有用的地方。生成器函数在遇到yield关键字之前会正常执行。遇到这个关键字后，执行会停止，函数作用域的状态会被保留。停止执行的生成器函数只能通过在生成器对象上调用next()方法来恢复执行。</p>
-</blockquote>
-<p>yield关键字</p>
-<ul>
-<li>有点像函数的中间返回语句<ul>
-<li>通过<code>yield</code>关键字退出的生成器函数会处在<code>done:false</code>状态</li>
-<li>通过<code>return</code>关键字退出的生成器函数会处于<code>done:true</code>状态</li>
-</ul>
-</li>
-<li>只能在生成器函数内部使用</li>
-<li>必须直接位于生成器函数定义中，出现在嵌套的非生成器函数中会抛出语法错误</li>
-<li>可以作为函数的中间参数使用<ul>
-<li>上一次让生成器函数暂停的yield关键字会接收到传给next()方法的第一个值</li>
-<li>第一次调用<code>next()</code>传入的值不会被使用，因为这一次调用是为了开始执行生成器函数</li>
-</ul>
-</li>
-<li><code>yield</code>关键字可以同时用于输入和输出</li>
-<li>使用星号增强yield的行为，让它<strong>能够迭代一个可迭代对象</strong>，从而一次产出一个值<ul>
-<li><code>yield*</code>最有用的地方是实现递归操作，此时生成器可以产生自身</li>
-</ul>
-</li>
-</ul>
-<p>生成器函数内部的执行流程会针对每个生成器对象区分作用域。在一个生成器对象上调用next()不会影响其他生成器</p>
-<p>生成器对象作为可迭代对象</p>
-<h3 id="提前终止生成器"><a href="#提前终止生成器" class="headerlink" title="提前终止生成器"></a>提前终止生成器</h3><p><code>return()</code>和<code>throw()</code>方法都可以用于强制生成器进入关闭状态</p>
-<ol>
-<li>所有生成器对象都有<code>return()</code>方法，只要通过它进入关闭状态，就无法恢复了。后续调用<code>next()</code>会显示<code>done:true</code>状态，而提供的任何返回值都不会被存储或传播</li>
-<li><code>throw()</code>方法会在暂停的时候将一个提供的错误注入到生成器对象中。如果错误未被处理，生成器就会关闭<ul>
-<li>假如生成器函数内部处理了这个错误，那么生成器就不会关闭，而且还可以恢复执行</li>
-<li>错误处理会跳过对应的<code>yield</code></li>
-<li>如果生成器对象还没有开始执行，那么调用<code>throw()</code>抛出的错误不会在函数内部被捕获，因为这相当于在函数块外部抛出了错误</li>
-</ul>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Javascript高级程序设计</category>
-      </categories>
-      <tags>
-        <tag>Javascript</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
